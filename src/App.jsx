@@ -9,14 +9,13 @@ import {
   UsersPage,
   UserLikes,
   UserReplied,
-  ReplyList
+  ReplyList,
 } from "pages";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <h1>Hello ALPHitter</h1>
         <Routes>
           <Route index element={<LoginPage />} />
           <Route path="login" element={<LoginPage />} />
@@ -32,7 +31,7 @@ function App() {
           </Route> */}
           {/* </Route> */}
           <Route path="/tweets" element={<HomePage />} />
-          <Route path="/tweets/tweetId/replies" element={<ReplyList/>}/>
+          <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
           <Route
