@@ -11,6 +11,7 @@ import {
   UsersPage,
   UserLikes,
   UserReplied,
+  ReplyList,
 } from "pages";
 import UserSettingPage from "pages/UserSettingPage";
 
@@ -34,6 +35,7 @@ function App() {
           </Route> */}
           {/* </Route> */}
           <Route path="/tweets" element={<HomePage />} />
+          <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
           <Route path="/users/:userId/setting" element={<UserSettingPage />} />
