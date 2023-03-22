@@ -1,3 +1,4 @@
+import { GlobalStyle } from "components/common/globalStyles";
 import {
   SignupPage,
   LoginPage,
@@ -11,8 +12,9 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
+      <GlobalStyle />
       <BrowserRouter>
-        <h1>Hello ALPHitter</h1>
+        <h1>Aa Noto Sans TC Hello ALPHitter 你好嗎 9 $% 123456</h1>
         <Routes>
           {/* 這個會失效 */}
           {/* <Route path="/" element={<App />}> */}
