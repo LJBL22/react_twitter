@@ -13,6 +13,7 @@ import {
   UserReplied,
   ReplyList,
 } from "pages";
+import UserSettingPage from "pages/UserSettingPage";
 
 function App() {
   return (
@@ -37,10 +38,12 @@ function App() {
           <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
+          <Route path="/users/:userId/setting" element={<UserSettingPage />} />
           <Route
             path="/users/:userId/replied-tweets"
             element={<UserReplied />}
           />
+          <Route path="*" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </div>
