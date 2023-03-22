@@ -1,13 +1,17 @@
 import { GlobalStyle } from "components/common/globalStyles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import {
   SignupPage,
   LoginPage,
   AdminLoginPage,
   AdminUsersPage,
   AdminTweetsPage,
+  HomePage,
+  UsersPage,
+  UserLikes,
+  UserReplied,
 } from "pages";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 
 function App() {
   return (
@@ -16,8 +20,6 @@ function App() {
       <BrowserRouter>
         <h1>Aa Noto Sans TC Hello ALPHitter 你好嗎 9 $% 123456</h1>
         <Routes>
-          {/* 這個會失效 */}
-          {/* <Route path="/" element={<App />}> */}
           <Route index element={<LoginPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignupPage />} />
@@ -31,6 +33,13 @@ function App() {
             <Route path="*" element={<AdminUsersPage />} />
           </Route> */}
           {/* </Route> */}
+          <Route path="/tweets" element={<HomePage />} />
+          <Route path="/users/:userId/tweets" element={<UsersPage />} />
+          <Route path="/users/:userId/likes" element={<UserLikes />} />
+          <Route
+            path="/users/:userId/replied-tweets"
+            element={<UserReplied />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
