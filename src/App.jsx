@@ -12,13 +12,13 @@ import {
   UserLikes,
   UserReplied,
 } from "pages";
+import UserSettingPage from "pages/UserSettingPage";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
       <BrowserRouter>
-        <h1>Aa Noto Sans TC Hello ALPHitter 你好嗎 9 $% 123456</h1>
         <Routes>
           <Route index element={<LoginPage />} />
           <Route path="login" element={<LoginPage />} />
@@ -36,10 +36,12 @@ function App() {
           <Route path="/tweets" element={<HomePage />} />
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
+          <Route path="/users/:userId/setting" element={<UserSettingPage />} />
           <Route
             path="/users/:userId/replied-tweets"
             element={<UserReplied />}
           />
+          <Route path="*" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </div>
