@@ -1,4 +1,6 @@
+import { GlobalStyle } from "components/common/globalStyles";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import {
   SignupPage,
   LoginPage,
@@ -14,7 +16,8 @@ import {
 
 function App() {
   return (
-    <div>
+    <div className="App">
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route index element={<LoginPage />} />
