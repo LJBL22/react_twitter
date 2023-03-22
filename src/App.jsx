@@ -11,6 +11,7 @@ import {
   UsersPage,
   UserLikes,
   UserReplied,
+  ReplyList,
 } from "pages";
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <BrowserRouter>
-        <h1>Aa Noto Sans TC Hello ALPHitter 你好嗎 9 $% 123456</h1>
         <Routes>
           <Route index element={<LoginPage />} />
           <Route path="login" element={<LoginPage />} />
@@ -34,6 +34,7 @@ function App() {
           </Route> */}
           {/* </Route> */}
           <Route path="/tweets" element={<HomePage />} />
+          <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
           <Route

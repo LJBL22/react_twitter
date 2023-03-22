@@ -1,5 +1,15 @@
+import Sidebar from "components/Sidebar";
+import PopularList from "components/PopularList";
+import MainTweet from "components/MainTweet";
+
 function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <Sidebar />
+      <MainTweet/>
+      <PopularList />
+    </>
+  );
 }
 
 export default HomePage;
