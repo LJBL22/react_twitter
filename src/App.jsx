@@ -1,10 +1,16 @@
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HomePage, UsersPage, UserLikes, UserReplied } from "pages";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello ALPHitter</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/tweets" element={<HomePage />} />
+        <Route path="/users/:userId/tweets" element={<UsersPage />} />
+        <Route path="/users/:userId/likes" element={<UserLikes />} />
+        <Route path="/users/:userId/replied-tweets" element={<UserReplied />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
