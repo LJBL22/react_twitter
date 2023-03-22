@@ -9,6 +9,7 @@ import {
   UsersPage,
   UserLikes,
   UserReplied,
+  ReplyList
 } from "pages";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           </Route> */}
           {/* </Route> */}
           <Route path="/tweets" element={<HomePage />} />
+          <Route path="/tweets/tweetId/replies" element={<ReplyList/>}/>
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
           <Route
