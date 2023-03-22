@@ -1,4 +1,6 @@
+import { GlobalStyle } from "components/common/globalStyles";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import {
   SignupPage,
   LoginPage,
@@ -13,9 +15,10 @@ import {
 
 function App() {
   return (
-    <div>
+    <div className="App">
+      <GlobalStyle />
       <BrowserRouter>
-        <h1>Hello ALPHitter</h1>
+        <h1>Aa Noto Sans TC Hello ALPHitter 你好嗎 9 $% 123456</h1>
         <Routes>
           <Route index element={<LoginPage />} />
           <Route path="login" element={<LoginPage />} />
