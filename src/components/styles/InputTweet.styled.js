@@ -23,8 +23,8 @@ export const StyledForm = styled.form`
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 3.125rem;
-    background-color: #ff6600;
-    color: #ffffff;
+    background-color: var(--color-theme);
+    color: var(--color-white);
   }
 `;
 
@@ -36,7 +36,7 @@ export const StyledTextarea = styled.textarea`
   border: none;
   resize: none;
   ::placeholder {
-    color: #6c757d;
+    color: var(--color-secondary);
   }
   // 讓滑鼠移到textarea 不會顯示外框
   :focus {
