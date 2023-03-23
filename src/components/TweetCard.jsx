@@ -1,5 +1,5 @@
-import { tweetData } from "./dummyData";
-import { StyledAvatar, StyledImgDiv } from "./styles/Avatar.styled";
+import { tweetData } from './dummyData';
+import { StyledAvatar, StyledImgDiv } from './styles/Avatar.styled';
 import {
   StyledCardDiv,
   StyledContextDiv,
@@ -7,7 +7,7 @@ import {
   StyledDescriptionDiv,
   StyledCardName,
   StyledCardAccount,
-} from "./styles/InputTweet.styled";
+} from './styles/InputTweet.styled';
 
 function TweetCard({ divWidth, divHeight }) {
   const tweets = tweetData;

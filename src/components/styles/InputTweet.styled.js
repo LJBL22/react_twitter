@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledCardDiv = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ export const StyledContextDiv = styled.div`
 export const StyledDescriptionDiv = styled.div`
   width: 33rem;
   height: 4.875rem;
-  font-family: "Noto Sans TC";
+  font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
   font-size: var(--fs-basic);
@@ -22,7 +22,7 @@ export const StyledDescriptionDiv = styled.div`
 `;
 
 export const StyledCardName = styled.p`
-  font-family: "Noto Sans TC";
+  font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 700;
   font-size: var(--fs-basic);
@@ -31,7 +31,7 @@ export const StyledCardName = styled.p`
 `;
 
 export const StyledCardAccount = styled.p`
-  font-family: "Noto Sans TC";
+  font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
   font-size: var(--fs-secondary);
@@ -70,7 +70,7 @@ export const StyledTextarea = styled.textarea`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding: 1.75rem 1.78125rem 1.75rem 0.5rem;
-  maxlength: "140";
+  maxlength: '140';
   border: none;
   resize: none;
   ::placeholder {
