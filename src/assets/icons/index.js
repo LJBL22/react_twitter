@@ -17,7 +17,7 @@ import { ReactComponent as IconNotiFi } from './notiFilled.svg'
 import { ReactComponent as IconNotiOut } from './notiOutlined.svg'
 import { ReactComponent as IconPost } from './post.svg';
 import { ReactComponent as IconReply } from './reply.svg';
-import { ReactComponent as IconUserFi } from './userFilled.svg'
-import { ReactComponent as IconUserOut } from './userOutlined.svg'
+import { ReactComponent as IconUserFi } from './userFilled.svg';
+import { ReactComponent as IconUserOut } from './userOutlined.svg';
 
 export { IconLogo, IconLogout, IconAddPhoto, IconBack, IconChatFi, IconChatOut, IconClose, IconCogFi, IconCogOut, IconHomeFi, IconHomeOut, IconLikeFi, IconLikeOut, IconMessageFi, IconMessageOut, IconNotiFi, IconNotiOut, IconPost, IconReply, IconUserFi, IconUserOut };

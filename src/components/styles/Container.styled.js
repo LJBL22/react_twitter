@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 export const breakpoint = {
   md: '992px',
   lg: '1200px',
@@ -22,18 +22,19 @@ export const Container = styled.div`
   @media screen and (${device.lg}) {
     max-width: 1140px;
   }
-`
+`;
 
 export const GridContainer = styled(Container)`
   .fr1 {
     background-color: khaki;
   }
   .fr2 {
-    background-color: lavenderblush ;
+    background-color: lavenderblush;
   }
   .fr3 {
     background-color: beige;
   }
+
   @media screen and (${device.md}) {
     display: grid;
     grid-template-columns: 1fr 4fr 3fr;

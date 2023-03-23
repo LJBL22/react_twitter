@@ -1,5 +1,5 @@
-import { GlobalStyle } from "components/common/globalStyles";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GlobalStyle } from 'components/common/globalStyles';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import {
   SignupPage,
@@ -12,9 +12,10 @@ import {
   UserLikes,
   UserReplied,
   ReplyList,
-} from "pages";
-import UserSettingPage from "pages/UserSettingPage";
-import AdminLayout from "components/layouts/AdminLayout";
+} from 'pages';
+import UserSettingPage from 'pages/UserSettingPage';
+import AdminLayout from 'components/layouts/AdminLayout';
+import TweetLayout from 'components/layouts/TweetLayout';
 // import TweetLayout from "components/layouts/TweetLayout";
 
 function App() {
@@ -33,12 +34,14 @@ function App() {
               <Route path="tweets" element={<AdminTweetsPage />} />
             </Route>
           </Route>
-          <Route path="/tweets" element={<HomePage />} />
-          <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
+          <Route element={<TweetLayout />}>
+            <Route path="/tweets" element={<HomePage />} />
+            <Route path="/tweets/:tweetId" element={<ReplyList />} />
+          </Route>
           <Route path="/users/:userId/tweets" element={<UsersPage />} />
           <Route path="/users/:userId/likes" element={<UserLikes />} />
           <Route
-            path="/users/:userId/replied-tweets"
+            path="/users/:userId/replied_tweets"
             element={<UserReplied />}
           />
           <Route path="setting" element={<UserSettingPage />} />
