@@ -26,13 +26,13 @@ export const Container = styled.div`
 
 export const GridContainer = styled(Container)`
   .fr1 {
-    background-color: aqua;
+    background-color: khaki;
   }
   .fr2 {
-    background-color: antiquewhite;
+    background-color: lavenderblush ;
   }
   .fr3 {
-    /* background-color: blue; */
+    background-color: beige;
   }
   @media screen and (${device.md}) {
     display: grid;
