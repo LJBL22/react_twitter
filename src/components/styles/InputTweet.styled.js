@@ -1,9 +1,47 @@
 import styled from "styled-components";
 
-export const StyledInputDiv = styled.div`
+export const StyledCardDiv = styled.div`
   display: flex;
   width: ${({ divWidth }) => divWidth};
   height: ${({ divHeight }) => divHeight};
+`;
+
+export const StyledContextDiv = styled.div`
+  padding: 1rem 1.8125rem 1.0625rem 0.5rem;
+`;
+
+export const StyledDescriptionDiv = styled.div`
+  width: 33rem;
+  height: 4.875rem;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--fs-basic);
+  line-height: 1.625rem;
+  color: var(--color-gray-900);
+`;
+
+export const StyledCardName = styled.p`
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--fs-basic);
+  line-height: 1.625rem;
+  color: var(--color-gray-900);
+`;
+
+export const StyledCardAccount = styled.p`
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--fs-secondary);
+  line-height: 1.375rem;
+  color: var(--color-secondary);
+`;
+
+export const StyledItemDiv = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledForm = styled.form`
