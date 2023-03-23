@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const StyledAvatar = styled.img`
   object-fit: cover;
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   border-radius: 100%;
 `;
 
 export const StyledImgDiv = styled.div`
-  padding: 16px 0px 0px 26.49px;
+  padding: 1rem 0rem 0rem 1.65562rem;
 `;

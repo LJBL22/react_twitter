@@ -13,16 +13,16 @@ export const StyledForm = styled.form`
   // 在 flex 內 控制裡面的button flex-basis 和寬高 &>button
   // 思考CSS變數化 以及把button 的style 拉出來共用
   & > button {
-    flex-basis: 64px;
-    width: 64px;
-    height: 40px;
-    line-height: 64px;
+    flex-basis: 4rem;
+    width: 4rem;
+    height: 2.5rem;
+    line-height: 4rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     border: none;
-    border-radius: 50px;
+    border-radius: 3.125rem;
     background-color: #ff6600;
     color: #ffffff;
   }
@@ -31,7 +31,7 @@ export const StyledForm = styled.form`
 export const StyledTextarea = styled.textarea`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  padding: 28px 28.5px 28px 8px;
+  padding: 1.75rem 1.78125rem 1.75rem 0.5rem;
   maxlength: "140";
   border: none;
   resize: none;
