@@ -1,4 +1,4 @@
-import userData from "./dummyData";
+import {userData} from "./dummyData";
 import { StyledAvatar, StyledImgDiv } from "./styles/Avatar.styled";
 import {
   StyledTextarea,

@@ -1,5 +1,7 @@
+import TweetCard from "./TweetCard";
+
 function TweetCollection() {
-  return <div>TweetCollection</div>;
+  return <div><TweetCard/></div>;
 }
 
 export default TweetCollection;
