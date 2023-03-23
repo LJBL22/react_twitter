@@ -7,10 +7,10 @@ function MainTweet() {
     <div>
       <Main>
         <InputTweet
-          width="526px"
-          height="137px"
-          divWidth="641px"
-          divHeight="138px"
+          width="32.875rem"
+          height="8.5625rem"
+          divWidth="40.0625rem"
+          divHeight="8.625rem"
         />
         <TweetCollection />
       </Main>
