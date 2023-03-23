@@ -33,17 +33,15 @@ function App() {
               <Route path="tweets" element={<AdminTweetsPage />} />
             </Route>
           </Route>
-          <Route element={<TweetLayout />}>
-            <Route path="/tweets" element={<HomePage />} />
-            <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
-            <Route path="/users/:userId/tweets" element={<UsersPage />} />
-            <Route path="/users/:userId/likes" element={<UserLikes />} />
-            <Route
-              path="/users/:userId/replied-tweets"
-              element={<UserReplied />}
-            />
-            <Route path="setting" element={<UserSettingPage />} />
-          </Route>
+          <Route path="/tweets" element={<HomePage />} />
+          <Route path="/tweets/tweetId/replies" element={<ReplyList />} />
+          <Route path="/users/:userId/tweets" element={<UsersPage />} />
+          <Route path="/users/:userId/likes" element={<UserLikes />} />
+          <Route
+            path="/users/:userId/replied-tweets"
+            element={<UserReplied />}
+          />
+          <Route path="setting" element={<UserSettingPage />} />
         </Routes>
       </BrowserRouter>
     </div>
