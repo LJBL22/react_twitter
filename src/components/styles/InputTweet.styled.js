@@ -4,6 +4,8 @@ export const StyledCardDiv = styled.div`
   display: flex;
   width: ${({ divWidth }) => divWidth};
   height: ${({ divHeight }) => divHeight};
+  padding-bottom: 1rem;
+  border: 1px solid #e6ecf0;
 `;
 
 export const StyledContextDiv = styled.div`
@@ -73,6 +75,7 @@ export const StyledTextarea = styled.textarea`
   maxlength: '140';
   border: none;
   resize: none;
+  overflow-y: hidden;
   ::placeholder {
     color: var(--color-secondary);
   }

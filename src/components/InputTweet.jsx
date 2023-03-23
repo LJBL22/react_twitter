@@ -1,10 +1,10 @@
-import { userData } from "./dummyData";
-import { StyledAvatar, StyledImgDiv } from "./styles/Avatar.styled";
+import { userData } from './dummyData';
+import { StyledAvatar, StyledImgDiv } from './styles/Avatar.styled';
 import {
   StyledTextarea,
   StyledCardDiv,
   StyledForm,
-} from "./styles/InputTweet.styled";
+} from './styles/InputTweet.styled';
 
 function InputTweet({ width, height, divWidth, divHeight }) {
   const avatar = userData[0].avatar;
