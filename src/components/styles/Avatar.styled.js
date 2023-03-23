@@ -6,3 +6,7 @@ export const StyledAvatar = styled.img`
   height: 50px;
   border-radius: 100%;
 `;
+
+export const StyledImgDiv = styled.div`
+  padding: 16px 0px 0px 26.49px;
+`;

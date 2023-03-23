@@ -6,7 +6,12 @@ function MainTweet() {
   return (
     <div>
       <Main>
-        <InputTweet />
+        <InputTweet
+          width="526px"
+          height="137px"
+          divWidth="641px"
+          divHeight="138px"
+        />
         <TweetCollection />
       </Main>
     </div>
