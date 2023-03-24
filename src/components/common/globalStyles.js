@@ -16,9 +16,9 @@ export const GlobalStyle = createGlobalStyle`
   margin: 0;
 }
 
-html,
-body {
-  height: 100%;
+html, body {
+  padding: 0;
+  min-height: 100%;
   scroll-behavior: smooth;
   font-weight: 400;
   font-style: normal;
