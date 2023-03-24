@@ -1,5 +1,5 @@
-import { GlobalStyle } from 'components/common/globalStyles';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { GlobalStyle } from "components/common/globalStyles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import {
   SignupPage,
@@ -12,10 +12,11 @@ import {
   UserLikes,
   UserReplied,
   ReplyList,
-} from 'pages';
-import UserSettingPage from 'pages/UserSettingPage';
-import AdminLayout from 'components/layouts/AdminLayout';
-import TweetLayout from 'components/layouts/TweetLayout';
+  NavigatePage,
+} from "pages";
+import UserSettingPage from "pages/UserSettingPage";
+import AdminLayout from "components/layouts/AdminLayout";
+import TweetLayout from "components/layouts/TweetLayout";
 // import TweetLayout from "components/layouts/TweetLayout";
 
 function App() {
@@ -24,9 +25,9 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<LoginPage />} />
+          <Route path="*" element={<NavigatePage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route path="signup" element={<SignupPage />} />
+          <Route path="regist" element={<SignupPage />} />
           <Route path="admin">
             <Route index element={<AdminLoginPage />} />
             <Route element={<AdminLayout />}>
