@@ -8,6 +8,7 @@ import UserLikes from "./UserLikes";
 import UserReplied from "./UserReplied";
 import UsersPage from "./UsersPage";
 import ReplyList from "./ReplyList";
+import NavigatePage from "./NavigatePage"
 
 export {
   LoginPage,
@@ -20,4 +21,5 @@ export {
   UserReplied,
   UsersPage,
   ReplyList,
+  NavigatePage
 };
