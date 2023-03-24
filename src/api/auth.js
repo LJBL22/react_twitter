@@ -7,10 +7,10 @@ export const login = async ({ account, password }) => {
       account,
       password,
     });
-    const { authToken } = data;
+    const { authToken } = data.data;
     console.log(data);
     if (authToken) {
-      return { success: true, ...data };
+      return { success: true, ...data.data };
     }
     return data;
   } catch (error) {
