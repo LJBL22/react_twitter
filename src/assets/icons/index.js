@@ -1,6 +1,6 @@
 import { ReactComponent as IconLogo } from './logo.svg';
 import { ReactComponent as IconLogout } from './logout.svg';
-import { ReactComponent as IconAddPhoto } from './addPhoto.svg'
+import { ReactComponent as IconUploadPhoto } from './uploadPhoto.svg'
 import { ReactComponent as IconBack } from './back.svg'
 import { ReactComponent as IconChatFi } from './chatFilled.svg'
 import { ReactComponent as IconChatOut } from './chatOutlined.svg'
@@ -20,4 +20,4 @@ import { ReactComponent as IconReply } from './reply.svg';
 import { ReactComponent as IconUserFi } from './userFilled.svg';
 import { ReactComponent as IconUserOut } from './userOutlined.svg';
 
-export { IconLogo, IconLogout, IconAddPhoto, IconBack, IconChatFi, IconChatOut, IconClose, IconCogFi, IconCogOut, IconHomeFi, IconHomeOut, IconLikeFi, IconLikeOut, IconMessageFi, IconMessageOut, IconNotiFi, IconNotiOut, IconPost, IconReply, IconUserFi, IconUserOut };
+export { IconLogo, IconLogout, IconUploadPhoto, IconBack, IconChatFi, IconChatOut, IconClose, IconCogFi, IconCogOut, IconHomeFi, IconHomeOut, IconLikeFi, IconLikeOut, IconMessageFi, IconMessageOut, IconNotiFi, IconNotiOut, IconPost, IconReply, IconUserFi, IconUserOut };
