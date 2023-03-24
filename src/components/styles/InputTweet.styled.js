@@ -4,6 +4,8 @@ export const StyledCardDiv = styled.div`
   display: flex;
   width: ${({ divWidth }) => divWidth};
   height: ${({ divHeight }) => divHeight};
+  border: 1px solid #e6ecf0;
+  min-height: 9.5625rem;
 `;
 
 export const StyledContextDiv = styled.div`
@@ -12,7 +14,8 @@ export const StyledContextDiv = styled.div`
 
 export const StyledDescriptionDiv = styled.div`
   width: 33rem;
-  height: 4.875rem;
+  height: auto;
+  min-height: 4.875rem;
   font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
@@ -44,6 +47,18 @@ export const StyledItemDiv = styled.div`
   align-items: center;
 `;
 
+export const StyledActions = styled(StyledItemDiv)`
+  margin-top: 8px;
+  > div {
+    display: flex;
+    align-items: center;
+    margin-right: 41.3px;
+    & .iconAction {
+      margin-right: 9.3px;
+    }
+  }
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -63,16 +78,20 @@ export const StyledForm = styled.form`
     border-radius: 3.125rem;
     background-color: var(--color-theme);
     color: var(--color-white);
+    margin-bottom: 1rem;
   }
 `;
 
-export const StyledTextarea = styled.textarea`
+export const StyledTextarea = styled.textarea.attrs({
+  placeholder: '有什麼新鮮事?',
+  maxLength: '140',
+})`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding: 1.75rem 1.78125rem 1.75rem 0.5rem;
-  maxlength: '140';
   border: none;
   resize: none;
+  overflow-y: hidden;
   ::placeholder {
     color: var(--color-secondary);
   }

@@ -2,16 +2,20 @@ import TweetCard from './TweetCard';
 import { tweetData } from './dummyData';
 
 function TweetCollection() {
-  const cardCollection = tweetData.map((card) => {
-    console.log(card);
-    return (
-      <div>
-        <TweetCard />
-      </div>
-    );
-  });
-
-  return <div>{cardCollection}</div>;
+  return (
+    <div>
+      {tweetData.map((card) => {
+        return (
+          <TweetCard
+            divWidth="40.0625rem"
+            divHeight="auto"
+            key={card.id}
+            card={card}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 export default TweetCollection;
