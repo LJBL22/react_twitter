@@ -1,9 +1,71 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
-  /* 有時間再研究 font-face 的做法 */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap&text=0123456789%$');
+@font-face {
+   font-family: 'Montserrat';
+   font-style: normal;
+   font-weight: 400;
+   /* chatGPT */
+   src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
+   /* TA's */
+   /* src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v10/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); */
+   
+   /* 只有數字 */
+  /* unicode-range: U+30-39; */
+  /* 數字跟符號 */
+  unicode-range: U+20-29, U+2A-2F, U+30-39, U+3A-3F, U+40-47, U+48-5F, U+60-69, U+6A-6F, U+70-7F;
+}
+@font-face {
+   font-family: 'Montserrat';
+   font-style: normal;
+   font-weight: 500;
+   src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_ZpC3gnD-w.ttf) format('truetype');
+   
+   /* 只有數字 */
+  /* unicode-range: U+30-39; */
+  /* 數字跟符號 */
+  unicode-range: U+20-29, U+2A-2F, U+30-39, U+3A-3F, U+40-47, U+48-5F, U+60-69, U+6A-6F, U+70-7F;
+}
+
+@font-face {
+   font-family: 'Montserrat';
+   font-style: normal;
+   font-weight: 700;
+   /* chatGPT */
+   src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
+   /* TA's */
+   /* src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v10/IQHow_FEYlDC4Gzy_m8fcoWiMMZ7xLd792ULpGE4W_Y.woff2) format('woff2'); */
+ 
+   /* 只有數字 */
+  /* unicode-range: U+30-39; */
+  /* 數字跟符號 */
+  unicode-range: U+20-29, U+2A-2F, U+30-39, U+3A-3F, U+40-47, U+48-5F, U+60-69, U+6A-6F, U+70-7F;
+}
+  @font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 400;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 500;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 700;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.otf) format('opentype');
+ }
+
 
 /* * * * CSS reset * * * */
 *,
@@ -23,7 +85,6 @@ html, body {
   font-weight: 400;
   font-style: normal;
 }
-
 body {
   font-family: 'Montserrat','Noto Sans TC', sans-serif;
   font-variant-numeric: tabular-nums;
