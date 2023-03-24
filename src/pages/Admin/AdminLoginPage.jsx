@@ -8,14 +8,15 @@ import {
   AuthP,
 } from "components/common/auth.styled";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 // import { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
 // import { useAuth } from "contexts/AuthContext";
 
 const AdminLoginPage = () => {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   // const navigate = useNavigate();
   // const { login, isAuthenticated } = useAuth();
 
@@ -66,8 +67,8 @@ const AdminLoginPage = () => {
         <AuthInput
           label="帳號"
           placeholder="請輸入帳號"
-          // value={username}
-          // onChange={(nameInputValue) => setUsername(nameInputValue)}
+          value={username}
+          onChange={(nameInputValue) => setUsername(nameInputValue)}
         />
       </AuthInputContainer>
 
@@ -76,8 +77,8 @@ const AdminLoginPage = () => {
           type="password"
           label="密碼"
           placeholder="請輸入密碼"
-          // value={password}
-          // onChange={(passwordInputValue) => setPassword(passwordInputValue)}
+          value={password}
+          onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>
       {/* <AuthButton onClick={handleClick}>登入</AuthButton> */}
