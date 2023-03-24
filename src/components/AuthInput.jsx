@@ -20,7 +20,7 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   outline: none;
   border: none;
-  color: var(--color-gray-500);
+  color: var(--color-gray-900);
   background-color: #f5f8fa;
   border-radius: 0px 0px 4px 4px;
 `;

@@ -1,16 +1,16 @@
 import axios from 'axios';
-const authURL = 'https://todo-list.alphacamp.io/api/auth';
+const authURL = 'https://dry-lowlands-42863.herokuapp.com/api';
 
-export const login = async ({ username, password }) => {
+export const login = async ({ account, password }) => {
   try {
-    const { data } = await axios.post(`${authURL}/login`, {
-      username,
+    const { data } = await axios.post(`${authURL}/users/signIn`, {
+      account,
       password,
     });
-    const { authToken } = data;
+    const { authToken } = data.data;
     console.log(data);
     if (authToken) {
-      return { success: true, ...data };
+      return { success: true, ...data.data };
     }
     return data;
   } catch (error) {
@@ -18,10 +18,10 @@ export const login = async ({ username, password }) => {
   }
 };
 
-export const register = async ({ username, email, password }) => {
+export const register = async ({ account, email, password }) => {
   try {
     const { data } = await axios.post(`${authURL}/register`, {
-      username,
+      account,
       email,
       password,
     });
