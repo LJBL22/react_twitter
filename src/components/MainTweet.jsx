@@ -25,6 +25,23 @@ const StyledDivider = styled.div`
   background-color: #e6ecf0;
 `;
 
+const ScrollBar = styled.div`
+  max-height: 49.81rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 13px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #fafafa;
+    margin: 20px 4px;
+    box-shadow: inset 1px 0px 0px #e8e8e8, inset -1px 0px 0px #f0f0f0;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #c1c1c1;
+  }
+`;
+
 function MainTweet() {
   return (
     <div>
@@ -32,14 +49,16 @@ function MainTweet() {
         <StyledHeader>
           <StyledTitle>首頁</StyledTitle>
         </StyledHeader>
-        <InputTweet
-          width="32.875rem"
-          height="8.5625rem"
-          divWidth="40.0625rem"
-          divHeight="8.625rem"
-        />
-        <StyledDivider></StyledDivider>
-        <TweetCollection />
+        <ScrollBar>
+          <InputTweet
+            width='32.875rem'
+            height='8.5625rem'
+            divWidth='40.0625rem'
+            divHeight='8.625rem'
+          />
+          <StyledDivider />
+          <TweetCollection />
+        </ScrollBar>
       </Main>
     </div>
   );
