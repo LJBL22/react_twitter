@@ -6,7 +6,7 @@ export default function NavigatePage() {
   return <div>NavigatePage</div>;
 }
 
-// const HomePage = () => {
+// const NavigatePage = () => {
 //   const { isAuthenticated } = useAuth();
 //   const navigate = useNavigate();
 //   useEffect(() => {
@@ -16,8 +16,8 @@ export default function NavigatePage() {
 //       navigate('/login');
 //     }
 //   }, [isAuthenticated, navigate]);
-//   // 因為會依照狀態直接導引至其他頁面了，i.e. 不需要 homepage 了，所以可直接刪除此行
-//   // return <div>HomePage</div>;
+//   // 因為會依照狀態直接導引至其他頁面了，i.e. 不需要 NavigatePage 了，所以可直接刪除此行
+//   // return <div>NavigatePage</div>;
 // };
 
-// export default HomePage;
+// export default NavigatePage;
