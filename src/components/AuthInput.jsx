@@ -34,6 +34,7 @@ const AuthInput = ({ type, label, value, placeholder, onChange }) => {
         value={value}
         placeholder={placeholder}
         onChange={(event) => onChange?.(event.target.value)}
+        required
       />
     </StyledContainer>
   );
