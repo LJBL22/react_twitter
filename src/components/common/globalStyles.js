@@ -5,41 +5,25 @@ export const GlobalStyle = createGlobalStyle`
    font-family: 'Montserrat';
    font-style: normal;
    font-weight: 400;
-   /* chatGPT */
    src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
-   /* TA's */
-   /* src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v10/zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2) format('woff2'); */
-   
-   /* 只有數字 */
-  /* unicode-range: U+30-39; */
   /* 數字跟符號 */
-  unicode-range: U+20-29, U+2A-2F, U+30-39, U+3A-3F, U+40-47, U+48-5F, U+60-69, U+6A-6F, U+70-7F;
+  unicode-range: U+30-39, U+0021-002F, U+003A, U+003F;
 }
 @font-face {
    font-family: 'Montserrat';
    font-style: normal;
    font-weight: 500;
    src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_ZpC3gnD-w.ttf) format('truetype');
-   
-   /* 只有數字 */
-  /* unicode-range: U+30-39; */
-  /* 數字跟符號 */
-  unicode-range: U+20-29, U+2A-2F, U+30-39, U+3A-3F, U+40-47, U+48-5F, U+60-69, U+6A-6F, U+70-7F;
+   unicode-range: U+30-39, U+0021-002F, U+003A, U+003F;
 }
 
 @font-face {
    font-family: 'Montserrat';
    font-style: normal;
    font-weight: 700;
-   /* chatGPT */
    src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
-   /* TA's */
-   /* src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v10/IQHow_FEYlDC4Gzy_m8fcoWiMMZ7xLd792ULpGE4W_Y.woff2) format('woff2'); */
- 
-   /* 只有數字 */
-  /* unicode-range: U+30-39; */
-  /* 數字跟符號 */
-  unicode-range: U+20-29, U+2A-2F, U+30-39, U+3A-3F, U+40-47, U+48-5F, U+60-69, U+6A-6F, U+70-7F;
+   /* 中文跟英文 */
+   unicode-range: U+30-39, U+0021-002F, U+003A, U+003F;
 }
   @font-face {
    font-family: 'Noto Sans TC';
@@ -48,6 +32,7 @@ export const GlobalStyle = createGlobalStyle`
    src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff2) format('woff2'),
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff) format('woff'),
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.otf) format('opentype');
+   unicode-range: U+4E00-9FFF, U+00-024F;
  }
 @font-face {
    font-family: 'Noto Sans TC';
@@ -56,6 +41,7 @@ export const GlobalStyle = createGlobalStyle`
    src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff2) format('woff2'),
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff) format('woff'),
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.otf) format('opentype');
+   unicode-range: U+4E00-9FFF, U+00-024F;
  }
 @font-face {
    font-family: 'Noto Sans TC';
@@ -64,8 +50,8 @@ export const GlobalStyle = createGlobalStyle`
    src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff2) format('woff2'),
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff) format('woff'),
         url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.otf) format('opentype');
+   unicode-range: U+4E00-9FFF, U+00-024F;
  }
-
 
 /* * * * CSS reset * * * */
 *,
@@ -86,6 +72,7 @@ html, body {
   font-style: normal;
 }
 body {
+  /* 以 Montserrat 優先 */
   font-family: 'Montserrat','Noto Sans TC', sans-serif;
   font-variant-numeric: tabular-nums;
   line-height: 1.625;
