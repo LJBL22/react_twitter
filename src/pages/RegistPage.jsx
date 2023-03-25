@@ -14,7 +14,7 @@ import { useState } from "react";
 // import Swal from "sweetalert2";
 // import { useAuth } from "contexts/AuthContext";
 
-const SignupPage = () => {
+const RegistPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -118,4 +118,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default RegistPage;
