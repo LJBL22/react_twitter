@@ -1,5 +1,5 @@
 import LoginPage from "./LoginPage";
-import SignupPage from "./SignupPage";
+import RegistPage from "./RegistPage";
 import AdminLoginPage from "./Admin/AdminLoginPage";
 import AdminTweetsPage from "./Admin/AdminTweetsPage";
 import AdminUsersPage from "./Admin/AdminUsersPage";
@@ -12,7 +12,7 @@ import NavigatePage from "./NavigatePage"
 
 export {
   LoginPage,
-  SignupPage,
+  RegistPage,
   AdminLoginPage,
   AdminTweetsPage,
   AdminUsersPage,
