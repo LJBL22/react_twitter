@@ -2,7 +2,9 @@ import Main from 'components/Main';
 import InputTweet from 'components/InputTweet';
 import TweetCollection from 'components/TweetCollection';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getTweets, createTweet } from 'api/tweet';
 
 const StyledHeader = styled.div`
   width: 40.0625rem;
@@ -45,27 +47,75 @@ const ScrollBar = styled.div`
 const HomePage = () => {
   // 因為之後新增的推文，會推到TweetCollection，故把 useState設定在這，其他使用 model 視窗串接的推文還待思考
   const [inputValue, setInputValue] = useState('');
+  const [tweets, setTweets] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkTokenIsValid = async () => {
+      const authToken = localStorage.getItem('authToken');
+      // 確認 authToken 有沒有存在，驗證authToken 是不是正確還要額外從response 的 headers取得
+      if (!authToken) {
+        navigate('/login');
+      }
+    };
+    checkTokenIsValid();
+  }, [navigate]);
+
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
   const words = inputValue.trim().split(/\s+/);
   // 如果 0 < inputValue < 140 則輸入有效
   const isInputValueValid = inputValue.length > 0 && words.length < 140;
-  const maxLengthError = words.length > 140
-
 
   const handleChange = (value) => {
     setInputValue(value);
   };
 
-  const handleAddTweet = () => {
+  const handleAddTweet = async () => {
     if (inputValue.length === 0) {
       return;
     }
-
-    // async await try catch串API
+    try {
+      // data 是使用 createTweet函式創建新的推文後拿回來的資料
+      const data = await createTweet({
+        description: inputValue,
+      });
+      console.log('data', data);
+      setTweets((prevTweets) => {
+        return [
+          ...prevTweets,
+          {
+            // 這裡要放資料庫拿的推文id (才能當key值)，新增推文陣列
+            id: data.id,
+            description: data.description,
+          },
+        ];
+      });
+      setInputValue('');
+    } catch (error) {
+      console.error(error);
+    }
     console.log('inputValue', inputValue);
     // 要將新的推文確認好資料加到tweetData裡
-    setInputValue('');
   };
+
+  useEffect(() => {
+    const getTweetsAsync = async () => {
+      try {
+        const tweets = await getTweets();
+        console.log('getTweets', tweets);
+        setTweets(
+          tweets.map((tweet) => {
+            return {
+              ...tweet,
+              // 目前沒有編輯功能，之後可以增加 isEdit: false 去切換推文編輯的狀態
+            };
+          })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getTweetsAsync();
+  }, []);
 
   return (
     <div>
@@ -83,10 +133,9 @@ const HomePage = () => {
             onChange={handleChange}
             onClick={handleAddTweet}
             isInputValid={isInputValueValid}
-            maxLengthError={maxLengthError}
           />
           <StyledDivider />
-          <TweetCollection />
+          <TweetCollection tweets={tweets} />
         </ScrollBar>
       </Main>
     </div>
