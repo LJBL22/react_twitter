@@ -29,11 +29,11 @@ const StyledButton = styled.button`
   font-weight: 400;
   padding: 8px 0;
   margin: 2rem 0px 3rem;
+  transition: background-color .1s ease-in-out;
 
   &:hover {
     cursor: pointer;
-    background-color: var(--color-secondary-orange);
-    border: 1px solid var(--color-gray-700);
+    background-color: var(--color-primary);
   }
 `;
 

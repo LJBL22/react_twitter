@@ -7,8 +7,6 @@ import {
   AuthLinkText,
   AuthP,
 } from "components/common/auth.styled";
-// import { Link } from "react-router-dom";
-// import { useState } from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -75,7 +73,7 @@ const LoginPage = () => {
         <AuthInput
           type="password"
           label="密碼"
-          placeholder="請輸入密碼123456789$%"
+          placeholder="請輸入密碼"
           value={password}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
