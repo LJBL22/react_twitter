@@ -45,6 +45,12 @@ const ScrollBar = styled.div`
 const HomePage = () => {
   // 因為之後新增的推文，會推到TweetCollection，故把 useState設定在這，其他使用 model 視窗串接的推文還待思考
   const [inputValue, setInputValue] = useState('');
+  // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
+  const words = inputValue.trim().split(/\s+/);
+  // 如果 0 < inputValue < 140 則輸入有效
+  const isInputValueValid = inputValue.length > 0 && words.length < 140;
+  const maxLengthError = words.length > 140
+
 
   const handleChange = (value) => {
     setInputValue(value);
@@ -54,6 +60,7 @@ const HomePage = () => {
     if (inputValue.length === 0) {
       return;
     }
+
     // async await try catch串API
     console.log('inputValue', inputValue);
     // 要將新的推文確認好資料加到tweetData裡
@@ -69,12 +76,14 @@ const HomePage = () => {
         <ScrollBar>
           <InputTweet
             width='32.875rem'
-            height='8.5625rem'
+            height='auto'
             divWidth='40.0625rem'
             divHeight='8.625rem'
             inputValue={inputValue}
             onChange={handleChange}
             onClick={handleAddTweet}
+            isInputValid={isInputValueValid}
+            maxLengthError={maxLengthError}
           />
           <StyledDivider />
           <TweetCollection />

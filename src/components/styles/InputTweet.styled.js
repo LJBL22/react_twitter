@@ -85,6 +85,7 @@ export const StyledForm = styled.form`
 export const StyledTextarea = styled.textarea.attrs({
   placeholder: '有什麼新鮮事?',
   maxLength: '140',
+  // 日後挑戰，使用者可繼續打(textarea框會長高)，但超過140個字就會跳錯誤提示
 })`
   width: ${({ width }) => width};
   height: ${({ height }) => height};

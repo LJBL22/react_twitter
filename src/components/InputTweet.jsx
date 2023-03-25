@@ -14,6 +14,7 @@ function InputTweet({
   inputValue,
   onChange,
   onClick,
+  isInputValid,
 }) {
   // 要如何確認是哪一個使用者在撰寫推文?
   // 從驗證的 authToken 確認當下使用者
@@ -30,7 +31,6 @@ function InputTweet({
           e.preventDefault();
         }}
       >
-        {/* placeholder 文字沒有辦法寫在 StyledTextarea檔案中，待確認問題 */}
         <StyledTextarea
           width={width}
           height={height}
@@ -38,7 +38,9 @@ function InputTweet({
           value={inputValue}
         />
         {/* submit 以後，text 設定為空值 */}
-        <button onClick={() => onClick?.()}>推文</button>
+        <button onClick={() => onClick?.()} disabled={!isInputValid}>
+          推文
+        </button>
       </StyledForm>
     </StyledCardDiv>
   );

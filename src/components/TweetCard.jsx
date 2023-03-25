@@ -50,7 +50,7 @@ function TweetCard({ divWidth, divHeight, card }) {
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       <StyledImgDiv>
-        <StyledAvatar src={card.avatar} alt="avatar" />
+        <StyledAvatar src={card.avatar} alt='avatar' />
       </StyledImgDiv>
       <StyledContextDiv>
         <StyledItemDiv>
@@ -63,11 +63,11 @@ function TweetCard({ divWidth, divHeight, card }) {
         <StyledDescriptionDiv>{card.description}</StyledDescriptionDiv>
         <StyledActions>
           <div>
-            <IconReply width="0.825rem" className="iconAction" />
+            <IconReply width='0.825rem' className='iconAction' />
             {card.replyNum}
           </div>
           <div>
-            <IconLikeOut width="0.825rem" className="iconAction" />
+            <IconLikeOut width='0.825rem' className='iconAction' />
             {card.likeNum}
           </div>
         </StyledActions>
