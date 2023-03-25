@@ -2,26 +2,29 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
-   font-family: 'Montserrat';
-   font-style: normal;
-   font-weight: 400;
-   src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXx-p7K4KLg.woff) format('woff');
   /* 數字跟符號 */
   unicode-range: U+30-39, U+0021-002F, U+003A, U+003F;
 }
 @font-face {
-   font-family: 'Montserrat';
-   font-style: normal;
-   font-weight: 500;
-   src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_ZpC3gnD-w.ttf) format('truetype');
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtZ6Hw5aXx-p7K4KLg.woff) format('woff');
    unicode-range: U+30-39, U+0021-002F, U+003A, U+003F;
 }
 
 @font-face {
-   font-family: 'Montserrat';
-   font-style: normal;
-   font-weight: 700;
-   src: url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXx-p7K4KLg.woff) format('woff');
    /* 中文跟英文 */
    unicode-range: U+30-39, U+0021-002F, U+003A, U+003F;
 }
