@@ -10,7 +10,7 @@ export const login = async ({ account, password }) => {
     });
     const { token } = data;
     if (token) {
-      return { ...data };
+      return { success: true, ...data };
     }
     return data;
   } catch (error) {
@@ -36,7 +36,7 @@ export const register = async ({
     const { token } = data;
     console.log(data);
     if (token) {
-      return { ...data };
+      return { success: true, ...data };
     }
     return data;
   } catch (error) {
@@ -54,7 +54,7 @@ export const adminLogin = async ({ account, password }) => {
     const { token } = data;
     console.log(data);
     if (token) {
-      return { ...data };
+      return { success: true, ...data };
     }
     return data;
   } catch (error) {

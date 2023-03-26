@@ -10,14 +10,14 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { login } from "api/auth";
-// import { useAuth } from "contexts/AuthContext";
+// import { login } from "api/auth";
+import { useAuth } from "contexts/AuthContext";
 
 const LoginPage = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
-  // const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
     if (account.length === 0) {
@@ -27,12 +27,12 @@ const LoginPage = () => {
       return;
     }
 
-    const { success, token } = await login({
+    const { token } = await login({
       account,
       password,
     });
-    if (success) {
-      localStorage.setItem("token", token);
+    if (token) {
+      // localStorage.setItem("token", token);
       Swal.fire({
         title: "登入成功",
         icon: "success",
@@ -50,11 +50,11 @@ const LoginPage = () => {
       position: "top",
     });
   };
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/todos");
-  //   }
-  // }, [navigate, isAuthenticated]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/todos");
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <AuthContainer>
       <div>
