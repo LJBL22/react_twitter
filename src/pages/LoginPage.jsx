@@ -32,7 +32,7 @@ const LoginPage = () => {
       password,
     });
     if (success) {
-      localStorage.setItem('token', token);
+      localStorage.setItem("token", token);
       Swal.fire({
         title: "登入成功",
         icon: "success",

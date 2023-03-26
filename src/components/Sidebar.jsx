@@ -5,6 +5,7 @@ import {
   IconLogout,
   IconHomeOut,
 } from "assets/icons";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledSidebar = styled.nav`
@@ -24,6 +25,11 @@ const PageLink = styled.li`
 `;
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <>
       <nav className="sidebar">
@@ -51,7 +57,7 @@ function Sidebar() {
           </div>
           <div>
             <ul>
-              <PageLink>
+              <PageLink onClick={handleClick}>
                 <IconLogout />
                 登出
               </PageLink>
