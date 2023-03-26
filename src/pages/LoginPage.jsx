@@ -27,12 +27,11 @@ const LoginPage = () => {
       return;
     }
 
-    const { success, token } = await login({
+    const success = await login({
       account,
       password,
     });
     if (success) {
-      localStorage.setItem('token', token);
       Swal.fire({
         title: "登入成功",
         icon: "success",

@@ -8,10 +8,9 @@ export const login = async ({ account, password }) => {
       account,
       password,
     });
-    const { token } = data.data;
-    console.log('data', data);
+    const { token } = data;
     if (token) {
-      return { success: true, ...data.data };
+      return { success: true, ...data };
     }
     return data;
   } catch (error) {
@@ -25,7 +24,6 @@ export const register = async ({ account, name, password, confirmPassword, email
     });
     const { token } = data;
     console.log(data);
-
     if (token) {
       return { success: true, ...data };
     }
@@ -57,13 +55,13 @@ export const adminLogin = async ({ account, password }) => {
       account,
       password,
     });
-    const { token } = data.data;
+    const { token } = data;
     console.log(data);
     if (token) {
-      return { success: true, ...data.data };
+      return { success: true, ...data };
     }
     return data;
   } catch (error) {
-    console.error('[Login failed]:', error);
+    console.error('[adminLogin failed]:', error);
   }
 };
