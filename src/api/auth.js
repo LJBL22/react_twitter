@@ -10,7 +10,7 @@ export const login = async ({ account, password }) => {
     });
     const { token } = data;
     if (token) {
-      return { success: true, ...data };
+      return { ...data };
     }
     return data;
   } catch (error) {
@@ -25,28 +25,13 @@ export const register = async ({ account, name, password, confirmPassword, email
     const { token } = data;
     console.log(data);
     if (token) {
-      return { success: true, ...data };
+      return { ...data };
     }
     return data;
   } catch (error) {
-    console.error(error);
+    console.error('[Register failed]:', error);
   }
 };
-
-// export const checkPermission = async (token) => {
-//   try {
-//     const { data } = await axios.get(`${authURL}/test-token`, {
-//       headers: {
-//         Authorization: 'Bearer ' + token,
-//       },
-//     });
-
-//     return data.success;
-//   } catch (error) {
-//     console.error('[Check Permission Failed]:', error);
-//   }
-// };
-
 
 // admin
 export const adminLogin = async ({ account, password }) => {
@@ -58,7 +43,7 @@ export const adminLogin = async ({ account, password }) => {
     const { token } = data;
     console.log(data);
     if (token) {
-      return { success: true, ...data };
+      return { ...data };
     }
     return data;
   } catch (error) {

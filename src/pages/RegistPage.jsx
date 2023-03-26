@@ -43,14 +43,15 @@ const RegistPage = () => {
     //   return errorMsg;
     // }
 
-    const success = await register({
+    const token = await register({
       account,
       name,
       password,
       confirmPassword,
       email,
     });
-    if (success) {
+    if (token) {
+      localStorage.setItem("token", token);
       Swal.fire({
         title: "註冊成功",
         icon: "success",
