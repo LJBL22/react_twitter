@@ -10,7 +10,6 @@ import {
 } from "components/common/auth.styled";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Swal from "sweetalert2";
 // import { useAuth } from "contexts/AuthContext";
 
@@ -19,40 +18,36 @@ const RegistPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  // const [errorMsg, setErrorMsg] = useState(null);
   // const navigate = useNavigate();
   // const { register, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
-    if (account.length === 0) {
-      return;
-    }
-    if (name.length === 0) {
-      return;
-    }
-    if (password.length === 0) {
-      return;
-    }
-    if (email.length === 0) {
-      return;
-    }
+    // if (account.length === 0) {
+    //   return;
+    // }
+    // if (name.length === 0) {
+    //   return;
+    // }
+    // if (password.length === 0) {
+    //   return;
+    // }
+    // if (email.length === 0) {
+    //   return;
+    // }
 
-    if (checkPassword !== password) {
-      Swal.fire({
-        title: "密阿怪怪喔",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 3000,
-        position: "top",
-      });
-      return;
-    }
+    // if (confirmPassword !== password) {
+    //   setErrorMsg("密碼不一致，請重新確認");
+    //   return errorMsg;
+    // }
 
     const success = await register({
       account,
       name,
       password,
-      checkPassword,
+      confirmPassword,
       email,
     });
     if (success) {
@@ -105,6 +100,7 @@ const RegistPage = () => {
       </AuthInputContainer>
       <AuthInputContainer>
         <AuthInput
+          type="email"
           label="Email"
           placeholder="請輸入 Email"
           value={email}
@@ -125,12 +121,21 @@ const RegistPage = () => {
         <AuthInput
           type="password"
           label="密碼確認"
-          value={checkPassword}
+          value={confirmPassword}
           placeholder="請再次輸入密碼"
           onChange={(passwordInputValue) =>
-            setCheckPassword(passwordInputValue)
+            setConfirmPassword(passwordInputValue)
           }
+          // 自定義正則表達式，確認密碼確認和密碼是否一致
+          pattern={`^${password}$`}
+          // required 屬性表示這個欄位必填
+          required
         />
+        {confirmPassword !== password ? (
+          <span style={{ color: "purple" }}>密碼不一致，請重新確認</span>
+        ) : (
+          ""
+        )}
       </AuthInputContainer>
       <AuthButton onClick={handleClick}>註冊</AuthButton>
       <AuthP>
