@@ -101,3 +101,66 @@ export const tweetData = [
     likeNum: '200',
   },
 ];
+
+export const replies = [
+  {
+    id: 19,
+    comment:
+      'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
+    UserId: 6,
+    TweetId: 7,
+    createdAt: '2022-10-05T09:24:04.000Z',
+    updatedAt: '2023-03-24T23:19:04.000Z',
+    User: {
+      account: 'Kennedy20',
+      name: 'Mozelle.Cassin',
+      avatar:
+        'https://raw.githubusercontent.com/LJBL22/react_twitter/3d808b59166970aa7c34cbb78dba58d70b11fc63/src/logo.svg',
+    },
+  },
+  {
+    id: 20,
+    comment:
+      'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
+    UserId: 6,
+    TweetId: 7,
+    createdAt: '2022-10-05T09:24:04.000Z',
+    updatedAt: '2023-03-24T23:19:04.000Z',
+    User: {
+      account: 'Kennedy20',
+      name: 'Mozelle.Cassin',
+      avatar:
+        'https://raw.githubusercontent.com/LJBL22/react_twitter/3d808b59166970aa7c34cbb78dba58d70b11fc63/src/logo.svg',
+    },
+  },
+  {
+    id: 21,
+    comment:
+      'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
+    UserId: 6,
+    TweetId: 7,
+    createdAt: '2022-10-05T09:24:04.000Z',
+    updatedAt: '2023-03-24T23:19:04.000Z',
+    User: {
+      account: 'Kennedy20',
+      name: 'Mozelle.Cassin',
+      avatar:
+        'https://raw.githubusercontent.com/LJBL22/react_twitter/3d808b59166970aa7c34cbb78dba58d70b11fc63/src/logo.svg',
+    },
+  },
+  {
+    id: 22,
+    comment:
+      'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
+    UserId: 6,
+    TweetId: 7,
+    createdAt: '2022-10-05T09:24:04.000Z',
+    updatedAt: '2023-03-24T23:19:04.000Z',
+    User: {
+      account: 'Kennedy20',
+      name: 'Mozelle.Cassin',
+      avatar:
+        'https://raw.githubusercontent.com/LJBL22/react_twitter/3d808b59166970aa7c34cbb78dba58d70b11fc63/src/logo.svg',
+    },
+  },
+];

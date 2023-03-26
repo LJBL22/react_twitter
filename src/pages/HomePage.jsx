@@ -36,11 +36,12 @@ const HomePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const checkTokenIsValid = async () => {
-      const authToken = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       // 確認 authToken 有沒有存在，驗證authToken 是不是正確還要額外從response 的 headers取得
-      if (!authToken) {
+      if (!token) {
         navigate('/login');
       }
+      console.log('token', token);
     };
     checkTokenIsValid();
   }, [navigate]);

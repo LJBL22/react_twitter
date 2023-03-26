@@ -41,6 +41,24 @@ const formatDate = (dateString) => {
 // console.log('1', formatDate('2023-03-22T11:39:01.000Z'));
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
+function MainSection({ card }) {
+  return (
+    <>
+      <div className='styledContent'>{card.description}</div>
+      <StyledActions>
+        <div>
+          <IconReply width='0.825rem' className='iconAction' />
+          {card.repliesNum}
+        </div>
+        <div>
+          <IconLikeOut width='0.825rem' className='iconAction' />
+          {card.likesNum}
+        </div>
+      </StyledActions>
+    </>
+  );
+}
+
 function TweetCard({ divWidth, divHeight, card }) {
   const localTime = formatDate(card.createdAt);
   return (
@@ -57,17 +75,7 @@ function TweetCard({ divWidth, divHeight, card }) {
             @{card.User.account}・{localTime}
           </p>
         </StyledItemDiv>
-        <div className='styledContent'>{card.description}</div>
-        <StyledActions>
-          <div>
-            <IconReply width='0.825rem' className='iconAction' />
-            {card.replyNum}
-          </div>
-          <div>
-            <IconLikeOut width='0.825rem' className='iconAction' />
-            {card.likeNum}
-          </div>
-        </StyledActions>
+        <MainSection card={card} />
       </StyledContentDiv>
     </StyledCardDiv>
   );

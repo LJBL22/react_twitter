@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { StyledHeader } from 'components/styles/InputTweet.styled';
 import { IconBack } from 'assets/icons';
 import TweetReply from 'components/TweetReply';
+import { ReplyCollection } from 'components/TweetCollection';
+import { replies } from 'components/dummyData';
 
 const ReplyHeader = styled(StyledHeader)`
   & > div {
@@ -27,6 +29,7 @@ const ReplyList = () => {
         </div>
       </ReplyHeader>
       <TweetReply />
+      <ReplyCollection replyData={replies} />
     </div>
   );
 };
