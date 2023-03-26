@@ -5,7 +5,7 @@ import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
 import { replies } from 'components/dummyData';
 
-const ReplyHeader = styled(StyledHeader)`
+export const BackHeader = styled(StyledHeader)`
   & > div {
     display: flex;
     width: 100%;
@@ -20,14 +20,14 @@ const ReplyHeader = styled(StyledHeader)`
 const ReplyList = () => {
   return (
     <div>
-      <ReplyHeader>
+      <BackHeader>
         <div>
           <div>
             <IconBack />
           </div>
           <div>推文</div>
         </div>
-      </ReplyHeader>
+      </BackHeader>
       <TweetReply />
       <ReplyCollection replyData={replies} />
     </div>

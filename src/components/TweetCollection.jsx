@@ -25,13 +25,13 @@ export const ReplyCollection = ({ replyData }) => {
   // console.log('tweets', tweets);
   return (
     <div>
-      {replyData.map((card) => {
+      {replyData.map((reply) => {
         return (
           <TweetCard
             divWidth='40.0625rem'
             divHeight='auto'
-            key={card.id}
-            card={card}
+            key={reply.id}
+            reply={reply}
           />
         );
       })}
