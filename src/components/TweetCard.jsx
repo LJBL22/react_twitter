@@ -45,7 +45,7 @@ const formatDate = (dateString) => {
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
 function TweetCard({ divWidth, divHeight, card }) {
-  const localTime = formatDate(card.createdTime);
+  const localTime = formatDate(card.createdAt);
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>

@@ -1,14 +1,15 @@
 import TweetCard from './TweetCard';
-import { tweetData } from './dummyData';
+// import { tweetData } from './dummyData';
 
-function TweetCollection() {
+function TweetCollection({ tweets }) {
+  // console.log('tweets', tweets);
   return (
     <div>
-      {tweetData.map((card) => {
+      {tweets.map((card) => {
         return (
           <TweetCard
-            divWidth="40.0625rem"
-            divHeight="auto"
+            divWidth='40.0625rem'
+            divHeight='auto'
             key={card.id}
             card={card}
           />

@@ -16,7 +16,6 @@ export const StyledDescriptionDiv = styled.div`
   width: 33rem;
   height: auto;
   min-height: 4.875rem;
-  font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
   font-size: var(--fs-basic);
@@ -25,7 +24,6 @@ export const StyledDescriptionDiv = styled.div`
 `;
 
 export const StyledCardName = styled.p`
-  font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 700;
   font-size: var(--fs-basic);
@@ -34,7 +32,6 @@ export const StyledCardName = styled.p`
 `;
 
 export const StyledCardAccount = styled.p`
-  font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
   font-size: var(--fs-secondary);
