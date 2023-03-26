@@ -1,7 +1,8 @@
 import { login, register } from "api/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import * as jwt from "jsonwebtoken";
+// import * as jwt from "jsonwebtoken";
 import { useLocation } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const defaultAuthContext = {
   isAuthenticated: false,
@@ -44,32 +45,16 @@ export const AuthProvider = ({ children }) => {
           account: payload.account,
         },
         //直接從 signUp page 取
-        // register: async (data) => {
-        //   const { success, token } = await register({
-        //     account: data.account,
-        //     name: data.name,
-        //     password: data.password,
-        //     email: data.email,
-        //     confirmPassword: data.confirmPassword,
-        //   });
-        //   //將經過 jwtWebToken 解析的 payload，儲存進 state
-        //   const tempPayload = jwt.decode(token);
-        //   if (tempPayload) {
-        //     setPayload(tempPayload);
-        //     setIsAuthenticated(true);
-        //     localStorage.setItem("token", token);
-        //   } else {
-        //     setPayload(null);
-        //     setIsAuthenticated(false);
-        //   }
-        //   return success;
-        // },
-        login: async (data) => {
-          const { success, token } = await login({
-            account: data.user.account,
-            password: data.user.password,
+        register: async (data) => {
+          const { token } = await register({
+            account: data.account,
+            name: data.name,
+            password: data.password,
+            email: data.email,
+            confirmPassword: data.confirmPassword,
           });
-          const tempPayload = jwt.decode(token);
+          //將經過 jwt_decode 解析的 payload，儲存進 state
+          const tempPayload = jwt_decode(token);
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
@@ -77,15 +62,36 @@ export const AuthProvider = ({ children }) => {
           } else {
             setPayload(null);
             setIsAuthenticated(false);
+          }
+          // 現在後端取消回傳 success 了不確定要改 return 什麼
+          return;
+        },
+        // 這裡有寫過 ({user}) + user.account
+        // 跟 (data) + data.account 也一樣會跳 function 錯誤
+        login: async (data) => {
+          const { token } = await login({
+            account: data.account,
+            password: data.password,
+          });
+          const tempPayload = jwt_decode(token);
+          if (tempPayload) {
+            setPayload(tempPayload);
+            setIsAuthenticated(true);
+            localStorage.setItem("token", token);
+            console.log("p ");
+          } else {
+            setPayload(null);
+            setIsAuthenticated(false);
             console.log("啊啊啊啊");
           }
-          return success;
+          // 現在後端取消回傳 success 了不確定要改 return 什麼
+          return;
         },
-        // logout: () => {
-        //   localStorage.removeItem("token");
-        //   setPayload(null);
-        //   setIsAuthenticated(false);
-        // },
+        logout: () => {
+          localStorage.removeItem("token");
+          setPayload(null);
+          setIsAuthenticated(false);
+        },
       }}
     >
       {children}
