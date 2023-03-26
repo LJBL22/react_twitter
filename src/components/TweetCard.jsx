@@ -1,12 +1,9 @@
-import { StyledAvatar, StyledImgDiv } from './styles/Avatar.styled';
 import {
   StyledCardDiv,
-  StyledContextDiv,
+  StyledContentDiv,
   StyledItemDiv,
-  StyledDescriptionDiv,
-  StyledCardName,
-  StyledCardAccount,
   StyledActions,
+  StyledImgDiv,
 } from './styles/InputTweet.styled';
 import { IconLikeOut, IconReply } from 'assets/icons';
 
@@ -44,34 +41,42 @@ const formatDate = (dateString) => {
 // console.log('1', formatDate('2023-03-22T11:39:01.000Z'));
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
+function MainSection({ card }) {
+  return (
+    <>
+      <div className='styledContent'>{card.description}</div>
+      <StyledActions>
+        <div>
+          <IconReply width='0.825rem' className='iconAction' />
+          {card.repliesNum}
+        </div>
+        <div>
+          <IconLikeOut width='0.825rem' className='iconAction' />
+          {card.likesNum}
+        </div>
+      </StyledActions>
+    </>
+  );
+}
+
 function TweetCard({ divWidth, divHeight, card }) {
   const localTime = formatDate(card.createdAt);
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       <StyledImgDiv>
-        <StyledAvatar src={card.avatar} alt='avatar' />
+        <img src={card.User.avatar} alt='avatar' />
       </StyledImgDiv>
-      <StyledContextDiv>
+      <StyledContentDiv>
         <StyledItemDiv>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <StyledCardName>{card.name}</StyledCardName>&ensp;
-          <StyledCardAccount>
-            @{card.account}・{localTime}
-          </StyledCardAccount>
+          <p className='cardName'>{card.User.name}</p>&ensp;
+          <p className='cardAccount'>
+            @{card.User.account}・{localTime}
+          </p>
         </StyledItemDiv>
-        <StyledDescriptionDiv>{card.description}</StyledDescriptionDiv>
-        <StyledActions>
-          <div>
-            <IconReply width='0.825rem' className='iconAction' />
-            {card.replyNum}
-          </div>
-          <div>
-            <IconLikeOut width='0.825rem' className='iconAction' />
-            {card.likeNum}
-          </div>
-        </StyledActions>
-      </StyledContextDiv>
+        <MainSection card={card} />
+      </StyledContentDiv>
     </StyledCardDiv>
   );
 }

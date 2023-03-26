@@ -1,26 +1,10 @@
-import Main from 'components/Main';
 import InputTweet from 'components/InputTweet';
 import TweetCollection from 'components/TweetCollection';
 import styled from 'styled-components';
+import { StyledHeader } from 'components/styles/InputTweet.styled';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTweets, createTweet } from 'api/tweet';
-
-const StyledHeader = styled.div`
-  width: 40.0625rem;
-  height: 3.1875rem;
-  border: 0.0625rem solid #e6ecf0;
-  border-top: none;
-  margin-top: 1.5rem;
-`;
-
-const StyledTitle = styled.div`
-  font-weight: 700;
-  font-size: var(--fs-h4);
-  line-height: 1.625rem;
-  margin: 0rem 35.4375rem 1.5625rem 1.5rem;
-  color: var(--color-gray-900);
-`;
 
 const StyledDivider = styled.div`
   width: 39.9375rem;
@@ -31,6 +15,7 @@ const StyledDivider = styled.div`
 const ScrollBar = styled.div`
   max-height: 49.81rem;
   overflow-y: scroll;
+  overflow-x: hidden;
   &::-webkit-scrollbar {
     width: 13px;
   }
@@ -51,11 +36,12 @@ const HomePage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const checkTokenIsValid = async () => {
-      const authToken = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       // 確認 authToken 有沒有存在，驗證authToken 是不是正確還要額外從response 的 headers取得
-      if (!authToken) {
+      if (!token) {
         navigate('/login');
       }
+      console.log('token', token);
     };
     checkTokenIsValid();
   }, [navigate]);
@@ -119,9 +105,9 @@ const HomePage = () => {
 
   return (
     <div>
-      <Main>
+      <div>
         <StyledHeader>
-          <StyledTitle>首頁</StyledTitle>
+          <div>首頁</div>
         </StyledHeader>
         <ScrollBar>
           <InputTweet
@@ -137,7 +123,7 @@ const HomePage = () => {
           <StyledDivider />
           <TweetCollection tweets={tweets} />
         </ScrollBar>
-      </Main>
+      </div>
     </div>
   );
 };
