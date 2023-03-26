@@ -29,9 +29,11 @@ const StyledButton = styled.button`
   font-weight: 400;
   padding: 8px 0;
   margin: 2rem 0px 3rem;
+  transition: background-color .1s ease-in-out;
 
-  &.hover {
+  &:hover {
     cursor: pointer;
+    background-color: var(--color-primary);
   }
 `;
 

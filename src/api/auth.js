@@ -1,6 +1,7 @@
 import axios from 'axios';
 const authURL = 'https://dry-lowlands-42863.herokuapp.com/api';
 
+// User
 export const login = async ({ account, password }) => {
   try {
     const { data } = await axios.post(`${authURL}/users/signIn`, {
@@ -17,16 +18,15 @@ export const login = async ({ account, password }) => {
     console.error('[Login failed]:', error);
   }
 };
-
-export const register = async ({ account, email, password }) => {
+export const register = async ({ account, name, password, confirmPassword, email, errorMsg }) => {
   try {
-    const { data } = await axios.post(`${authURL}/register`, {
-      account,
-      email,
-      password,
+    const { data } = await axios.post(`${authURL}/users`, {
+      account, name, password, confirmPassword, email
     });
-    const { authToken } = data;
-    if (authToken) {
+    const { token } = data;
+    console.log(data);
+
+    if (token) {
       return { success: true, ...data };
     }
     return data;
@@ -35,16 +35,35 @@ export const register = async ({ account, email, password }) => {
   }
 };
 
-export const checkPermission = async (authToken) => {
-  try {
-    const { data } = await axios.get(`${authURL}/test-token`, {
-      headers: {
-        Authorization: 'Bearer ' + authToken,
-      },
-    });
+// export const checkPermission = async (token) => {
+//   try {
+//     const { data } = await axios.get(`${authURL}/test-token`, {
+//       headers: {
+//         Authorization: 'Bearer ' + token,
+//       },
+//     });
 
-    return data.success;
+//     return data.success;
+//   } catch (error) {
+//     console.error('[Check Permission Failed]:', error);
+//   }
+// };
+
+
+// admin
+export const adminLogin = async ({ account, password }) => {
+  try {
+    const { data } = await axios.post(`${authURL}/admin/signIn`, {
+      account,
+      password,
+    });
+    const { token } = data.data;
+    console.log(data);
+    if (token) {
+      return { success: true, ...data.data };
+    }
+    return data;
   } catch (error) {
-    console.error('[Check Permission Failed]:', error);
+    console.error('[Login failed]:', error);
   }
 };
