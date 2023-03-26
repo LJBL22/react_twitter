@@ -1,47 +1,71 @@
 import styled from 'styled-components';
 
+export const StyledHeader = styled.div`
+  width: 40.0625rem;
+  height: 3.1875rem;
+  border: 0.0625rem solid #e6ecf0;
+  border-top: none;
+  margin-top: 1.5rem;
+  & > div {
+    font-weight: 700;
+    font-size: var(--fs-h4);
+    line-height: 1.625rem;
+    margin: 0rem 35.4375rem 1.5625rem 1.5rem;
+    color: var(--color-gray-900);
+  }
+`;
+
 export const StyledCardDiv = styled.div`
   display: flex;
   width: ${({ divWidth }) => divWidth};
   height: ${({ divHeight }) => divHeight};
   border: 1px solid #e6ecf0;
   min-height: 9.5625rem;
+  padding-left: 1.655rem;
 `;
 
-export const StyledContextDiv = styled.div`
+export const StyledContentDiv = styled.div`
   padding: 1rem 1.8125rem 1.0625rem 0.5rem;
+  & .cardName {
+    font-style: normal;
+    font-weight: 700;
+    font-size: var(--fs-basic);
+    line-height: 1.625rem;
+    color: var(--color-gray-900);
+  }
+  &.cardAccount {
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--fs-secondary);
+    line-height: 1.375rem;
+    color: var(--color-secondary);
+  }
+  & .styledContent {
+    width: 33rem;
+    height: auto;
+    min-height: 4.875rem;
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--fs-basic);
+    line-height: 1.625rem;
+    color: var(--color-gray-900);
+  }
 `;
-
-export const StyledDescriptionDiv = styled.div`
-  width: 33rem;
-  height: auto;
-  min-height: 4.875rem;
-  font-style: normal;
-  font-weight: 400;
-  font-size: var(--fs-basic);
-  line-height: 1.625rem;
-  color: var(--color-gray-900);
+export const StyledImgDiv = styled.div`
+  padding-top: 1rem;
+  & > img {
+    object-fit: cover;
+    width: 3.125rem;
+    height: 3.125rem;
+    border-radius: 100%;
+  }
 `;
-
-export const StyledCardName = styled.p`
-  font-style: normal;
-  font-weight: 700;
-  font-size: var(--fs-basic);
-  line-height: 1.625rem;
-  color: var(--color-gray-900);
-`;
-
-export const StyledCardAccount = styled.p`
-  font-style: normal;
-  font-weight: 400;
-  font-size: var(--fs-secondary);
-  line-height: 1.375rem;
-  color: var(--color-secondary);
-`;
-
 export const StyledItemDiv = styled.div`
   display: flex;
   align-items: center;
+  & .paddingL {
+    padding-left: 0.5rem;
+  }
 `;
 
 export const StyledActions = styled(StyledItemDiv)`
@@ -89,7 +113,7 @@ export const StyledTextarea = styled.textarea.attrs({
   padding: 1.75rem 1.78125rem 1.75rem 0.5rem;
   border: none;
   resize: none;
-  overflow-y: hidden;
+  overflow: hidden;
   ::placeholder {
     color: var(--color-secondary);
   }

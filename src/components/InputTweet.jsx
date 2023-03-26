@@ -1,9 +1,9 @@
 import { userData } from './dummyData';
-import { StyledAvatar, StyledImgDiv } from './styles/Avatar.styled';
 import {
   StyledTextarea,
   StyledCardDiv,
   StyledForm,
+  StyledImgDiv,
 } from './styles/InputTweet.styled';
 
 function InputTweet({
@@ -24,7 +24,7 @@ function InputTweet({
   return (
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       <StyledImgDiv>
-        <StyledAvatar src={currentUser.avatar} alt='avatar' />
+        <img src={currentUser.avatar} alt='avatar' />
       </StyledImgDiv>
       <StyledForm
         onSubmit={(e) => {
