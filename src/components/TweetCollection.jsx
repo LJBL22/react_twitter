@@ -1,6 +1,5 @@
 import TweetCard from './TweetCard';
 
-
 function TweetCollection({ tweets }) {
   // console.log('tweets', tweets);
   return (
@@ -22,17 +21,19 @@ function TweetCollection({ tweets }) {
 export default TweetCollection;
 
 export const ReplyCollection = ({ replyData }) => {
-  console.log('replyData', replyData);
+  // console.log('replyData', replyData);
   return (
     <div>
       {replyData.map((reply) => {
         console.log('replyinMap', reply);
-        <TweetCard
-          divWidth='40.0625rem'
-          divHeight='auto'
-          key={reply.id}
-          reply={reply}
-        />;
+        return (
+          <TweetCard
+            divWidth='40.0625rem'
+            divHeight='auto'
+            key={reply.id}
+            reply={reply}
+          />
+        );
       })}
     </div>
   );

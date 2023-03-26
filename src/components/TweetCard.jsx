@@ -71,7 +71,7 @@ function TweetCard({ divWidth, divHeight, card, reply }) {
   const cardUserName = card.User.name;
   const cardUserAccount = card.User.account;
   const cardUserAvatar = card.User.avatar;
-  console.log('replyinTweetCard', reply);
+  // console.log('replyinTweetCard', reply);
   // const replyLocalTime = reply.createdAt;
   // const replyUserName = reply.User.name;
   // const replyUserAccount = reply.User.account;
