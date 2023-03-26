@@ -1,5 +1,5 @@
 import TweetCard from './TweetCard';
-// import { tweetData } from './dummyData';
+
 
 function TweetCollection({ tweets }) {
   // console.log('tweets', tweets);
@@ -22,18 +22,17 @@ function TweetCollection({ tweets }) {
 export default TweetCollection;
 
 export const ReplyCollection = ({ replyData }) => {
-  // console.log('tweets', tweets);
+  console.log('replyData', replyData);
   return (
     <div>
       {replyData.map((reply) => {
-        return (
-          <TweetCard
-            divWidth='40.0625rem'
-            divHeight='auto'
-            key={reply.id}
-            reply={reply}
-          />
-        );
+        console.log('replyinMap', reply);
+        <TweetCard
+          divWidth='40.0625rem'
+          divHeight='auto'
+          key={reply.id}
+          reply={reply}
+        />;
       })}
     </div>
   );

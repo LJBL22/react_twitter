@@ -68,32 +68,27 @@ function MainSection({ card }) {
 
 function TweetCard({ divWidth, divHeight, card, reply }) {
   const cardLocalTime = formatDate(card.createdAt);
-  const replyLocalTime = reply.createdAt;
   const cardUserName = card.User.name;
-  const replyUserName = reply.User.name;
   const cardUserAccount = card.User.account;
-  const replyUserAccount = reply.User.account;
   const cardUserAvatar = card.User.avatar;
-  const replyUserAvatar = reply.User.avatar;
+  console.log('replyinTweetCard', reply);
+  // const replyLocalTime = reply.createdAt;
+  // const replyUserName = reply.User.name;
+  // const replyUserAccount = reply.User.account;
+  // const replyUserAvatar = reply.User.avatar;
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       <StyledImgDiv>
-        <img
-          src={card ? { cardUserAvatar } : { replyUserAvatar }}
-          alt='avatar'
-        />
+        <img src={card ? cardUserAvatar : 'test'} alt='avatar' />
       </StyledImgDiv>
       <StyledContentDiv>
         <StyledItemDiv>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>
-            {card ? { cardUserName } : { replyUserName }}
-          </p>
+          <p className='cardName'>{card ? cardUserName : 'test'}</p>
           &ensp;
           <p className='cardAccount'>
-            @{card ? { cardUserAccount } : { replyUserAccount }}・
-            {card ? { cardLocalTime } : { replyLocalTime }}
+            @{card ? cardUserAccount : 'test'}・{card ? cardLocalTime : 'test'}
           </p>
         </StyledItemDiv>
         <MainSection card={card} />

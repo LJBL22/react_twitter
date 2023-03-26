@@ -18,6 +18,7 @@ export const BackHeader = styled(StyledHeader)`
 `;
 
 const ReplyList = () => {
+  console.log('replies', replies);
   return (
     <div>
       <BackHeader>
