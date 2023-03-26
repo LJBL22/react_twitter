@@ -25,32 +25,33 @@ const RegistPage = () => {
   // const { register, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
-    // if (account.length === 0) {
-    //   return;
-    // }
-    // if (name.length === 0) {
-    //   return;
-    // }
-    // if (password.length === 0) {
-    //   return;
-    // }
-    // if (email.length === 0) {
-    //   return;
-    // }
+    if (account.length === 0) {
+      return;
+    }
+    if (name.length === 0) {
+      return;
+    }
+    if (password.length === 0) {
+      return;
+    }
+    if (email.length === 0) {
+      return;
+    }
 
     // if (confirmPassword !== password) {
     //   setErrorMsg("密碼不一致，請重新確認");
     //   return errorMsg;
     // }
 
-    const success = await register({
+    const token = await register({
       account,
       name,
       password,
       confirmPassword,
       email,
     });
-    if (success) {
+    if (token) {
+      localStorage.setItem("token", token);
       Swal.fire({
         title: "註冊成功",
         icon: "success",
