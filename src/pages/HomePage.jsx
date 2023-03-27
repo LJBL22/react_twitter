@@ -5,6 +5,7 @@ import { StyledHeader } from 'components/styles/InputTweet.styled';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTweets } from 'contexts/TweetContext';
+import { useAuth } from 'contexts/AuthContext';
 
 const StyledContainer = styled.div`
   height: 100vh;
@@ -36,20 +37,16 @@ const ScrollBar = styled.div`
 `;
 const HomePage = () => {
   const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
-  console.log('inputValue', inputValue);
   const navigate = useNavigate();
-  // console.log('getTweets', tweets);
+  const { isAuthenticated } = useAuth();
   useEffect(() => {
-    const checkTokenIsValid = async () => {
-      const token = localStorage.getItem('token');
-      // 確認 authToken 有沒有存在，驗證authToken 是不是正確還要額外從response 的 headers取得
-      if (!token) {
-        navigate('/login');
-      }
-      console.log('token', token);
-    };
-    checkTokenIsValid();
-  }, [navigate]);
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [navigate, isAuthenticated]);
+
+  console.log('inputValue', inputValue);
+  // console.log('getTweets', tweets);
 
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
   const words = inputValue.trim().split(/\s+/);

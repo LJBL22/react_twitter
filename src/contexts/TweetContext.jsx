@@ -36,7 +36,7 @@ export const TweetsProvider = ({ children }) => {
       return;
     }
     try {
-      const data = await createTweet({
+      const { data } = await createTweet({
         description: inputValue,
       });
       setTweets((prevTweets) => {
