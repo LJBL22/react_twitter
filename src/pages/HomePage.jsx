@@ -6,6 +6,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTweets } from 'contexts/TweetContext';
 
+const StyledContainer = styled.div`
+  height: 100vh;
+  overflow-y: hidden;
+`;
+
 const StyledDivider = styled.div`
   width: 39.9375rem;
   height: 0.625rem;
@@ -13,7 +18,6 @@ const StyledDivider = styled.div`
 `;
 
 const ScrollBar = styled.div`
-  max-height: 49.81rem;
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar {
@@ -52,7 +56,7 @@ const HomePage = () => {
   const isInputValueValid = inputValue.length > 0 && words.length < 140;
 
   return (
-    <div>
+    <StyledContainer>
       <div>
         <StyledHeader>
           <div>首頁</div>
@@ -72,7 +76,7 @@ const HomePage = () => {
           <TweetCollection tweets={tweets} />
         </ScrollBar>
       </div>
-    </div>
+    </StyledContainer>
   );
 };
 
