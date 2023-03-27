@@ -49,6 +49,22 @@ export const TweetsProvider = ({ children }) => {
         ];
       });
       setInputValue('');
+      const getTweetsAsync = async () => {
+        // 將 getTweetsAsync 函式定義在 handleAddTweet 函式內部
+        try {
+          const tweets = await getTweets();
+          setTweets(
+            tweets.map((tweet) => {
+              return {
+                ...tweet,
+              };
+            })
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      await getTweetsAsync(); // 獲取所有推文並更新狀態
     } catch (error) {
       console.error(error);
     }

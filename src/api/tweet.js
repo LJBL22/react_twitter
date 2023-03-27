@@ -18,19 +18,9 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// (暫時使用) 從 localStorage 中讀取 token
-const token = localStorage.getItem('token');
-
-// (暫時使用) 在 headers 中添加 token
-const headers = {
-  Authorization: `Bearer ${token}`,
-};
-
 // 觀看所有的推文
 export const getTweets = async () => {
   try {
-    // const res = await axios.get(`${baseUrl}`);
-    // 暫時改寫加入上面取得的header
     const res = await axiosInstance.get(`${baseUrl}`);
     console.log('res', res);
     // 拿到資料庫裡存的所有的推文
