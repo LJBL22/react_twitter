@@ -23,13 +23,13 @@ const TweetLayout = () => {
   return (
     <>
       <TweetContainer>
-        <div className="grid-item">
+        <div className='grid-item'>
           <Sidebar />
         </div>
-        <div className="grid-item">
+        <div className='grid-item'>
           <Outlet />
         </div>
-        <div className="grid-item">
+        <div className='grid-item'>
           <PopularList />
         </div>
       </TweetContainer>

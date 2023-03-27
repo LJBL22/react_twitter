@@ -17,15 +17,13 @@ const StyledAuthInputContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
+  min-width: 178px;
   width: 100%;
   height: 2.875rem;
   border-radius: 50px;
   background-color: var(--color-theme);
   border: none;
-
   color: white;
-  min-width: 300px;
-  font-family: 'Noto Sans TC', sans-serif;
   font-weight: 400;
   padding: 8px 0;
   margin: 2rem 0px 3rem;
