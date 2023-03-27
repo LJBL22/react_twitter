@@ -20,6 +20,7 @@ const BorderDivider = styled.div`
   width: 39.9375rem;
   height: 0.076rem;
   background-color: #e6ecf0;
+  margin-left: -1.7rem;
 `;
 
 const TweetReply = ({ divWidth, divHeight }) => {

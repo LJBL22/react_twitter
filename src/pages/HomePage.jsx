@@ -2,9 +2,9 @@ import InputTweet from 'components/InputTweet';
 import TweetCollection from 'components/TweetCollection';
 import styled from 'styled-components';
 import { StyledHeader } from 'components/styles/InputTweet.styled';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTweets, createTweet } from 'api/tweet';
+import { useTweets } from 'contexts/TweetContext';
 
 const StyledDivider = styled.div`
   width: 39.9375rem;
@@ -30,10 +30,10 @@ const ScrollBar = styled.div`
   }
 `;
 const HomePage = () => {
-  // 因為之後新增的推文，會推到TweetCollection，故把 useState設定在這，其他使用 model 視窗串接的推文還待思考
-  const [inputValue, setInputValue] = useState('');
-  const [tweets, setTweets] = useState([]);
+  const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
+  console.log('inputValue', inputValue);
   const navigate = useNavigate();
+  console.log('getTweets', tweets);
   useEffect(() => {
     const checkTokenIsValid = async () => {
       const token = localStorage.getItem('token');
@@ -50,58 +50,6 @@ const HomePage = () => {
   const words = inputValue.trim().split(/\s+/);
   // 如果 0 < inputValue < 140 則輸入有效
   const isInputValueValid = inputValue.length > 0 && words.length < 140;
-
-  const handleChange = (value) => {
-    setInputValue(value);
-  };
-
-  const handleAddTweet = async () => {
-    if (inputValue.length === 0) {
-      return;
-    }
-    try {
-      // data 是使用 createTweet函式創建新的推文後拿回來的資料
-      const data = await createTweet({
-        description: inputValue,
-      });
-      console.log('data', data);
-      setTweets((prevTweets) => {
-        return [
-          ...prevTweets,
-          {
-            // 這裡要放資料庫拿的推文id (才能當key值)，新增推文陣列
-            id: data.id,
-            description: data.description,
-          },
-        ];
-      });
-      setInputValue('');
-    } catch (error) {
-      console.error(error);
-    }
-    console.log('inputValue', inputValue);
-    // 要將新的推文確認好資料加到tweetData裡
-  };
-
-  useEffect(() => {
-    const getTweetsAsync = async () => {
-      try {
-        const tweets = await getTweets();
-        console.log('getTweets', tweets);
-        setTweets(
-          tweets.map((tweet) => {
-            return {
-              ...tweet,
-              // 目前沒有編輯功能，之後可以增加 isEdit: false 去切換推文編輯的狀態
-            };
-          })
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getTweetsAsync();
-  }, []);
 
   return (
     <div>

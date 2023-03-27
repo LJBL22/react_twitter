@@ -104,10 +104,10 @@ export const tweetData = [
 
 export const replies = [
   {
-    id: 19,
+    id: 1,
     comment:
       'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
-    UserId: 6,
+    UserId: 1,
     TweetId: 7,
     createdAt: '2022-10-05T09:24:04.000Z',
     updatedAt: '2023-03-24T23:19:04.000Z',
@@ -119,10 +119,10 @@ export const replies = [
     },
   },
   {
-    id: 20,
+    id: 2,
     comment:
       'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
-    UserId: 6,
+    UserId: 2,
     TweetId: 7,
     createdAt: '2022-10-05T09:24:04.000Z',
     updatedAt: '2023-03-24T23:19:04.000Z',
@@ -134,10 +134,10 @@ export const replies = [
     },
   },
   {
-    id: 21,
+    id: 3,
     comment:
       'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
-    UserId: 6,
+    UserId: 3,
     TweetId: 7,
     createdAt: '2022-10-05T09:24:04.000Z',
     updatedAt: '2023-03-24T23:19:04.000Z',
@@ -149,10 +149,10 @@ export const replies = [
     },
   },
   {
-    id: 22,
+    id: 4,
     comment:
       'Culpa sint natus. Error et eius consequatur expedita. Fuga vel recusandae reprehenderit perferendis cupiditate vel quae et.',
-    UserId: 6,
+    UserId: 4,
     TweetId: 7,
     createdAt: '2022-10-05T09:24:04.000Z',
     updatedAt: '2023-03-24T23:19:04.000Z',
