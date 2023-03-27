@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledHeader = styled.div`
   width: 40.0625rem;
   height: 3.1875rem;
-  border: 0.0625rem solid #e6ecf0;
+  border: 0.0625rem solid var(--color-gray-border);
   border-top: none;
   margin-top: 1.5rem;
   & > div {
@@ -19,7 +19,7 @@ export const StyledCardDiv = styled.div`
   display: flex;
   width: ${({ divWidth }) => divWidth};
   height: ${({ divHeight }) => divHeight};
-  border: 1px solid #e6ecf0;
+  border: 1px solid var(--color-gray-border);
   min-height: 9.5625rem;
   padding-left: 1.655rem;
 `;

@@ -19,7 +19,7 @@ const StyledMainCard = styled(StyledCardDiv)`
 const BorderDivider = styled.div`
   width: 39.9375rem;
   height: 0.076rem;
-  background-color: #e6ecf0;
+  background-color: var(--color-gray-border);
   margin-left: -1.7rem;
 `;
 
