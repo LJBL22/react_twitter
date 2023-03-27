@@ -21,10 +21,10 @@ function TweetCollection({ tweets }) {
 export default TweetCollection;
 
 export const ReplyCollection = ({ replyData }) => {
-  // console.log('replyData', replyData);
+  console.log('replyData from TweetCollection', replyData);
   return (
     <div>
-      {/* {replyData.map((reply) => {
+      {replyData.map((reply) => {
         console.log('replyinMap', reply);
         return (
           <TweetCard
@@ -34,7 +34,7 @@ export const ReplyCollection = ({ replyData }) => {
             reply={reply}
           />
         );
-      })} */}
+      })}
     </div>
   );
 };
