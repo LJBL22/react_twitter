@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-const replies = [
+const repliesData = [
   {
     id: 1,
     comment:
@@ -63,10 +63,19 @@ const replies = [
   },
 ];
 
-const ReplyContext = createContext(replies);
-export const useReply = () => useContext(ReplyContext);
+const ReplyContext = createContext(repliesData);
+export const useReply = () => {
+  console.log('ReplyContext', useContext(ReplyContext));
+  const repliesData = useContext(ReplyContext);
+  return { repliesData };
+};
 export const ReplyTweetProvider = ({ children }) => {
+  const [replies, setReplies] = useState(repliesData);
+  // console.log('repliesData', repliesData);
+  // console.log('replycontext', replies);
   return (
-    <ReplyContext.Provider value={replies}>{children}</ReplyContext.Provider>
+    <ReplyContext.Provider value={{ replies, setReplies }}>
+      {children}
+    </ReplyContext.Provider>
   );
 };
