@@ -1,6 +1,5 @@
 import { login, register, adminLogin } from 'api/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
-// import * as jwt from "jsonwebtoken";
 import { useLocation } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
