@@ -8,7 +8,7 @@ import { useTweets } from 'contexts/TweetContext';
 
 const StyledContainer = styled.div`
   height: 100vh;
-  overflow-y: hidden;
+  overflow: hidden;
 `;
 
 const StyledDivider = styled.div`
@@ -18,6 +18,7 @@ const StyledDivider = styled.div`
 `;
 
 const ScrollBar = styled.div`
+  height: calc(100vh - 3.25rem);
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar {
@@ -37,7 +38,7 @@ const HomePage = () => {
   const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
   console.log('inputValue', inputValue);
   const navigate = useNavigate();
-  console.log('getTweets', tweets);
+  // console.log('getTweets', tweets);
   useEffect(() => {
     const checkTokenIsValid = async () => {
       const token = localStorage.getItem('token');
