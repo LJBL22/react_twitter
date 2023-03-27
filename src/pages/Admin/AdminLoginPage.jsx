@@ -1,21 +1,21 @@
-import { adminLogin } from "api/auth";
-import { IconLogo } from "assets/icons";
-import AuthInput from "components/AuthInput";
+import { adminLogin } from 'api/auth';
+import { IconLogo } from 'assets/icons';
+import AuthInput from 'components/AuthInput';
 import {
   AuthContainer,
   AuthInputContainer,
-  AuthButton,
   AuthLinkText,
   AuthP,
-} from "components/common/auth.styled";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+} from 'components/common/auth.styled';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { ThemeButton, PageTitle } from 'components/common/common.styled';
 // import { useAuth } from "contexts/AuthContext";
 
 const AdminLoginPage = () => {
-  const [account, setAccount] = useState("");
-  const [password, setPassword] = useState("");
+  const [account, setAccount] = useState('');
+  const [password, setPassword] = useState('');
   // const navigate = useNavigate();
   // const { login, isAuthenticated } = useAuth();
 
@@ -32,20 +32,20 @@ const AdminLoginPage = () => {
     });
     if (success) {
       Swal.fire({
-        title: "登入成功",
-        icon: "success",
+        title: '登入成功',
+        icon: 'success',
         showConfirmButton: false,
         timer: 1000,
-        position: "top",
+        position: 'top',
       });
       return;
     }
     Swal.fire({
-      title: "登入失敗",
-      icon: "error",
+      title: '登入失敗',
+      icon: 'error',
       showConfirmButton: false,
       timer: 1000,
-      position: "top",
+      position: 'top',
     });
   };
   // useEffect(() => {
@@ -58,12 +58,12 @@ const AdminLoginPage = () => {
       <div>
         <IconLogo />
       </div>
-      <h1>後台登入</h1>
+      <PageTitle>後台登入</PageTitle>
 
       <AuthInputContainer>
         <AuthInput
-          label="帳號"
-          placeholder="請輸入帳號"
+          label='帳號'
+          placeholder='請輸入帳號'
           value={account}
           onChange={(nameInputValue) => setAccount(nameInputValue)}
         />
@@ -71,16 +71,18 @@ const AdminLoginPage = () => {
 
       <AuthInputContainer>
         <AuthInput
-          type="password"
-          label="密碼"
-          placeholder="請輸入密碼"
+          type='password'
+          label='密碼'
+          placeholder='請輸入密碼'
           value={password}
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>
-      <AuthButton onClick={handleClick}>登入</AuthButton>
+      <ThemeButton width='100%' onClick={handleClick}>
+        登入
+      </ThemeButton>
       <AuthP>
-        <Link to="/login">
+        <Link to='/login'>
           <AuthLinkText>前台登入</AuthLinkText>
         </Link>
       </AuthP>

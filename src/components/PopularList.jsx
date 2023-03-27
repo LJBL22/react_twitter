@@ -69,7 +69,10 @@ function PopularUserCard({ user }) {
 }
 function PopularList() {
   return (
-    <div className='PopularList' style={{ padding: '1.5rem' }}>
+    <div
+      className='PopularList'
+      style={{ padding: '1.5rem', height: '100vh', overflow: 'hidden' }}
+    >
       <PopContainer>
         <Header>推薦跟隨</Header>
         {users.map((user, id) => (

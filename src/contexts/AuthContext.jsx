@@ -1,8 +1,8 @@
-import { login, register } from "api/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import { login, register } from 'api/auth';
+import { createContext, useContext, useEffect, useState } from 'react';
 // import * as jwt from "jsonwebtoken";
-import { useLocation } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import { useLocation } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 const defaultAuthContext = {
   isAuthenticated: false,
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkTokenIsValid = async () => {
       //確認憑證是否存在
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (!token) {
         setIsAuthenticated(false);
         setPayload(null);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         //避免 payload 為 null 的初始狀態
-        //設置解析成功後會出現的值
+        //從 JWT 解析成功出現的物件中取值
         currentMember: payload && {
           id: payload.id,
           account: payload.account,
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem("token", token);
+            localStorage.setItem('token', token);
           } else {
             setPayload(null);
             setIsAuthenticated(false);
@@ -66,8 +66,6 @@ export const AuthProvider = ({ children }) => {
           // 現在後端取消回傳 success 了不確定要改 return 什麼
           return;
         },
-        // 這裡有寫過 ({user}) + user.account
-        // 跟 (data) + data.account 也一樣會跳 function 錯誤
         login: async (data) => {
           const { token } = await login({
             account: data.account,
@@ -77,18 +75,18 @@ export const AuthProvider = ({ children }) => {
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem("token", token);
-            console.log("p ");
+            localStorage.setItem('token', token);
+            console.log('p ');
           } else {
             setPayload(null);
             setIsAuthenticated(false);
-            console.log("啊啊啊啊");
+            console.log('啊啊啊啊');
           }
           // 現在後端取消回傳 success 了不確定要改 return 什麼
           return;
         },
         logout: () => {
-          localStorage.removeItem("token");
+          localStorage.removeItem('token');
           setPayload(null);
           setIsAuthenticated(false);
         },
