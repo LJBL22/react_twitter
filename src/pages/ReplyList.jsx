@@ -19,7 +19,8 @@ export const BackHeader = styled(StyledHeader)`
 
 const ReplyList = () => {
   const { replies } = useReply();
-  console.log('replies', replies);
+  
+  console.log('replies', { replies });
   return (
     <div>
       <ReplyTweetProvider>
