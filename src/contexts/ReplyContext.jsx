@@ -66,7 +66,7 @@ const repliesData = [
 const ReplyContext = createContext(repliesData);
 export const useReply = () => {
   console.log('ReplyContext', useContext(ReplyContext));
-  const { repliesData } = useContext(ReplyContext);
+  const repliesData = useContext(ReplyContext);
   return { repliesData };
 };
 export const ReplyTweetProvider = ({ children }) => {
