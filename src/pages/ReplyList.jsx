@@ -3,7 +3,7 @@ import { StyledHeader } from 'components/styles/InputTweet.styled';
 import { IconBack } from 'assets/icons';
 import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
-import { replies } from 'components/dummyData';
+import { useReply, ReplyTweetProvider } from 'contexts/ReplyContext';
 
 export const BackHeader = styled(StyledHeader)`
   & > div {
@@ -18,19 +18,22 @@ export const BackHeader = styled(StyledHeader)`
 `;
 
 const ReplyList = () => {
+  const { replies } = useReply();
   console.log('replies', replies);
   return (
     <div>
-      <BackHeader>
-        <div>
+      <ReplyTweetProvider>
+        <BackHeader>
           <div>
-            <IconBack />
+            <div>
+              <IconBack />
+            </div>
+            <div>推文</div>
           </div>
-          <div>推文</div>
-        </div>
-      </BackHeader>
-      <TweetReply />
-      <ReplyCollection replyData={replies} />
+        </BackHeader>
+        <TweetReply />
+        <ReplyCollection replyData={replies} />
+      </ReplyTweetProvider>
     </div>
   );
 };

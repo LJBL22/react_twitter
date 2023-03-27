@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 const replies = [
   {
@@ -63,4 +63,10 @@ const replies = [
   },
 ];
 
-export const replyData = createContext(replies);
+const ReplyContext = createContext(replies);
+export const useReply = () => useContext(ReplyContext);
+export const ReplyTweetProvider = ({ children }) => {
+  return (
+    <ReplyContext.Provider value={replies}>{children}</ReplyContext.Provider>
+  );
+};
