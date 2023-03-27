@@ -9,7 +9,9 @@ export const login = async ({ account, password }) => {
       password,
     });
     const { token } = data;
+
     if (token) {
+      console.log(data)
       return { success: true, ...data };
     }
     return data;
@@ -21,7 +23,7 @@ export const register = async ({
   account,
   name,
   password,
-  confirmPassword,
+  checkPassword,
   email,
   errorMsg,
 }) => {
@@ -30,11 +32,10 @@ export const register = async ({
       account,
       name,
       password,
-      confirmPassword,
+      checkPassword,
       email,
     });
     const { token } = data;
-    console.log(data);
     if (token) {
       return { success: true, ...data };
     }
@@ -52,7 +53,6 @@ export const adminLogin = async ({ account, password }) => {
       password,
     });
     const { token } = data;
-    console.log(data);
     if (token) {
       return { success: true, ...data };
     }

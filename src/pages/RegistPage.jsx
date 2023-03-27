@@ -1,4 +1,3 @@
-import { register } from 'api/auth';
 import { IconLogo } from 'assets/icons';
 import AuthInput from 'components/AuthInput';
 import {
@@ -11,18 +10,18 @@ import { ThemeButton, PageTitle } from 'components/common/common.styled';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-// import { useAuth } from "contexts/AuthContext";
+import { useAuth } from 'contexts/AuthContext';
 
 const RegistPage = () => {
   const [account, setAccount] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
+  const [checkPassword, setcheckPassword] = useState('');
+  // const [errorMsg, setErrorMsg] = useState('');
   // const [errorMsg, setErrorMsg] = useState(null);
-  // const navigate = useNavigate();
-  // const { register, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { register, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
     if (account.length === 0) {
@@ -38,20 +37,19 @@ const RegistPage = () => {
       return;
     }
 
-    // if (confirmPassword !== password) {
+    // if (checkPassword !== password) {
     //   setErrorMsg("密碼不一致，請重新確認");
     //   return errorMsg;
     // }
 
-    const token = await register({
+    const success = await register({
       account,
       name,
       password,
-      confirmPassword,
+      checkPassword,
       email,
     });
-    if (token) {
-      localStorage.setItem('token', token);
+    if (success) {
       Swal.fire({
         title: '註冊成功',
         icon: 'success',
@@ -71,11 +69,11 @@ const RegistPage = () => {
     });
   };
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/todos");
-  //   }
-  // }, [navigate, isAuthenticated]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/tweets');
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <AuthContainer>
       <div>
@@ -122,17 +120,17 @@ const RegistPage = () => {
         <AuthInput
           type='password'
           label='密碼確認'
-          value={confirmPassword}
+          value={checkPassword}
           placeholder='請再次輸入密碼'
           onChange={(passwordInputValue) =>
-            setConfirmPassword(passwordInputValue)
+            setcheckPassword(passwordInputValue)
           }
           // 自定義正則表達式，確認密碼確認和密碼是否一致
           pattern={`^${password}$`}
           // required 屬性表示這個欄位必填
           required
         />
-        {confirmPassword !== password ? (
+        {checkPassword !== password ? (
           <span style={{ color: 'purple' }}>密碼不一致，請重新確認</span>
         ) : (
           ''

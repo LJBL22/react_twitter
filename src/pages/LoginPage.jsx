@@ -9,7 +9,6 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-// import { login } from "api/auth";
 import { useAuth } from 'contexts/AuthContext';
 import { ThemeButton, PageTitle } from 'components/common/common.styled';
 
@@ -26,13 +25,11 @@ const LoginPage = () => {
     if (password.length === 0) {
       return;
     }
-
-    const { token } = await login({
+    const success = await login({
       account,
       password,
     });
-    if (token) {
-      // localStorage.setItem("token", token);
+    if (success) {
       Swal.fire({
         title: '登入成功',
         icon: 'success',

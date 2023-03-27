@@ -1,4 +1,3 @@
-import { adminLogin } from 'api/auth';
 import { IconLogo } from 'assets/icons';
 import AuthInput from 'components/AuthInput';
 import {
@@ -10,14 +9,14 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useAuth } from 'contexts/AuthContext';
 import { ThemeButton, PageTitle } from 'components/common/common.styled';
-// import { useAuth } from "contexts/AuthContext";
 
 const AdminLoginPage = () => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
-  // const navigate = useNavigate();
-  // const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { adminLogin, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
     if (account.length === 0) {
@@ -48,11 +47,11 @@ const AdminLoginPage = () => {
       position: 'top',
     });
   };
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/todos");
-  //   }
-  // }, [navigate, isAuthenticated]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/admin/tweets');
+    }
+  }, [navigate, isAuthenticated]);
   return (
     <AuthContainer>
       <div>

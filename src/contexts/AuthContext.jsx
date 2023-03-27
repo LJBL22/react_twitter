@@ -1,4 +1,4 @@
-import { login, register } from 'api/auth';
+import { login, register, adminLogin } from 'api/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 // import * as jwt from "jsonwebtoken";
 import { useLocation } from 'react-router-dom';
@@ -9,6 +9,7 @@ const defaultAuthContext = {
   currentMember: null,
   register: null,
   login: null,
+  adminLogin: null,
   logout: null,
 };
 
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
             name: data.name,
             password: data.password,
             email: data.email,
-            confirmPassword: data.confirmPassword,
+            checkPassword: data.checkPassword,
           });
           //將經過 jwt_decode 解析的 payload，儲存進 state
           const tempPayload = jwt_decode(token);
@@ -76,11 +77,26 @@ export const AuthProvider = ({ children }) => {
             setPayload(tempPayload);
             setIsAuthenticated(true);
             localStorage.setItem('token', token);
-            console.log('p ');
           } else {
             setPayload(null);
             setIsAuthenticated(false);
-            console.log('啊啊啊啊');
+          }
+          // 現在後端取消回傳 success 了不確定要改 return 什麼
+          return;
+        },
+        adminLogin: async (data) => {
+          const { token } = await adminLogin({
+            account: data.account,
+            password: data.password,
+          });
+          const tempPayload = jwt_decode(token);
+          if (tempPayload) {
+            setPayload(tempPayload);
+            setIsAuthenticated(true);
+            localStorage.setItem('token', token);
+          } else {
+            setPayload(null);
+            setIsAuthenticated(false);
           }
           // 現在後端取消回傳 success 了不確定要改 return 什麼
           return;
