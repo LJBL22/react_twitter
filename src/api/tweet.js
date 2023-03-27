@@ -35,8 +35,8 @@ export const createTweet = async ({ description }) => {
   try {
     const res = await axiosInstance.post(`${baseUrl}`, { description });
     const data = res.data; // 資料通常在 res.data 中，可以再取出來檢查一下
-    console.log('data', data); // 加上這一行來檢查資料
-    console.log('res-create', res);
+    // console.log('data', data); // 加上這一行來檢查資料
+    // console.log('res-create', res);
     // 在這裡要抓到目前存的全部的 tweets，後面新增才可以把新的推文推到舊的tweets陣列裡
     return res;
   } catch (error) {

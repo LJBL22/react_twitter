@@ -36,18 +36,15 @@ const ScrollBar = styled.div`
   }
 `;
 const HomePage = () => {
-  const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
+  const { inputValue, handleChange, handleAddTweet, tweets, setTweets } =
+    useTweets();
   const navigate = useNavigate();
-  const { isAuthenticated, currentMember } = useAuth();
-  console.log('currentMember', currentMember);
+  const { isAuthenticated } = useAuth();
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');
     }
   }, [navigate, isAuthenticated]);
-
-  console.log('inputValue', inputValue);
-  // console.log('getTweets', tweets);
 
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
   const words = inputValue.trim().split(/\s+/);
@@ -72,7 +69,7 @@ const HomePage = () => {
             isInputValid={isInputValueValid}
           />
           <StyledDivider />
-          <TweetCollection tweets={tweets} />
+          <TweetCollection tweets={tweets} setTweets={setTweets} />
         </ScrollBar>
       </div>
     </StyledContainer>

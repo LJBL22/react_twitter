@@ -7,6 +7,7 @@ import {
   StyledImgDiv,
 } from './styles/InputTweet.styled';
 import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
+import { Link } from 'react-router-dom';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -65,9 +66,17 @@ function MainSection({ card, reply }) {
           </div>
           <div onClick={handleClick}>
             {isLiked ? (
-              <IconLikeFi width='0.825rem' className='iconAction' />
+              <IconLikeFi
+                width='0.825rem'
+                className='iconAction'
+                style={{ pointerEvents: 'none' }}
+              />
             ) : (
-              <IconLikeOut width='0.825rem' className='iconAction' />
+              <IconLikeOut
+                width='0.825rem'
+                className='iconAction'
+                style={{ pointerEvents: 'none' }}
+              />
             )}
             {card.likesNum}
           </div>
@@ -85,23 +94,31 @@ function MainSection({ card, reply }) {
 function TweetCard({ divWidth, divHeight, card, reply }) {
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
-    <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
-      <StyledImgDiv>
-        <img src={card ? card.User.avatar : reply.User.avatar} alt='avatar' />
-      </StyledImgDiv>
-      <StyledContentDiv>
-        <StyledItemDiv>
-          {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>{card ? card.User.name : reply.User.name}</p>
-          &ensp;
-          <p className='cardAccount'>
-            @{card ? card.User.account : reply.User.account}・
-            {card ? formatDate(card.createdAt) : formatDate(reply.createdAt)}
-          </p>
-        </StyledItemDiv>
-        <MainSection card={card} reply={reply} />
-      </StyledContentDiv>
-    </StyledCardDiv>
+    <Link to={`/tweets/${card.id}`}>
+      <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
+        <StyledImgDiv>
+          <img
+            src={card ? card.User.avatar : reply.User.avatar}
+            alt='avatar'
+            style={{ pointerEvents: 'none' }}
+          />
+        </StyledImgDiv>
+        <StyledContentDiv>
+          <StyledItemDiv>
+            {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+            <p className='cardName'>
+              {card ? card.User.name : reply.User.name}
+            </p>
+            &ensp;
+            <p className='cardAccount'>
+              @{card ? card.User.account : reply.User.account}・
+              {card ? formatDate(card.createdAt) : formatDate(reply.createdAt)}
+            </p>
+          </StyledItemDiv>
+          <MainSection card={card} reply={reply} />
+        </StyledContentDiv>
+      </StyledCardDiv>
+    </Link>
   );
 }
 

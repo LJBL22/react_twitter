@@ -44,31 +44,55 @@ export const TweetsProvider = ({ children }) => {
         return [
           ...prevTweets,
           {
-            id: data.id,
-            description: data.description,
-            UserId: data.UserId,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
-            likesNum: data.likesNum,
-            repliesNum: data.repliesNum,
+            id: data.data.id,
+            description: data.data.description,
+            UserId: data.data.UserId,
+            createdAt: data.data.createdAt,
+            updatedAt: data.data.updatedAt,
+            likesNum: 0,
+            repliesNum: 0,
             User: {
-              account: data.User.account,
-              avatar: data.User.avatar,
-              name: data.User.name,
+              account: 'test',
+              avatar:
+                'https://www.akc.org/wp-content/uploads/2021/07/Cavalier-King-Charles-Spaniel-laying-down-indoors.jpeg',
+              name: 'test',
             },
           },
         ];
       });
+
+      const newTweet = {
+        id: data.data.id,
+        description: data.data.description,
+        UserId: data.data.UserId,
+        createdAt: data.data.createdAt,
+        updatedAt: data.data.updatedAt,
+        likesNum: 0,
+        repliesNum: 0,
+        User: {
+          account: 'heklo',
+          avatar:
+            'https://www.akc.org/wp-content/uploads/2021/07/Cavalier-King-Charles-Spaniel-laying-down-indoors.jpeg',
+          name: 'test',
+        },
+      };
+
+      const updatedTweets = [newTweet, ...tweets];
+      setTweets(updatedTweets);
       setInputValue('');
     } catch (error) {
       console.error(error);
     }
-    console.log('inputValue', inputValue);
-    // 要將新的推文確認好資料加到tweetData裡
   };
   return (
     <TweetsContext.Provider
-      value={{ inputValue, handleChange, handleAddTweet, tweets }}
+      value={{
+        inputValue,
+        handleChange,
+        handleAddTweet,
+        tweets,
+        setTweets,
+      }}
     >
       {children}
     </TweetsContext.Provider>
