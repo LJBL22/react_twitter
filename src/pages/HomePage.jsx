@@ -38,7 +38,8 @@ const ScrollBar = styled.div`
 const HomePage = () => {
   const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentMember } = useAuth();
+  console.log('currentMember', currentMember);
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');

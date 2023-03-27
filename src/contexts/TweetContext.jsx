@@ -36,35 +36,28 @@ export const TweetsProvider = ({ children }) => {
       return;
     }
     try {
-      const { data } = await createTweet({
+      const data = await createTweet({
         description: inputValue,
       });
+      console.log('data', data);
       setTweets((prevTweets) => {
         return [
           ...prevTweets,
           {
             id: data.id,
             description: data.description,
+            UserId: data.UserId,
+            createdAt: data.createdAt,
+            updatedAt: data.updatedAt,
+            likesNum: data.likesNum,
+            repliesNum: data.repliesNum,
+            account: data.User.account,
+            avatar: data.User.avatar,
+            name: data.User.name,
           },
         ];
       });
       setInputValue('');
-      const getTweetsAsync = async () => {
-        // 將 getTweetsAsync 函式定義在 handleAddTweet 函式內部
-        try {
-          const tweets = await getTweets();
-          setTweets(
-            tweets.map((tweet) => {
-              return {
-                ...tweet,
-              };
-            })
-          );
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      await getTweetsAsync(); // 獲取所有推文並更新狀態
     } catch (error) {
       console.error(error);
     }

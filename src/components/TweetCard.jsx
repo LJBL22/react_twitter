@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   StyledCardDiv,
   StyledContentDiv,
@@ -5,7 +6,7 @@ import {
   StyledActions,
   StyledImgDiv,
 } from './styles/InputTweet.styled';
-import { IconLikeOut, IconReply } from 'assets/icons';
+import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -42,6 +43,17 @@ const formatDate = (dateString) => {
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
 function MainSection({ card, reply }) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleClick = () => {
+    if (!isLiked) {
+      card.likesNum += 1;
+    } else {
+      card.likesNum -= 1;
+    }
+    setIsLiked(!isLiked);
+  };
+
   if (card) {
     return (
       <>
@@ -51,8 +63,12 @@ function MainSection({ card, reply }) {
             <IconReply width='0.825rem' className='iconAction' />
             {card.repliesNum}
           </div>
-          <div>
-            <IconLikeOut width='0.825rem' className='iconAction' />
+          <div onClick={handleClick}>
+            {isLiked ? (
+              <IconLikeFi width='0.825rem' className='iconAction' />
+            ) : (
+              <IconLikeOut width='0.825rem' className='iconAction' />
+            )}
             {card.likesNum}
           </div>
         </StyledActions>
