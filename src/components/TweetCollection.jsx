@@ -1,20 +1,22 @@
 import TweetCard from './TweetCard';
+import { Link } from 'react-router-dom';
 
 function TweetCollection({ tweets }) {
-  // console.log('tweets', tweets);
   return (
-    <div>
-      {tweets.map((card) => {
-        return (
-          <TweetCard
-            divWidth='40.0625rem'
-            divHeight='auto'
-            key={card.id}
-            card={card}
-          />
-        );
-      })}
-    </div>
+    <Link to='/tweets/:tweetId'>
+      <div>
+        {tweets.map((card) => {
+          return (
+            <TweetCard
+              divWidth='40.0625rem'
+              divHeight='auto'
+              key={card.id}
+              card={card}
+            />
+          );
+        })}
+      </div>
+    </Link>
   );
 }
 

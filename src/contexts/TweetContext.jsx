@@ -51,9 +51,11 @@ export const TweetsProvider = ({ children }) => {
             updatedAt: data.updatedAt,
             likesNum: data.likesNum,
             repliesNum: data.repliesNum,
-            account: data.User.account,
-            avatar: data.User.avatar,
-            name: data.User.name,
+            User: {
+              account: data.User.account,
+              avatar: data.User.avatar,
+              name: data.User.name,
+            },
           },
         ];
       });
