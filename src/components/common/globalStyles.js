@@ -165,6 +165,7 @@ a {
     --color-gray-700: #696974;
     --color-gray-800: #44444F;
     --color-gray-900: #171725;
+    --color-gray-border: #E6ECF0;
   }
 
   body {

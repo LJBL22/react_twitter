@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
 const StyledDivider = styled.div`
   width: 39.9375rem;
   height: 0.625rem;
-  background-color: #e6ecf0;
+  background-color: var(--color-gray-border);
 `;
 
 const ScrollBar = styled.div`
