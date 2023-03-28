@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { Header, ThemeButton } from './common/common.styled';
-// 暫待後端
-// import { followRank } from 'api/user';
-// 先使用假資料
-import { userData } from './dummyData';
-const users = userData;
+import { getFollow } from 'api/followship';
+import { useEffect, useState } from 'react';
+
 const PopContainer = styled.div`
   min-width: 273px;
   background-color: var(--color-gray-100);
@@ -34,6 +32,10 @@ const StyledUserCard = styled.div`
       margin: 0;
       font-size: 1rem;
       line-height: 1.5rem;
+      width: 83px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     & > p:first-child {
@@ -47,9 +49,17 @@ const StyledUserCard = styled.div`
     }
   }
 `;
+const PopularUserCollection = ({ followship }) => {
+  return (
+    <>
+      {followship.map((user) => {
+        return <PopularUserCard key={user.id} user={user} />;
+      })}
+    </>
+  );
+};
 function PopularUserCard({ user }) {
   const { name, account, avatar } = user;
-
   return (
     <StyledUserCard>
       <div className='avatar'>
@@ -62,12 +72,33 @@ function PopularUserCard({ user }) {
       </div>
       <div>
         {/* 之後要寫邏輯切換 Button 樣式 */}
-        <ThemeButton>正在跟隨</ThemeButton>
+        <ThemeButton width={'6rem'}>正在跟隨</ThemeButton>
       </div>
     </StyledUserCard>
   );
 }
-function PopularList() {
+
+export default function PopularList() {
+  const [followship, setFollowship] = useState([]);
+  useEffect(() => {
+    const getFollowshipAsync = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const followship = await getFollow(token);
+        setFollowship(
+          followship.map((popUserCard) => {
+            return {
+              ...popUserCard,
+            };
+          })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getFollowshipAsync();
+  }, []);
+
   return (
     <div
       className='PopularList'
@@ -75,12 +106,8 @@ function PopularList() {
     >
       <PopContainer>
         <Header>推薦跟隨</Header>
-        {users.map((user, id) => (
-          <PopularUserCard key={id} user={user} />
-        ))}
+        <PopularUserCollection followship={followship} />
       </PopContainer>
     </div>
   );
 }
-
-export default PopularList;

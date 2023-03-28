@@ -19,6 +19,7 @@ import AdminLayout from 'components/layouts/AdminLayout';
 import TweetLayout from 'components/layouts/TweetLayout';
 import { AuthProvider } from 'contexts/AuthContext';
 import { TweetsProvider } from 'contexts/TweetContext';
+// import { FollowshipProvider } from 'contexts/FollowshipContext';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
                   <Route path='tweets' element={<AdminTweetsPage />} />
                 </Route>
               </Route>
+              {/* <FollowshipProvider> */}
               <Route element={<TweetLayout />}>
                 <Route path='/tweets' element={<HomePage />} />
                 <Route path='/tweets/:tweetId' element={<ReplyList />} />
@@ -54,6 +56,7 @@ function App() {
                   />
                 </Route>
               </Route>
+              {/* </FollowshipProvider> */}
             </Routes>
           </TweetsProvider>
         </AuthProvider>
