@@ -16,14 +16,11 @@ const StyledButton = styled.button`
   background-color: var(--color-theme);
   padding: ${({ padding }) => padding || '8px 0'};
   border-radius: ${({ borderRadius }) => borderRadius || '50px'};
-  height: ${({ hight }) => hight || '46px'};
+  height: ${({ height }) => height || '46px'};
   width: ${({ width }) => width || '7rem'};
   margin: ${({ margin }) => margin || 0};
-  /* min-width: 178px; */
-  /* height: 2.875rem; */
-  /* width: 100%; */
   transition: background-color .1s ease-in-out;
-  &:hover {
+  &:hover:not(.modal) {
     cursor: pointer;
     background-color: var(--color-primary);
   }

@@ -7,7 +7,7 @@ import {
 } from 'assets/icons';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ThemeButton } from 'components/common/common.styled';
+import ModalBtn from './Modal';
 
 const StyledSidebar = styled.nav`
   height: 100vh;
@@ -63,7 +63,7 @@ function Sidebar() {
               &ensp;設定
             </PageLink>
           </StyleUl>
-          <ThemeButton width='100%'>推文</ThemeButton>
+          <ModalBtn></ModalBtn>
         </SidebarContainer>
         <SidebarContainer>
           <StyleUl>
