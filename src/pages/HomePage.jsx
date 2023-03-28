@@ -37,13 +37,14 @@ const ScrollBar = styled.div`
 `;
 const HomePage = () => {
   const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
-  const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-    }
-  }, [navigate, isAuthenticated]);
+  // 3/28: 目前刷新頁面就回要重回登入畫面先comment掉確認是否因此程式碼
+  // const navigate = useNavigate();
+  // const { isAuthenticated } = useAuth();
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate('/login');
+  //   }
+  // }, [navigate, isAuthenticated]);
 
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
   const words = inputValue.trim().split(/\s+/);
