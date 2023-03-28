@@ -19,5 +19,9 @@ import { ReactComponent as IconPost } from './post.svg';
 import { ReactComponent as IconReply } from './reply.svg';
 import { ReactComponent as IconUserFi } from './userFilled.svg';
 import { ReactComponent as IconUserOut } from './userOutlined.svg';
+import { ReactComponent as IconDanger } from './danger.svg';
+import { ReactComponent as IconSuccess } from './success.svg';
+import { ReactComponent as IconWarning } from './warning.svg';
+import { ReactComponent as IconInfo } from './info.svg';
 
-export { IconLogo, IconLogout, IconUploadPhoto, IconBack, IconChatFi, IconChatOut, IconClose, IconCogFi, IconCogOut, IconHomeFi, IconHomeOut, IconLikeFi, IconLikeOut, IconMessageFi, IconMessageOut, IconNotiFi, IconNotiOut, IconPost, IconReply, IconUserFi, IconUserOut };
+export { IconLogo, IconLogout, IconUploadPhoto, IconBack, IconChatFi, IconChatOut, IconClose, IconCogFi, IconCogOut, IconHomeFi, IconHomeOut, IconLikeFi, IconLikeOut, IconMessageFi, IconMessageOut, IconNotiFi, IconNotiOut, IconPost, IconReply, IconUserFi, IconUserOut, IconDanger, IconSuccess, IconWarning, IconInfo };
