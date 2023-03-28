@@ -57,8 +57,10 @@ const RegistPage = () => {
         timer: 3000,
         position: 'top',
       });
+      navigate('/login');
       return;
     }
+    // 需要加上判斷
     Swal.fire({
       title: '註冊失敗',
       text: '重複的使用者帳號',

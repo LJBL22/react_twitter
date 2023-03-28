@@ -44,27 +44,17 @@ export const AuthProvider = ({ children }) => {
           id: payload.id,
           account: payload.account,
         },
-        //直接從 signUp page 取
         register: async (data) => {
-          const { token } = await register({
+          // 取前端塞入的 success: true
+          const { success } = await register({
             account: data.account,
             name: data.name,
             password: data.password,
             email: data.email,
             checkPassword: data.checkPassword,
           });
-          //將經過 jwt_decode 解析的 payload，儲存進 state
-          const tempPayload = jwt_decode(token);
-          if (tempPayload) {
-            setPayload(tempPayload);
-            setIsAuthenticated(true);
-            localStorage.setItem('token', token);
-          } else {
-            setPayload(null);
-            setIsAuthenticated(false);
-          }
-          // 現在後端取消回傳 success 了不確定要改 return 什麼
-          return;
+          // 註冊完應該要導引至登入畫面，不再回傳 token ，因此不用解析，故刪除
+          return success;
         },
         login: async (data) => {
           const { token } = await login({
