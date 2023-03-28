@@ -45,9 +45,6 @@ const HomePage = () => {
     }
   }, [navigate, isAuthenticated]);
 
-  console.log('inputValue', inputValue);
-  // console.log('getTweets', tweets);
-
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
   const words = inputValue.trim().split(/\s+/);
   // 如果 0 < inputValue < 140 則輸入有效

@@ -34,7 +34,7 @@ export const getTweets = async () => {
 export const createTweet = async ({ description }) => {
   try {
     const res = await axiosInstance.post(`${baseUrl}`, { description });
-    console.log('res-create', res);
+    // console.log('res-create', res);
     // 在這裡要抓到目前存的全部的 tweets，後面新增才可以把新的推文推到舊的tweets陣列裡
     return res;
   } catch (error) {

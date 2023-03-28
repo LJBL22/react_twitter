@@ -1,10 +1,10 @@
 import TweetCard from './TweetCard';
 
 function TweetCollection({ tweets }) {
-  // console.log('tweets', tweets);
   return (
     <div>
       {tweets.map((card) => {
+        // console.log('card', card);
         return (
           <TweetCard
             divWidth='40.0625rem'
@@ -21,11 +21,9 @@ function TweetCollection({ tweets }) {
 export default TweetCollection;
 
 export const ReplyCollection = ({ replyData }) => {
-  console.log('replyData from TweetCollection', replyData);
   return (
     <div>
       {replyData.map((reply) => {
-        console.log('replyinMap', reply);
         return (
           <TweetCard
             divWidth='40.0625rem'
