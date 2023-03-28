@@ -80,7 +80,7 @@ export const TweetsProvider = ({ children }) => {
       ]);
       console.log('getATweet', tweet);
       console.log('getReplies', replies);
-      setReplies(
+      return setReplies(
         replies.map((reply) => {
           return {
             ...reply,
@@ -91,6 +91,7 @@ export const TweetsProvider = ({ children }) => {
       console.error(error);
     }
   };
+
   return (
     <TweetsContext.Provider
       value={{

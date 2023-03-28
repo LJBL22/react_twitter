@@ -20,9 +20,6 @@ export const BackHeader = styled(StyledHeader)`
 
 const ReplyList = () => {
   const { repliesData } = useReply();
-  const { tweetId } = useParams();
-  console.log('tweetId', tweetId);
-  console.log('replies from ReplyList', { repliesData });
   return (
     <div>
       <ReplyTweetProvider>
@@ -35,7 +32,7 @@ const ReplyList = () => {
           </div>
         </BackHeader>
         <TweetReply />
-        <ReplyCollection replyData={repliesData} tweetId={tweetId} />
+        <ReplyCollection replyData={repliesData} />
       </ReplyTweetProvider>
     </div>
   );
