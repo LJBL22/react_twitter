@@ -1,19 +1,25 @@
 import TweetCard from './TweetCard';
 import { useTweets } from 'contexts/TweetContext';
+import { useNavigate } from 'react-router-dom';
 
 function TweetCollection({ tweets }) {
-  const { handleGetTweet } = useTweets;
+  const { handleGetTweet } = useTweets();
+  const navigate = useNavigate();
+
+  const handleCardClick = (id) => {
+    handleGetTweet(id);
+    navigate(`/tweets/${id}`);
+  };
   return (
     <div>
       {tweets.map((card) => {
-        // console.log('card', card);
         return (
           <TweetCard
             divWidth='40.0625rem'
             divHeight='auto'
             key={card.id}
             card={card}
-            onClick={() => handleGetTweet(card.id)}
+            onClick={() => handleCardClick(card.id)}
           />
         );
       })}
@@ -23,7 +29,7 @@ function TweetCollection({ tweets }) {
 
 export default TweetCollection;
 
-export const ReplyCollection = ({ replyData, tweetId }) => {
+export const ReplyCollection = ({ replyData }) => {
   return (
     <div>
       {replyData.map((reply) => {
@@ -33,7 +39,7 @@ export const ReplyCollection = ({ replyData, tweetId }) => {
             divHeight='auto'
             key={reply.id}
             reply={reply}
-            tweetId={tweetId}
+            onClick={null}
           />
         );
       })}
