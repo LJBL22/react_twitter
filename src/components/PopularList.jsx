@@ -3,8 +3,11 @@ import { Header, ThemeButton } from './common/common.styled';
 // 暫待後端
 // import { followRank } from 'api/user';
 // 先使用假資料
-import { userData } from './dummyData';
-const users = userData;
+// import { userData } from './dummyData';
+import { getFollow } from 'api/followship';
+import { useEffect, useState } from 'react';
+// const followship = userData;
+
 const PopContainer = styled.div`
   min-width: 273px;
   background-color: var(--color-gray-100);
@@ -47,9 +50,17 @@ const StyledUserCard = styled.div`
     }
   }
 `;
+const PopularUserCollection = ({ followship }) => {
+  return (
+    <>
+      {followship.map((user) => {
+        return <PopularUserCard key={user.id} user={user} />;
+      })}
+    </>
+  );
+};
 function PopularUserCard({ user }) {
   const { name, account, avatar } = user;
-
   return (
     <StyledUserCard>
       <div className='avatar'>
@@ -67,7 +78,25 @@ function PopularUserCard({ user }) {
     </StyledUserCard>
   );
 }
-function PopularList() {
+export default function PopularList() {
+  const [followship, setFollowship] = useState([]);
+  useEffect(() => {
+    const getFollowshipAsync = async () => {
+      try {
+        const followship = await getFollow();
+        setFollowship(
+          followship.map((popUserCard) => {
+            return {
+              ...popUserCard,
+            };
+          })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getFollowshipAsync();
+  }, []);
   return (
     <div
       className='PopularList'
@@ -75,12 +104,8 @@ function PopularList() {
     >
       <PopContainer>
         <Header>推薦跟隨</Header>
-        {users.map((user, id) => (
-          <PopularUserCard key={id} user={user} />
-        ))}
+        <PopularUserCollection followship={followship} />
       </PopContainer>
     </div>
   );
 }
-
-export default PopularList;
