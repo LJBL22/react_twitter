@@ -3,8 +3,6 @@ import { StyledHeader } from 'components/styles/InputTweet.styled';
 import { IconBack } from 'assets/icons';
 import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
-import { useReply, ReplyTweetProvider } from 'contexts/ReplyContext';
-import { useParams } from 'react-router-dom';
 
 export const BackHeader = styled(StyledHeader)`
   & > div {
@@ -19,24 +17,20 @@ export const BackHeader = styled(StyledHeader)`
 `;
 
 const ReplyList = () => {
-  const { repliesData } = useReply();
-  const { tweetId } = useParams();
-  console.log('tweetId', tweetId);
-  console.log('replies from ReplyList', { repliesData });
+  // console.log('singleTweet', singleTweet);
+  // console.log('replies', replies);
   return (
     <div>
-      <ReplyTweetProvider>
-        <BackHeader>
+      <BackHeader>
+        <div>
           <div>
-            <div>
-              <IconBack />
-            </div>
-            <div>推文</div>
+            <IconBack />
           </div>
-        </BackHeader>
-        <TweetReply />
-        <ReplyCollection replyData={repliesData} tweetId={tweetId} />
-      </ReplyTweetProvider>
+          <div>推文</div>
+        </div>
+      </BackHeader>
+      <TweetReply />
+      <ReplyCollection />
     </div>
   );
 };
