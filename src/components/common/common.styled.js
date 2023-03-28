@@ -1,5 +1,8 @@
 import styled from "styled-components"
 
+const StyledTitle = styled.h1`
+  margin: 29px 0 40px 0;
+`
 const StyledHeader = styled.header`
   font-weight: 700;
   padding: 1.5rem;
@@ -26,6 +29,7 @@ const StyledButton = styled.button`
   }
 `;
 export {
+  StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
 }

@@ -13,31 +13,12 @@ const StyedContainer = styled.div`
 
 const StyledAuthInputContainer = styled.div`
   width: 100%;
-  margin-top: 30px;
-`;
-
-const StyledButton = styled.button`
-  min-width: 178px;
-  width: 100%;
-  height: 2.875rem;
-  border-radius: 50px;
-  background-color: var(--color-theme);
-  border: none;
-  color: white;
-  font-weight: 400;
-  padding: 8px 0;
-  margin: 2rem 0px 3rem;
-  transition: background-color .1s ease-in-out;
-
-  &:hover {
-    cursor: pointer;
-    background-color: var(--color-primary);
-  }
+  margin-bottom: 30px;
 `;
 
 const StyledFlexP = styled.p`
 position: absolute;
-bottom: 0;
+bottom: -2.875rem;
 right: 0;
 `
 
@@ -49,7 +30,6 @@ const StyledLinkText = styled.span`
 export {
   StyedContainer as AuthContainer,
   StyledAuthInputContainer as AuthInputContainer,
-  StyledButton as AuthButton,
   StyledLinkText as AuthLinkText,
   StyledFlexP as AuthP,
 };

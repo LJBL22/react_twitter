@@ -7,7 +7,7 @@ import {
 } from 'assets/icons';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AuthButton } from 'components/common/auth.styled';
+import { ThemeButton } from 'components/common/common.styled';
 
 const StyledSidebar = styled.nav`
   height: 100vh;
@@ -29,7 +29,7 @@ const StyleUl = styled.ul`
 const PageLink = styled.li`
   display: flex;
   font-weight: 700;
-  padding: 1.875rem 0 0 1rem;
+  padding: 0 0 1.875rem 1rem;
   &:hover {
     cursor: pointer;
     color: var(--color-primary);
@@ -46,7 +46,9 @@ function Sidebar() {
     <>
       <StyledSidebar>
         <SidebarContainer>
-          <IconLogo />
+          <div style={{ padding: '0 0 31.78px 0' }}>
+            <IconLogo />
+          </div>
           <StyleUl>
             <PageLink>
               <IconHomeOut />
@@ -61,7 +63,7 @@ function Sidebar() {
               &ensp;設定
             </PageLink>
           </StyleUl>
-          <AuthButton>推文</AuthButton>
+          <ThemeButton width='100%'>推文</ThemeButton>
         </SidebarContainer>
         <SidebarContainer>
           <StyleUl>

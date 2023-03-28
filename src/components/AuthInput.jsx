@@ -1,5 +1,5 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import styled from 'styled-components';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -16,10 +16,10 @@ const StyledContainer = styled.div`
     border-bottom: 2px solid var(--color-primary);
   }
   /* 有問題不確定可不可以吃到 */
-  &:invalid[focused="true"] {
+  &:invalid[focused='true'] {
     border-bottom: 2px solid var(--color-error);
   }
-  &:invalid[focused="true"] ~ span {
+  &:invalid[focused='true'] ~ span {
     display: block;
   }
 `;
@@ -72,12 +72,12 @@ const AuthInput = ({
     <StyledContainer>
       <StyledLabel>{label}</StyledLabel>
       <StyledInput
-        type={type || "text"}
+        type={type || 'text'}
         value={value}
         placeholder={placeholder}
         onChange={(event) => onChange?.(event.target.value)}
         onBlur={handleFocus}
-        onFocus={() => value === "confirmPassword" && setFocused(true)}
+        onFocus={() => value === 'checkPassword' && setFocused(true)}
         focused={focused.toString()}
         pattern={pattern}
       />

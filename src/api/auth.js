@@ -8,8 +8,11 @@ export const login = async ({ account, password }) => {
       account,
       password,
     });
+    console.log(data)//應該要印出回傳的 data，教案只回傳一個 token
     const { token } = data;
+    console.log(token)//取鍵值，得到 token 一串
     if (token) {
+      console.log(data)
       return { success: true, ...data };
     }
     return data;
@@ -21,7 +24,7 @@ export const register = async ({
   account,
   name,
   password,
-  confirmPassword,
+  checkPassword,
   email,
   errorMsg,
 }) => {
@@ -30,11 +33,12 @@ export const register = async ({
       account,
       name,
       password,
-      confirmPassword,
+      checkPassword,
       email,
     });
+    console.log(data)//應該要印出回傳的 data，教案只回傳一個 token
     const { token } = data;
-    console.log(data);
+    console.log(token)//取鍵值，得到 token 一串=> 結果沒有 token 
     if (token) {
       return { success: true, ...data };
     }
@@ -51,10 +55,12 @@ export const adminLogin = async ({ account, password }) => {
       account,
       password,
     });
-    const { token } = data;
-    console.log(data);
+    console.log(data)//應該要印出回傳的 data，教案只回傳一個 token
+    // 檢查發現資料多一個 data
+    const { token } = data.data;
+    console.log(token)//取鍵值，得到 token 一串
     if (token) {
-      return { success: true, ...data };
+      return { success: true, ...data.data };
     }
     return data;
   } catch (error) {

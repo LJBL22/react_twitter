@@ -3,15 +3,14 @@ import AuthInput from 'components/AuthInput';
 import {
   AuthContainer,
   AuthInputContainer,
-  AuthButton,
   AuthLinkText,
   AuthP,
 } from 'components/common/auth.styled';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-// import { login } from "api/auth";
 import { useAuth } from 'contexts/AuthContext';
+import { ThemeButton, PageTitle } from 'components/common/common.styled';
 
 const LoginPage = () => {
   const [account, setAccount] = useState('');
@@ -26,13 +25,11 @@ const LoginPage = () => {
     if (password.length === 0) {
       return;
     }
-
-    const { token } = await login({
+    const success = await login({
       account,
       password,
     });
-    if (token) {
-      // localStorage.setItem("token", token);
+    if (success) {
       Swal.fire({
         title: '登入成功',
         icon: 'success',
@@ -60,7 +57,7 @@ const LoginPage = () => {
       <div>
         <IconLogo />
       </div>
-      <h1>登入 Alphitter</h1>
+      <PageTitle>登入 Alphitter</PageTitle>
 
       <AuthInputContainer>
         <AuthInput
@@ -80,12 +77,14 @@ const LoginPage = () => {
           onChange={(passwordInputValue) => setPassword(passwordInputValue)}
         />
       </AuthInputContainer>
-      <AuthButton onClick={handleClick}>登入</AuthButton>
+      <ThemeButton width='100%' onClick={handleClick}>
+        登入
+      </ThemeButton>
       <AuthP>
         <Link to='/regist'>
           <AuthLinkText>註冊</AuthLinkText>
         </Link>
-        ．
+        &ensp;．&ensp;
         <Link to='/admin'>
           <AuthLinkText>後台登入</AuthLinkText>
         </Link>
