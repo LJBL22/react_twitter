@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { getTweets, createTweet } from 'api/tweet';
+import { getTweets, createTweet, getATweet, getReplies } from 'api/tweet';
 
 const TweetsContext = createContext();
 
@@ -8,11 +8,14 @@ export const useTweets = () => useContext(TweetsContext);
 export const TweetsProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState('');
   const [tweets, setTweets] = useState([]);
+  const [replies, setReplies] = useState([]);
 
+  // Input Tweet 撰寫推文
   const handleChange = (value) => {
     setInputValue(value);
   };
 
+  // 拿到所有推文的API
   useEffect(() => {
     const getTweetsAsync = async () => {
       try {
@@ -31,6 +34,7 @@ export const TweetsProvider = ({ children }) => {
     getTweetsAsync();
   }, []);
 
+  // 使用 handleAddTweet 拿到 createTweet API 新增一則推文
   const handleAddTweet = async () => {
     if (inputValue.length === 0) {
       return;
@@ -41,11 +45,11 @@ export const TweetsProvider = ({ children }) => {
       });
       console.log('data', data);
       const newTweet = {
-        id: data.data.id,
-        description: data.data.description,
-        UserId: data.data.UserId,
-        createdAt: data.data.createdAt,
-        updatedAt: data.data.updatedAt,
+        id: data.id,
+        description: data.description,
+        UserId: data.UserId,
+        createdAt: data.createdAt,
+        updatedAt: data.updatedAt,
         likesNum: 0,
         repliesNum: 0,
         User: {
@@ -66,6 +70,27 @@ export const TweetsProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+  // 使用 handleClick 點擊其中一推文後，可瀏覽該則推文，及其相關回覆
+  const handleGetTweet = async (id) => {
+    try {
+      const [tweet, replies] = await Promise.all([
+        getATweet(id),
+        getReplies(id),
+      ]);
+      console.log('getATweet', tweet);
+      console.log('getReplies', replies);
+      setReplies(
+        replies.map((reply) => {
+          return {
+            ...reply,
+          };
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <TweetsContext.Provider
       value={{
@@ -73,6 +98,7 @@ export const TweetsProvider = ({ children }) => {
         handleChange,
         handleAddTweet,
         tweets,
+        handleGetTweet,
       }}
     >
       {children}

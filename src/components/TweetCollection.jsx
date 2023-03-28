@@ -1,6 +1,8 @@
 import TweetCard from './TweetCard';
+import { useTweets } from 'contexts/TweetContext';
 
 function TweetCollection({ tweets }) {
+  const { handleGetTweet } = useTweets;
   return (
     <div>
       {tweets.map((card) => {
@@ -11,6 +13,7 @@ function TweetCollection({ tweets }) {
             divHeight='auto'
             key={card.id}
             card={card}
+            onClick={() => handleGetTweet(card.id)}
           />
         );
       })}
@@ -20,7 +23,7 @@ function TweetCollection({ tweets }) {
 
 export default TweetCollection;
 
-export const ReplyCollection = ({ replyData }) => {
+export const ReplyCollection = ({ replyData, tweetId }) => {
   return (
     <div>
       {replyData.map((reply) => {
@@ -30,6 +33,7 @@ export const ReplyCollection = ({ replyData }) => {
             divHeight='auto'
             key={reply.id}
             reply={reply}
+            tweetId={tweetId}
           />
         );
       })}

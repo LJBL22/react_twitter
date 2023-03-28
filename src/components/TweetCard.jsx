@@ -8,6 +8,22 @@ import {
 } from './styles/InputTweet.styled';
 import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import { Link } from 'react-router-dom';
+import { useTweets } from 'contexts/TweetContext';
+import styled from 'styled-components';
+
+const StyledReplyActions = styled.div`
+  & .replyAccount {
+    margin: 0.6rem 0rem;
+  }
+
+  & .replyComment {
+    margin-bottom: 0.7rem;
+  }
+`;
+
+const StyledReplyImg = styled(StyledImgDiv)`
+  width: 4.2rem;
+`;
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -85,39 +101,50 @@ function MainSection({ card, reply }) {
     );
   }
   return (
-    <>
-      <div>hello {reply.comment}</div>
-    </>
+    <StyledReplyActions>
+      {/* 目前帶入回覆account 是錯的，串完API後要把tweet 此主要推文(被回覆)的 user.account 加進來 */}
+      <div className='replyAccount'>回覆@{reply.User.account}</div>
+      <div className='replyComment'>{reply.comment}</div>
+    </StyledReplyActions>
   );
 }
 
 function TweetCard({ divWidth, divHeight, card, reply }) {
+  const { handleGetTweet } = useTweets();
+  const handleCardClick = () => {
+    handleGetTweet(card.id);
+  };
+  console.log('cardId', card);
   return (
-    //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
-    // 要先在ReplyList 上掛 id
-    // <Link to={`/tweets/${card.id}`}>
-    <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
-      <StyledImgDiv>
-        <img
-          src={card ? card.User.avatar : reply.User.avatar}
-          alt='avatar'
-          style={{ pointerEvents: 'none' }}
-        />
-      </StyledImgDiv>
-      <StyledContentDiv>
-        <StyledItemDiv>
-          {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>{card ? card.User.name : reply.User.name}</p>
-          &ensp;
-          <p className='cardAccount'>
-            @{card ? card.User.account : reply.User.account}・
-            {card ? formatDate(card.createdAt) : formatDate(reply.createdAt)}
-          </p>
-        </StyledItemDiv>
-        <MainSection card={card} reply={reply} />
-      </StyledContentDiv>
-    </StyledCardDiv>
-    // </Link>
+    //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認${card.id}`
+
+    <Link to={`/tweets/${card.id}`} onClick={handleCardClick}>
+      <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
+        {card ? (
+          <StyledImgDiv>
+            <img src={card.User.avatar} alt='avatar' />
+          </StyledImgDiv>
+        ) : (
+          <StyledReplyImg>
+            <img src={reply.User.avatar} alt='avatar' />
+          </StyledReplyImg>
+        )}
+        <StyledContentDiv>
+          <StyledItemDiv>
+            {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+            <p className='cardName'>
+              {card ? card.User.name : reply.User.name}
+            </p>
+            &ensp;
+            <p className='cardAccount'>
+              @{card ? card.User.account : reply.User.account}・
+              {card ? formatDate(card.createdAt) : formatDate(reply.createdAt)}
+            </p>
+          </StyledItemDiv>
+          <MainSection card={card} reply={reply} />
+        </StyledContentDiv>
+      </StyledCardDiv>
+    </Link>
   );
 }
 

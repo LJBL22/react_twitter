@@ -22,7 +22,7 @@ axiosInstance.interceptors.request.use(
 export const getTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}`);
-    console.log('res', res);
+    // console.log('res', res);
     // 拿到資料庫裡存的所有的推文
     return res.data;
   } catch (error) {
@@ -36,14 +36,34 @@ export const createTweet = async ({ description }) => {
     const res = await axiosInstance.post(`${baseUrl}`, { description });
     // console.log('res-create', res);
     // 在這裡要抓到目前存的全部的 tweets，後面新增才可以把新的推文推到舊的tweets陣列裡
-    return res;
+    console.log('creatAtweet', res.data);
+    return res.data;
   } catch (error) {
     console.error(`[Create the new tweet failed]`, error);
   }
 };
 
+// 觀看一則推文
+export const getATweet = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseUrl}/${id}`);
+    console.log('res_getATweet', res);
+    return res.data;
+  } catch (error) {
+    console.error(`[Get a tweet failed]`, error);
+  }
+};
+
 // 觀看所有回覆
-export const getReplis = () => {};
+export const getReplies = async (id) => {
+  try {
+    const res = await axiosInstance.get(`${baseUrl}/${id}/replies`);
+    console.log('res:getReplies', res);
+    return res.data;
+  } catch (error) {
+    console.error(`[Get all tweet replies failed]`, error);
+  }
+};
 
 // 新增回覆
 export const tweetReply = () => {};

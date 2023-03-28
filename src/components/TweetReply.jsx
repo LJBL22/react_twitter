@@ -17,10 +17,16 @@ const StyledMainCard = styled(StyledCardDiv)`
 `;
 
 const BorderDivider = styled.div`
-  width: 39.9375rem;
+  width: 39rem;
   height: 0.076rem;
   background-color: var(--color-gray-border);
-  margin-left: -1.7rem;
+  margin-left: -1.4rem;
+  align-items: center;
+`;
+
+const ReplyActions = styled(StyledActions)`
+  margin-top: 0px;
+  height: 4.61rem;
 `;
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
@@ -45,7 +51,7 @@ const TweetReply = ({ divWidth, divHeight }) => {
           <div className='styledTime'>上午 10:05・2021年11月10日</div>
         </StyledContentDiv>
         <BorderDivider />
-        <StyledActions>
+        <ReplyActions>
           <div>
             <p>34</p>回覆<p></p>
           </div>
@@ -53,16 +59,16 @@ const TweetReply = ({ divWidth, divHeight }) => {
             <p>808</p>
             <p>喜歡次數</p>
           </div>
-        </StyledActions>
+        </ReplyActions>
         <BorderDivider />
-        <StyledActions>
+        <ReplyActions>
           <div>
             <IconReply width='1.9rem' className='iconAction' />
           </div>
           <div>
             <IconLikeOut width='1.9rem' className='iconAction' />
           </div>
-        </StyledActions>
+        </ReplyActions>
       </div>
     </StyledMainCard>
   );
