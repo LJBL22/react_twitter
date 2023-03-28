@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   StyledCardDiv,
   StyledContentDiv,
@@ -5,7 +6,9 @@ import {
   StyledActions,
   StyledImgDiv,
 } from './styles/InputTweet.styled';
-import { IconLikeOut, IconReply } from 'assets/icons';
+import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 const StyledReplyActions = styled.div`
@@ -57,6 +60,17 @@ const formatDate = (dateString) => {
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
 function MainSection({ card, reply }) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleClick = () => {
+    if (!isLiked) {
+      card.likesNum += 1;
+    } else {
+      card.likesNum -= 1;
+    }
+    setIsLiked(!isLiked);
+  };
+
   if (card) {
     return (
       <>
@@ -66,8 +80,20 @@ function MainSection({ card, reply }) {
             <IconReply width='0.825rem' className='iconAction' />
             {card.repliesNum}
           </div>
-          <div>
-            <IconLikeOut width='0.825rem' className='iconAction' />
+          <div onClick={handleClick}>
+            {isLiked ? (
+              <IconLikeFi
+                width='0.825rem'
+                className='iconAction'
+                style={{ pointerEvents: 'none' }}
+              />
+            ) : (
+              <IconLikeOut
+                width='0.825rem'
+                className='iconAction'
+                style={{ pointerEvents: 'none' }}
+              />
+            )}
             {card.likesNum}
           </div>
         </StyledActions>
@@ -86,6 +112,8 @@ function MainSection({ card, reply }) {
 function TweetCard({ divWidth, divHeight, card, reply }) {
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
+    // 要先在ReplyList 上掛 id
+    // <Link to={`/tweets/${card.id}`}>
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       {card ? (
         <StyledImgDiv>
@@ -109,6 +137,7 @@ function TweetCard({ divWidth, divHeight, card, reply }) {
         <MainSection card={card} reply={reply} />
       </StyledContentDiv>
     </StyledCardDiv>
+    // </Link>
   );
 }
 

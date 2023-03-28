@@ -5,6 +5,7 @@ import {
   StyledForm,
   StyledImgDiv,
 } from './styles/InputTweet.styled';
+import { useAuth } from 'contexts/AuthContext';
 
 function InputTweet({
   width,
@@ -21,6 +22,7 @@ function InputTweet({
   // 要從後端拿到API 驗證當前的 currentUser 是誰，來取得他的資料。
   const currentUser = userData[0];
   // 先假設此帳號登入使用者是 userId: 1
+  // 要使用 userContext 拿到 userData 裡面的 avatar 來替換
   return (
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       <StyledImgDiv>

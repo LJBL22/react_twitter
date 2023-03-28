@@ -29,6 +29,7 @@ const ReplyActions = styled(StyledActions)`
   height: 4.61rem;
 `;
 
+// 要先掛上 getReply 的API 去拿到裡面的id 來使用
 const TweetReply = ({ divWidth, divHeight }) => {
   return (
     <StyledMainCard>

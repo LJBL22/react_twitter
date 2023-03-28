@@ -36,44 +36,44 @@ export const TweetsProvider = ({ children }) => {
       return;
     }
     try {
-      const { data } = await createTweet({
+      const data = await createTweet({
         description: inputValue,
       });
-      setTweets((prevTweets) => {
-        return [
-          ...prevTweets,
-          {
-            id: data.id,
-            description: data.description,
-          },
-        ];
-      });
-      setInputValue('');
-      const getTweetsAsync = async () => {
-        // 將 getTweetsAsync 函式定義在 handleAddTweet 函式內部
-        try {
-          const tweets = await getTweets();
-          setTweets(
-            tweets.map((tweet) => {
-              return {
-                ...tweet,
-              };
-            })
-          );
-        } catch (error) {
-          console.error(error);
-        }
+      console.log('data', data);
+      const newTweet = {
+        id: data.data.id,
+        description: data.data.description,
+        UserId: data.data.UserId,
+        createdAt: data.data.createdAt,
+        updatedAt: data.data.updatedAt,
+        likesNum: 0,
+        repliesNum: 0,
+        User: {
+          account: 'heklo',
+          avatar:
+            'https://www.akc.org/wp-content/uploads/2021/07/Cavalier-King-Charles-Spaniel-laying-down-indoors.jpeg',
+          name: 'test',
+        },
       };
-      await getTweetsAsync(); // 獲取所有推文並更新狀態
+      setTweets((prevTweets) => {
+        return [...prevTweets, newTweet];
+      });
+
+      const updatedTweets = [newTweet, ...tweets];
+      setTweets(updatedTweets);
+      setInputValue('');
     } catch (error) {
       console.error(error);
     }
-    console.log('inputValue', inputValue);
-    // 要將新的推文確認好資料加到tweetData裡
   };
   return (
     <TweetsContext.Provider
-      value={{ inputValue, handleChange, handleAddTweet, tweets }}
+      value={{
+        inputValue,
+        handleChange,
+        handleAddTweet,
+        tweets,
+      }}
     >
       {children}
     </TweetsContext.Provider>
