@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from 'styled-components';
 
 const StyledTitle = styled.h1`
   margin: 29px 0 40px 0;
@@ -25,9 +25,50 @@ const StyledButton = styled.button`
     background-color: var(--color-primary);
   }
 `;
+
+const StyledModalBtn = styled(StyledButton)`
+  & .modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    /* 邊緣做效果 */
+    /* filter: blur(0px); */
+    transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+    &.show {
+      opacity: 1;
+      /* 邊緣做效果 */
+      /* filter: blur(4px); */
+    }
+  }
+  & .modal {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    & .modal-content {
+      border-radius: 14px;
+      background-color: white;
+      padding: 1rem;
+    }
+  }
+  /* 繼承StyledButton的樣式並覆蓋width屬性 */
+  ${({ modalBtnWidth }) => css`
+    ${StyledButton};
+    width: ${modalBtnWidth};
+  `}
+`;
 export {
   StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
+  StyledModalBtn as ModalButton,
 }
 
