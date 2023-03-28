@@ -32,6 +32,10 @@ const StyledUserCard = styled.div`
       margin: 0;
       font-size: 1rem;
       line-height: 1.5rem;
+      width: 83px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     & > p:first-child {
@@ -68,7 +72,7 @@ function PopularUserCard({ user }) {
       </div>
       <div>
         {/* 之後要寫邏輯切換 Button 樣式 */}
-        <ThemeButton>正在跟隨</ThemeButton>
+        <ThemeButton width={'6rem'}>正在跟隨</ThemeButton>
       </div>
     </StyledUserCard>
   );
