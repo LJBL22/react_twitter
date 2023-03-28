@@ -1,9 +1,10 @@
 import TweetCard from './TweetCard';
 
-function TweetCollection({ tweets, setTweets }) {
+function TweetCollection({ tweets }) {
   return (
     <div>
       {tweets.map((card) => {
+        // console.log('card', card);
         return (
           <TweetCard
             divWidth='40.0625rem'

@@ -40,27 +40,6 @@ export const TweetsProvider = ({ children }) => {
         description: inputValue,
       });
       console.log('data', data);
-      setTweets((prevTweets) => {
-        return [
-          ...prevTweets,
-          {
-            id: data.data.id,
-            description: data.data.description,
-            UserId: data.data.UserId,
-            createdAt: data.data.createdAt,
-            updatedAt: data.data.updatedAt,
-            likesNum: 0,
-            repliesNum: 0,
-            User: {
-              account: 'test',
-              avatar:
-                'https://www.akc.org/wp-content/uploads/2021/07/Cavalier-King-Charles-Spaniel-laying-down-indoors.jpeg',
-              name: 'test',
-            },
-          },
-        ];
-      });
-
       const newTweet = {
         id: data.data.id,
         description: data.data.description,
@@ -76,6 +55,9 @@ export const TweetsProvider = ({ children }) => {
           name: 'test',
         },
       };
+      setTweets((prevTweets) => {
+        return [...prevTweets, newTweet];
+      });
 
       const updatedTweets = [newTweet, ...tweets];
       setTweets(updatedTweets);
@@ -91,7 +73,6 @@ export const TweetsProvider = ({ children }) => {
         handleChange,
         handleAddTweet,
         tweets,
-        setTweets,
       }}
     >
       {children}

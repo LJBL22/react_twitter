@@ -36,8 +36,7 @@ const ScrollBar = styled.div`
   }
 `;
 const HomePage = () => {
-  const { inputValue, handleChange, handleAddTweet, tweets, setTweets } =
-    useTweets();
+  const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   useEffect(() => {
@@ -69,7 +68,7 @@ const HomePage = () => {
             isInputValid={isInputValueValid}
           />
           <StyledDivider />
-          <TweetCollection tweets={tweets} setTweets={setTweets} />
+          <TweetCollection tweets={tweets} />
         </ScrollBar>
       </div>
     </StyledContainer>
