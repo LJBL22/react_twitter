@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 import { Header, ThemeButton } from './common/common.styled';
-// 暫待後端
-// import { followRank } from 'api/user';
-// 先使用假資料
-// import { userData } from './dummyData';
 import { getFollow } from 'api/followship';
 import { useEffect, useState } from 'react';
-// const followship = userData;
 
 const PopContainer = styled.div`
   min-width: 273px;
@@ -78,12 +73,14 @@ function PopularUserCard({ user }) {
     </StyledUserCard>
   );
 }
+
 export default function PopularList() {
   const [followship, setFollowship] = useState([]);
   useEffect(() => {
     const getFollowshipAsync = async () => {
       try {
-        const followship = await getFollow();
+        const token = localStorage.getItem('token');
+        const followship = await getFollow(token);
         setFollowship(
           followship.map((popUserCard) => {
             return {
@@ -97,6 +94,7 @@ export default function PopularList() {
     };
     getFollowshipAsync();
   }, []);
+
   return (
     <div
       className='PopularList'

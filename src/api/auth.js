@@ -8,9 +8,10 @@ export const login = async ({ account, password }) => {
       account,
       password,
     });
-    console.log(data)//應該要印出回傳的 data，教案只回傳一個 token
+    // 檢查用，未來可刪除
+    // console.log(data)//應該要印出回傳的 data，教案只回傳一個 token
     const { token } = data;
-    console.log(token)//取鍵值，得到 token 一串
+    // console.log(token)//取鍵值，得到 token 一串
     if (token) {
       return { success: true, ...data };
     }
