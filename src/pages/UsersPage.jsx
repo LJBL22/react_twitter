@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from 'react';
-import { useParams, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'contexts/UserContext';
 import UserProfile from 'components/UserProfile';
 import Header from 'components/Header';
@@ -16,6 +15,15 @@ const UsersPage = () => {
   const { currentUser } = useUser();
   const { userId } = useParams();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   const [userInfo, setUserInfo] = useState(currentUser);
   const [userTweets, setUserTweets] = useState([]);
   const [userReplies, setUserReplies] = useState([]);
@@ -56,7 +64,6 @@ const UsersPage = () => {
         )}
       </StyledDiv>
       <Outlet userTweets={userTweets} />
-
     </div>
   );
 };

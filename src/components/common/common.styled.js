@@ -19,7 +19,7 @@ const StyledButton = styled.button`
   height: ${({ height }) => height || '46px'};
   width: ${({ width }) => width || '7rem'};
   margin: ${({ margin }) => margin || 0};
-  transition: background-color .1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   &:hover:not(.modal) {
     cursor: pointer;
     background-color: var(--color-primary);
@@ -101,18 +101,16 @@ const StyledAvatar = styled.div`
   & > img {
     object-fit: cover;
     height: ${({ height }) => height || '3.125rem'};
-    max-width: ${({ width }) => width || '3.125rem'};
+    width: ${({ width }) => width || '3.125rem'};
     border-radius: 100%;
   }
 `;
-
 
 export {
   StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
   StyledModalBtn as ModalButton,
-
   StyledCardDiv,
   StyledAvatar,
   StyledBackHeader as BackHeader,

@@ -10,6 +10,7 @@ import { createTweet, getATweet, getReplies } from 'api/tweet';
 import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
+  max-width: inherit;
   display: grid;
   grid-auto-flow: column;
   @media screen and (${device.md}) {
