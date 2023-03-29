@@ -2,6 +2,7 @@ import { IconBack } from 'assets/icons';
 import { BackHeader } from './ReplyList';
 import { styled } from 'styled-components';
 import { userData, tweetData } from 'components/dummyData';
+import { Outlet } from 'react-router-dom';
 
 // const StyledHeader = styled(BackHeader)`
 // /*  */
@@ -24,6 +25,7 @@ const UsersPage = () => {
           </div>
         </div>
       </BackHeader>
+      <Outlet />
     </div>
   );
 };
