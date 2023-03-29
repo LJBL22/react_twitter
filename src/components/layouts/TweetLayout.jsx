@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
-import { createTweet, getATweet, getReplies } from 'api/tweet';
+import { createTweet, getSingleTweet, getReplies } from 'api/tweet';
 import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
@@ -30,8 +30,6 @@ const TweetLayout = () => {
     useUser();
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
-  const [singleTweet, setSingleTweet] = useState([]);
-  const [replies, setReplies] = useState([]);
 
   const { pathname } = useLocation();
   console.log('currentMember', currentMember);
@@ -92,27 +90,6 @@ const TweetLayout = () => {
     getUserAsync();
   }, []);
 
-  // 使用 handleClick 點擊其中一推文後，可瀏覽該則推文，及其相關回覆
-  const handleGetTweet = async (id) => {
-    try {
-      const [tweet, replyCollection] = await Promise.all([
-        getATweet(id),
-        getReplies(id),
-      ]);
-      // 前面有資料，但問題點是這裡的setState 沒有把資料更新進去, 導致輸出以後還是初始值
-      setSingleTweet({ tweet });
-      setReplies(
-        replyCollection.map((reply) => {
-          return {
-            ...reply,
-          };
-        })
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <>
       <TweetContainer>
@@ -128,7 +105,6 @@ const TweetLayout = () => {
               tweetInput,
               handleChange,
               handleAddTweet,
-              handleGetTweet,
             }}
           />
         </div>

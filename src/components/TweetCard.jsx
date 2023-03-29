@@ -8,6 +8,7 @@ import {
 import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const StyledReplyActions = styled.div`
   & .replyAccount {
@@ -57,7 +58,7 @@ const formatDate = (dateString) => {
 // console.log('1', formatDate('2023-03-22T11:39:01.000Z'));
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
-function MainSection({ card, reply }) {
+function MainSection({ card }) {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleClick = () => {
@@ -101,39 +102,43 @@ function MainSection({ card, reply }) {
   return (
     <StyledReplyActions>
       {/* 目前帶入回覆account 是錯的，串完API後要把tweet 此主要推文(被回覆)的 user.account 加進來 */}
-      <div className='replyAccount'>回覆@{reply.User.account}</div>
-      <div className='replyComment'>{reply.comment}</div>
+      <div className='replyAccount'>回覆@{'r'}</div>
+      <div className='replyComment'>{'r'}</div>
     </StyledReplyActions>
   );
 }
 
-function TweetCard({ divWidth, divHeight, card, reply, onClick }) {
+// function ReplyCard(reply)
+
+function TweetCard({ divWidth, divHeight, card }) {
+  const id = card.id;
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認${card.id}`
-
-    <StyledCardDiv divWidth={divWidth} divHeight={divHeight} onClick={onClick}>
-      {card ? (
-        <StyledImgDiv>
-          <img src={card.User.avatar} alt='avatar' />
-        </StyledImgDiv>
-      ) : (
-        <StyledReplyImg>
-          <img src={reply.User.avatar} alt='avatar' />
-        </StyledReplyImg>
-      )}
-      <StyledContentDiv>
-        <StyledItemDiv>
-          {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>{card ? card.User.name : reply.User.name}</p>
-          &ensp;
-          <p className='cardAccount'>
-            @{card ? card.User.account : reply.User.account}・
-            {card ? formatDate(card.createdAt) : formatDate(reply.createdAt)}
-          </p>
-        </StyledItemDiv>
-        <MainSection card={card} reply={reply} />
-      </StyledContentDiv>
-    </StyledCardDiv>
+    <NavLink to={`tweets/${id}`}>
+      <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
+        {card ? (
+          <StyledImgDiv>
+            <img src={card.User.avatar} alt='avatar' />
+          </StyledImgDiv>
+        ) : (
+          <StyledReplyImg>r</StyledReplyImg>
+        )}
+        <StyledContentDiv>
+          <StyledItemDiv>
+            {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+            <p className='cardName'>{card ? card.User.name : 'r'}</p>
+            &ensp;
+            <p className='cardAccount'>
+              @{card ? card.User.account : 'r'}・
+              {card
+                ? formatDate(card.createdAt)
+                : 'formatDate(reply.createdAt)'}
+            </p>
+          </StyledItemDiv>
+          <MainSection card={card} />
+        </StyledContentDiv>
+      </StyledCardDiv>
+    </NavLink>
   );
 }
 

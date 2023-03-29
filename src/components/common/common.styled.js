@@ -79,10 +79,11 @@ const StyledBackHeader = styled(StyledHeader)`
   & > div {
     display: flex;
     width: 100%;
+    align-items: center;
     & > div {
       display: grid;
       align-content: center;
-      padding-right: 1.46rem;
+      padding-left: 1.46rem;
       & .name {
         font-size: 1.38rem;
         color: var(--color-gray-900);
