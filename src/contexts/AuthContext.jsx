@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
           id: payload.id,
           account: payload.account,
         },
+       
         register: async (data) => {
           // 取前端塞入的 success: true
           const { success } = await register({

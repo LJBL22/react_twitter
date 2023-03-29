@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import {
-  StyledCardDiv,
   StyledContentDiv,
   StyledItemDiv,
   StyledActions,
   StyledImgDiv,
 } from './styles/InputTweet.styled';
+import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import styled from 'styled-components';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
-const UserTweets = () => {
+
+const UserTweets = ({ UserTweets }) => {
   return <div>UserTweets</div>;
 };
 
