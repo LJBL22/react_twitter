@@ -106,11 +106,13 @@ const StyledAvatar = styled.div`
   }
 `;
 
+
 export {
   StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
   StyledModalBtn as ModalButton,
+
   StyledCardDiv,
   StyledAvatar,
   StyledBackHeader as BackHeader,

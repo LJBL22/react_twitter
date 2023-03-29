@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { useUser } from 'contexts/UserContext';
@@ -55,6 +56,7 @@ const UsersPage = () => {
         )}
       </StyledDiv>
       <Outlet userTweets={userTweets} />
+
     </div>
   );
 };

@@ -14,15 +14,14 @@ import {
   ReplyList,
   NavigatePage,
   FollowList,
+  UserTweets,
 } from 'pages';
 import UserSetting from 'pages/UserSetting';
 import AdminLayout from 'components/layouts/AdminLayout';
 import TweetLayout from 'components/layouts/TweetLayout';
 import { AuthProvider } from 'contexts/AuthContext';
 import { TweetsProvider } from 'contexts/TweetContext';
-// import { FollowshipProvider } from 'contexts/FollowshipContext';
 import { UserProvider } from 'contexts/UserContext';
-import UserTweets from 'pages/UserTweets';
 
 function App() {
   return (
