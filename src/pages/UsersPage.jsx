@@ -54,6 +54,7 @@ const UsersPage = () => {
           <UserProfile user={userInfo} key={userInfo.id} />
         )}
       </StyledDiv>
+      <Outlet />
     </div>
   );
 };

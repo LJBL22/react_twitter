@@ -1,7 +1,7 @@
-import Sidebar from "components/Sidebar";
-import { device, GridContainer } from "components/styles/Container.styled";
-import { Outlet } from "react-router-dom";
-import styled from "styled-components";
+import { AdminSidebar } from 'components/Sidebar';
+import { device, GridContainer } from 'components/styles/Container.styled';
+import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 
 const AdminContainer = styled(GridContainer)`
   @media screen and (${device.md}) {
@@ -17,10 +17,10 @@ const AdminLayout = () => {
   return (
     <>
       <AdminContainer>
-        <div className="fr1">
-          <Sidebar />
+        <div className='fr1'>
+          <AdminSidebar />
         </div>
-        <div className="fr2">
+        <div className='fr2'>
           <Outlet />
         </div>
       </AdminContainer>
