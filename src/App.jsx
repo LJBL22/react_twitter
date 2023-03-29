@@ -20,6 +20,8 @@ import AdminLayout from 'components/layouts/AdminLayout';
 import TweetLayout from 'components/layouts/TweetLayout';
 import { AuthProvider } from 'contexts/AuthContext';
 import { TweetsProvider } from 'contexts/TweetContext';
+import FollowList from 'pages/FollowList';
+import UserTweets from 'pages/UserTweets';
 // import { FollowshipProvider } from 'contexts/FollowshipContext';
 import { UserProvider } from 'contexts/UserContext';
 import UserTweets from 'pages/UserTweets';
