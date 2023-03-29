@@ -21,7 +21,7 @@ const userData = {
 export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(userData);
-  const [usersFollowing, setUsersFollowing] = useState([]);
+  const [userFollowings, setUserFollowings] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
 
   const handleUserUpdate = (data) => {
@@ -30,7 +30,15 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ currentUser, handleUserUpdate, setCurrentUser }}
+      value={{
+        currentUser,
+        handleUserUpdate,
+        setCurrentUser,
+        userFollowings,
+        setUserFollowings,
+        userLikes,
+        setUserLikes,
+      }}
     >
       {children}
     </UserContext.Provider>

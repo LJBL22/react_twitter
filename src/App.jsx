@@ -13,7 +13,7 @@ import {
   UserReplied,
   ReplyList,
   NavigatePage,
-  FollowPage,
+  FollowList,
 } from 'pages';
 import UserSetting from 'pages/UserSetting';
 import AdminLayout from 'components/layouts/AdminLayout';
@@ -23,6 +23,7 @@ import { TweetsProvider } from 'contexts/TweetContext';
 // import { FollowshipProvider } from 'contexts/FollowshipContext';
 import { UserProvider } from 'contexts/UserContext';
 import UserTweets from 'pages/UserTweets';
+
 function App() {
   return (
     <div className='App'>
@@ -48,17 +49,17 @@ function App() {
                     <Route path=':tweetId' element={<ReplyList />} />
                   </Route>
                   <Route element={<UsersPage />}>
-                    <Route path='users/:tweetId'>
+                    <Route path='users/:userId'>
                       <Route path='tweets' element={<UserTweets />} />
                       <Route path='replies' element={<UserReplied />} />
                       <Route path='likes' element={<UserLikes />} />
                       <Route
                         path='followers'
-                        element={<FollowPage type='followers' />}
+                        element={<FollowList type='followers' />}
                       />
                       <Route
                         path='followings'
-                        element={<FollowPage type='followings' />}
+                        element={<FollowList type='followings' />}
                       />
                     </Route>
                   </Route>

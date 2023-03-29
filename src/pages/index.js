@@ -9,7 +9,7 @@ import UserReplied from './UserReplied';
 import UsersPage from './UsersPage';
 import ReplyList from './ReplyList';
 import NavigatePage from './NavigatePage';
-import FollowPage from 'pages/FollowPage';
+import FollowList from 'pages/FollowList';
 
 export {
   LoginPage,
@@ -23,5 +23,5 @@ export {
   UsersPage,
   ReplyList,
   NavigatePage,
-  FollowPage,
+  FollowList,
 };

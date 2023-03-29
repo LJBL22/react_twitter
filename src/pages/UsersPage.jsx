@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
 
 const UsersPage = () => {
   const { currentUser } = useUser();
-  const { id } = useParams();
+  const { userId } = useParams();
   const { pathname } = useLocation();
   const [userInfo, setUserInfo] = useState(currentUser);
   const [userTweets, setUserTweets] = useState([]);
@@ -23,9 +23,9 @@ const UsersPage = () => {
 
   const getUserPageData = async () => {
     try {
-      const user = await getUserData(id);
-      console.log('id', id);
-      const userTweets = await getUserTweets(id);
+      const user = await getUserData(userId);
+      console.log('id', userId);
+      const userTweets = await getUserTweets(userId);
       setUserInfo(user);
       setUserTweets(userTweets);
       setIsLoading(false);
@@ -39,7 +39,7 @@ const UsersPage = () => {
   useEffect(() => {
     setIsLoading(true);
     getUserPageData();
-  }, [id]);
+  }, [userId]);
 
   return (
     <div>
@@ -54,7 +54,7 @@ const UsersPage = () => {
           <UserProfile user={userInfo} key={userInfo.id} />
         )}
       </StyledDiv>
-      <Outlet />
+      <Outlet userTweets={userTweets} />
     </div>
   );
 };
