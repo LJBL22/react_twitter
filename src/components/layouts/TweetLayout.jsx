@@ -106,7 +106,10 @@ const TweetLayout = () => {
             }}
           />
         </div>
-        <div className='grid-item'>
+        <div
+          className='grid-item'
+          style={{ borderLeft: 'var(--color-gray-border) 1px solid' }}
+        >
           <PopularList />
         </div>
       </TweetContainer>

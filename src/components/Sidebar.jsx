@@ -22,6 +22,7 @@ const StyledSidebar = styled.nav`
   padding: 1.5rem;
   background-color: white;
   color: var(--color-gray-800);
+  border-right: var(--color-gray-border) 1px solid;
 `;
 
 const SidebarContainer = styled.div`
@@ -54,7 +55,7 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
     setShowModal(nextShowModal);
   };
 
-  const handleLogoutClick = () => {
+  const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
@@ -81,28 +82,28 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
               </StyledLi>
             </NavLink>
             {/* 暫時，種子的 id 是2 */}
-            <NavLink
+            {/* <NavLink
               to={`/users/2/tweets`}
               className={pathname.includes(`users/2`) && 'active'}
-            >
-              {/* <NavLink
-            to={`/users/${currentUser.id}/tweets`}
-            className={
-              pathname.includes(`users/${currentUser.id}`) && 'active'
-            }
             > */}
+            <NavLink
+              to={`/users/${currentUser.id}/tweets`}
+              className={
+                pathname.includes(`users/${currentUser.id}`) && 'active'
+              }
+            >
               <StyledLi>
                 <div className='icon'>
-                  {/* {pathname.includes(`users/${currentUser.id}`) ? ( */}
                   {/* 等 userContext 的資料 */}
                   {/* 暫時，種子的 id 是2 */}
-                  {pathname.includes(`users/2`) ? (
+                  {/*  {pathname.includes(`users/2`) ? ( */}
+                  {pathname.includes(`users/${currentUser.id}`) ? (
                     <IconUserFi />
                   ) : (
                     <IconUserOut />
                   )}
                 </div>
-                <span>個人資料</span>
+                <span>&ensp;個人資料</span>
               </StyledLi>
             </NavLink>
             <NavLink to='/setting'>
@@ -114,7 +115,7 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
                     <IconCogOut />
                   )}
                 </div>
-                <span>設定</span>
+                <span>&ensp;設定</span>
               </StyledLi>
             </NavLink>
           </StyleUl>
@@ -122,7 +123,7 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
         </SidebarContainer>
         <SidebarContainer>
           <StyleUl>
-            <StyledLi onClick={handleLogoutClick}>
+            <StyledLi onClick={handleLogout}>
               <IconLogout />
               登出
             </StyledLi>
@@ -144,11 +145,11 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
 
 export function AdminSidebar() {
   const { pathname } = useLocation();
-
   const navigate = useNavigate();
-  const handleClick = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+
+  const handleAdminLogout = () => {
+    localStorage.removeItem('adminToken');
+    navigate('/admin');
   };
   return (
     <>
@@ -158,24 +159,38 @@ export function AdminSidebar() {
             <IconLogo />
           </div>
           <StyleUl>
-            <StyledLi>
-              <IconHomeOut />
-              &ensp;首頁
-            </StyledLi>
-            <StyledLi>
-              <IconUserOut />
-              &ensp;個人資料
-            </StyledLi>
-            <StyledLi>
-              <IconCogOut />
-              &ensp;設定
-            </StyledLi>
+            <NavLink to='/admin/tweets'>
+              <StyledLi>
+                <div className='icon'>
+                  {pathname.includes('/tweets') ? (
+                    <IconHomeFi />
+                  ) : (
+                    <IconHomeOut />
+                  )}
+                </div>
+                <span>&ensp;推文清單</span>
+              </StyledLi>
+            </NavLink>
+            <NavLink
+              to='/admin/users'
+              className={pathname.includes('users') && 'active'}
+            >
+              <StyledLi>
+                <div className='icon'>
+                  {pathname.includes('users') ? (
+                    <IconUserFi />
+                  ) : (
+                    <IconUserOut />
+                  )}
+                </div>
+                <span>&ensp;使用者列表</span>
+              </StyledLi>
+            </NavLink>
           </StyleUl>
-          <ModalBtn></ModalBtn>
         </SidebarContainer>
         <SidebarContainer>
           <StyleUl>
-            <StyledLi onClick={handleClick}>
+            <StyledLi onClick={handleAdminLogout}>
               <IconLogout />
               登出
             </StyledLi>
