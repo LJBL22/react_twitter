@@ -4,8 +4,8 @@ import {
   StyledItemDiv,
   StyledActions,
   StyledImgDiv,
-  StyledCardDiv,
 } from 'components/styles/InputTweet.styled';
+import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply } from 'assets/icons';
 import { useTweets } from 'contexts/TweetContext';
 import { tweetData } from './dummyData';

@@ -1,14 +1,18 @@
 import PopularList from 'components/PopularList';
 import { Sidebar } from 'components/Sidebar';
 import { device, GridContainer } from 'components/styles/Container.styled';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useAuth } from 'contexts/AuthContext';
+import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
+import { createTweet } from 'api/tweet';
+import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
   display: grid;
   grid-auto-flow: column;
   @media screen and (${device.md}) {
-    /* 設定無效 無法改他們三欄的比例 */
     grid-template-rows: 1fr;
     grid-template-columns: 3.45fr 6.61fr 4.44fr;
   }
@@ -20,6 +24,70 @@ const TweetContainer = styled(GridContainer)`
 `;
 
 const TweetLayout = () => {
+  const { currentMember } = useAuth();
+  const { currentUser, setCurrentUser, setUserFollowings, setUserLikes } =
+    useUser();
+  const [tweetInput, setTweetInput] = useState('');
+  const [tweets, setTweets] = useState([]);
+  const { pathname } = useLocation();
+  console.log('currentMemeber', currentMember);
+  const id = currentMember.id;
+  // Input Tweet 撰寫推文
+  const handleChange = (value) => {
+    setTweetInput(value);
+  };
+
+  // 使用 handleAddTweet 拿到 createTweet API 新增一則推文
+  const handleAddTweet = async () => {
+    if (tweetInput.length === 0) {
+      return;
+    }
+    try {
+      const data = await createTweet({
+        description: tweetInput,
+      });
+      console.log('TTTdata', data);
+      const newTweets = [
+        {
+          id: data.id,
+          description: data.description,
+          UserId: data.UserId,
+          createdAt: data.createdAt,
+          updatedAt: data.updatedAt,
+          likesNum: 0,
+          repliesNum: 0,
+          User: {
+            account: data.User.account,
+            avatar: data.User.avatar,
+            name: data.User.name,
+          },
+        },
+        ...tweets,
+      ];
+      // 這裡使用 setTimeout 更好使用者體驗
+      setTimeout(() => {
+        setTweets(newTweets);
+        setTweetInput('');
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const getUserAsync = async () => {
+      try {
+        // 將現有使用者拿到的id 去抓 currentUser
+        const currentUser = await getUserData(id);
+        console.log('currentUser', currentUser);
+        setCurrentUser(currentUser);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserAsync();
+  }, []);
+
   return (
     <>
       <TweetContainer>
@@ -27,7 +95,16 @@ const TweetLayout = () => {
           <Sidebar />
         </div>
         <div className='grid-item'>
-          <Outlet />
+          <Outlet
+            context={{
+              currentUser,
+              tweets,
+              setTweets,
+              tweetInput,
+              handleChange,
+              handleAddTweet,
+            }}
+          />
         </div>
         <div className='grid-item'>
           <PopularList />

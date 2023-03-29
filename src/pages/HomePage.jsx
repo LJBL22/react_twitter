@@ -3,9 +3,8 @@ import TweetCollection from 'components/TweetCollection';
 import styled from 'styled-components';
 import { StyledHeader } from 'components/styles/InputTweet.styled';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTweets } from 'contexts/TweetContext';
-import { useAuth } from 'contexts/AuthContext';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import { getTweets } from 'api/tweet';
 
 const StyledContainer = styled.div`
   height: 100vh;
@@ -36,20 +35,39 @@ const ScrollBar = styled.div`
   }
 `;
 const HomePage = () => {
-  const { inputValue, handleChange, handleAddTweet, tweets } = useTweets();
-  // 3/28: 目前刷新頁面就回要重回登入畫面先comment掉確認是否因此程式碼
-  // const navigate = useNavigate();
-  // const { isAuthenticated } = useAuth();
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigate('/login');
-  //   }
-  // }, [navigate, isAuthenticated]);
+  const { tweets, tweetInput, handleChange, handleAddTweet, setTweets } =
+    useOutletContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  // 拿到所有推文的API
+  useEffect(() => {
+    const getTweetsAsync = async () => {
+      try {
+        const tweets = await getTweets();
+        setTweets(
+          tweets.map((tweet) => {
+            return {
+              ...tweet,
+            };
+          })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getTweetsAsync();
+  }, []);
 
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
-  const words = inputValue.trim().split(/\s+/);
-  // 如果 0 < inputValue < 140 則輸入有效
-  const isInputValueValid = inputValue.length > 0 && words.length < 140;
+  const words = tweetInput.trim().split(/\s+/);
+  const isInputValueValid = tweetInput.length > 0 && words.length < 140;
 
   return (
     <StyledContainer>
@@ -63,7 +81,7 @@ const HomePage = () => {
             height='auto'
             divWidth='40.0625rem'
             divHeight='8.625rem'
-            inputValue={inputValue}
+            tweetValue={tweetInput}
             onChange={handleChange}
             onClick={handleAddTweet}
             isInputValid={isInputValueValid}

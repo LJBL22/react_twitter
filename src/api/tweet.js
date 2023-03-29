@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'https://dry-lowlands-42863.herokuapp.com/api/tweets';
+const baseUrl = 'https://dry-lowlands-42863.herokuapp.com/api';
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
@@ -15,14 +15,13 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     console.error(error);
-    return Promise.reject(error);
   }
 );
 
 // 觀看所有的推文
 export const getTweets = async () => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}`);
+    const res = await axiosInstance.get(`${baseUrl}/tweets`);
     // console.log('res', res);
     // 拿到資料庫裡存的所有的推文
     return res.data;
@@ -34,7 +33,7 @@ export const getTweets = async () => {
 // 新增一則推文, 新增的內容 description
 export const createTweet = async ({ description }) => {
   try {
-    const res = await axiosInstance.post(`${baseUrl}`, { description });
+    const res = await axiosInstance.post(`${baseUrl}/tweets`, { description });
     // console.log('res-create', res);
     // 在這裡要抓到目前存的全部的 tweets，後面新增才可以把新的推文推到舊的tweets陣列裡
     return res.data;
@@ -46,7 +45,7 @@ export const createTweet = async ({ description }) => {
 // 觀看一則推文
 export const getATweet = async (id) => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}/${id}`);
+    const res = await axiosInstance.get(`${baseUrl}/tweets/${id}`);
     // console.log('res_getATweet', res.data);
     return res.data;
   } catch (error) {
@@ -57,7 +56,7 @@ export const getATweet = async (id) => {
 // 觀看所有回覆
 export const getReplies = async (id) => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}/${id}/replies`);
+    const res = await axiosInstance.get(`${baseUrl}/tweets/${id}/replies`);
     // console.log('res_getReplies', res.data);
     return res.data;
   } catch (error) {

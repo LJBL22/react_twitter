@@ -111,8 +111,8 @@ export const TweetsProvider = ({ children }) => {
       console.error(error);
     }
   };
-  console.log('tweet', singleTweet);
-  console.log('replies', replies);
+  // console.log('tweet', singleTweet);
+  // console.log('replies', replies);
   return (
     <TweetsContext.Provider
       value={{
