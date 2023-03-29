@@ -1,11 +1,12 @@
 import { userData } from './dummyData';
 import {
   StyledTextarea,
-  StyledCardDiv,
   StyledForm,
   StyledImgDiv,
 } from './styles/InputTweet.styled';
+import { StyledCardDiv } from 'components/common/common.styled';
 import { useAuth } from 'contexts/AuthContext';
+
 
 function InputTweet({
   width,

@@ -1,14 +1,15 @@
-import LoginPage from "./LoginPage";
-import RegistPage from "./RegistPage";
-import AdminLoginPage from "./Admin/AdminLoginPage";
-import AdminTweetsPage from "./Admin/AdminTweetsPage";
-import AdminUsersPage from "./Admin/AdminUsersPage";
-import HomePage from "./HomePage";
-import UserLikes from "./UserLikes";
-import UserReplied from "./UserReplied";
-import UsersPage from "./UsersPage";
-import ReplyList from "./ReplyList";
-import NavigatePage from "./NavigatePage"
+import LoginPage from './LoginPage';
+import RegistPage from './RegistPage';
+import AdminLoginPage from './Admin/AdminLoginPage';
+import AdminTweetsPage from './Admin/AdminTweetsPage';
+import AdminUsersPage from './Admin/AdminUsersPage';
+import HomePage from './HomePage';
+import UserLikes from './UserLikes';
+import UserReplied from './UserReplied';
+import UsersPage from './UsersPage';
+import ReplyList from './ReplyList';
+import NavigatePage from './NavigatePage';
+import FollowPage from 'pages/FollowPage';
 
 export {
   LoginPage,
@@ -21,5 +22,6 @@ export {
   UserReplied,
   UsersPage,
   ReplyList,
-  NavigatePage
+  NavigatePage,
+  FollowPage,
 };

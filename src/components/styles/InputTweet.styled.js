@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { StyledAvatar } from 'components/common/common.styled';
 
 export const StyledHeader = styled.div`
   width: 40.0625rem;
   height: 3.1875rem;
-  border: 0.0625rem solid var(--color-gray-border);
+  border-bottom: 0.0625rem solid var(--color-gray-border);
   border-top: none;
   margin-top: 1.5rem;
   & > div {
@@ -13,15 +14,6 @@ export const StyledHeader = styled.div`
     margin: 0rem 35.4375rem 1.5625rem 1.5rem;
     color: var(--color-gray-900);
   }
-`;
-
-export const StyledCardDiv = styled.div`
-  display: flex;
-  width: ${({ divWidth }) => divWidth};
-  height: ${({ divHeight }) => divHeight};
-  border: 1px solid var(--color-gray-border);
-  min-height: 9.5625rem;
-  padding-left: 1.655rem;
 `;
 
 export const StyledContentDiv = styled.div`
@@ -51,14 +43,8 @@ export const StyledContentDiv = styled.div`
     color: var(--color-gray-900);
   }
 `;
-export const StyledImgDiv = styled.div`
+export const StyledImgDiv = styled(StyledAvatar)`
   padding-top: 1rem;
-  & > img {
-    object-fit: cover;
-    width: 3.125rem;
-    height: 3.125rem;
-    border-radius: 100%;
-  }
 `;
 export const StyledItemDiv = styled.div`
   display: flex;
