@@ -1,9 +1,9 @@
 import TweetCard from './TweetCard';
-import { useTweets } from 'contexts/TweetContext';
+import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function TweetCollection({ tweets }) {
-  const { handleGetTweet } = useTweets();
+  const { handleGetTweet } = useOutletContext();
   const navigate = useNavigate();
 
   const handleCardClick = (id) => {

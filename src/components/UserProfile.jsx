@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useUser } from 'contexts/UserContext';
+import { useState } from 'react';
+import { IconMessageOut, IconNotiFi } from 'assets/icons';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -29,8 +31,18 @@ const StyledContentDiv = styled.div``;
 
 const StyledEditDiv = styled.div``;
 
-function UserProfile({ height, width }) {
+function UserProfile({ user }) {
   const { currentUser } = useUser();
+  const { id, name, account, introduction, avatar, coverUrl } = user;
+  console.log('user', user);
+  const [showModal, setShowModal] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
+  const handleShowModal = () => {
+    const nextShowModal = !showModal;
+    setShowModal(nextShowModal);
+  };
+
   return (
     <div>
       <StyledContainer>
@@ -40,15 +52,32 @@ function UserProfile({ height, width }) {
         <img className='avatar' src={currentUser.avatar} alt='avatar' />
         <StyledContentDiv>
           <StyledEditDiv>
-            {/* {id === currentUser.id? (
-              <button type="button" onClick={handleShowModal}>
+            {id === currentUser.id ? (
+              <button type='button' onClick={handleShowModal}>
                 編輯個人資料
               </button>
-            ):(<>
-            
-            </>) 
-            } */}
+            ) : (
+              <>
+                <span>
+                  <IconMessageOut />
+                </span>
+                <span>
+                  <IconNotiFi />
+                </span>
+                {/* <button
+                  className={`${isFollowed ? 'active' : undefined}${
+                    disabled ? 'disabled' : undefined
+                  }`}
+                  type='buttton'
+                ></button> */}
+              </>
+            )}
           </StyledEditDiv>
+          <div className='userInfo'>
+            <b>{currentUser.name}</b>
+            <p>@{currentUser.account}</p>
+            <p>{currentUser.introduction}</p>
+          </div>
         </StyledContentDiv>
       </StyledContainer>
       <div></div>
