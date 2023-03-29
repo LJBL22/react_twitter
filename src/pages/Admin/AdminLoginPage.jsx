@@ -16,7 +16,7 @@ const AdminLoginPage = () => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { adminLogin, isAuthenticated } = useAuth();
+  const { adminLogin, isAuthenticated, currentUser } = useAuth();
 
   const handleClick = async () => {
     if (account.length === 0) {
@@ -30,6 +30,7 @@ const AdminLoginPage = () => {
       password,
     });
     if (success) {
+      console.log(currentUser);
       Swal.fire({
         title: '登入成功',
         icon: 'success',

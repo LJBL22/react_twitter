@@ -44,7 +44,7 @@ const StyledLi = styled.li`
   }
 `;
 
-export function Sidebar({ tweetInput, currentMember, onChange, onAddTweet }) {
+export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
   const { pathname } = useLocation();
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -86,14 +86,14 @@ export function Sidebar({ tweetInput, currentMember, onChange, onAddTweet }) {
               className={pathname.includes(`users/2`) && 'active'}
             >
               {/* <NavLink
-            to={`/users/${currentMember.id}/tweets`}
+            to={`/users/${currentUser.id}/tweets`}
             className={
-              pathname.includes(`users/${currentMember.id}`) && 'active'
+              pathname.includes(`users/${currentUser.id}`) && 'active'
             }
             > */}
               <StyledLi>
                 <div className='icon'>
-                  {/* {pathname.includes(`users/${currentMember.id}`) ? ( */}
+                  {/* {pathname.includes(`users/${currentUser.id}`) ? ( */}
                   {/* 等 userContext 的資料 */}
                   {/* 暫時，種子的 id 是2 */}
                   {pathname.includes(`users/2`) ? (

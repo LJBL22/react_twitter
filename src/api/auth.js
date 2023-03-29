@@ -42,6 +42,14 @@ export const register = async ({
   }
 };
 
+// export const setup = async ({
+//   account,
+//   name,
+//   password,
+//   checkPassword,
+//   email,
+// })
+
 // admin
 export const adminLogin = async ({ account, password }) => {
   try {
@@ -61,3 +69,4 @@ export const adminLogin = async ({ account, password }) => {
     console.error('[adminLogin failed]:', error);
   }
 };
+
