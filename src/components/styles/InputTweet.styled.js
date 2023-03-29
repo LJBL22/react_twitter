@@ -6,7 +6,6 @@ export const StyledHeader = styled.div`
   height: 3.1875rem;
   border-bottom: 0.0625rem solid var(--color-gray-border);
   border-top: none;
-  margin-top: 1.5rem;
   & > div {
     font-weight: 700;
     font-size: var(--fs-h4);
