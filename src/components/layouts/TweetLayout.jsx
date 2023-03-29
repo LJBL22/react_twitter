@@ -1,5 +1,5 @@
 import PopularList from 'components/PopularList';
-import Sidebar from 'components/Sidebar';
+import { Sidebar } from 'components/Sidebar';
 import { device, GridContainer } from 'components/styles/Container.styled';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
