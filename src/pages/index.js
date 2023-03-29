@@ -10,6 +10,7 @@ import UsersPage from './UsersPage';
 import ReplyList from './ReplyList';
 import NavigatePage from './NavigatePage';
 import FollowList from 'pages/FollowList';
+import UserTweets from 'pages/UserTweets';
 
 export {
   LoginPage,
@@ -24,4 +25,5 @@ export {
   ReplyList,
   NavigatePage,
   FollowList,
+  UserTweets
 };

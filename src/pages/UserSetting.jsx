@@ -2,10 +2,12 @@ import AuthInput from 'components/AuthInput';
 import { AuthInputContainer } from 'components/common/auth.styled';
 import { Header, ThemeButton } from 'components/common/common.styled';
 import { useAuth } from 'contexts/AuthContext';
+import { useUser } from 'contexts/UserContext';
 import { useState } from 'react';
 
 const UserSetting = () => {
-  const { currentUser, handleUserUpdate } = useAuth();
+  const { currentUser } = useUser();
+  const { handleUserUpdate } = useAuth();
   const nextUser = { ...currentUser };
   const { account: userAccount, name: userName, email: userEmail } = nextUser;
   const [account, setAccount] = useState(userAccount);

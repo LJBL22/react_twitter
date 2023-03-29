@@ -30,7 +30,7 @@ const TweetLayout = () => {
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
   const { pathname } = useLocation();
-  console.log('currentMemeber', currentMember);
+  console.log('currentMember', currentMember);
   const id = currentMember.id;
   // Input Tweet 撰寫推文
   const handleChange = (value) => {
