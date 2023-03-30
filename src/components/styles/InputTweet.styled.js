@@ -19,6 +19,7 @@ export const StyledHeader = styled.div`
 export const StyledContentDiv = styled.div`
   flex-direction: column;
   padding: 1rem 1.8125rem 1.0625rem 0.5rem;
+  width: 528px;
   & .cardName {
     font-style: normal;
     font-weight: 700;

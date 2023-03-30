@@ -10,6 +10,7 @@ function TweetCollection({ tweets }) {
             divHeight='auto'
             key={card.id}
             card={card}
+            id={card.id}
           />
         );
       })}
