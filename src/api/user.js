@@ -88,3 +88,23 @@ export const getFollowings = async (userId) => {
   }
 };
 // 使用者編輯自己的資料
+export async function changeUserInformation(payload) {
+  const {
+    userId,
+    account,
+    name,
+    email,
+  } = payload;
+  try {
+    const res = await axiosInstance.patch(`${baseUrl}/users/${userId}`, {
+      account,
+      name,
+      email,
+    });
+    const { data, status } = res;
+    console.log('updateUser', res);
+    return { data, status };
+  } catch (error) {
+    console.error('[Patch User failed]: ', error);
+  }
+}
