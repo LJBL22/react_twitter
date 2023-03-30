@@ -31,3 +31,23 @@ export const getFollow = async (token) => {
     console.error(`[Get followship failed]`, error);
   }
 };
+
+export const following = async (id) => {
+  try {
+    const res = await axiosInstance.post(`${baseUrl}/followships`, {
+      id
+    })
+    return res.data
+  } catch (error) {
+    console.error(`[Following failed]`, error)
+  }
+}
+
+export const unfollow = async (id) => {
+  try {
+    const res = await axiosInstance.delete(`${baseUrl}/followships/${id}`)
+    return res.data
+  } catch (error) {
+    console.error('[Unfollow failed]', error)
+  }
+}

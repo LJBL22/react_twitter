@@ -26,7 +26,7 @@ export const adminGetTweets = async () => {
     // 拿到資料庫裡存的所有的推文
     return res.data;
   } catch (error) {
-    console.error(`[adminGetTweets failed]`, error);
+    console.error('[adminGetTweets failed]', error);
   }
 };
 
@@ -38,7 +38,7 @@ export async function deleteTweet
     const { data, status } = res;
     return { data, status };
   } catch (error) {
-    console.error('[Admin Delete Tweet failed]: ', error);
+    console.error('[Admin Delete Tweet failed]:', error);
   }
 }
 
