@@ -6,10 +6,11 @@ import { useState, useEffect } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
-import { createTweet } from 'api/tweet';
+import { createTweet, getSingleTweet, getReplies } from 'api/tweet';
 import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
+  max-width: inherit;
   display: grid;
   grid-auto-flow: column;
   @media screen and (${device.md}) {
@@ -29,6 +30,7 @@ const TweetLayout = () => {
     useUser();
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
+
   const { pathname } = useLocation();
   console.log('currentMember', currentMember);
   const id = currentMember.id;

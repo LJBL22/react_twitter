@@ -43,10 +43,10 @@ export const createTweet = async ({ description }) => {
 };
 
 // 觀看一則推文
-export const getATweet = async (id) => {
+export const getSingleTweet = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${id}`);
-    // console.log('res_getATweet', res.data);
+    console.log('res_getATweet', res.data);
     return res.data;
   } catch (error) {
     console.error(`[Get a tweet failed]`, error);
@@ -57,12 +57,23 @@ export const getATweet = async (id) => {
 export const getReplies = async (id) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${id}/replies`);
-    // console.log('res_getReplies', res.data);
+    console.log('res_getReplies', res.data);
     return res.data;
   } catch (error) {
     console.error(`[Get all tweet replies failed]`, error);
   }
 };
 
-// 新增回覆
-export const tweetReply = () => {};
+// 在特定貼文新增回覆
+export const replyTweet = async (payload) => {
+  const { id, comment } = payload;
+  try {
+    const res = await axiosInstance.post(`${baseUrl}/tweets/${id}/replies`, {
+      comment,
+    });
+    // console.log('res_tweetReply', res.data);
+    return res.data;
+  } catch (error) {
+    console.error('[Reply tweet failed]', error);
+  }
+};

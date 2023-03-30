@@ -19,7 +19,7 @@ const StyledButton = styled.button`
   height: ${({ height }) => height || '46px'};
   width: ${({ width }) => width || '7rem'};
   margin: ${({ margin }) => margin || 0};
-  transition: background-color .1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   &:hover:not(.modal) {
     cursor: pointer;
     background-color: var(--color-primary);
@@ -79,10 +79,11 @@ const StyledBackHeader = styled(StyledHeader)`
   & > div {
     display: flex;
     width: 100%;
+    align-items: center;
     & > div {
       display: grid;
       align-content: center;
-      padding-right: 1.46rem;
+      padding-left: 1.46rem;
       & .name {
         font-size: 1.38rem;
         color: var(--color-gray-900);
@@ -101,18 +102,16 @@ const StyledAvatar = styled.div`
   & > img {
     object-fit: cover;
     height: ${({ height }) => height || '3.125rem'};
-    max-width: ${({ width }) => width || '3.125rem'};
+    width: ${({ width }) => width || '3.125rem'};
     border-radius: 100%;
   }
 `;
-
 
 export {
   StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
   StyledModalBtn as ModalButton,
-
   StyledCardDiv,
   StyledAvatar,
   StyledBackHeader as BackHeader,

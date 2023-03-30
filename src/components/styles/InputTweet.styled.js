@@ -4,12 +4,13 @@ import { StyledAvatar } from 'components/common/common.styled';
 export const StyledHeader = styled.div`
   width: 40.0625rem;
   height: 3.1875rem;
+  /* line-height: 3.1875rem; */
   border-bottom: 0.0625rem solid var(--color-gray-border);
   border-top: none;
   & > div {
     font-weight: 700;
     font-size: var(--fs-h4);
-    line-height: 1.625rem;
+    /* line-height: 1.625rem; */
     margin: 0rem 35.4375rem 1.5625rem 1.5rem;
     color: var(--color-gray-900);
   }
