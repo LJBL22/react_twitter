@@ -59,8 +59,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        //避免 payload 為 null 的初始狀態
-        //從 JWT 解析成功出現的物件中取值
+        // 直接從 localStorage 取 token ，回傳解析的個人資料
         currentMember: () => {
           const token = localStorage.getItem('token');
           return jwt_decode(token);
@@ -93,22 +92,6 @@ export const AuthProvider = ({ children }) => {
           }
           return;
         },
-        // setting: async (data) => {
-        //   const { token } = await setup({
-        //     account: data.account,
-        //     password: data.password,
-        //   });
-        //   const tempPayload = jwt_decode(token);
-        //   if (tempPayload) {
-        //     setPayload(tempPayload);
-        //     setIsAuthenticated(true);
-        //     localStorage.setItem('token', token);
-        //   } else {
-        //     setPayload(null);
-        //     setIsAuthenticated(false);
-        //   }
-        //   return;
-        // },
         adminLogin: async (data) => {
           const { token } = await adminLogin({
             account: data.account,
@@ -124,11 +107,6 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(false);
           }
           return;
-        },
-        logout: () => {
-          localStorage.removeItem('token');
-          setPayload(null);
-          setIsAuthenticated(false);
         },
       }}
     >

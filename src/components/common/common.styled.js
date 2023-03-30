@@ -20,7 +20,7 @@ const StyledButton = styled.button`
   width: ${({ width }) => width || '7rem'};
   margin: ${({ margin }) => margin || 0};
   transition: background-color 0.1s ease-in-out;
-  &:hover:not(.modal) {
+  &:hover {
     cursor: pointer;
     background-color: var(--color-primary);
   }

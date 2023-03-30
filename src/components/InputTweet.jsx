@@ -5,6 +5,7 @@ import {
 } from './styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
 import { useOutletContext } from 'react-router-dom';
+import { useAuth } from 'contexts/AuthContext';
 
 function InputTweet({
   width,
@@ -16,12 +17,12 @@ function InputTweet({
   onClick,
   isInputValid,
 }) {
-  const { currentUser } = useOutletContext();
+  const { currentMember } = useAuth();
 
   return (
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
       <StyledImgDiv>
-        <img src={currentUser.avatar} alt='avatar' />
+        <img src={currentMember().avatar} alt='avatar' />
       </StyledImgDiv>
       <StyledForm
         onSubmit={(e) => {
@@ -31,7 +32,7 @@ function InputTweet({
         <StyledTextarea
           width={width}
           height={height}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange?.(e.target.value)}
           value={tweetInput}
         />
         {/* submit 以後，text 設定為空值 */}
