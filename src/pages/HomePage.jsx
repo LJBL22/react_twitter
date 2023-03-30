@@ -17,7 +17,7 @@ const StyledDivider = styled.div`
   background-color: var(--color-gray-border);
 `;
 
-const ScrollBar = styled.div`
+export const ScrollBar = styled.div`
   height: calc(100vh - 3.25rem);
   overflow-y: scroll;
   overflow-x: hidden;

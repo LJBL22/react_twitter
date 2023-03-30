@@ -121,12 +121,11 @@ export const AuthProvider = ({ children }) => {
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem('token', token);
+            localStorage.setItem('adminToken', token);
           } else {
             setPayload(null);
             setIsAuthenticated(false);
           }
-          // 現在後端取消回傳 success 了不確定要改 return 什麼
           return;
         },
         logout: () => {
