@@ -94,12 +94,16 @@ export async function changeUserInformation(payload) {
     account,
     name,
     email,
+    password,
+    checkPassword,
   } = payload;
   try {
     const res = await axiosInstance.patch(`${baseUrl}/users/${userId}`, {
       account,
       name,
       email,
+      password,
+      checkPassword,
     });
     const { data, status } = res;
     console.log('updateUser', res);
