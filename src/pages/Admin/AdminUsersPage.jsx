@@ -1,6 +1,8 @@
 import { Header } from 'components/common/common.styled';
 // import { ScrollBar } from 'pages/HomePage';
 import React from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import styled from 'styled-components';
 
 // import { useState, useEffect } from 'react';
@@ -168,24 +170,24 @@ import React from 'react';
 const AdminUsersPage = () => {
   //   const [users, setUsers] = useState([]);
   //   const [isLoading, setIsLoading] = useState(true);
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     const adminToken = localStorage.getItem('adminToken');
-  //     if (!adminToken) {
-  //       navigate('/admin');
-  //     }
-  //     const getUsers = async () => {
-  //       try {
-  //         const users = await adminGetAllUsers();
-  //         setUsers(users);
-  //         setIsLoading(false);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     getUsers();
-  //   }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/admin');
+    }
+    //     const getUsers = async () => {
+    //       try {
+    //         const users = await adminGetAllUsers();
+    //         setUsers(users);
+    //         setIsLoading(false);
+    //       } catch (error) {
+    //         console.log(error);
+    //       }
+    //     };
+    //     getUsers();
+  }, []);
 
   //   const renderedItems = users.map((user) => {
   //     if (!isLoading) {
@@ -194,7 +196,7 @@ const AdminUsersPage = () => {
   //   });
   return (
     <>
-      <Header headerText='使用者列表' />
+      <Header>使用者列表</Header>
       {/* <StyledContainer>{renderedItems}</StyledContainer> */}
       {/* <StyledContainer>f</StyledContainer> */}
     </>
