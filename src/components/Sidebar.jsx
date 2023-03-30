@@ -152,7 +152,7 @@ export function AdminSidebar() {
   const navigate = useNavigate();
 
   const handleAdminLogout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('token');
     navigate('/admin');
   };
   return (

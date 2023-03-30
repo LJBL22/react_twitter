@@ -56,12 +56,14 @@ const UserSetting = () => {
       }, 1000);
       return;
     }
-
+    // 傳入參數 password & checkPassword
     const { data, status } = await changeUserInformation({
-      id: currentUser.id,
+      userId: currentUser.id,
       account,
       name,
       email,
+      password,
+      checkPassword,
     });
     console.log(currentUser.id);
     if (data && status === 200) {
@@ -76,6 +78,8 @@ const UserSetting = () => {
       account: data.account,
       name: data.name,
       email: data.email,
+      password: data.password,
+      checkPassword: data.password,
     };
     handleUserUpdate(newCurrentUser);
   };

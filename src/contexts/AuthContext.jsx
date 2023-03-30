@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }) => {
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem('adminToken', token);
+            localStorage.setItem('token', token);
           } else {
             setPayload(null);
             setIsAuthenticated(false);

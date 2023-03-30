@@ -11,7 +11,7 @@ export default function AdminTweetsPage() {
   // const { tweets, setTweets } = useOutletContext();
   // const navigate = useNavigate();
   // useEffect(() => {
-  //   const token = localStorage.getItem('adminToken');
+  //   const token = localStorage.getItem('token');
   //   if (!token) {
   //     navigate('/admin');
   //   }
