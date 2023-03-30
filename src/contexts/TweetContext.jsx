@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { getTweets, createTweet, getATweet, getReplies } from 'api/tweet';
+import { getTweets, createTweet, getSingleTweet, getReplies } from 'api/tweet';
 
 const TweetsContext = createContext();
 
@@ -95,7 +95,7 @@ export const TweetsProvider = ({ children }) => {
   const handleGetTweet = async (id) => {
     try {
       const [tweet, replyCollection] = await Promise.all([
-        getATweet(id),
+        getSingleTweet(id),
         getReplies(id),
       ]);
       // 前面有資料，但問題點是這裡的setState 沒有把資料更新進去, 導致輸出以後還是初始值

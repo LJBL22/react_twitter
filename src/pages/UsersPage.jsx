@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from 'react';
-import { useParams, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'contexts/UserContext';
 import UserProfile from 'components/UserProfile';
 import Header from 'components/Header';
@@ -16,11 +15,19 @@ const UsersPage = () => {
   const { currentUser } = useUser();
   const { userId } = useParams();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(currentUser);
   const [userTweets, setUserTweets] = useState([]);
   const [userReplies, setUserReplies] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const getUserPageData = async () => {
     try {
@@ -33,15 +40,14 @@ const UsersPage = () => {
     } catch (error) {
       console.error(error);
     }
-    console.log('userTweets', userTweets);
-    console.log('userInfo', userInfo);
   };
 
   useEffect(() => {
     setIsLoading(true);
     getUserPageData();
   }, [userId]);
-
+  console.log('userTweets', userTweets);
+  console.log('userInfo', userInfo);
   return (
     <div>
       <Header
@@ -55,8 +61,7 @@ const UsersPage = () => {
           <UserProfile user={userInfo} key={userInfo.id} />
         )}
       </StyledDiv>
-      <Outlet userTweets={userTweets} />
-
+      <Outlet context={{ currentUser, userInfo, userTweets }} />
     </div>
   );
 };
