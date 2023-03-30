@@ -27,7 +27,7 @@ const ReplyList = () => {
   const { currentUser } = useUser();
   // console.log('currentUserReply', currentUser);
   // 瀏覽單則推文
-  const [singleTweet, setSingleTweet] = useState([]);
+  const [singleTweet, setSingleTweet] = useState(null);
   // 留言回覆
   const [tweetReplies, setTweetReplies] = useState([]);
   // 回覆 input 狀態
@@ -59,6 +59,7 @@ const ReplyList = () => {
         console.error(error);
       }
     };
+
     fetchSingleTweet();
   }, [tweetId]);
 
@@ -81,7 +82,7 @@ const ReplyList = () => {
   //     console.log(error);
   //   }
   // };
-
+  console.log('ereSing', singleTweet);
   return (
     <div>
       <BackHeader>
