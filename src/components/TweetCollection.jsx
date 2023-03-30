@@ -1,4 +1,4 @@
-import TweetCard from './TweetCard';
+import { TweetCard } from 'components/TweetCard';
 
 function TweetCollection({ tweets }) {
   return (

@@ -11,8 +11,10 @@ import {
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ModalBtn from './Modal';
-import { useState } from 'react';
-import TweetCard from './TweetCard';
+// import { useState } from 'react';
+// import { TweetCard } from 'components/TweetCard';
+// import { useOutletContext } from 'react-router-dom';
+import { useAuth } from 'contexts/AuthContext';
 
 const StyledSidebar = styled.nav`
   height: 100vh;
@@ -45,15 +47,16 @@ const StyledLi = styled.li`
   }
 `;
 
-export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
+export function Sidebar({ tweetInput, onChange, onAddTweet }) {
+  const { currentMember } = useAuth();
   const { pathname } = useLocation();
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleShowModal = () => {
-    const nextShowModal = !showModal;
-    setShowModal(nextShowModal);
-  };
+  // const handleShowModal = () => {
+  //   const nextShowModal = !showModal;
+  //   setShowModal(nextShowModal);
+  // };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -87,17 +90,17 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
               className={pathname.includes(`users/2`) && 'active'}
             > */}
             <NavLink
-              to={`/users/${currentUser.id}/tweets`}
+              to={`/users/${currentMember.id}/tweets`}
               className={
-                pathname.includes(`users/${currentUser.id}`) && 'active'
+                pathname.includes(`users/${currentMember.id}`) && 'active'
               }
             >
               <StyledLi>
                 <div className='icon'>
                   {/* 等 userContext 的資料 */}
                   {/* 暫時，種子的 id 是2 */}
-                  {/*  {pathname.includes(`users/2`) ? ( */}
-                  {pathname.includes(`users/${currentUser.id}`) ? (
+                  {/* {pathname.includes(`users/2`) ? ( */}
+                  {pathname.includes(`users/${currentMember.id}`) ? (
                     <IconUserFi />
                   ) : (
                     <IconUserOut />
@@ -130,7 +133,8 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
           </StyleUl>
         </SidebarContainer>
       </StyledSidebar>
-      {showModal && (
+      {/* inputTweet */}
+      {/* {showModal && (
         <TweetCard
           tweetInput={tweetInput}
           // currentUser={currentUser}
@@ -138,7 +142,7 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
           onAddTweet={onAddTweet}
           onClose={handleShowModal}
         />
-      )}
+      )} */}
     </>
   );
 }

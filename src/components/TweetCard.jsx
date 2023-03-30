@@ -110,7 +110,7 @@ function MainSection({ card }) {
 
 // function ReplyCard(reply)
 
-function TweetCard({ divWidth, divHeight, card }) {
+export function TweetCard({ divWidth, divHeight, card }) {
   const id = card.id;
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認${card.id}`
@@ -141,5 +141,3 @@ function TweetCard({ divWidth, divHeight, card }) {
     </NavLink>
   );
 }
-
-export default TweetCard;
