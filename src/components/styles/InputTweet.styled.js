@@ -17,6 +17,7 @@ export const StyledHeader = styled.div`
 `;
 
 export const StyledContentDiv = styled.div`
+  flex-direction: column;
   padding: 1rem 1.8125rem 1.0625rem 0.5rem;
   & .cardName {
     font-style: normal;
@@ -45,6 +46,7 @@ export const StyledContentDiv = styled.div`
 `;
 export const StyledImgDiv = styled(StyledAvatar)`
   padding-top: 1rem;
+  width: 50px;
 `;
 export const StyledItemDiv = styled.div`
   display: flex;

@@ -58,67 +58,90 @@ const formatDate = (dateString) => {
 // console.log('1', formatDate('2023-03-22T11:39:01.000Z'));
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
-// <StyledReplyActions>
-//   {/* 目前帶入回覆account 是錯的，串完API後要把tweet 此主要推文(被回覆)的 user.account 加進來 */}
-//   <div className='replyAccount'>回覆@{'r'}</div>
-//   <div className='replyComment'>{'r'}</div>
-// </StyledReplyActions>
+function TweetCard({ divWidth, divHeight, card, userInfo }) {
+  // console.log('card', card);
+  const {
+    id,
+    description,
+    createdAt,
+    isLiked,
+    likesNum,
+    repliesNum,
+    User,
+    UserId,
+  } = card;
+  const [isCurrentLiked, setIsCurrentLiked] = useState(isLiked);
 
-// function ReplyCard(reply)
-
-function TweetCard({ divWidth, divHeight, card }) {
-  const id = card.id;
-  // console.log('card', card.id); 有拿到
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleClick = () => {
-    if (!isLiked) {
+  const handleLike = () => {
+    if (!isCurrentLiked) {
       card.likesNum += 1;
     } else {
       card.likesNum -= 1;
     }
-    setIsLiked(!isLiked);
+    setIsCurrentLiked(!isCurrentLiked);
   };
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認${card.id}`
     <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
-      {card ? (
+      <NavLink to={`/users/${userInfo ? userInfo.id : UserId}/tweets`}>
         <StyledImgDiv>
-          <img src={card.User.avatar} alt='avatar' />
+          <img src={userInfo ? userInfo.avatar : User.avatar} alt='avatar' />
         </StyledImgDiv>
-      ) : (
-        <StyledReplyImg>r</StyledReplyImg>
-      )}
+      </NavLink>
       <StyledContentDiv>
         <StyledItemDiv>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>{card ? card.User.name : 'r'}</p>
+          <p className='cardName'>{userInfo ? userInfo.name : User.name}</p>
           &ensp;
           <p className='cardAccount'>
-            @{card ? card.User.account : 'r'}・
-            {card ? formatDate(card.createdAt) : 'formatDate(reply.createdAt)'}
+            @{userInfo ? userInfo.account : User.account}・
+            {userInfo ? formatDate(userInfo.createdAt) : formatDate(createdAt)}
           </p>
         </StyledItemDiv>
         <NavLink to={`/tweets/${id}`}>
-          <div className='styledContent'>{card.description}</div>
+          <div className='styledContent'>{description}</div>
         </NavLink>
+        <StyledActions>
+          <div>
+            <IconReply width='0.825rem' className='iconAction' />
+            {repliesNum}
+          </div>
+          <div onClick={handleLike}>
+            {isCurrentLiked ? (
+              <IconLikeFi width='0.825rem' className='iconAction' />
+            ) : (
+              <IconLikeOut width='0.825rem' className='iconAction' />
+            )}
+            {likesNum}
+          </div>
+        </StyledActions>
       </StyledContentDiv>
-      <StyledActions>
-        <div>
-          <IconReply width='0.825rem' className='iconAction' />
-          {card.repliesNum}
-        </div>
-        <div onClick={handleClick}>
-          {isLiked ? (
-            <IconLikeFi width='0.825rem' className='iconAction' />
-          ) : (
-            <IconLikeOut width='0.825rem' className='iconAction' />
-          )}
-          {card.likesNum}
-        </div>
-      </StyledActions>
     </StyledCardDiv>
   );
 }
 
-export default TweetCard;
+function ReplyCard({ reply, replyTo }) {
+  <StyledCardDiv>
+    <StyledImgDiv>
+      <img src={reply.User.avatar} alt='avatar' />
+    </StyledImgDiv>
+
+    <StyledContentDiv>
+      <StyledItemDiv>
+        <p className='cardName'>{reply.User.name}</p>
+        &ensp;
+        <p className='cardAccount'>
+          @{reply.User.account}・{formatDate(reply.createdAt)}
+        </p>
+      </StyledItemDiv>
+
+      <div className='styledContent'>{reply.description}</div>
+    </StyledContentDiv>
+    <StyledReplyActions>
+      <div className='replyAccount'>回覆@{replyTo}</div>
+      <div className='replyComment'>{reply.comment}</div>
+    </StyledReplyActions>
+  </StyledCardDiv>;
+}
+
+export { TweetCard, ReplyCard };

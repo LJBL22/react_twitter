@@ -12,7 +12,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ModalBtn from './Modal';
 import { useState } from 'react';
-import TweetCard from './TweetCard';
+import { TweetCard } from 'components/TweetCard';
 
 const StyledSidebar = styled.nav`
   height: 100vh;
@@ -44,7 +44,7 @@ const StyledLi = styled.li`
   }
 `;
 
-export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
+export function Sidebar({ tweetInput, onChange, onAddTweet }) {
   const { pathname } = useLocation();
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import TweetCard from './TweetCard';
+import { TweetCard, ReplyCard } from 'components/TweetCard';
 
 function TweetCollection({ tweets }) {
   return (
@@ -19,21 +19,17 @@ function TweetCollection({ tweets }) {
 
 export default TweetCollection;
 
-export const ReplyCollection = ({ replyData }) => {
+export const ReplyCollection = ({ replies, replyTo }) => {
+  const tweetReplies = replies.map((reply) => {
+    return (
+      <ReplyCard key={reply.id} reply={reply} replyTo={replyTo.User.account} />
+    );
+  });
+
   return (
     <div>
-      replyData
-      {/* {replyData.map((reply) => {
-        return (
-          <TweetCard
-            divWidth='40.0625rem'
-            divHeight='auto'
-            key={reply.id}
-            reply={reply}
-            onClick={null}
-          />
-        );
-      })} */}
+      reply
+      {/* {tweetReplies} */}
     </div>
   );
 };
