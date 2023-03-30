@@ -43,9 +43,9 @@ export const createTweet = async ({ description }) => {
 };
 
 // 觀看一則推文
-export const getSingleTweet = async (id) => {
+export const getSingleTweet = async (tweetId) => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}/tweets/${id}`);
+    const res = await axiosInstance.get(`${baseUrl}/tweets/${tweetId}`);
     console.log('res_getATweet', res.data);
     return res.data;
   } catch (error) {
@@ -54,9 +54,9 @@ export const getSingleTweet = async (id) => {
 };
 
 // 觀看所有回覆
-export const getReplies = async (id) => {
+export const getReplies = async (tweetId) => {
   try {
-    const res = await axiosInstance.get(`${baseUrl}/tweets/${id}/replies`);
+    const res = await axiosInstance.get(`${baseUrl}/tweets/${tweetId}/replies`);
     console.log('res_getReplies', res.data);
     return res.data;
   } catch (error) {

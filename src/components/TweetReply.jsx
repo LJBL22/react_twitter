@@ -7,10 +7,6 @@ import {
 } from 'components/styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply } from 'assets/icons';
-import { useTweets } from 'contexts/TweetContext';
-import { tweetData } from './dummyData';
-// 先使用假資料，第一篇 tweet
-const tweet = tweetData[0];
 
 const StyledMainCard = styled(StyledCardDiv)`
   width: 40.0625rem;
@@ -41,8 +37,7 @@ const ReplyActions = styled(StyledActions)`
 `;
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
-const TweetReply = () => {
-  const { singleTweet } = useTweets();
+const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
   console.log('ere', singleTweet);
   return (
     <StyledMainCard>
@@ -74,7 +69,11 @@ const TweetReply = () => {
         <BorderDivider />
         <ReplyActions>
           <div>
-            <IconReply width='1.9rem' className='iconAction' />
+            <IconReply
+              width='1.9rem'
+              className='iconAction'
+              onChange={onChange}
+            />
           </div>
           <div>
             <IconLikeOut width='1.9rem' className='iconAction' />
