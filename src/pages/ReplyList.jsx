@@ -5,7 +5,7 @@ import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getSingleTweet, getReplies, replyTweet } from 'api/tweet';
+import { getSingleTweet, getReplies } from 'api/tweet';
 import { useUser } from 'contexts/UserContext';
 
 export const BackHeader = styled(StyledHeader)`

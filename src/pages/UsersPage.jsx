@@ -3,7 +3,12 @@ import { useParams, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'contexts/UserContext';
 import UserProfile from 'components/UserProfile';
 import Header from 'components/Header';
-import { getUserData, getUserTweets } from 'api/user';
+import {
+  getUserData,
+  getUserTweets,
+  getUserRelies,
+  getUserLikes,
+} from 'api/user';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -20,7 +25,7 @@ const UsersPage = () => {
   const [userTweets, setUserTweets] = useState([]);
   const [userReplies, setUserReplies] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -32,22 +37,30 @@ const UsersPage = () => {
   const getUserPageData = async () => {
     try {
       const user = await getUserData(userId);
-      console.log('id', userId);
+      // console.log('id', userId);
       const userTweets = await getUserTweets(userId);
+      const userReplies = await getUserRelies(userId);
+      const userLikes = await getUserLikes(userId);
       setUserInfo(user);
       setUserTweets(userTweets);
-      setIsLoading(false);
+      setUserReplies(userReplies);
+      setUserLikes(userLikes);
+      // setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
-
+  console.log('UserPage_userReplies', userReplies);
   useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     getUserPageData();
+    // eslint-disable-next-line
   }, [userId]);
-  console.log('userTweets', userTweets);
-  console.log('userInfo', userInfo);
+  // console.log('userTweetsInUserPage', userTweets);
+  // console.log('userInfo', userInfo);
+  // console.log('userReplies', userReplies);
+  // console.log('userLikes', userLikes);
+
   return (
     <div>
       <Header
@@ -60,8 +73,16 @@ const UsersPage = () => {
         {!pathname.includes('follow') && (
           <UserProfile user={userInfo} key={userInfo.id} />
         )}
+        <Outlet
+          context={{
+            currentUser,
+            userInfo,
+            userTweets,
+            userReplies,
+            userLikes,
+          }}
+        />
       </StyledDiv>
-      <Outlet context={{ currentUser, userInfo, userTweets }} />
     </div>
   );
 };
