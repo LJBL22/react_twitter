@@ -3,7 +3,7 @@ import { ModalButton } from './common/common.styled';
 import InputTweet from 'components/InputTweet';
 import { IconDanger } from 'assets/icons';
 
-const ModalBtn = ({
+export const TweetModal = ({
   inputValue,
   handleChange,
   handleAddTweet,
@@ -54,5 +54,3 @@ const ModalBtn = ({
     </>
   );
 };
-
-export default ModalBtn;

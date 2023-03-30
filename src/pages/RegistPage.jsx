@@ -133,7 +133,9 @@ const RegistPage = () => {
           required
         />
         {checkPassword !== password ? (
-          <span style={{ color: 'purple' }}>密碼不一致，請重新確認</span>
+          <span style={{ color: 'var(--color-theme)' }}>
+            密碼不一致，請重新確認
+          </span>
         ) : (
           ''
         )}

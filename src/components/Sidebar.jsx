@@ -10,7 +10,7 @@ import {
 } from 'assets/icons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import ModalBtn from './Modal';
+import { TweetModal } from './Modal';
 // import { useState } from 'react';
 // import { TweetCard } from 'components/TweetCard';
 // import { useOutletContext } from 'react-router-dom';
@@ -122,7 +122,7 @@ export function Sidebar({ tweetInput, onChange, onAddTweet }) {
               </StyledLi>
             </NavLink>
           </StyleUl>
-          <ModalBtn></ModalBtn>
+          <TweetModal />
         </SidebarContainer>
         <SidebarContainer>
           <StyleUl>
