@@ -20,10 +20,6 @@ const StyledReplyActions = styled.div`
   }
 `;
 
-const StyledReplyImg = styled(StyledImgDiv)`
-  width: 4.2rem;
-`;
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   // 去抓使用者的時區
@@ -58,18 +54,9 @@ const formatDate = (dateString) => {
 // console.log('1', formatDate('2023-03-22T11:39:01.000Z'));
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
-function TweetCard({ divWidth, divHeight, card, userInfo }) {
-  // console.log('card', card);
-  const {
-    id,
-    description,
-    createdAt,
-    isLiked,
-    likesNum,
-    repliesNum,
-    User,
-    UserId,
-  } = card;
+function TweetCard({ card, userInfo, id }) {
+  const isLiked = card.isLiked;
+  // console.log('isLiked', isLiked);
   const [isCurrentLiked, setIsCurrentLiked] = useState(isLiked);
 
   const handleLike = () => {
@@ -81,30 +68,37 @@ function TweetCard({ divWidth, divHeight, card, userInfo }) {
     setIsCurrentLiked(!isCurrentLiked);
   };
   return (
-    //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認${card.id}`
-    <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
-      <NavLink to={`/users/${userInfo ? userInfo.id : UserId}/tweets`}>
+    //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
+    <StyledCardDiv>
+      <NavLink to={`/users/${userInfo ? userInfo.id : card.UserId}/tweets`}>
         <StyledImgDiv>
-          <img src={userInfo ? userInfo.avatar : User.avatar} alt='avatar' />
+          <img
+            src={userInfo ? userInfo.avatar : card.User.avatar}
+            alt='avatar'
+          />
         </StyledImgDiv>
       </NavLink>
       <StyledContentDiv>
         <StyledItemDiv>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>{userInfo ? userInfo.name : User.name}</p>
+          <p className='cardName'>
+            {userInfo ? userInfo.name : card.User.name}
+          </p>
           &ensp;
           <p className='cardAccount'>
-            @{userInfo ? userInfo.account : User.account}・
-            {userInfo ? formatDate(userInfo.createdAt) : formatDate(createdAt)}
+            @{userInfo ? userInfo.account : card.User.account}・
+            {userInfo
+              ? formatDate(userInfo.createdAt)
+              : formatDate(card.createdAt)}
           </p>
         </StyledItemDiv>
         <NavLink to={`/tweets/${id}`}>
-          <div className='styledContent'>{description}</div>
+          <div className='styledContent'>{card.description}</div>
         </NavLink>
         <StyledActions>
           <div>
             <IconReply width='0.825rem' className='iconAction' />
-            {repliesNum}
+            {card.repliesNum}
           </div>
           <div onClick={handleLike}>
             {isCurrentLiked ? (
@@ -112,7 +106,7 @@ function TweetCard({ divWidth, divHeight, card, userInfo }) {
             ) : (
               <IconLikeOut width='0.825rem' className='iconAction' />
             )}
-            {likesNum}
+            {card.likesNum}
           </div>
         </StyledActions>
       </StyledContentDiv>
@@ -120,22 +114,22 @@ function TweetCard({ divWidth, divHeight, card, userInfo }) {
   );
 }
 
-function ReplyCard({ reply, replyTo }) {
+function ReplyCard({ reply, replyTo, userInfo }) {
   <StyledCardDiv>
     <StyledImgDiv>
-      <img src={reply.User.avatar} alt='avatar' />
+      <img src={userInfo ? userInfo.avatar : reply.User.avatar} alt='avatar' />
     </StyledImgDiv>
-
     <StyledContentDiv>
       <StyledItemDiv>
-        <p className='cardName'>{reply.User.name}</p>
+        <p className='cardName'>{userInfo ? userInfo.name : reply.User.name}</p>
         &ensp;
         <p className='cardAccount'>
-          @{reply.User.account}・{formatDate(reply.createdAt)}
+          @{userInfo ? 'replyTo' : reply.User.account}・
+          {userInfo ? 'post.createdAt' : formatDate(reply.createdAt)}
         </p>
       </StyledItemDiv>
-
-      <div className='styledContent'>{reply.description}</div>
+      {/* 
+      <div className='styledContent'>{reply.description}</div> */}
     </StyledContentDiv>
     <StyledReplyActions>
       <div className='replyAccount'>回覆@{replyTo}</div>

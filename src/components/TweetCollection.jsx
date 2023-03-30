@@ -26,10 +26,5 @@ export const ReplyCollection = ({ replies, replyTo }) => {
     );
   });
 
-  return (
-    <div>
-      reply
-      {/* {tweetReplies} */}
-    </div>
-  );
+  return <div>{tweetReplies}</div>;
 };
