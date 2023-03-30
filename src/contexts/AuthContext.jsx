@@ -61,13 +61,10 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated,
         //避免 payload 為 null 的初始狀態
         //從 JWT 解析成功出現的物件中取值
-        currentMember: payload && {
-          id: payload.id,
-          account: payload.account,
-          email: payload.email,
-          name: payload.name,
+        currentMember: () => {
+          const token = localStorage.getItem('token');
+          return jwt_decode(token);
         },
-
         register: async (data) => {
           // 取前端塞入的 success: true
           const { success } = await register({
