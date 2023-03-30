@@ -90,9 +90,9 @@ export function Sidebar({ tweetInput, onChange, onAddTweet }) {
               className={pathname.includes(`users/2`) && 'active'}
             > */}
             <NavLink
-              to={`/users/${currentMember.id}/tweets`}
+              to={`/users/${currentMember().id}/tweets`}
               className={
-                pathname.includes(`users/${currentMember.id}`) && 'active'
+                pathname.includes(`users/${currentMember().id}`) && 'active'
               }
             >
               <StyledLi>
@@ -100,7 +100,7 @@ export function Sidebar({ tweetInput, onChange, onAddTweet }) {
                   {/* 等 userContext 的資料 */}
                   {/* 暫時，種子的 id 是2 */}
                   {/* {pathname.includes(`users/2`) ? ( */}
-                  {pathname.includes(`users/${currentMember.id}`) ? (
+                  {pathname.includes(`users/${currentMember().id}`) ? (
                     <IconUserFi />
                   ) : (
                     <IconUserOut />
