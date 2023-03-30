@@ -63,7 +63,7 @@ const HomePage = () => {
       }
     };
     getTweetsAsync();
-  }, []);
+  }, [setTweets]);
 
   // 將取得的輸入值去掉空白的部分使用正則表達式轉換成單字陣列
   const words = tweetInput.trim().split(/\s+/);

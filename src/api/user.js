@@ -19,14 +19,12 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// 取得目前登入的使用者資料
-
 // 看特定使用者資料
 export async function getUserData(userId) {
   try {
     // 這裡要取得 currentMember的 userId
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}`);
-    console.log('getUser', res);
+    // console.log('getUser', res);
     return res.data;
   } catch (error) {
     console.error('[Get User Data failed]:', error);
@@ -36,7 +34,7 @@ export async function getUserData(userId) {
 export async function getUserTweets(userId) {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/tweets`);
-    console.log('getUserTweets', res);
+    // console.log('getUserTweets', res);
     return res.data;
   } catch (error) {
     console.error('[Get user tweets failed]:', error);
@@ -44,9 +42,51 @@ export async function getUserTweets(userId) {
 }
 
 //看某使用者回覆的推文
+export async function getUserRelies(userId) {
+  try {
+    const res = await axiosInstance.get(
+      `${baseUrl}/users/${userId}/replied_tweets`
+    );
+    console.log('getUserReplies', res);
+    return res.data;
+  } catch (error) {
+    console.error('[Get user replies failed]:', error);
+  }
+}
+
 // 看特定使用者的likes
+export async function getUserLikes(userId) {
+  try {
+    const res = await axiosInstance.get(`${baseUrl}/users/${userId}/likes`);
+    // console.log('getUserLikes', res);
+    return res.data;
+  } catch (error) {
+    console.error('[Get user likes failed]:', error);
+  }
+}
+
 // 看特定使用者的追隨者
+export const getFollowers = async (userId) => {
+  try {
+    const res = await axiosInstance.get(`${baseUrl}/users/${userId}/followers`);
+
+    return res.data;
+  } catch (error) {
+    console.log(`[getFollowers failed]`, error);
+  }
+};
 // 看特定使用者的追蹤
+export const getFollowings = async (userId) => {
+  try {
+    const res = await axiosInstance.get(
+      `${baseUrl}/users/${userId}/followings`
+    );
+
+    return res.data;
+  } catch (error) {
+    console.log(`[getFollowings failed]`, error);
+  }
+};
 // 使用者編輯自己的資料
 export async function changeUserInformation(payload) {
   const {

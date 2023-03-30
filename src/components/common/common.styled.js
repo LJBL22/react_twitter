@@ -68,8 +68,8 @@ const StyledModalBtn = styled(StyledButton)`
 
 const StyledCardDiv = styled.div`
   display: flex;
-  width: ${({ divWidth }) => divWidth};
-  height: ${({ divHeight }) => divHeight};
+  width: ${({ divWidth }) => divWidth || '40.0625rem'};
+  height: ${({ divHeight }) => divHeight || 'auto'};
   border-bottom: 1px solid var(--color-gray-border);
   min-height: 9.5625rem;
   padding-left: 1.655rem;

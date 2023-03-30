@@ -18,6 +18,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+// 對推文按like
 export const likeTweet = async (payload) => {
   const { id } = payload;
 
@@ -30,6 +31,7 @@ export const likeTweet = async (payload) => {
   }
 };
 
+// 對推文按unlike
 export const unlikeTweet = async (payload) => {
   const { id } = payload;
 

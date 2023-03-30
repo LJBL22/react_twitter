@@ -4,13 +4,11 @@ import AdminLoginPage from './Admin/AdminLoginPage';
 import AdminTweetsPage from './Admin/AdminTweetsPage';
 import AdminUsersPage from './Admin/AdminUsersPage';
 import HomePage from './HomePage';
-import UserLikes from './UserLikes';
-import UserReplied from './UserReplied';
 import UsersPage from './UsersPage';
 import ReplyList from './ReplyList';
 import NavigatePage from './NavigatePage';
 import FollowList from 'pages/FollowList';
-import UserTweets from 'pages/UserTweets';
+import { UserTweets, UserReplied, UserLikes } from 'pages/UserTweetsList';
 
 export {
   LoginPage,
@@ -25,5 +23,5 @@ export {
   ReplyList,
   NavigatePage,
   FollowList,
-  UserTweets
+  UserTweets,
 };

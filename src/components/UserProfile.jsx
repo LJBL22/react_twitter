@@ -9,7 +9,6 @@ const StyledContainer = styled.div`
   border: 1px solid var(--color-gray-200);
   background-color: var(--color-white);
   .cover {
-    height: 15.38rem;
     overflow: hidden;
 
     img {
@@ -89,7 +88,7 @@ const StyledEditDiv = styled.div`
     flex-grow: 0;
     cursor: pointer;
     &:hover,
-    &.avtive {
+    & .active {
       color: var(--color-white);
       background-color: var(--color-theme);
     }
@@ -124,10 +123,10 @@ const StyledTab = styled.div`
 
 function UserProfile({ user }) {
   const { currentUser } = useUser();
-  const { id, name, account, introduction, avatar, coverUrl } = user;
-  console.log('user', user);
+  const { id } = user;
+  // console.log('user', user);
   const [showModal, setShowModal] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  // const [disabled, setDisabled] = useState(false);
 
   const handleShowModal = () => {
     const nextShowModal = !showModal;
@@ -159,7 +158,7 @@ function UserProfile({ user }) {
                   className={`${isFollowed ? 'active' : undefined}${
                     disabled ? 'disabled' : undefined
                   }`}
-                  type='buttton'
+                  type='button'
                 ></button> */}
               </>
             )}
@@ -186,7 +185,7 @@ function UserProfile({ user }) {
           <NavLink className='category' to={`/users/${id}/tweets`}>
             <p>推文</p>
           </NavLink>
-          <NavLink className='category' to={`users/${id}/replies`}>
+          <NavLink className='category' to={`users/${id}/replied_tweets`}>
             <p>回覆</p>
           </NavLink>
           <NavLink className='category' to={`users/${id}/likes`}>

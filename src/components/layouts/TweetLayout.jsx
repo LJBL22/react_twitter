@@ -1,12 +1,12 @@
 import PopularList from 'components/PopularList';
 import { Sidebar } from 'components/Sidebar';
 import { device, GridContainer } from 'components/styles/Container.styled';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
-import { createTweet, getSingleTweet, getReplies } from 'api/tweet';
+import { createTweet } from 'api/tweet';
 import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
@@ -26,13 +26,11 @@ const TweetContainer = styled(GridContainer)`
 
 const TweetLayout = () => {
   const { currentMember } = useAuth();
-  const { currentUser, setCurrentUser, setUserFollowings, setUserLikes } =
-    useUser();
+  const { currentUser, setCurrentUser } = useUser();
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
 
-  const { pathname } = useLocation();
-  console.log('currentMember', currentMember);
+  // console.log('currentMember', currentMember);
   const id = currentMember.id;
   // Input Tweet 撰寫推文
   const handleChange = (value) => {
@@ -48,7 +46,7 @@ const TweetLayout = () => {
       const data = await createTweet({
         description: tweetInput,
       });
-      console.log('TTTdata', data);
+      // console.log('TTTdata', data);
       const newTweets = [
         {
           id: data.id,
@@ -88,7 +86,7 @@ const TweetLayout = () => {
       }
     };
     getUserAsync();
-  }, []);
+  }, [id, setCurrentUser]);
 
   return (
     <>
