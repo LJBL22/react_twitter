@@ -14,7 +14,6 @@ const UserTweets = () => {
 const UserReplied = () => {
   const { userInfo, userReplies } = useOutletContext();
   const userRepliesCollection = userReplies.map((reply) => {
-    console.log('reply user', reply);
     return (
       <ReplyCard
         key={reply.TweetId}

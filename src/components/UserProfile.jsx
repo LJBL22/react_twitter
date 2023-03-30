@@ -99,7 +99,7 @@ const StyledEditDiv = styled.div`
   }
 `;
 
-const StyledTab = styled.div`
+export const StyledTab = styled.div`
   display: flex;
   justify-content: start;
   color: var(--color-secondary);

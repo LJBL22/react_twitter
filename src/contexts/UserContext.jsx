@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from 'react';
+import { likeTweet, unlikeTweet } from 'api/like';
+import { following, unfollow } from 'api/followship';
 
 const UserContext = createContext(null);
 
@@ -27,6 +29,44 @@ export const UserProvider = ({ children }) => {
   const handleUserUpdate = (data) => {
     setCurrentUser(data);
   };
+  
+  // 每次 handleLike 完都要拿到最新的 userLike List
+  const handleLike = async (id) => {
+    try {
+      if (userLikes.includes(id)) {
+        await unlikeTweet(id);
+        const newLikes = userLikes.filter((TweetId) => TweetId !== id);
+        setUserLikes(newLikes);
+        console.log('unLike-new', newLikes);
+      } else {
+        await likeTweet(id);
+        const newLikes = [...userLikes, id];
+        setUserLikes(newLikes);
+        console.log('like-new', newLikes);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 每次 handleFollow 完都要拿到最新的 userFollowing List
+  const handleFollow = async (id) => {
+    try {
+      if (userFollowings.includes(id)) {
+        await unfollow(id);
+        const newFollowList = userFollowings.filter((userId) => userId !== id);
+        setUserFollowings(newFollowList);
+        console.log('-following', newFollowList);
+      } else {
+        await following(id);
+        const newFollowList = [...following, id];
+        setUserFollowings(newFollowList);
+        console.log('+following', newFollowList);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <UserContext.Provider
@@ -38,6 +78,8 @@ export const UserProvider = ({ children }) => {
         setUserFollowings,
         userLikes,
         setUserLikes,
+        handleFollow,
+        handleLike,
       }}
     >
       {children}
