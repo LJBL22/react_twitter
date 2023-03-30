@@ -115,27 +115,34 @@ function TweetCard({ card, userInfo, id }) {
 }
 
 function ReplyCard({ reply, replyTo, userInfo }) {
-  <StyledCardDiv>
-    <StyledImgDiv>
-      <img src={userInfo ? userInfo.avatar : reply.User.avatar} alt='avatar' />
-    </StyledImgDiv>
-    <StyledContentDiv>
-      <StyledItemDiv>
-        <p className='cardName'>{userInfo ? userInfo.name : reply.User.name}</p>
-        &ensp;
-        <p className='cardAccount'>
-          @{userInfo ? 'replyTo' : reply.User.account}・
-          {userInfo ? 'post.createdAt' : formatDate(reply.createdAt)}
-        </p>
-      </StyledItemDiv>
-      {/* 
+  return (
+    <StyledCardDiv>
+      <StyledImgDiv>
+        <img
+          src={userInfo ? userInfo.avatar : reply.User.avatar}
+          alt='avatar'
+        />
+      </StyledImgDiv>
+      <StyledContentDiv>
+        <StyledItemDiv>
+          <p className='cardName'>
+            {userInfo ? userInfo.name : reply.User.name}
+          </p>
+          &ensp;
+          <p className='cardAccount'>
+            @{userInfo ? 'replyTo' : reply.User.account}・
+            {userInfo ? 'post.createdAt' : formatDate(reply.createdAt)}
+          </p>
+        </StyledItemDiv>
+        {/* 
       <div className='styledContent'>{reply.description}</div> */}
-    </StyledContentDiv>
-    <StyledReplyActions>
-      <div className='replyAccount'>回覆@{replyTo}</div>
-      <div className='replyComment'>{reply.comment}</div>
-    </StyledReplyActions>
-  </StyledCardDiv>;
+        <StyledReplyActions>
+          <div className='replyAccount'>回覆@{replyTo}</div>
+          <div className='replyComment'>{reply.comment}</div>
+        </StyledReplyActions>
+      </StyledContentDiv>
+    </StyledCardDiv>
+  );
 }
 
 export { TweetCard, ReplyCard };

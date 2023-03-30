@@ -27,7 +27,7 @@ const ReplyList = () => {
   const { currentUser } = useUser();
   // console.log('currentUserReply', currentUser);
   // 瀏覽單則推文
-  const [singleTweet, setSingleTweet] = useState(null);
+  const [singleTweet, setSingleTweet] = useState({});
   // 留言回覆
   const [tweetReplies, setTweetReplies] = useState([]);
   // 回覆 input 狀態
@@ -43,6 +43,7 @@ const ReplyList = () => {
     }
   }, [navigate]);
 
+  // singleTweet 是空值，所以會再拿到API前渲染下面元件跳錯誤以後，就會跳錯抓不到，useEffect 因為非同步最後才會填入資料
   useEffect(() => {
     const fetchSingleTweet = async () => {
       try {
@@ -84,28 +85,30 @@ const ReplyList = () => {
   // };
   console.log('ereSing', singleTweet);
   return (
-    <div>
-      <BackHeader>
-        <div>
+    singleTweet.id && (
+      <div>
+        <BackHeader>
           <div>
-            <IconBack />
+            <div>
+              <IconBack />
+            </div>
+            <div>推文</div>
           </div>
-          <div>推文</div>
-        </div>
-      </BackHeader>
-      <TweetReply
-        singleTweet={singleTweet}
-        currentUser={currentUser}
-        replyInput={replyInput}
-        onChange={handleInputChange}
-      />
-      {!isLoading && tweetReplies !== null && (
-        <ReplyCollection replies={tweetReplies} replyTo={singleTweet} />
-      )}
-      {!isLoading && tweetReplies.length === 0 && (
-        <div>此貼文目前沒有回覆訊息</div>
-      )}
-    </div>
+        </BackHeader>
+        <TweetReply
+          singleTweet={singleTweet}
+          currentUser={currentUser}
+          replyInput={replyInput}
+          onChange={handleInputChange}
+        />
+        {!isLoading && tweetReplies !== null && (
+          <ReplyCollection replies={tweetReplies} replyTo={singleTweet} />
+        )}
+        {!isLoading && tweetReplies.length === 0 && (
+          <div>此貼文目前沒有回覆訊息</div>
+        )}
+      </div>
+    )
   );
 };
 
