@@ -47,6 +47,7 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
     const nextShowModal = !showModal;
     setShowModal(nextShowModal);
   };
+
   return (
     <>
       <StyledMainCard>
