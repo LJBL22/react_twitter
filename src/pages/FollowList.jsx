@@ -1,206 +1,109 @@
-// import styled from 'styled-components';
-// import { useState, useEffect } from 'react';
-// import { NavLink, useLocation, useOutletContext } from 'react-router-dom';
-// // import BeatLoader from 'react-spinners/BeatLoader';
-// // import { useUser } from '../contexts/UserContext.jsx';
-// // import { getUserFollowings, getUserFollowers } from '../api/user.js';
-
-// const StyledList = styled.ul`
-//   height: calc(100% - 53px);
-//   background-color: white;
-//   border-inline: 1px solid var(--color-gray-200);
-// `;
-
-// // const StyledLoadingDiv = styled.div`
-// //   width: 100%;
-// //   height: calc(100% - 53px);
-// //   display: grid;
-// //   place-items: center;
-// // `;
-
-// const StyledListItem = styled.li`
-//   display: grid;
-//   grid-template-columns: calc(50px + 1rem) 1fr;
-//   padding: 1rem;
-//   border: 1px solid var(--color-gray-200);
-//   background-color: white;
-
-//   img {
-//     width: 50px;
-//     aspect-ratio: 1/1;
-//     margin-right: 1rem;
-//     border-radius: 50%;
-//     overflow: hidden;
-//   }
-
-//   .user {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     margin-bottom: 0.5rem;
-
-//     div {
-//       display: flex;
-//       align-items: center;
-//     }
-//   }
-
-//   button {
-//     cursor: pointer;
-//     padding: 0.5rem 1rem;
-//     border: 1px solid var(--color-theme);
-//     border-radius: 3.125rem;
-//     color: var(--color-theme);
-//     background-color: white;
-//     font-size: var(--fs-basic);
-
-//     &:hover,
-//     &.active {
-//       color: white;
-//       background-color: var(--color-theme);
-//     }
-
-//     &.disabled {
-//       pointer-events: none;
-//       opacity: 0.75;
-//     }
-//   }
-
-//   .content {
-//     color: var(--color-gray-900);
-//   }
-// `;
-
-// const StyledTab = styled.div`
-//   display: flex;
-//   justify-content: start;
-//   border: 1px solid var(--color-gray-200);
-//   color: var(--color-secondary);
-//   background-color: white;
-//   font-weight: 700;
-
-//   .category {
-//     width: 8em;
-//     display: grid;
-//     place-items: center;
-//     border-bottom: 3px solid white;
-//     line-height: 3em;
-
-//     :hover {
-//       border-bottom: 3px solid var(--color-gray-100);
-//       background-color: var(--color-gray-100);
-//     }
-
-//     &.active {
-//       border-bottom: 3px solid var(--color-theme);
-//       color: var(--color-theme);
-//     }
-//   }
-// `;
-
-// export default function FollowList() {
-//   const { pathname } = useLocation();
-//   const { userFollowings } = useUser();
-//   const { shownUser } = useOutletContext();
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [userFollowingsData, setUserFollowingsData] = useState([]);
-//   const [userFollowers, setUserFollowers] = useState([]);
-//   let renderedFollowItem;
-
-//   if (pathname.includes('following')) {
-//     renderedFollowItem = userFollowingsData.map((user) => {
-//       return <FollowItem key={user.id} user={user} />;
-//     });
-//   } else {
-//     renderedFollowItem = userFollowers.map((user) => {
-//       return <FollowItem key={user.id} user={user} />;
-//     });
-//   }
-
-//   useEffect(() => {
-//     const getFollowUsersAsync = async () => {
-//       try {
-//         const followings = await getUserFollowings(shownUser.id);
-//         console.log('user followings get!');
-//         const followers = await getUserFollowers(shownUser.id);
-//         console.log('user followers get!');
-//         setUserFollowingsData(followings);
-//         setUserFollowers(followers);
-//         setIsLoading(false);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     };
-//     setIsLoading(true);
-//     getFollowUsersAsync();
-//   }, [userFollowings]);
-
-//   return (
-//     <>
-//       <FollowTab id={shownUser.id} />
-//       {isLoading ? (
-//         <StyledLoadingDiv>
-//           <div>
-//             <BeatLoader color='var(--color-theme)' />
-//           </div>
-//         </StyledLoadingDiv>
-//       ) : (
-//         <StyledList>{renderedFollowItem}</StyledList>
-//       )}
-//     </>
-//   );
-// }
-
-// function FollowTab({ id }) {
-//   return (
-//     <StyledTab>
-//       <NavLink className='category' to={`/users/${id}/followers`}>
-//         <p>追隨者</p>
-//       </NavLink>
-//       <NavLink className='category' to={`/users/${id}/followings`}>
-//         <p>正在追隨</p>
-//       </NavLink>
-//     </StyledTab>
-//   );
-// }
-
-// function FollowItem({ user }) {
-//   const { userFollowings, handleFollow } = useUser();
-//   const { id, name, avatar, introduction } = user;
-//   const isFollowed = userFollowings.includes(id);
-//   const [disabled, setDisabled] = useState(false);
-
-//   const handleFollowBtnClick = async () => {
-//     setDisabled(true);
-//     await handleFollow(id);
-//     setDisabled(false);
-//   };
-
-//   return (
-//     <StyledListItem>
-//       <img src={avatar} alt='avatar' />
-//       <div>
-//         <div className='user'>
-//           <b>{name}</b>
-//           <button
-//             className={`${isFollowed ? 'active' : undefined} ${
-//               disabled ? 'disabled' : undefined
-//             }`}
-//             type='button'
-//             onClick={handleFollowBtnClick}
-//           >
-//             {isFollowed ? '正在跟隨' : '跟隨'}
-//           </button>
-//         </div>
-//         <p className='content'>{introduction}</p>
-//       </div>
-//     </StyledListItem>
-//   );
-// }
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { NavLink, useLocation, useOutletContext } from 'react-router-dom';
+import { getFollowers, getFollowings } from 'api/user';
+import { useUser } from 'contexts/UserContext';
+import { StyledTab } from 'components/UserProfile';
+import {
+  StyledContentDiv,
+  StyledItemDiv,
+  StyledImgDiv,
+} from 'components/styles/InputTweet.styled';
+import { StyledCardDiv } from 'components/common/common.styled';
 
 const FollowList = () => {
-  return <div>FollowList</div>;
+  const { pathname } = useLocation();
+  // 使用者追蹤清單
+  const { userFollowings } = useUser();
+  const { userInfo } = useOutletContext();
+  // 更新使用者的追蹤 與被追蹤狀態
+  const [userFollowingList, setUserFollowingList] = useState([]);
+  const [userFollower, setUserFollower] = useState([]);
+  // 用這行在非同步拿到資料前，可以不會噴錯
+  const [isLoading, setIsLoading] = useState(true);
+
+  let renderedFollowList;
+
+  if (pathname.includes('following')) {
+    renderedFollowList = userFollowingList.map((user) => {
+      return (
+        <FollowItem
+          key={user.followingId}
+          userInfo={userInfo}
+          id={user.followingId}
+          isFollowed={user.isFollowed}
+        />
+      );
+    });
+  } else {
+    renderedFollowList = userFollowingList.map((user) => {
+      return (
+        <FollowItem
+          key={user.followerId}
+          userInfo={userInfo}
+          id={user.followerId}
+          isFollowed={user.isFollowed}
+        />
+      );
+    });
+  }
+
+  useEffect(() => {
+    const getUserFollowStatus = async () => {
+      try {
+        const followers = await getFollowers(userInfo.id);
+        const following = await getFollowings(userInfo.id);
+        console.log('er', followers);
+        console.log('ing', following);
+        setUserFollower(followers);
+        setUserFollowingList(following);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setIsLoading(true);
+    getUserFollowStatus();
+  }, [userFollowings]);
+  return (
+    <div>
+      <FollowTab id={userInfo.id} />
+      {isLoading ? <div> 資料加載中 </div> : renderedFollowList}
+    </div>
+  );
 };
 
-export default FollowList;
+// 目前帶出來的 userInfo 是使用者的資料，需替換成追蹤人的
+const FollowItem = ({ followCollection, userInfo }) => {
+  return (
+    <StyledCardDiv>
+      <NavLink to={`/users/${userInfo.id}/tweets`}>
+        <StyledImgDiv>
+          <img src={userInfo.avatar} alt='avatar' />
+        </StyledImgDiv>
+      </NavLink>
+      <StyledContentDiv>
+        <StyledItemDiv>
+          {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+          <p className='cardName'>{userInfo.name}</p>
+        </StyledItemDiv>
+        <NavLink to={`/users/${userInfo.id}/tweets`}>
+          <div className='styledContent'>{userInfo.introduction}</div>
+        </NavLink>
+      </StyledContentDiv>
+    </StyledCardDiv>
+  );
+};
+const FollowTab = ({ id }) => {
+  return (
+    <StyledTab>
+      <NavLink className='category' to={`/users/${id}/followers`}>
+        <p>追蹤者</p>
+      </NavLink>
+      <NavLink className='category' to={`/users/${id}/followings`}>
+        <p>正在追隨</p>
+      </NavLink>
+    </StyledTab>
+  );
+};
+
+export { FollowList };

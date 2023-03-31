@@ -7,7 +7,7 @@ import { useAuth } from 'contexts/AuthContext';
 import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
 import { createTweet } from 'api/tweet';
-import { getUserData } from 'api/user';
+import { getUserData, get } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
   max-width: inherit;
