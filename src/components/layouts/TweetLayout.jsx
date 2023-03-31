@@ -30,7 +30,6 @@ const TweetLayout = () => {
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
 
-  // console.log('currentMember', currentMember);
   const id = currentMember().id;
   // Input Tweet 撰寫推文
   const handleChange = (value) => {
@@ -46,7 +45,6 @@ const TweetLayout = () => {
       const data = await createTweet({
         description: tweetInput,
       });
-      // console.log('TTTdata', data);
       const newTweets = [
         {
           id: data.id,
@@ -92,12 +90,7 @@ const TweetLayout = () => {
     <>
       <TweetContainer>
         <div className='grid-item'>
-          <Sidebar
-            // tweetInput={tweetInput}
-            currentUser={currentUser}
-            // onChange={handleChange}
-            // onAddTweet={handleAddTweet}
-          />
+          <Sidebar />
         </div>
         <div className='grid-item'>
           <Outlet

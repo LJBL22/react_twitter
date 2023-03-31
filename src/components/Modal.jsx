@@ -1,37 +1,16 @@
 import { useState } from 'react';
-import { ModalButton, StyledCardDiv } from './common/common.styled';
+import { ModalButton } from './common/common.styled';
 import InputTweet from 'components/InputTweet';
 import { IconDanger } from 'assets/icons';
-import {
-  StyledForm,
-  StyledImgDiv,
-  StyledTextarea,
-} from './styles/InputTweet.styled';
-import { useAuth } from 'contexts/AuthContext';
 import { createTweet } from 'api/tweet';
 
-export const TweetModal = ({
-  // 從 inputTweet 傳來 （bug?
-  // inputValue,
-  // handleChange,
-  // handleAddTweet,
-  isInputValueValid,
-  // 從 tweetLayout -> sidebar 傳來
-  // tweetInput,
-  currentUser,
-  onChange,
-  onAddTweet,
-}) => {
+export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
-
   const handleChange = (value) => {
     setTweetInput(value);
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // };
   const handleAddTweet = async () => {
     if (tweetInput.length === 0) {
       return;
@@ -40,7 +19,6 @@ export const TweetModal = ({
       const data = await createTweet({
         description: tweetInput,
       });
-      // console.log('TTTdata', data);
       const newTweets = [
         {
           id: data.id,
@@ -63,15 +41,13 @@ export const TweetModal = ({
         setTweets(newTweets);
         setTweetInput('');
       }, 2000);
-      console.log('tweetInput', tweetInput);
-      console.log('currentUser', currentUser);
-      console.log('onChange', onChange);
-      console.log('onAddTweet', onAddTweet);
+      console.log('modal success');
     } catch (error) {
       console.error(error);
     }
   };
-
+  const words = tweetInput.trim().split(/\s+/);
+  const isInputValueValid = tweetInput.length > 0 && words.length < 140;
   return (
     <>
       <ModalButton onClick={() => setShowModal(true)} modalBtnWidth='100%'>
