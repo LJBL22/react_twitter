@@ -102,20 +102,22 @@ const StyledEditDiv = styled.div`
 export const StyledTab = styled.div`
   display: flex;
   justify-content: start;
+  border-bottom: 1px solid var(--color-gray-200);
   color: var(--color-secondary);
   font-weight: 700;
-  margin: 0px 0px 15px 50px;
   .category {
     width: 130px;
+    height: 52px;
+    display: grid;
     gap: 50px;
+    place-items: center;
     border-bottom: 2px solid white;
-
     :hover {
       background-color: var(--color-gray-100);
       border-bottom: 2px solid var(--color-gray-100);
     }
     &.active {
-      border-bottom: 2px solid var(--color-them);
+      border-bottom: 2px solid var(--color-theme);
       color: var(--color-theme);
     }
   }
@@ -123,6 +125,7 @@ export const StyledTab = styled.div`
 
 function UserProfile({ user }) {
   const { currentUser } = useUser();
+  // console.log('currentUser', currentUser);
   const { id } = user;
   // console.log('user', user);
   const [showModal, setShowModal] = useState(false);
@@ -171,12 +174,12 @@ function UserProfile({ user }) {
           <div className='followShip'>
             <NavLink to={`/users/${id}/followings`}>
               <span>
-                <b className='fQty'>個</b>跟隨中
+                <b className='fQty'>{currentUser.followingNum}個</b>跟隨中
               </span>
             </NavLink>
             <NavLink to={`/users/${id}/followers`}>
               <span>
-                <b className='fQty'>個</b>跟隨者
+                <b className='fQty'>{currentUser.followerNum}個</b>跟隨者
               </span>
             </NavLink>
           </div>

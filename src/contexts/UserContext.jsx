@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
   const handleUserUpdate = (data) => {
     setCurrentUser(data);
   };
-  
+
   // 每次 handleLike 完都要拿到最新的 userLike List
   const handleLike = async (id) => {
     try {
@@ -59,7 +59,7 @@ export const UserProvider = ({ children }) => {
         console.log('-following', newFollowList);
       } else {
         await following(id);
-        const newFollowList = [...following, id];
+        const newFollowList = [...userFollowings, id];
         setUserFollowings(newFollowList);
         console.log('+following', newFollowList);
       }
