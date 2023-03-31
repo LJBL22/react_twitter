@@ -5,7 +5,6 @@ export const StyledHeader = styled.div`
   width: 40.0625rem;
   height: 3.1875rem;
   /* line-height: 3.1875rem; */
-  border-bottom: 0.0625rem solid var(--color-gray-border);
   border-top: none;
   & > div {
     font-weight: 700;
@@ -89,6 +88,10 @@ export const StyledForm = styled.form`
     background-color: var(--color-theme);
     color: var(--color-white);
     margin-bottom: 1rem;
+    &:hover {
+    cursor: pointer;
+    background-color: var(--color-primary);
+  }
   }
 `;
 

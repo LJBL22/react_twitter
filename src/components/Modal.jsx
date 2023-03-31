@@ -41,6 +41,7 @@ export const TweetModal = () => {
         setTweets(newTweets);
         setTweetInput('');
       }, 2000);
+      setShowModal(false);
       console.log('modal success');
     } catch (error) {
       console.error(error);
@@ -65,8 +66,14 @@ export const TweetModal = () => {
             ></div>
             <div className='modal'>
               <div className='modal-content'>
-                <div>
+                <div
+                  style={{
+                    padding: '1rem',
+                    borderBottom: '1px solid var(--color-gray-border)',
+                  }}
+                >
                   <IconDanger
+                    style={{ cursor: 'pointer' }}
                     onClick={(e) => {
                       e.stopPropagation();
                       setShowModal(false);
@@ -92,5 +99,84 @@ export const TweetModal = () => {
   );
 };
 
-export const ProfileModal = () => {};
+export const ProfileModal = ({ onClose, onProfileChange }) => {
+  // const handleAvatarChange = (e) => {
+  //   const selectedImage = e.target.files[0];
+  //   const previewURL = URL.createObjectURL(e.target.files[0]);
+  //   setAvatar(selectedImage);
+  //   setAvatarPreview(previewURL);
+  // };
+
+  // const handleCoverChange = (e) => {
+  //   const selectedImage = e.target.files[0];
+  //   const previewURL = URL.createObjectURL(e.target.files[0]);
+  //   setCover(selectedImage);
+  //   setcoverPreview(previewURL);
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   if (name.length === 0 || introduction.length === 0) {
+  //     setShowErrorMsg('欄位不可空白!');
+  //     setTimeout(() => {
+  //       setShowErrorMsg(false);
+  //       setIsSubmitting(false);
+  //     }, 1000);
+  //     return;
+  //   }
+  //   if (name.length > 50 || introduction.length > 160) {
+  //     setShowErrorMsg('字數超過上限!');
+  //     setTimeout(() => {
+  //       setShowErrorMsg(false);
+  //       setIsSubmitting(false);
+  //     }, 1000);
+  //     return;
+  //   }
+
+  //   const { data, status } = await changeUserProfile({
+  //     id: currentUser.id,
+  //     name,
+  //     introduction,
+  //     avatar,
+  //     cover,
+  //   });
+  //   if (data && status === 200) {
+  //     setShowSuccessMsg(true);
+  //     setIsSubmitting(false);
+  //     setTimeout(() => {
+  //       setShowSuccessMsg(false);
+  //     }, 1000);
+  //   }
+
+  //   const newCurrentUser = {
+  //     ...currentUser,
+  //     name: data.name,
+  //     introduction: data.introduction,
+  //     avatar: data.avatar,
+  //     cover: data.cover,
+  //   };
+  //   handleUserUpdate(newCurrentUser);
+  //   onProfileChange();
+  //   setIsSubmitting(false);
+  //   onClose();
+  // };
+  return (
+    <Modal>
+      <div className='modal-background show'></div>
+      <div className='modal'>
+        <div className='modal-content'>
+          <div onClick={onClose}>
+            <IconDanger />
+          </div>
+          {/* 編輯個人資料 */}
+          {/* 有 close 功能的儲存 */}
+          {/* //Profile */}
+          {/* 兩個 AuthInput */}
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
 export const ReplyModal = () => {};

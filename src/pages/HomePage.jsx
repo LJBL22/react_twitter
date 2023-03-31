@@ -72,7 +72,9 @@ const HomePage = () => {
   return (
     <StyledContainer>
       <div>
-        <StyledHeader>
+        <StyledHeader
+          style={{ borderBottom: '0.0625rem solid var(--color-gray-border)' }}
+        >
           <div>首頁</div>
         </StyledHeader>
         <ScrollBar>

@@ -56,7 +56,7 @@ const StyledModal = styled.div`
     & .modal-content {
       border-radius: 14px;
       background-color: white;
-      padding: 1rem;
+      /* padding: 1rem; */
     }
   }
   /* 繼承StyledButton的樣式並覆蓋width屬性 */
