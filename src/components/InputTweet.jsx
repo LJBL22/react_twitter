@@ -4,7 +4,6 @@ import {
   StyledImgDiv,
 } from './styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
-import { useOutletContext } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 
 function InputTweet({
