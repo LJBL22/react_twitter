@@ -73,11 +73,12 @@ const UsersPage = () => {
         {/* 如果pathname沒有follow，則不含此頁面 */}
         {!pathname.includes('follow') && (
           <UserProfile
-          // UserPage 點選的任何 id 使用
+            // UserPage 點選的任何 id 使用
             user={userInfo}
             key={userInfo.id}
             // currentUser 是從useUser引入的初始值，部會受UsersPage點選切換=> 當作使用者
             currentUser={currentUser}
+            onProfileChange={getUserPageData}
           />
         )}
         <Outlet

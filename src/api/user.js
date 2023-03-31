@@ -112,3 +112,30 @@ export async function changeUserInformation(payload) {
     console.error('[Patch User failed]: ', error);
   }
 }
+
+// * 修改個人資料 profile
+export async function changeUserProfile(payload) {
+  const { userId, name, introduction, avatar, coverUrl } = payload;
+  const config = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  try {
+    const res = await axiosInstance.put(
+      `${baseUrl}/users/${userId}`,
+      {
+        name,
+        introduction,
+        avatar,
+        coverUrl,
+      },
+      config
+    );
+    const { data, status } = res;
+    return { data, status };
+  } catch (error) {
+    console.error('[Change User Profile failed]: ', error);
+  }
+}

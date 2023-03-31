@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { useUser } from 'contexts/UserContext';
 import { useState } from 'react';
-import { NavLink, useOutletContext } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { IconMessageOut, IconNotiFi } from 'assets/icons';
+import { ProfileModal } from './Modal';
 
 const StyledContainer = styled.div`
   position: relative;
@@ -136,7 +137,7 @@ export const StyledTab = styled.div`
   }
 `;
 
-function UserProfile({ user, currentUser }) {
+function UserProfile({ user, currentUser, onProfileChange }) {
   // user 是特定id 用戶，currentUser是使用者
   console.log('user', user);
   const { id } = currentUser;
@@ -207,6 +208,14 @@ function UserProfile({ user, currentUser }) {
             </NavLink>
           </div>
         </StyledContentDiv>
+        {showModal && (
+          <ProfileModal
+            onClose={handleShowModal}
+            // value={(showModal, setShowModal)}
+            onProfileChange={onProfileChange}
+            currentUser={currentUser}
+          />
+        )}
         <StyledTab>
           <NavLink className='category' to={`/users/${user.id}/tweets`}>
             <p>推文</p>
@@ -219,7 +228,6 @@ function UserProfile({ user, currentUser }) {
           </NavLink>
         </StyledTab>
       </StyledContainer>
-      <div></div>
     </div>
   );
 }

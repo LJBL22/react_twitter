@@ -56,7 +56,7 @@ const StyledModal = styled.div`
     & .modal-content {
       border-radius: 14px;
       background-color: white;
-      padding: 1rem;
+      /* padding: 1rem; */
     }
   }
   /* 繼承StyledButton的樣式並覆蓋width屬性 */
@@ -70,7 +70,7 @@ const StyledCardDiv = styled.div`
   display: flex;
   width: ${({ divWidth }) => divWidth || '40.0625rem'};
   height: ${({ divHeight }) => divHeight || 'auto'};
-  border-bottom: 1px solid var(--color-gray-border);
+  border-bottom: ${({ borderBottom }) => borderBottom || '1px solid var(--color-gray-border)'};
   min-height: 9.5625rem;
   padding-left: 1.655rem;
 `;

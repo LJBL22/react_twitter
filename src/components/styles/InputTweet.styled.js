@@ -101,6 +101,10 @@ export const StyledForm = styled.form`
     background-color: var(--color-theme);
     color: var(--color-white);
     margin-bottom: 1rem;
+    &:hover {
+    cursor: pointer;
+    background-color: var(--color-primary);
+  }
   }
 `;
 
