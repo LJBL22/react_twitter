@@ -9,6 +9,12 @@ import AuthInput from './AuthInput';
 import styled from 'styled-components';
 import clsx from 'clsx';
 import { device } from './styles/Container.styled';
+import {
+  StyledContentDiv,
+  StyledItemDiv,
+  StyledImgDiv,
+} from 'components/styles/InputTweet.styled';
+import { StyledMainCard } from './TweetReply';
 
 export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -75,6 +81,7 @@ export const TweetModal = () => {
                 <div
                   style={{
                     padding: '1rem',
+                    borderBottom: '1px solid var(--color-gray-border)',
                   }}
                 >
                   <IconDanger
@@ -101,6 +108,55 @@ export const TweetModal = () => {
           </Modal>
         </>
       )}
+    </>
+  );
+};
+
+export const ReplyModal = (
+  tweet,
+  currentUser,
+  replyInput,
+  onChange,
+  onAddReply,
+  onClose
+) => {
+  // const [showModal, setShowModal] = useState(false);
+
+  return (
+    <>
+      <Modal>
+        <div className='modal-background show'></div>
+        <div className='modal'>
+          <div className='modal-content'>
+            <div
+              style={{
+                padding: '1rem',
+                borderBottom: '1px solid var(--color-gray-border)',
+              }}
+            >
+              <IconDanger style={{ cursor: 'pointer' }} onClose={onClose} />
+            </div>
+            <StyledMainCard>
+              <div>
+                <StyledItemDiv>
+                  <StyledImgDiv>
+                    {/* <img src={singleTweet.User.avatar} alt='avatar' /> */}
+                  </StyledImgDiv>
+                  <div className='paddingL'>
+                    {/* <p>{singleTweet.User.name}</p>
+                    <p>{singleTweet.User.account}</p> */}
+                  </div>
+                </StyledItemDiv>
+                <StyledContentDiv>
+                  {/* <div className='styledContent'>{singleTweet.description}</div> */}
+                  <div className='styledTime'>上午 10:05・2021年11月10日</div>
+                </StyledContentDiv>
+              </div>
+            </StyledMainCard>
+            {/* inpuTweet */}
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
@@ -279,8 +335,6 @@ export const ProfileModal = ({ onClose, onProfileChange }) => {
     </StyledDiv>
   );
 };
-
-export const ReplyModal = () => {};
 
 const StyledMsgDiv = styled.div`
   position: absolute;
