@@ -15,11 +15,16 @@ function InputTweet({
   onChange,
   onClick,
   isInputValid,
+  borderBottom,
 }) {
   const { currentMember } = useAuth();
 
   return (
-    <StyledCardDiv divWidth={divWidth} divHeight={divHeight}>
+    <StyledCardDiv
+      divWidth={divWidth}
+      divHeight={divHeight}
+      borderBottom={borderBottom}
+    >
       <StyledImgDiv>
         <img src={currentMember().avatar} alt='avatar' />
       </StyledImgDiv>

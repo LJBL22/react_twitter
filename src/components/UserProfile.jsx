@@ -187,6 +187,7 @@ function UserProfile({ user, onProfileChange }) {
             onClose={handleShowModal}
             // value={(showModal, setShowModal)}
             onProfileChange={onProfileChange}
+            currentUser={currentUser}
           />
         )}
         <StyledTab>

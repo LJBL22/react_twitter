@@ -5,6 +5,7 @@ export const StyledHeader = styled.div`
   width: 40.0625rem;
   height: 3.1875rem;
   /* line-height: 3.1875rem; */
+  border-bottom: 1px solid var(--color-gray-border);
   border-top: none;
   & > div {
     font-weight: 700;
