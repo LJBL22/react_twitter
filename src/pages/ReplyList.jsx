@@ -4,7 +4,7 @@ import { IconBack } from 'assets/icons';
 import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation, NavLink } from 'react-router-dom';
+import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { getSingleTweet, getReplies } from 'api/tweet';
 import { useUser } from 'contexts/UserContext';
 
