@@ -130,7 +130,7 @@ export const StyledTab = styled.div`
       background-color: var(--color-gray-100);
       border-bottom: 2px solid var(--color-gray-100);
     }
-    .active {
+    &.active {
       border-bottom: 2px solid var(--color-theme);
       color: var(--color-theme);
     }
@@ -139,13 +139,12 @@ export const StyledTab = styled.div`
 
 function UserProfile({ user, currentUser, onProfileChange }) {
   // user 是特定id 用戶，currentUser是使用者
-  console.log('user', user);
   const { id } = currentUser;
   const { handleFollow, userFollowings } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const isFollowed = userFollowings.includes(user.id);
-  console.log('userFollowings', userFollowings);
+  // console.log('userFollowings', userFollowings); 是空陣列
   const handleShowModal = () => {
     const nextShowModal = !showModal;
     setShowModal(nextShowModal);
@@ -156,7 +155,6 @@ function UserProfile({ user, currentUser, onProfileChange }) {
     setDisabled(false);
   };
 
-  console.log('isFollowd', isFollowed);
   return (
     <div>
       <StyledContainer>

@@ -27,7 +27,7 @@ const UsersPage = () => {
   const [userTweets, setUserTweets] = useState([]);
   const [userReplies, setUserReplies] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -46,13 +46,13 @@ const UsersPage = () => {
       setUserTweets(userTweets);
       setUserReplies(userReplies);
       setUserLikes(userLikes);
-      // setIsLoading(false);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    // setIsLoading(true);
+    setIsLoading(true);
     getUserPageData();
     // eslint-disable-next-line
   }, [userId]);

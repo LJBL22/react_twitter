@@ -45,30 +45,42 @@ const StyledContent = styled(StyledContentDiv)`
 
 const FollowList = () => {
   const { pathname } = useLocation();
-  // 使用者追蹤清單
+  // 從UserPage 拿到正在瀏覽的用戶追蹤清單
   const { userInfo } = useOutletContext();
-  const { currentUser, userFollowings } = useUser();
-  console.log('currentUserFo', currentUser);
+  // userFollowings 存取 追蹤id
+  const { userFollowings } = useUser();
+  console.log('userFollowings', userFollowings);
   // 更新使用者的追蹤 與被追蹤狀態
   const [userFollowingList, setUserFollowingList] = useState([]);
   const [userFollower, setUserFollower] = useState([]);
   // 用這行在非同步拿到資料前，可以不會噴錯
   const [isLoading, setIsLoading] = useState(true);
-
   let renderedFollowList;
-
+  const followingIdList = userFollowingList.map((user) => user.followingId);
+  const followerIdList = userFollower.map((user) => user.followerId);
+  console.log('followIdList', followerIdList, 'followIdList', followingIdList);
   if (pathname.includes('following')) {
     renderedFollowList = userFollowingList.map((user) => {
       // console.log('following', user);
       return (
-        <FollowItem key={user.followingId} user={user} id={user.followingId} />
+        <FollowItem
+          key={user.followingId}
+          user={user}
+          id={user.followingId}
+          followIdList={followingIdList}
+        />
       );
     });
   } else {
     renderedFollowList = userFollower.map((user) => {
       // console.log('follower', user);
       return (
-        <FollowItem key={user.followerId} user={user} id={user.followerId} />
+        <FollowItem
+          key={user.followerId}
+          user={user}
+          id={user.followerId}
+          followIdList={followerIdList}
+        />
       );
     });
   }
@@ -78,8 +90,8 @@ const FollowList = () => {
       try {
         const followers = await getFollowers(userInfo.id);
         const following = await getFollowings(userInfo.id);
-        console.log('er', followers);
-        console.log('ing', following);
+        // console.log('er', followers);
+        // console.log('ing', following);
         setUserFollower(followers);
         setUserFollowingList(following);
         setIsLoading(false);
@@ -89,7 +101,7 @@ const FollowList = () => {
     };
     setIsLoading(true);
     getUserFollowStatus();
-  }, [userFollowings]);
+  }, [userInfo.id]);
   return (
     <div>
       <FollowTab id={userInfo.id} />
@@ -98,12 +110,11 @@ const FollowList = () => {
   );
 };
 
-// 目前帶出來的 userInfo 是使用者的資料，需替換成追蹤人的
-
 const FollowItem = ({ user, id }) => {
-  const { handleFollow } = useUser();
+  const { userFollowings, handleFollow } = useUser();
   const [disabled, setDisabled] = useState(false);
-
+  const isFollowed = userFollowings.includes(id);
+  console.log('isFollowed', isFollowed);
   const handleFollowClick = async () => {
     setDisabled(true);
     await handleFollow(id);
@@ -121,15 +132,14 @@ const FollowItem = ({ user, id }) => {
         <div className='follower'>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
           <p className='cardName'>{user.name}</p>
-
           <button
-            className={`${user.isFollowed ? 'active' : ''} ${
+            className={`${isFollowed ? 'active' : ''} ${
               disabled ? 'disabled' : ''
             }`}
             type='button'
             onClick={handleFollowClick}
           >
-            {user.isFollowed ? '正在跟隨' : '跟隨'}
+            {isFollowed ? '正在跟隨' : '跟隨'}
           </button>
         </div>
         <NavLink to={`/users/${user.id}/tweets`}>
