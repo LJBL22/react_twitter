@@ -70,7 +70,11 @@ const UsersPage = () => {
       <StyledDiv>
         {/* 如果pathname沒有follow，則不含此頁面 */}
         {!pathname.includes('follow') && (
-          <UserProfile user={userInfo} key={userInfo.id} />
+          <UserProfile
+            user={userInfo}
+            key={userInfo.id}
+            onProfileChange={getUserPageData}
+          />
         )}
         <Outlet
           context={{
