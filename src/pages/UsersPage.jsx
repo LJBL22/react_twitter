@@ -37,7 +37,6 @@ const UsersPage = () => {
   const getUserPageData = async () => {
     try {
       const user = await getUserData(userId);
-      // console.log('id', userId);
       const userTweets = await getUserTweets(userId);
       const userReplies = await getUserRelies(userId);
       const userLikes = await getUserLikes(userId);
@@ -50,7 +49,6 @@ const UsersPage = () => {
       console.error(error);
     }
   };
-  console.log('UserPage_userReplies', userReplies);
   useEffect(() => {
     // setIsLoading(true);
     getUserPageData();
@@ -70,6 +68,7 @@ const UsersPage = () => {
         userTweets={userTweets}
       />
       <StyledDiv>
+        {/* 如果pathname沒有follow，則不含此頁面 */}
         {!pathname.includes('follow') && (
           <UserProfile user={userInfo} key={userInfo.id} />
         )}

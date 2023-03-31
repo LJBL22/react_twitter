@@ -7,7 +7,7 @@ import HomePage from './HomePage';
 import UsersPage from './UsersPage';
 import ReplyList from './ReplyList';
 import NavigatePage from './NavigatePage';
-import FollowList from 'pages/FollowList';
+import { FollowList } from 'pages/FollowList';
 import { UserTweets, UserReplied, UserLikes } from 'pages/UserTweetsList';
 
 export {

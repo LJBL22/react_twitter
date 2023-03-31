@@ -23,7 +23,7 @@ export const BackHeader = styled(StyledHeader)`
 const ReplyList = () => {
   const navigate = useNavigate();
   const { tweetId } = useParams();
-  console.log('tweetId', tweetId);
+  // console.log('tweetId', tweetId);
   const { currentUser } = useUser();
   // console.log('currentUserReply', currentUser);
   // 瀏覽單則推文
@@ -48,10 +48,8 @@ const ReplyList = () => {
     const fetchSingleTweet = async () => {
       try {
         const tweet = await getSingleTweet(tweetId);
-        console.log(`tweet ${tweetId} get!`);
         const replies = await getReplies(tweetId);
         if (replies !== undefined) {
-          console.log(`tweet ${tweetId} replies get!`);
           setTweetReplies(replies);
         }
         setSingleTweet(tweet);
@@ -83,7 +81,6 @@ const ReplyList = () => {
   //     console.log(error);
   //   }
   // };
-  console.log('ereSing', singleTweet);
   return (
     singleTweet.id && (
       <div>
