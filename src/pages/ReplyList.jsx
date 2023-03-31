@@ -4,7 +4,7 @@ import { IconBack } from 'assets/icons';
 import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { getSingleTweet, getReplies } from 'api/tweet';
 import { useUser } from 'contexts/UserContext';
 
@@ -16,10 +16,19 @@ export const BackHeader = styled(StyledHeader)`
       display: flex;
       flex-wrap: nowrap;
       padding-right: 1.46rem;
+      align-items: center;
     }
   }
+  .back-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 8px;
+  }
+  .back-link span:first-child {
+    margin-right: 10px;
+  }
 `;
-
 const ReplyList = () => {
   const navigate = useNavigate();
   const { tweetId } = useParams();
@@ -86,10 +95,12 @@ const ReplyList = () => {
       <div>
         <BackHeader>
           <div>
-            <div>
-              <IconBack />
-            </div>
-            <div>推文</div>
+            <NavLink to={'/tweets'} className='back-link'>
+              <div>
+                <IconBack />
+              </div>
+              <div>推文</div>
+            </NavLink>
           </div>
         </BackHeader>
         <TweetReply

@@ -130,8 +130,10 @@ function ReplyCard({ reply, replyTo, userInfo }) {
           </p>
           &ensp;
           <p className='cardAccount'>
-            @{userInfo ? 'replyTo' : reply.User.account}・
-            {userInfo ? 'post.createdAt' : formatDate(reply.createdAt)}
+            @{userInfo ? replyTo : reply.User.account}・
+            {userInfo
+              ? formatDate(reply.createdAt)
+              : formatDate(reply.createdAt)}
           </p>
         </StyledItemDiv>
         {/* 

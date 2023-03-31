@@ -46,8 +46,7 @@ const StyledContent = styled(StyledContentDiv)`
 const FollowList = () => {
   const { pathname } = useLocation();
   // 使用者追蹤清單
-  const { userFollowings } = useUser();
-  const { userInfo } = useOutletContext();
+  const { userInfo, userFollowings } = useOutletContext();
   // 更新使用者的追蹤 與被追蹤狀態
   const [userFollowingList, setUserFollowingList] = useState([]);
   const [userFollower, setUserFollower] = useState([]);
@@ -122,8 +121,8 @@ const FollowItem = ({ user, id }) => {
           <p className='cardName'>{user.name}</p>
 
           <button
-            className={`${user.isFollowed ? 'active' : undefined} ${
-              disabled ? 'disabled' : undefined
+            className={`${user.isFollowed ? 'active' : ''} ${
+              disabled ? 'disabled' : ''
             }`}
             type='button'
             onClick={handleFollowClick}

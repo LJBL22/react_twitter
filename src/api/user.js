@@ -47,7 +47,7 @@ export async function getUserRelies(userId) {
     const res = await axiosInstance.get(
       `${baseUrl}/users/${userId}/replied_tweets`
     );
-    console.log('getUserReplies', res);
+    // console.log('getUserReplies', res);
     return res.data;
   } catch (error) {
     console.error('[Get user replies failed]:', error);
@@ -106,7 +106,7 @@ export async function changeUserInformation(payload) {
       checkPassword,
     });
     const { data, status } = res;
-    console.log('updateUser', res);
+    // console.log('updateUser', res);
     return { data, status };
   } catch (error) {
     console.error('[Patch User failed]: ', error);

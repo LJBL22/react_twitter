@@ -56,12 +56,12 @@ export const UserProvider = ({ children }) => {
         await unfollow(id);
         const newFollowList = userFollowings.filter((userId) => userId !== id);
         setUserFollowings(newFollowList);
-        console.log('-following', newFollowList);
+        // console.log('-following', newFollowList);
       } else {
         await following(id);
         const newFollowList = [...userFollowings, id];
         setUserFollowings(newFollowList);
-        console.log('+following', newFollowList);
+        // console.log('+following', newFollowList);
       }
     } catch (error) {
       console.log(error);
