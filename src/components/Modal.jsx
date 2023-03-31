@@ -82,14 +82,6 @@ export const TweetModal = () => {
                   onClick={handleAddTweet}
                   isInputValid={isInputValueValid}
                 />
-                {/* <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowModal(false);
-                  }}
-                >
-                  Close Modal
-                </button> */}
               </div>
             </div>
           </>

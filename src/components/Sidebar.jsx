@@ -11,9 +11,6 @@ import {
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { TweetModal } from './Modal';
-// import { useState } from 'react';
-// import { TweetCard } from 'components/TweetCard';
-// import { useOutletContext } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 
 const StyledSidebar = styled.nav`
@@ -114,12 +111,7 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
               </StyledLi>
             </NavLink>
           </StyleUl>
-          <TweetModal
-            tweetInput={tweetInput}
-            currentUser={currentUser}
-            onChange={onChange}
-            onAddTweet={onAddTweet}
-          />
+          <TweetModal />
         </SidebarContainer>
         <SidebarContainer>
           <StyleUl>
