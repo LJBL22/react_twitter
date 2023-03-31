@@ -2,7 +2,12 @@ import { createContext, useContext, useState } from 'react';
 import { likeTweet, unlikeTweet } from 'api/like';
 import { following, unfollow } from 'api/followship';
 import { useEffect } from 'react';
-import { getFollowings, getUserData, getUserLikes } from 'api/user';
+import {
+  getFollowers,
+  getFollowings,
+  getUserData,
+  getUserLikes,
+} from 'api/user';
 import { useAuth } from './AuthContext';
 
 const UserContext = createContext(null);
@@ -33,6 +38,15 @@ export const UserProvider = ({ children }) => {
   const [userLikes, setUserLikes] = useState([]);
   // 儲存 特定使用者正在追蹤的用戶及資料
   const [userFollowInfo, setUserFollowInfo] = useState([]);
+  // 更新使用者的追蹤狀態ID
+  let [followingIdList, setFollowingIdList] = useState([]);
+  // let [followerIdList, setFollowerIdList] = useState([]);
+  // 更新使用者的追蹤 與被追蹤狀態
+  const [userFollowingList, setUserFollowingList] = useState([]);
+  const [userFollowerList, setUserFollowerList] = useState([]);
+
+  followingIdList = userFollowingList.map((user) => user.followingId);
+  // followerIdList = userFollowerList.map((user) => user.followerId);
 
   const handleUserUpdate = (data) => {
     setCurrentUser(data);
@@ -61,17 +75,17 @@ export const UserProvider = ({ children }) => {
   const handleFollow = async (id) => {
     try {
       //userFollowings = [1,2,3] 只能用來儲存followingId
-      if (userFollowings.includes(id)) {
+      if (followingIdList.includes(id)) {
         await unfollow(id);
-        const newFollowList = userFollowings.filter(
+        const newFollowList = followingIdList.filter(
           (followingId) => followingId !== id
         );
-        setUserFollowings(newFollowList);
+        setFollowingIdList(newFollowList);
         console.log('-following', newFollowList);
       } else {
         await following(id);
-        const newFollowList = [...userFollowings, id];
-        setUserFollowings(newFollowList);
+        const newFollowList = [...followingIdList, id];
+        setFollowingIdList(newFollowList);
         console.log('+following', newFollowList);
       }
     } catch (error) {
@@ -86,11 +100,11 @@ export const UserProvider = ({ children }) => {
         const currentUser = await getUserData(id);
         // console.log('currentUser', currentUser);
         // 拿到使用者追蹤用戶資料清單
-        const userFollowings = await getFollowings(id);
+        const userFollowingInfo = await getFollowings(id);
         // 拿到使用者喜歡貼文清單
         const userLikes = await getUserLikes(id);
         setCurrentUser(currentUser);
-        setUserFollowInfo(userFollowings);
+        setUserFollowInfo(userFollowingInfo);
         setUserLikes(userLikes);
       } catch (error) {
         console.error(error);
@@ -101,6 +115,29 @@ export const UserProvider = ({ children }) => {
   }, [id, setCurrentUser]);
 
   // 這裡的 currentUser 是拿到login的 ID ，所以是使用者
+
+  useEffect(() => {
+    const getUserFollowStatus = async () => {
+      try {
+        const followers = await getFollowers(id);
+        const following = await getFollowings(id);
+        console.log('er', followers);
+        console.log('ing', following);
+        setUserFollowerList(followers);
+        setUserFollowingList(following);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserFollowStatus();
+  }, [id]);
+  console.log(
+    'userFollower',
+    userFollowerList,
+    'userFollowingList',
+    userFollowingList
+  );
+
   return (
     <UserContext.Provider
       value={{
@@ -115,6 +152,8 @@ export const UserProvider = ({ children }) => {
         setUserLikes,
         handleFollow,
         handleLike,
+        userFollowerList,
+        userFollowingList,
       }}
     >
       {children}

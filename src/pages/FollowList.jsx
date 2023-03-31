@@ -48,16 +48,15 @@ const FollowList = () => {
   // 從UserPage 拿到正在瀏覽的用戶追蹤清單
   const { userInfo } = useOutletContext();
   // userFollowings 存取 追蹤id
-  const { userFollowings } = useUser();
-  console.log('userFollowings', userFollowings);
-  // 更新使用者的追蹤 與被追蹤狀態
-  const [userFollowingList, setUserFollowingList] = useState([]);
-  const [userFollower, setUserFollower] = useState([]);
+  const { userFollowings, userFollowingList, userFollowerList, follo } =
+    useUser();
+
   // 用這行在非同步拿到資料前，可以不會噴錯
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   let renderedFollowList;
   const followingIdList = userFollowingList.map((user) => user.followingId);
-  const followerIdList = userFollower.map((user) => user.followerId);
+  const followerIdList = userFollowerList.map((user) => user.followerId);
+
   console.log('followIdList', followerIdList, 'followIdList', followingIdList);
   if (pathname.includes('following')) {
     renderedFollowList = userFollowingList.map((user) => {
@@ -72,7 +71,7 @@ const FollowList = () => {
       );
     });
   } else {
-    renderedFollowList = userFollower.map((user) => {
+    renderedFollowList = userFollowerList.map((user) => {
       // console.log('follower', user);
       return (
         <FollowItem
@@ -85,35 +84,18 @@ const FollowList = () => {
     });
   }
 
-  useEffect(() => {
-    const getUserFollowStatus = async () => {
-      try {
-        const followers = await getFollowers(userInfo.id);
-        const following = await getFollowings(userInfo.id);
-        // console.log('er', followers);
-        // console.log('ing', following);
-        setUserFollower(followers);
-        setUserFollowingList(following);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    setIsLoading(true);
-    getUserFollowStatus();
-  }, [userInfo.id]);
   return (
     <div>
       <FollowTab id={userInfo.id} />
-      {isLoading ? <div> 資料加載中 </div> : renderedFollowList}
+      {renderedFollowList}
     </div>
   );
 };
 
-const FollowItem = ({ user, id }) => {
-  const { userFollowings, handleFollow } = useUser();
+const FollowItem = ({ user, id, followIdList }) => {
+  const { handleFollow } = useUser();
   const [disabled, setDisabled] = useState(false);
-  const isFollowed = userFollowings.includes(id);
+  const isFollowed = followIdList.includes(id);
   console.log('isFollowed', isFollowed);
   const handleFollowClick = async () => {
     setDisabled(true);
