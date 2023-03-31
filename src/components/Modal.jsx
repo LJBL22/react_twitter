@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { Modal, ThemeButton } from './common/common.styled';
 import InputTweet from 'components/InputTweet';
-import { IconClose, IconDanger, IconUploadPhoto } from 'assets/icons';
+import {
+  IconClose,
+  IconDanger,
+  IconReply,
+  IconUploadPhoto,
+} from 'assets/icons';
 import { createTweet } from 'api/tweet';
 import { useUser } from 'contexts/UserContext';
 import { changeUserProfile } from 'api/user';
@@ -120,43 +125,67 @@ export const ReplyModal = (
   onAddReply,
   onClose
 ) => {
-  // const [showModal, setShowModal] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => {
+    const nextShowModal = !showModal;
+    setShowModal(nextShowModal);
+  };
   return (
     <>
-      <Modal>
-        <div className='modal-background show'></div>
-        <div className='modal'>
-          <div className='modal-content'>
-            <div
-              style={{
-                padding: '1rem',
-                borderBottom: '1px solid var(--color-gray-border)',
-              }}
-            >
-              <IconDanger style={{ cursor: 'pointer' }} onClose={onClose} />
-            </div>
-            <StyledMainCard>
-              <div>
-                <StyledItemDiv>
-                  <StyledImgDiv>
-                    {/* <img src={singleTweet.User.avatar} alt='avatar' /> */}
-                  </StyledImgDiv>
-                  <div className='paddingL'>
-                    {/* <p>{singleTweet.User.name}</p>
+      <IconReply
+        width='1.9rem'
+        className='iconAction'
+        onChange={onChange}
+        onClick={handleShowModal}
+      />
+      {showModal && (
+        // <ReplyModal
+        //   // tweet={tweet}
+        //   // currentUser={currentUser}
+        //   // replyInput={replyInput}
+        //   // onChange={onChange}
+        //   // onAddReply={onAddReply}
+        //   onClose={handleShowModal}
+        // />
+        <>
+          <Modal>
+            <div className='modal-background show'></div>
+            <div className='modal'>
+              <div className='modal-content'>
+                <div
+                  style={{
+                    padding: '1rem',
+                    borderBottom: '1px solid var(--color-gray-border)',
+                  }}
+                >
+                  <IconDanger style={{ cursor: 'pointer' }} onClose={onClose} />
+                </div>
+                <StyledMainCard>
+                  <div>
+                    <StyledItemDiv>
+                      <StyledImgDiv>
+                        {/* <img src={singleTweet.User.avatar} alt='avatar' /> */}
+                      </StyledImgDiv>
+                      <div className='paddingL'>
+                        {/* <p>{singleTweet.User.name}</p>
                     <p>{singleTweet.User.account}</p> */}
+                      </div>
+                    </StyledItemDiv>
+                    <StyledContentDiv>
+                      {/* <div className='styledContent'>{singleTweet.description}</div> */}
+                      <div className='styledTime'>
+                        上午 10:05・2021年11月10日
+                      </div>
+                    </StyledContentDiv>
                   </div>
-                </StyledItemDiv>
-                <StyledContentDiv>
-                  {/* <div className='styledContent'>{singleTweet.description}</div> */}
-                  <div className='styledTime'>上午 10:05・2021年11月10日</div>
-                </StyledContentDiv>
+                </StyledMainCard>
+                {/* inpuTweet */}
               </div>
-            </StyledMainCard>
-            {/* inpuTweet */}
-          </div>
-        </div>
-      </Modal>
+            </div>
+          </Modal>
+        </>
+      )}
+      ;
     </>
   );
 };

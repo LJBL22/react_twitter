@@ -43,10 +43,10 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
   console.log('ere', singleTweet);
   const [showModal, setShowModal] = useState(false);
 
-  const handleShowModal = () => {
-    const nextShowModal = !showModal;
-    setShowModal(nextShowModal);
-  };
+  // const handleShowModal = () => {
+  //   const nextShowModal = !showModal;
+  //   setShowModal(nextShowModal);
+  // };
 
   return (
     <>
@@ -79,12 +79,7 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           <BorderDivider />
           <ReplyActions>
             <div>
-              <IconReply
-                width='1.9rem'
-                className='iconAction'
-                onChange={onChange}
-                onClick={handleShowModal}
-              />
+              <ReplyModal />
             </div>
             <div>
               <IconLikeOut width='1.9rem' className='iconAction' />
@@ -92,16 +87,6 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           </ReplyActions>
         </div>
       </StyledMainCard>
-      {showModal && (
-        <ReplyModal
-          // tweet={tweet}
-          // currentUser={currentUser}
-          // replyInput={replyInput}
-          // onChange={onChange}
-          // onAddReply={onAddReply}
-          onClose={handleShowModal}
-        />
-      )}
     </>
   );
 };

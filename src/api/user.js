@@ -115,7 +115,7 @@ export async function changeUserInformation(payload) {
 
 // * 修改個人資料 profile
 export async function changeUserProfile(payload) {
-  const { userId, name, introduction, avatar, coverUrl } = payload;
+  const { userId, name, introduction, avatar, cover } = payload;
   const config = {
     headers: {
       Accept: 'application/json',
@@ -129,7 +129,7 @@ export async function changeUserProfile(payload) {
         name,
         introduction,
         avatar,
-        coverUrl,
+        coverUrl: cover,
       },
       config
     );
