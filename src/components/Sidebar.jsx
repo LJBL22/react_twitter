@@ -122,16 +122,6 @@ export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
           </StyleUl>
         </SidebarContainer>
       </StyledSidebar>
-      {/* inputTweet */}
-      {/* {showModal && (
-        <TweetCard
-          tweetInput={tweetInput}
-          // currentUser={currentUser}
-          // onChange={onChange}
-          onAddTweet={onAddTweet}
-          onClose={handleShowModal}
-        />
-      )} */}
     </>
   );
 }

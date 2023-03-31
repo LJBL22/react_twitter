@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ModalButton } from './common/common.styled';
+import { Modal, ThemeButton } from './common/common.styled';
 import InputTweet from 'components/InputTweet';
 import { IconDanger } from 'assets/icons';
 import { createTweet } from 'api/tweet';
@@ -50,10 +50,12 @@ export const TweetModal = () => {
   const isInputValueValid = tweetInput.length > 0 && words.length < 140;
   return (
     <>
-      <ModalButton onClick={() => setShowModal(true)} modalBtnWidth='100%'>
+      <ThemeButton onClick={() => setShowModal(true)} width='100%'>
         推文
-        {showModal && (
-          <>
+      </ThemeButton>
+      {showModal && (
+        <>
+          <Modal>
             <div
               className='modal-background show'
               onClick={(e) => {
@@ -77,16 +79,18 @@ export const TweetModal = () => {
                   divWidth='40.0625rem'
                   divHeight='8.625rem'
                   tweetValue={tweetInput}
-                  // onSubmit={handleSubmit}
                   onChange={handleChange}
                   onClick={handleAddTweet}
                   isInputValid={isInputValueValid}
                 />
               </div>
             </div>
-          </>
-        )}
-      </ModalButton>
+          </Modal>
+        </>
+      )}
     </>
   );
 };
+
+export const ProfileModal = () => {};
+export const ReplyModal = () => {};

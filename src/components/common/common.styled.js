@@ -26,7 +26,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const StyledModalBtn = styled(StyledButton)`
+const StyledModal = styled.div`
   & .modal-background {
     position: fixed;
     top: 0;
@@ -111,7 +111,7 @@ export {
   StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
-  StyledModalBtn as ModalButton,
+  StyledModal as Modal,
   StyledCardDiv,
   StyledAvatar,
   StyledBackHeader as BackHeader,
