@@ -130,7 +130,7 @@ function ReplyCard({ reply, replyTo, userInfo }) {
           </p>
           &ensp;
           <p className='cardAccount'>
-            @{userInfo ? replyTo : reply.User.account}・
+            @{userInfo ? userInfo.account : reply.User.account}・
             {userInfo
               ? formatDate(reply.createdAt)
               : formatDate(reply.createdAt)}

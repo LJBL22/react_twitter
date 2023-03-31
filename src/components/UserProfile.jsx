@@ -96,8 +96,8 @@ const StyledEditDiv = styled.div`
     background-color: var(--color-white);
     flex-grow: 0;
     cursor: pointer;
-    :hover,
-    .active {
+    &:hover,
+    &.active {
       color: var(--color-white);
       background-color: var(--color-theme);
     }
@@ -129,7 +129,7 @@ export const StyledTab = styled.div`
       background-color: var(--color-gray-100);
       border-bottom: 2px solid var(--color-gray-100);
     }
-    &.active {
+    .active {
       border-bottom: 2px solid var(--color-theme);
       color: var(--color-theme);
     }
@@ -137,14 +137,13 @@ export const StyledTab = styled.div`
 `;
 
 function UserProfile({ user, currentUser }) {
-  // console.log('user', user);
+  // user 是特定id 用戶，currentUser是使用者
+  console.log('user', user);
   const { id } = currentUser;
-  const { userFollowings } = useOutletContext();
-  const { handleFollow } = useUser();
-
+  const { handleFollow, userFollowings } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const isFollowed = userFollowings.includes(user);
+  const isFollowed = userFollowings.includes(user.id);
   console.log('userFollowings', userFollowings);
   const handleShowModal = () => {
     const nextShowModal = !showModal;
@@ -152,7 +151,7 @@ function UserProfile({ user, currentUser }) {
   };
   const handleFollowClick = async () => {
     setDisabled(true);
-    await handleFollow(id);
+    await handleFollow(user.id);
     setDisabled(false);
   };
 
@@ -196,12 +195,12 @@ function UserProfile({ user, currentUser }) {
             <p className='intro'>{user.introduction}</p>
           </div>
           <div className='followShip'>
-            <NavLink to={`/users/${id}/followings`}>
+            <NavLink to={`/users/${user.id}/followings`}>
               <span>
                 <b className='fQty'>{user.followingNum}個</b>跟隨中
               </span>
             </NavLink>
-            <NavLink to={`/users/${id}/followers`}>
+            <NavLink to={`/users/${user.id}/followers`}>
               <span>
                 <b className='fQty'>{user.followerNum}個</b>跟隨者
               </span>

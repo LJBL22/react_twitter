@@ -46,7 +46,9 @@ const StyledContent = styled(StyledContentDiv)`
 const FollowList = () => {
   const { pathname } = useLocation();
   // 使用者追蹤清單
-  const { userInfo, userFollowings } = useOutletContext();
+  const { userInfo } = useOutletContext();
+  const { currentUser, userFollowings } = useUser();
+  console.log('currentUserFo', currentUser);
   // 更新使用者的追蹤 與被追蹤狀態
   const [userFollowingList, setUserFollowingList] = useState([]);
   const [userFollower, setUserFollower] = useState([]);
@@ -76,8 +78,8 @@ const FollowList = () => {
       try {
         const followers = await getFollowers(userInfo.id);
         const following = await getFollowings(userInfo.id);
-        // console.log('er', followers);
-        // console.log('ing', following);
+        console.log('er', followers);
+        console.log('ing', following);
         setUserFollower(followers);
         setUserFollowingList(following);
         setIsLoading(false);

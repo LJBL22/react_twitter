@@ -17,10 +17,12 @@ const StyledDiv = styled.div`
 `;
 
 const UsersPage = () => {
+  // 拿到特定 id 的使用者資料
   const { currentUser } = useUser();
   const { userId } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  // 拿到特定 id 的使用者資料，更新誰是目前檔案看的使用者
   const [userInfo, setUserInfo] = useState(currentUser);
   const [userTweets, setUserTweets] = useState([]);
   const [userReplies, setUserReplies] = useState([]);
@@ -58,7 +60,7 @@ const UsersPage = () => {
   // console.log('userInfo', userInfo);
   // console.log('userReplies', userReplies);
   // console.log('userLikes', userLikes);
-
+  //  這裡的 userInfo 是拿到特定 ID 的 currentUser
   return (
     <div>
       <Header
@@ -71,8 +73,10 @@ const UsersPage = () => {
         {/* 如果pathname沒有follow，則不含此頁面 */}
         {!pathname.includes('follow') && (
           <UserProfile
+          // UserPage 點選的任何 id 使用
             user={userInfo}
             key={userInfo.id}
+            // currentUser 是從useUser引入的初始值，部會受UsersPage點選切換=> 當作使用者
             currentUser={currentUser}
           />
         )}
