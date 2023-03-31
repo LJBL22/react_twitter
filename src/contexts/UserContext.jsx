@@ -1,6 +1,9 @@
 import { createContext, useContext, useState } from 'react';
 import { likeTweet, unlikeTweet } from 'api/like';
 import { following, unfollow } from 'api/followship';
+import { useEffect } from 'react';
+import { getFollowings, getUserData, getUserLikes } from 'api/user';
+import { useAuth } from './AuthContext';
 
 const UserContext = createContext(null);
 
@@ -22,15 +25,20 @@ const userData = {
 
 export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
+  const { currentMember } = useAuth();
+  const id = currentMember().id;
   const [currentUser, setCurrentUser] = useState(userData);
+  // 儲存使用者追蹤的 ID 名單
   const [userFollowings, setUserFollowings] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
+  // 儲存 特定使用者正在追蹤的用戶及資料
+  const [userFollowInfo, setUserFollowInfo] = useState([]);
 
   const handleUserUpdate = (data) => {
     setCurrentUser(data);
   };
-  
-  // 每次 handleLike 完都要拿到最新的 userLike List
+
+  // 每次 handleLike 完都要拿到最新的 userLikeID List
   const handleLike = async (id) => {
     try {
       if (userLikes.includes(id)) {
@@ -49,17 +57,20 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // 每次 handleFollow 完都要拿到最新的 userFollowing List
+  // 每次 handleFollow 完都要拿到最新的 userFollowingID List
   const handleFollow = async (id) => {
     try {
+      //userFollowings = [1,2,3] 只能用來儲存followingId
       if (userFollowings.includes(id)) {
         await unfollow(id);
-        const newFollowList = userFollowings.filter((userId) => userId !== id);
+        const newFollowList = userFollowings.filter(
+          (followingId) => followingId !== id
+        );
         setUserFollowings(newFollowList);
         console.log('-following', newFollowList);
       } else {
         await following(id);
-        const newFollowList = [...following, id];
+        const newFollowList = [...userFollowings, id];
         setUserFollowings(newFollowList);
         console.log('+following', newFollowList);
       }
@@ -68,6 +79,28 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const getUserAsync = async () => {
+      try {
+        // 將現有使用者拿到的id 去抓 currentUser
+        const currentUser = await getUserData(id);
+        // console.log('currentUser', currentUser);
+        // 拿到使用者追蹤用戶資料清單
+        const userFollowings = await getFollowings(id);
+        // 拿到使用者喜歡貼文清單
+        const userLikes = await getUserLikes(id);
+        setCurrentUser(currentUser);
+        setUserFollowInfo(userFollowings);
+        setUserLikes(userLikes);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserAsync();
+    // 這邊是否要把'setUserFollowings' and 'setUserLikes 寫進去才合理呢?
+  }, [id, setCurrentUser]);
+
+  // 這裡的 currentUser 是拿到login的 ID ，所以是使用者
   return (
     <UserContext.Provider
       value={{
@@ -76,6 +109,8 @@ export const UserProvider = ({ children }) => {
         setCurrentUser,
         userFollowings,
         setUserFollowings,
+        userFollowInfo,
+        setUserFollowInfo,
         userLikes,
         setUserLikes,
         handleFollow,

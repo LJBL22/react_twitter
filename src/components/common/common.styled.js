@@ -76,6 +76,7 @@ const StyledCardDiv = styled.div`
 `;
 
 const StyledBackHeader = styled(StyledHeader)`
+  padding: 10px 24px;
   & > div {
     display: flex;
     width: 100%;

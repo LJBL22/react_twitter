@@ -2,12 +2,10 @@ import PopularList from 'components/PopularList';
 import { Sidebar } from 'components/Sidebar';
 import { device, GridContainer } from 'components/styles/Container.styled';
 import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useAuth } from 'contexts/AuthContext';
+import { useState } from 'react';
 import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
 import { createTweet } from 'api/tweet';
-import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
   max-width: inherit;
@@ -25,12 +23,10 @@ const TweetContainer = styled(GridContainer)`
 `;
 
 const TweetLayout = () => {
-  const { currentMember } = useAuth();
-  const { currentUser, setCurrentUser } = useUser();
+  const { currentUser, userLikes } = useUser();
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
 
-  const id = currentMember().id;
   // Input Tweet 撰寫推文
   const handleChange = (value) => {
     setTweetInput(value);
@@ -72,19 +68,26 @@ const TweetLayout = () => {
     }
   };
 
-  useEffect(() => {
-    const getUserAsync = async () => {
-      try {
-        // 將現有使用者拿到的id 去抓 currentUser
-        const currentUser = await getUserData(id);
-        console.log('currentUser', currentUser);
-        setCurrentUser(currentUser);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUserAsync();
-  }, [id, setCurrentUser]);
+  // useEffect(() => {
+  //   const getUserAsync = async () => {
+  //     try {
+  //       // 將現有使用者拿到的id 去抓 currentUser
+  //       const currentUser = await getUserData(id);
+  //       // console.log('currentUser', currentUser);
+  //       // 拿到使用者追蹤清單
+  //       const userFollowings = await getFollowings(id);
+  //       // 拿到使用者喜歡貼文清單
+  //       const userLikes = await getUserLikes(id);
+  //       setCurrentUser(currentUser);
+  //       setUserFollowings(userFollowings);
+  //       setUserLikes(userLikes);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   getUserAsync();
+  //   // 這邊是否要把'setUserFollowings' and 'setUserLikes 寫進去才合理呢?
+  // }, [id, setCurrentUser]);
 
   return (
     <>
@@ -101,6 +104,7 @@ const TweetLayout = () => {
               tweetInput,
               handleChange,
               handleAddTweet,
+              userLikes,
             }}
           />
         </div>

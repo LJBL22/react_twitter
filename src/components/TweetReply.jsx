@@ -38,7 +38,6 @@ const ReplyActions = styled(StyledActions)`
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
 const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
-  console.log('ere', singleTweet);
   return (
     <StyledMainCard>
       <div>
