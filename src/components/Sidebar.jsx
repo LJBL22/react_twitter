@@ -11,9 +11,6 @@ import {
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { TweetModal } from './Modal';
-// import { useState } from 'react';
-// import { TweetCard } from 'components/TweetCard';
-// import { useOutletContext } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 
 const StyledSidebar = styled.nav`
@@ -47,7 +44,7 @@ const StyledLi = styled.li`
   }
 `;
 
-export function Sidebar({ tweetInput, onChange, onAddTweet }) {
+export function Sidebar({ tweetInput, currentUser, onChange, onAddTweet }) {
   const { currentMember } = useAuth();
   const { pathname } = useLocation();
   // const [showModal, setShowModal] = useState(false);
@@ -84,11 +81,6 @@ export function Sidebar({ tweetInput, onChange, onAddTweet }) {
                 <span>&ensp;首頁</span>
               </StyledLi>
             </NavLink>
-            {/* 暫時，種子的 id 是2 */}
-            {/* <NavLink
-              to={`/users/2/tweets`}
-              className={pathname.includes(`users/2`) && 'active'}
-            > */}
             <NavLink
               to={`/users/${currentMember().id}/tweets`}
               className={
@@ -97,9 +89,6 @@ export function Sidebar({ tweetInput, onChange, onAddTweet }) {
             >
               <StyledLi>
                 <div className='icon'>
-                  {/* 等 userContext 的資料 */}
-                  {/* 暫時，種子的 id 是2 */}
-                  {/* {pathname.includes(`users/2`) ? ( */}
                   {pathname.includes(`users/${currentMember().id}`) ? (
                     <IconUserFi />
                   ) : (
@@ -133,16 +122,6 @@ export function Sidebar({ tweetInput, onChange, onAddTweet }) {
           </StyleUl>
         </SidebarContainer>
       </StyledSidebar>
-      {/* inputTweet */}
-      {/* {showModal && (
-        <TweetCard
-          tweetInput={tweetInput}
-          // currentUser={currentUser}
-          // onChange={onChange}
-          onAddTweet={onAddTweet}
-          onClose={handleShowModal}
-        />
-      )} */}
     </>
   );
 }

@@ -7,7 +7,7 @@ import { useAuth } from 'contexts/AuthContext';
 import { useUser } from 'contexts/UserContext';
 import styled from 'styled-components';
 import { createTweet } from 'api/tweet';
-import { getUserData, get } from 'api/user';
+import { getUserData } from 'api/user';
 
 const TweetContainer = styled(GridContainer)`
   max-width: inherit;
@@ -30,7 +30,6 @@ const TweetLayout = () => {
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
 
-  // console.log('currentMember', currentMember);
   const id = currentMember().id;
   // Input Tweet 撰寫推文
   const handleChange = (value) => {
@@ -46,7 +45,6 @@ const TweetLayout = () => {
       const data = await createTweet({
         description: tweetInput,
       });
-      // console.log('TTTdata', data);
       const newTweets = [
         {
           id: data.id,

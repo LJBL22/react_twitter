@@ -20,13 +20,13 @@ const StyledButton = styled.button`
   width: ${({ width }) => width || '7rem'};
   margin: ${({ margin }) => margin || 0};
   transition: background-color 0.1s ease-in-out;
-  &:hover:not(.modal) {
+  &:hover {
     cursor: pointer;
     background-color: var(--color-primary);
   }
 `;
 
-const StyledModalBtn = styled(StyledButton)`
+const StyledModal = styled.div`
   & .modal-background {
     position: fixed;
     top: 0;
@@ -111,7 +111,7 @@ export {
   StyledTitle as PageTitle,
   StyledHeader as Header,
   StyledButton as ThemeButton,
-  StyledModalBtn as ModalButton,
+  StyledModal as Modal,
   StyledCardDiv,
   StyledAvatar,
   StyledBackHeader as BackHeader,

@@ -3,7 +3,6 @@ import { Header } from 'components/common/common.styled';
 import { ScrollBar } from 'pages/HomePage';
 // import { adminGetTweets, deleteTweet } from 'api/admin';
 // import TweetCard from 'components/TweetCard';
-// import { useTweets } from 'contexts/TweetContext';
 // import { useNavigate, useOutletContext } from 'react-router-dom';
 // import React, { useEffect, useState } from 'react';
 
