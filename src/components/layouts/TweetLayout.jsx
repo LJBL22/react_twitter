@@ -93,10 +93,10 @@ const TweetLayout = () => {
       <TweetContainer>
         <div className='grid-item'>
           <Sidebar
-            tweetInput={tweetInput}
+            // tweetInput={tweetInput}
             currentUser={currentUser}
-            onChange={handleChange}
-            onAddTweet={handleAddTweet}
+            // onChange={handleChange}
+            // onAddTweet={handleAddTweet}
           />
         </div>
         <div className='grid-item'>
