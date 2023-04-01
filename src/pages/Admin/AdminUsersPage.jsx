@@ -1,168 +1,13 @@
 // import styled from 'styled-components';
 import { adminGetAllUsers } from 'api/admin';
+import { IconLikeOut, IconPost } from 'assets/icons';
 // import { IconLikeOut, IconPost } from 'assets/icons';
 import { Header } from 'components/common/common.styled';
 // import { ScrollBar } from 'pages/HomePage';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// List container
-// const StyledContainer = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-//   grid-template-rows: auto;
-//   height: calc(100vh - 68px);
-//   overflow-y: scroll;
-//   padding: 1rem;
-//   background-color: #fff;
-//   border-top: 1px solid var(--color-gray-200);
-//   border-inline: 1px solid var(--color-gray-200);
-// `;
-
-// // Card container
-// const StyledCardContainer = styled.div`
-//   position: relative;
-//   width: 200px;
-//   height: 300px;
-//   margin: 0.5rem 0.5rem;
-//   background-color: var(--color-gray-200);
-//   border-radius: 10px;
-
-//   img {
-//     border-radius: 10px 10px 0 0;
-//   }
-
-//   :hover {
-//     border: 1px solid var(--color-gray-400);
-//     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-//   }
-
-//   .avatar {
-//     position: absolute;
-//     top: 40%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     width: 100px;
-//     aspect-ratio: 1/1;
-//     border: 4px solid white;
-//     border-radius: 50%;
-//     overflow: hidden;
-//   }
-
-//   .stats {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     gap: 1rem;
-//     margin-top: 0.6rem;
-//     color: var(--color-secondary);
-//     font-size: var(--fs-basic);
-
-//     .stat {
-//       display: flex;
-//       align-items: center;
-//       gap: 0.25rem;
-//     }
-
-//     span {
-//       color: var(--color-gray-900);
-//     }
-//   }
-// `;
-
-// const StyledCover = styled.div`
-//   width: 100%;
-//   background-image: url(${(props) => props.backgroundImage});
-//   background-size: cover;
-//   background-position: center;
-//   padding-bottom: 75%;
-//   border-radius: 10px 10px 0 0;
-// `;
-
-// const StyledDiv = styled.div`
-//   .svg {
-//     color: var(--color-gray-700);
-//   }
-//   .follow {
-//     display: flex;
-//     justify-content: center;
-//     gap: 0.3rem;
-//     padding: 0.6rem;
-//     color: var(--color-secondary);
-//     font-size: var(--fs-secondary);
-//     span {
-//       color: var(--color-gray-900);
-//     }
-//   }
-// `;
-
-// // title、account
-// const StyledName = styled.div`
-//   text-align: center;
-//   margin-top: 1.6rem;
-
-//   .title {
-//     font-size: var(--fs-basic);
-//     font-weight: bold;
-//   }
-
-//   .account {
-//     color: var(--color-secondary);
-//     font-size: var(--fs-secondary);
-//   }
-// `;
-
-// const StyledMessage = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   margin: 0 auto;
-//   display: grid;
-//   place-items: center;
-//   border-inline: 2px solid var(--color-gray-200);
-//   color: var(--color-secondary);
-// `;
-
-// function UserCard({ user }) {
-//   const {
-//     account,
-//     name,
-//     avatar,
-//     coverUrl,
-//     tweetsNum,
-//     followerNum,
-//     followingNum,
-//     likesNum,
-//   } = user;
-//   return (
-//     <StyledCardContainer backgroundImage={coverUrl}>
-//       <StyledCover backgroundImage={coverUrl} />
-//       <img className='avatar' src={avatar} alt='avatar' />
-//       <StyledName>
-//         <div className='title'>{name}</div>
-//         <div className='account'>@{account}</div>
-//       </StyledName>
-//       <StyledDiv>
-//         <div className='stats'>
-//           <div className='stat'>
-//             <span>
-//               <IconPost className='svg' />
-//             </span>
-//             <span>{tweetsNum}</span>
-//           </div>
-//           <div className='stat'>
-//             <IconLikeOut width='1.2rem' height='1.2rem' />
-//             <span>{likesNum}</span>
-//           </div>
-//         </div>
-//         <div className='follow'>
-//           <span>{followingNum} </span>個跟隨中
-//           <span>{followerNum} </span>位跟隨者
-//         </div>
-//       </StyledDiv>
-//     </StyledCardContainer>
-//   );
-// }
+import styled from 'styled-components';
 
 const AdminUsersPage = () => {
   // eslint-disable-next-line no-unused-vars
@@ -171,8 +16,8 @@ const AdminUsersPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
+    const adminToken = localStorage.getItem('token');
+    if (!adminToken) {
       navigate('/admin');
     }
     const getUsers = async () => {
@@ -186,19 +31,122 @@ const AdminUsersPage = () => {
     };
     getUsers();
   }, [navigate]);
+  const StyledContainer = styled.div`
+    padding: 1rem;
+    display: grid;
+    grid-template: 1rem / repeat(4, 1fr);
+    gap: 1rem;
+  `;
+  // users.map((user) => {
+  //     return <UserCard key={user.id} user={user} />
+  // });
 
-  //   const renderedItems = users.map((user) => {
-  //     if (!isLoading) {
-  //       return <UserCard key={user.id} user={user} />;
-  //     }
-  //   });
   return (
     <>
-      <Header>使用者列表</Header>
-      {/* <StyledContainer>{renderedItems}</StyledContainer> */}
-      {/* <StyledContainer>f</StyledContainer> */}
+      <StyledContainer>
+        <Header>使用者列表</Header>
+        <UserCard />
+      </StyledContainer>
     </>
   );
 };
 
+const UserCard = ({ user }) => {
+  const {
+    name,
+    account,
+    avatar,
+    coverUrl,
+    likesNum,
+    tweetsNum,
+    followingNum,
+    followerNum,
+  } = user;
+  return (
+    <>
+      <StyledCard>
+        <div className='cover'>
+          <img src={coverUrl} alt='cover' />
+          <div className='avatar'>
+            <img scr={avatar} alt='avatar' />
+          </div>
+        </div>
+        <StyledTitle>
+          <h2>{name}</h2>
+          <p>@{account}</p>
+        </StyledTitle>
+        <StyledStats>
+          <div className='stats'>
+            <div className='stat'>
+              <span>
+                <IconPost className='svg' />
+              </span>
+              <span>{tweetsNum}</span>
+            </div>
+            <div className='stat'>
+              <IconLikeOut width='1.2rem' height='1.2rem' />
+              <span>{likesNum}</span>
+            </div>
+          </div>
+          <div className='followship'>
+            <span>{followingNum}</span>個追隨中&ensp;
+            <span>{followerNum}</span>位跟隨者
+          </div>
+        </StyledStats>
+      </StyledCard>
+    </>
+  );
+};
+const StyledCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 210px;
+  height: 314px;
+  background-color: var(--color-gray-200);
+  border-radius: 10px;
+  .cover {
+    border-radius: 10px 10px 0 0;
+    height: 140px;
+    position: relative;
+    background-image: url(${(props) => props.backgroundImage});
+  }
+  .avatar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--color-white);
+  }
+`;
+
+const StyledTitle = styled.div`
+  padding: 2rem 0 1rem 0;
+  h2 {
+    font-size: 1rem;
+  }
+  p {
+    color: var(--color-secondary);
+    font-size: var(--fs-small);
+  }
+`;
+
+const StyledStats = styled.div`
+  .stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    & .stat {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+  }
+  span {
+    color: var(--color-gray-900);
+  }
+`;
 export default AdminUsersPage;

@@ -25,10 +25,16 @@ const LoginPage = () => {
     if (password.length === 0) {
       return;
     }
-    const success = await login({
+
+    // 只能單純 success
+    //現在這個寫法會 undefined
+    const { success, status, statusText } = await login({
       account,
       password,
     });
+    console.log('success', success);
+    console.log('account', account);
+    console.log('password', password);
     if (success) {
       Swal.fire({
         title: '登入成功',
@@ -37,19 +43,22 @@ const LoginPage = () => {
         timer: 1000,
         position: 'top',
       });
+      navigate('/tweets');
       return;
     }
-    Swal.fire({
-      title: '登入失敗',
-      icon: 'error',
-      showConfirmButton: false,
-      timer: 1000,
-      position: 'top',
-    });
+    if (status === 'error' && statusText)
+      Swal.fire({
+        title: '登入失敗',
+        icon: 'error',
+        text: `${statusText}`,
+        showConfirmButton: false,
+        timer: 1000,
+        position: 'top',
+      });
   };
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/todos');
+      navigate('/tweets');
     }
   }, [navigate, isAuthenticated]);
   return (
