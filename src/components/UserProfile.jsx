@@ -10,11 +10,11 @@ const StyledContainer = styled.div`
   border: 1px solid var(--color-gray-200);
   background-color: var(--color-white);
   .cover {
-    overflow: hidden;
-
     img {
+      width: 100%;
+      height: 200px;
       object-fit: cover;
-      max-width: inherit;
+      object-position: center;
     }
   }
 
