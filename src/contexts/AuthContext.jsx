@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
   // const [currentUser, setCurrentUser] = useState(dummyUser);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [payload, setPayload] = useState(null);
   const { pathname } = useLocation();
 

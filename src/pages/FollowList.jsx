@@ -89,7 +89,8 @@ const FollowList = () => {
     };
     setIsLoading(true);
     getUserFollowStatus();
-  }, [userFollowings]);
+    // need to add a dependency userInfo.id or remove dependency
+  }, [userFollowings, userInfo.id]);
   return (
     <div>
       <FollowTab id={userInfo.id} />
