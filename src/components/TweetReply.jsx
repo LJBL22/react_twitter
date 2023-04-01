@@ -7,6 +7,7 @@ import {
 } from 'components/styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply } from 'assets/icons';
+import { NavLink } from 'react-router-dom';
 
 const StyledMainCard = styled(StyledCardDiv)`
   width: 40.0625rem;
@@ -42,9 +43,11 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
     <StyledMainCard>
       <div>
         <StyledItemDiv>
-          <StyledImgDiv>
-            <img src={singleTweet.User.avatar} alt='avatar' />
-          </StyledImgDiv>
+          <NavLink to={`/users/${singleTweet.UserId}/tweets`}>
+            <StyledImgDiv>
+              <img src={singleTweet.User.avatar} alt='avatar' />
+            </StyledImgDiv>
+          </NavLink>
           <div className='paddingL'>
             <p>{singleTweet.User.name}</p>
             <p>{singleTweet.User.account}</p>
