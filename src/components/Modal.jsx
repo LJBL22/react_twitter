@@ -122,8 +122,8 @@ export const ReplyModal = (
   currentUser,
   replyInput,
   onChange,
-  onAddReply,
-  onClose
+  onAddReply
+  // onClose
 ) => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => {
@@ -136,7 +136,7 @@ export const ReplyModal = (
         width='1.9rem'
         className='iconAction'
         onChange={onChange}
-        onClick={handleShowModal}
+        onClick={() => setShowModal(true)}
       />
       {showModal && (
         // <ReplyModal
@@ -158,9 +158,9 @@ export const ReplyModal = (
                     borderBottom: '1px solid var(--color-gray-border)',
                   }}
                 >
-                  <IconDanger style={{ cursor: 'pointer' }} onClose={onClose} />
+                  <IconDanger onClick={() => setShowModal(false)} />
                 </div>
-                <StyledMainCard>
+                <StyledMainCard borderBottom='none'>
                   <div>
                     <StyledItemDiv>
                       <StyledImgDiv>
@@ -185,7 +185,6 @@ export const ReplyModal = (
           </Modal>
         </>
       )}
-      ;
     </>
   );
 };

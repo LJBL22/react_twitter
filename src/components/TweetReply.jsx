@@ -78,10 +78,10 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           </ReplyActions>
           <BorderDivider />
           <ReplyActions>
-            <div>
+            <div style={{ cursor: 'pointer' }}>
               <ReplyModal />
             </div>
-            <div>
+            <div style={{ cursor: 'pointer' }}>
               <IconLikeOut width='1.9rem' className='iconAction' />
             </div>
           </ReplyActions>
