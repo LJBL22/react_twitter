@@ -48,39 +48,28 @@ const FollowList = () => {
   // 從UserPage 拿到正在瀏覽的用戶追蹤清單
   const { userInfo } = useOutletContext();
   // userFollowings 存取 追蹤id
-  const { userFollowings } = useUser();
-  console.log('userFollowings', userFollowings);
+  const { userFollowings, setUserFollowings } = useUser();
+  // console.log('userFollowings', userFollowings);
   // 更新使用者的追蹤 與被追蹤狀態
-  const [userFollowingList, setUserFollowingList] = useState([]);
   const [userFollower, setUserFollower] = useState([]);
   // 用這行在非同步拿到資料前，可以不會噴錯
   const [isLoading, setIsLoading] = useState(true);
   let renderedFollowList;
-  const followingIdList = userFollowingList.map((user) => user.followingId);
-  const followerIdList = userFollower.map((user) => user.followerId);
-  console.log('followIdList', followerIdList, 'followIdList', followingIdList);
+  // const followingIdList = userFollowingList.map((user) => user.followingId);
+  // const followerIdList = userFollower.map((user) => user.followerId);
+  // console.log('followIdList', followerIdList, 'followIdList', followingIdList);
   if (pathname.includes('following')) {
-    renderedFollowList = userFollowingList.map((user) => {
+    renderedFollowList = userFollowings.map((user) => {
       // console.log('following', user);
       return (
-        <FollowItem
-          key={user.followingId}
-          user={user}
-          id={user.followingId}
-          followIdList={followingIdList}
-        />
+        <FollowItem key={user.followingId} user={user} id={user.followingId} />
       );
     });
   } else {
     renderedFollowList = userFollower.map((user) => {
       // console.log('follower', user);
       return (
-        <FollowItem
-          key={user.followerId}
-          user={user}
-          id={user.followerId}
-          followIdList={followerIdList}
-        />
+        <FollowItem key={user.followerId} user={user} id={user.followerId} />
       );
     });
   }
@@ -88,12 +77,14 @@ const FollowList = () => {
   useEffect(() => {
     const getUserFollowStatus = async () => {
       try {
+        // 處理 localStorage 裡面沒有 token 的情境
+        if (!userInfo.id) return;
         const followers = await getFollowers(userInfo.id);
         const following = await getFollowings(userInfo.id);
         // console.log('er', followers);
         // console.log('ing', following);
         setUserFollower(followers);
-        setUserFollowingList(following);
+        setUserFollowings(following);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -113,8 +104,8 @@ const FollowList = () => {
 const FollowItem = ({ user, id }) => {
   const { userFollowings, handleFollow } = useUser();
   const [disabled, setDisabled] = useState(false);
-  const isFollowed = userFollowings.includes(id);
-  console.log('isFollowed', isFollowed);
+  const isFollowed = userFollowings.some((user) => user.followingId === id);
+  // console.log('isFollowed', isFollowed);
   const handleFollowClick = async () => {
     setDisabled(true);
     await handleFollow(id);

@@ -144,7 +144,7 @@ function UserProfile({ user, currentUser, onProfileChange }) {
   const [showModal, setShowModal] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const isFollowed = userFollowings.includes(user.id);
-  // console.log('userFollowings', userFollowings); 是空陣列
+
   const handleShowModal = () => {
     const nextShowModal = !showModal;
     setShowModal(nextShowModal);
