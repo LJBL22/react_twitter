@@ -61,22 +61,20 @@ export const UserProvider = ({ children }) => {
   const handleFollow = async (id) => {
     try {
       const userFollowProfile = await getUserData(id);
-      // console.log('userFollowProfile', userFollowProfile);
       const userFollowings = await getFollowings(currentMember().id);
-      console.log('userFollowings', userFollowings);
-      //userFollowings = [1,2,3] 只能用來儲存followingId
       if (userFollowings.some((user) => user.followingId === id)) {
         const unFollower = await unfollow(id);
-        console.log('un', unFollower);
+        // console.log('un', unFollower);
         const newFollowList = userFollowings.filter(
           (user) => user.followingId !== unFollower.followingId
         );
         setUserFollowings(newFollowList);
-        console.log('-following', newFollowList);
+        // console.log('-following', newFollowList);
       } else {
+        //eslint-disable-next-line
         const newFollower = await following(id);
         // if (newFollower.followingId !== userFollowProfile.id) return;
-        console.log('new', newFollower);
+        // console.log('new', newFollower);
         const newFollowList = [
           ...userFollowings,
           {
@@ -90,7 +88,6 @@ export const UserProvider = ({ children }) => {
         setUserFollowings(newFollowList);
         console.log('+following', newFollowList);
       }
-      console.log('userFollowings2', userFollowings);
     } catch (error) {
       console.log(error);
     }

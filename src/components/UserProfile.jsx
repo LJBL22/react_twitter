@@ -143,8 +143,9 @@ function UserProfile({ user, currentUser, onProfileChange }) {
   const { handleFollow, userFollowings } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const isFollowed = userFollowings.includes(user.id);
-
+  const isFollowed = userFollowings.some(
+    (following) => following.followingId === user.id
+  );
   const handleShowModal = () => {
     const nextShowModal = !showModal;
     setShowModal(nextShowModal);
@@ -164,6 +165,7 @@ function UserProfile({ user, currentUser, onProfileChange }) {
         <img className='avatar' src={user.avatar} alt='avatar' />
         <StyledContentDiv>
           <StyledEditDiv>
+            {/* 如果使用者的id 等於此用戶的id */}
             {id === user.id ? (
               <button type='button' onClick={handleShowModal}>
                 編輯個人資料

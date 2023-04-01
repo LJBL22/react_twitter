@@ -62,36 +62,41 @@ const UsersPage = () => {
   // console.log('userLikes', userLikes);
   //  這裡的 userInfo 是拿到特定 ID 的 currentUser
   return (
-    <div>
-      <Header
-        headerText={userInfo.name}
-        user={userInfo}
-        goBackLink
-        userTweets={userTweets}
-      />
-      <StyledDiv>
-        {/* 如果pathname沒有follow，則不含此頁面 */}
-        {!pathname.includes('follow') && (
-          <UserProfile
-            // UserPage 點選的任何 id 使用
+    <>
+      {isLoading && <div> 資料加載中 </div>}
+      {!isLoading && (
+        <div>
+          <Header
+            headerText={userInfo.name}
             user={userInfo}
-            key={userInfo.id}
-            // currentUser 是從useUser引入的初始值，部會受UsersPage點選切換=> 當作使用者
-            currentUser={currentUser}
-            onProfileChange={getUserPageData}
+            goBackLink
+            userTweets={userTweets}
           />
-        )}
-        <Outlet
-          context={{
-            currentUser,
-            userInfo,
-            userTweets,
-            userReplies,
-            userLikes,
-          }}
-        />
-      </StyledDiv>
-    </div>
+          <StyledDiv>
+            {/* 如果pathname沒有follow，則不含此頁面 */}
+            {!pathname.includes('follow') && (
+              <UserProfile
+                // UserPage 點選的任何 id 使用
+                user={userInfo}
+                key={userInfo.id}
+                // currentUser 是從useUser引入的初始值，部會受UsersPage點選切換=> 當作使用者
+                currentUser={currentUser}
+                onProfileChange={getUserPageData}
+              />
+            )}
+            <Outlet
+              context={{
+                currentUser,
+                userInfo,
+                userTweets,
+                userReplies,
+                userLikes,
+              }}
+            />
+          </StyledDiv>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -55,19 +55,14 @@ const FollowList = () => {
   // 用這行在非同步拿到資料前，可以不會噴錯
   const [isLoading, setIsLoading] = useState(true);
   let renderedFollowList;
-  // const followingIdList = userFollowingList.map((user) => user.followingId);
-  // const followerIdList = userFollower.map((user) => user.followerId);
-  // console.log('followIdList', followerIdList, 'followIdList', followingIdList);
   if (pathname.includes('following')) {
     renderedFollowList = userFollowings.map((user) => {
-      // console.log('following', user);
       return (
         <FollowItem key={user.followingId} user={user} id={user.followingId} />
       );
     });
   } else {
     renderedFollowList = userFollower.map((user) => {
-      // console.log('follower', user);
       return (
         <FollowItem key={user.followerId} user={user} id={user.followerId} />
       );
@@ -81,8 +76,6 @@ const FollowList = () => {
         if (!userInfo.id) return;
         const followers = await getFollowers(userInfo.id);
         const following = await getFollowings(userInfo.id);
-        // console.log('er', followers);
-        // console.log('ing', following);
         setUserFollower(followers);
         setUserFollowings(following);
         setIsLoading(false);
@@ -92,6 +85,7 @@ const FollowList = () => {
     };
     setIsLoading(true);
     getUserFollowStatus();
+    //eslint-disable-next-line
   }, [userInfo.id]);
   return (
     <div>
@@ -105,7 +99,6 @@ const FollowItem = ({ user, id }) => {
   const { userFollowings, handleFollow } = useUser();
   const [disabled, setDisabled] = useState(false);
   const isFollowed = userFollowings.some((user) => user.followingId === id);
-  // console.log('isFollowed', isFollowed);
   const handleFollowClick = async () => {
     setDisabled(true);
     await handleFollow(id);

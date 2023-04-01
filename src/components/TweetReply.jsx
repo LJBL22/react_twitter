@@ -6,8 +6,8 @@ import {
   StyledImgDiv,
 } from 'components/styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
-import { IconLikeOut, IconReply } from 'assets/icons';
-import { useState } from 'react';
+import { IconLikeOut } from 'assets/icons';
+// import { useState } from 'react';
 import { ReplyModal } from './Modal';
 import { NavLink } from 'react-router-dom';
 
@@ -40,9 +40,10 @@ const ReplyActions = styled(StyledActions)`
 `;
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
+//eslint-disable-next-line
 const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
   // console.log('ere', singleTweet);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   // const handleShowModal = () => {
   //   const nextShowModal = !showModal;
