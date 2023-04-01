@@ -62,7 +62,16 @@ export const AuthProvider = ({ children }) => {
         // 直接從 localStorage 取 token ，回傳解析的個人資料
         currentMember: () => {
           const token = localStorage.getItem('token');
-          return jwt_decode(token);
+          // return jwt_decode(token);
+          if (token) return jwt_decode(token);
+          // 處理 localStorage 裡面沒有 token 的情境
+          return {
+            id: '',
+            email: '',
+            account: '',
+            name: '',
+            avatar: '',
+          };
         },
         register: async (data) => {
           // 取前端塞入的 success: true

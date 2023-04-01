@@ -7,9 +7,11 @@ import {
 } from 'components/styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply } from 'assets/icons';
+import { useState } from 'react';
+import { ReplyModal } from './Modal';
 import { NavLink } from 'react-router-dom';
 
-const StyledMainCard = styled(StyledCardDiv)`
+export const StyledMainCard = styled(StyledCardDiv)`
   width: 40.0625rem;
   min-height: 15.69rem;
 `;
@@ -39,50 +41,56 @@ const ReplyActions = styled(StyledActions)`
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
 const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
+  console.log('ere', singleTweet);
+  const [showModal, setShowModal] = useState(false);
+
+  // const handleShowModal = () => {
+  //   const nextShowModal = !showModal;
+  //   setShowModal(nextShowModal);
+  // };
+
   return (
-    <StyledMainCard>
-      <div>
-        <StyledItemDiv>
-          <NavLink to={`/users/${singleTweet.UserId}/tweets`}>
-            <StyledImgDiv>
-              <img src={singleTweet.User.avatar} alt='avatar' />
-            </StyledImgDiv>
-          </NavLink>
-          <div className='paddingL'>
-            <p>{singleTweet.User.name}</p>
-            <p>{singleTweet.User.account}</p>
-          </div>
-        </StyledItemDiv>
-        <StyledContentDiv>
-          <div className='styledContent'>{singleTweet.description}</div>
-          <div className='styledTime'>上午 10:05・2021年11月10日</div>
-        </StyledContentDiv>
-        <BorderDivider />
-        <ReplyActions>
-          <div>
-            <p className='number'>{singleTweet.repliesNum}</p>
-            <p className='text'>回覆</p>
-          </div>
-          <div>
-            <p className='number'>{singleTweet.likesNum}</p>
-            <p className='text'>喜歡次數</p>
-          </div>
-        </ReplyActions>
-        <BorderDivider />
-        <ReplyActions>
-          <div>
-            <IconReply
-              width='1.9rem'
-              className='iconAction'
-              onChange={onChange}
-            />
-          </div>
-          <div>
-            <IconLikeOut width='1.9rem' className='iconAction' />
-          </div>
-        </ReplyActions>
-      </div>
-    </StyledMainCard>
+    <>
+      <StyledMainCard>
+        <div>
+          <StyledItemDiv>
+            <NavLink to={`/users/${singleTweet.UserId}/tweets`}>
+              <StyledImgDiv>
+                <img src={singleTweet.User.avatar} alt='avatar' />
+              </StyledImgDiv>
+            </NavLink>
+            <div className='paddingL'>
+              <p>{singleTweet.User.name}</p>
+              <p>{singleTweet.User.account}</p>
+            </div>
+          </StyledItemDiv>
+          <StyledContentDiv>
+            <div className='styledContent'>{singleTweet.description}</div>
+            <div className='styledTime'>上午 10:05・2021年11月10日</div>
+          </StyledContentDiv>
+          <BorderDivider />
+          <ReplyActions>
+            <div>
+              <p className='number'>{singleTweet.repliesNum}</p>
+              <p className='text'>回覆</p>
+            </div>
+            <div>
+              <p className='number'>{singleTweet.likesNum}</p>
+              <p className='text'>喜歡次數</p>
+            </div>
+          </ReplyActions>
+          <BorderDivider />
+          <ReplyActions>
+            <div style={{ cursor: 'pointer' }}>
+              <ReplyModal />
+            </div>
+            <div style={{ cursor: 'pointer' }}>
+              <IconLikeOut width='1.9rem' className='iconAction' />
+            </div>
+          </ReplyActions>
+        </div>
+      </StyledMainCard>
+    </>
   );
 };
 

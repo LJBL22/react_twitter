@@ -47,8 +47,10 @@ export async function adminGetAllUsers() {
   try {
     console.log('test api');
     const res = await axiosInstance.get(`${baseUrl}/admin/users`);
+    // 回傳一個陣列
+    console.log(res.data)
     return res.data;
   } catch (error) {
-    console.error('[Admin Delete Tweet failed]: ', error);
+    console.error('[Admin get users failed]: ', error);
   }
 }
