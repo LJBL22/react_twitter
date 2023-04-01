@@ -4,6 +4,7 @@ import { following, unfollow } from 'api/followship';
 import { useEffect } from 'react';
 import { getFollowings, getUserData, getUserLikes } from 'api/user';
 import { useAuth } from './AuthContext';
+import { getSingleTweet } from 'api/tweet';
 
 const UserContext = createContext(null);
 
@@ -30,6 +31,7 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(userData);
   // 儲存使用者追蹤的 ID 名單
   const [userFollowings, setUserFollowings] = useState([]);
+  // 儲存使用者的 Like 名單
   const [userLikes, setUserLikes] = useState([]);
   // 儲存 特定使用者正在追蹤的用戶及資料
   const [userFollowInfo, setUserFollowInfo] = useState([]);
@@ -41,14 +43,29 @@ export const UserProvider = ({ children }) => {
   // 每次 handleLike 完都要拿到最新的 userLikeID List
   const handleLike = async (id) => {
     try {
-      if (userLikes.includes(id)) {
-        await unlikeTweet(id);
-        const newLikes = userLikes.filter((TweetId) => TweetId !== id);
-        setUserLikes(newLikes);
-        console.log('unLike-new', newLikes);
+      // 要得到此單則推文的ID 填入newLikes 的資料
+      const singleTweet = await getSingleTweet(id);
+      const userLikes = await getUserLikes(currentMember().id);
+      console.log('singleTweet', singleTweet);
+      if (userLikes.some((post) => post.TweetId === id)) {
+        const unlike = await unlikeTweet(id);
+        const newLikesList = userLikes.filter(
+          (TweetId) => TweetId !== unlike.id
+        );
+        setUserLikes(newLikesList);
+        console.log('unLike-new', newLikesList);
       } else {
-        await likeTweet(id);
-        const newLikes = [...userLikes, id];
+        const likeTweet = await likeTweet(id);
+        const newLikes = [
+          ...userLikes,
+          {
+            TweetId: singleTweet.id,
+            isLiked: 1,
+            description: singleTweet.description,
+            likesNum: singleTweet.likesNum,
+            repliesNum: singleTweet.repliesNum,
+          },
+        ];
         setUserLikes(newLikes);
         console.log('like-new', newLikes);
       }
