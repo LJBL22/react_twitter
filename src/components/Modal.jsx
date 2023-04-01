@@ -126,10 +126,10 @@ export const ReplyModal = (
   // onClose
 ) => {
   const [showModal, setShowModal] = useState(false);
-  const handleShowModal = () => {
-    const nextShowModal = !showModal;
-    setShowModal(nextShowModal);
-  };
+  // const handleShowModal = () => {
+  //   const nextShowModal = !showModal;
+  //   setShowModal(nextShowModal);
+  // };
   return (
     <>
       <IconReply
@@ -195,13 +195,13 @@ export const ProfileModal = ({ onClose, onProfileChange }) => {
   const [name, setName] = useState(nextUser.name);
   const [introduction, setIntroduction] = useState(nextUser.introduction);
   const [avatarPreview, setAvatarPreview] = useState(nextUser.avatar);
-  const [coverPreview, setcoverPreview] = useState(nextUser.cover);
+  const [coverPreview, setcoverPreview] = useState(nextUser.coverUrl);
   const [avatar, setAvatar] = useState(nextUser.avatar);
   const [cover, setCover] = useState(nextUser.cover);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showErrorMsg, setShowErrorMsg] = useState('');
-  const [showSuccessMsg, setShowSuccessMsg] = useState(false);
+  // const [showErrorMsg, setShowErrorMsg] = useState('');
+  // const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const nameLength = name.length;
   const introductionLength = introduction.length;
 
@@ -222,37 +222,38 @@ export const ProfileModal = ({ onClose, onProfileChange }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    if (name.length === 0 || introduction.length === 0) {
-      setShowErrorMsg('欄位不可空白!');
-      setTimeout(() => {
-        setShowErrorMsg(false);
-        setIsSubmitting(false);
-      }, 1000);
-      return;
-    }
-    if (name.length > 50 || introduction.length > 160) {
-      setShowErrorMsg('字數超過上限!');
-      setTimeout(() => {
-        setShowErrorMsg(false);
-        setIsSubmitting(false);
-      }, 1000);
-      return;
-    }
+    // if (name.length === 0 || introduction.length === 0) {
+    //   setShowErrorMsg('欄位不可空白!');
+    //   setTimeout(() => {
+    //     setShowErrorMsg(false);
+    //     setIsSubmitting(false);
+    //   }, 1000);
+    //   return;
+    // }
+    // if (name.length > 50 || introduction.length > 160) {
+    //   setShowErrorMsg('字數超過上限!');
+    //   setTimeout(() => {
+    //     setShowErrorMsg(false);
+    //     setIsSubmitting(false);
+    //   }, 1000);
+    //   return;
+    // }
 
-    const { data, status } = await changeUserProfile({
+    // const { data, status } = await changeUserProfile({
+    const { data } = await changeUserProfile({
       userId: currentUser.id,
       name,
       introduction,
       avatar,
       cover,
     });
-    if (data && status === 200) {
-      setShowSuccessMsg(true);
-      setIsSubmitting(false);
-      setTimeout(() => {
-        setShowSuccessMsg(false);
-      }, 1000);
-    }
+    // if (data && status === 200) {
+    //   setShowSuccessMsg(true);
+    //   setIsSubmitting(false);
+    //   setTimeout(() => {
+    //     setShowSuccessMsg(false);
+    //   }, 1000);
+    // }
 
     const newCurrentUser = {
       ...currentUser,
@@ -364,13 +365,13 @@ export const ProfileModal = ({ onClose, onProfileChange }) => {
   );
 };
 
-const StyledMsgDiv = styled.div`
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  display: grid;
-  place-items: center;
-`;
+// const StyledMsgDiv = styled.div`
+//   position: absolute;
+//   top: 10%;
+//   left: 50%;
+//   display: grid;
+//   place-items: center;
+// `;
 
 const StyledDiv = styled.div`
   position: absolute;
@@ -545,25 +546,25 @@ const StyledInputCount = styled.div`
 //     </StyledBaseAlert>
 //   );
 // }
-const StyledBaseAlert = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  z-index: 2;
-  width: 400px;
-  height: 100px;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04),
-    0px 4px 16px rgba(51, 51, 51, 0.08);
-  background-color: white;
-  font-size: var(--fs-h5);
-  font-weight: 700;
+// const StyledBaseAlert = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: absolute;
+//   z-index: 2;
+//   width: 400px;
+//   height: 100px;
+//   padding: 1.5rem;
+//   border-radius: 0.5rem;
+//   box-shadow: 0px 4px 4px rgba(51, 51, 51, 0.04),
+//     0px 4px 16px rgba(51, 51, 51, 0.08);
+//   background-color: white;
+//   font-size: var(--fs-h5);
+//   font-weight: 700;
 
-  .icon {
-    border: 2px solid ${(props) => props.borderColor[props.type]};
-    border-radius: 50%;
-    padding: 0.75rem;
-  }
-`;
+//   .icon {
+//     border: 2px solid ${(props) => props.borderColor[props.type]};
+//     border-radius: 50%;
+//     padding: 0.75rem;
+//   }
+// `;
