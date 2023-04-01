@@ -82,6 +82,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const getUserAsync = async () => {
       try {
+        if (!id) return;
         // 將現有使用者拿到的id 去抓 currentUser
         const currentUser = await getUserData(id);
         // console.log('currentUser', currentUser);
