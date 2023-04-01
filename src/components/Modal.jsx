@@ -195,7 +195,7 @@ export const ProfileModal = ({ onClose, onProfileChange }) => {
   const [name, setName] = useState(nextUser.name);
   const [introduction, setIntroduction] = useState(nextUser.introduction);
   const [avatarPreview, setAvatarPreview] = useState(nextUser.avatar);
-  const [coverPreview, setcoverPreview] = useState(nextUser.cover);
+  const [coverPreview, setcoverPreview] = useState(nextUser.coverUrl);
   const [avatar, setAvatar] = useState(nextUser.avatar);
   const [cover, setCover] = useState(nextUser.cover);
   const [showModal, setShowModal] = useState(false);
