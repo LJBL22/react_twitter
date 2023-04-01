@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
           const token = localStorage.getItem('token');
           // return jwt_decode(token);
           if (token) return jwt_decode(token);
+          // 處理 localStorage 裡面沒有 token 的情境
           return {
             id: '',
             email: '',
