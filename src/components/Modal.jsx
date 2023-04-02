@@ -107,6 +107,7 @@ export const TweetModal = () => {
                   onChange={handleChange}
                   onClick={handleAddTweet}
                   isInputValid={isInputValueValid}
+                  placeholder={'有什麼新鮮事?'}
                 />
               </div>
             </div>
@@ -117,69 +118,78 @@ export const TweetModal = () => {
   );
 };
 
-export const ReplyModal = (
-  tweet,
-  currentUser,
+export const ReplyModal = ({
+  singleTweet,
   replyInput,
   onChange,
-  onAddReply
-  // onClose
-) => {
-  const [showModal, setShowModal] = useState(false);
-  // const handleShowModal = () => {
-  //   const nextShowModal = !showModal;
-  //   setShowModal(nextShowModal);
-  // };
+  onAddReply,
+  isInputValueValid,
+  showModal,
+  setShowModal,
+}) => {
   return (
     <>
       <IconReply
         width='1.9rem'
         className='iconAction'
-        onChange={onChange}
         onClick={() => setShowModal(true)}
       />
       {showModal && (
-        // <ReplyModal
-        //   // tweet={tweet}
-        //   // currentUser={currentUser}
-        //   // replyInput={replyInput}
-        //   // onChange={onChange}
-        //   // onAddReply={onAddReply}
-        //   onClose={handleShowModal}
-        // />
         <>
           <Modal>
-            <div className='modal-background show'></div>
-            <div className='modal'>
-              <div className='modal-content'>
-                <div
-                  style={{
-                    padding: '1rem',
-                    borderBottom: '1px solid var(--color-gray-border)',
-                  }}
-                >
-                  <IconDanger onClick={() => setShowModal(false)} />
-                </div>
-                <StyledMainCard borderBottom='none'>
-                  <div>
-                    <StyledItemDiv>
-                      <StyledImgDiv>
-                        {/* <img src={singleTweet.User.avatar} alt='avatar' /> */}
-                      </StyledImgDiv>
-                      <div className='paddingL'>
-                        {/* <p>{singleTweet.User.name}</p>
-                    <p>{singleTweet.User.account}</p> */}
-                      </div>
-                    </StyledItemDiv>
+            <div
+              className='modal-background show'
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <div className='modal'>
+                <div className='modal-content'>
+                  <div
+                    style={{
+                      padding: '1rem',
+                      borderBottom: '1px solid var(--color-gray-border)',
+                    }}
+                  >
+                    <IconDanger onClick={() => setShowModal(false)} />
+                  </div>
+                  <StyledMainCard
+                    borderBottom='none'
+                    style={{ minHeight: '10.18rem' }}
+                  >
+                    <StyledImgDiv>
+                      <img src={singleTweet.User.avatar} alt='avatar' />
+                    </StyledImgDiv>
                     <StyledContentDiv>
-                      {/* <div className='styledContent'>{singleTweet.description}</div> */}
-                      <div className='styledTime'>
-                        上午 10:05・2021年11月10日
+                      <StyledItemDiv>
+                        {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+                        <p className='cardName'>{singleTweet.User.name}</p>
+                        &ensp;
+                        <p className='cardAccount'>
+                          @{singleTweet.User.account}・{singleTweet.diffTime}
+                        </p>
+                      </StyledItemDiv>
+                      <div className='styledContent'>
+                        {singleTweet.description}
+                      </div>
+                      <div>
+                        回覆給<span>@{singleTweet.User.account}</span>
                       </div>
                     </StyledContentDiv>
-                  </div>
-                </StyledMainCard>
-                {/* inpuTweet */}
+                  </StyledMainCard>
+                  <InputTweet
+                    width='32.875rem'
+                    height='auto'
+                    divWidth='40.0625rem'
+                    divHeight='10rem'
+                    borderBottom='none'
+                    placeholder={'推你的回覆'}
+                    tweetValue={replyInput}
+                    onChange={onChange}
+                    onClick={onAddReply}
+                    isInputValid={isInputValueValid}
+                  />
+                </div>
               </div>
             </div>
           </Modal>

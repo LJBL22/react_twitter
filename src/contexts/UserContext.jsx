@@ -4,6 +4,7 @@ import { following, unfollow } from 'api/followship';
 import { useEffect } from 'react';
 import { getFollowings, getUserData, getUserLikes } from 'api/user';
 import { useAuth } from './AuthContext';
+import { getSingleTweet } from 'api/tweet';
 
 const UserContext = createContext(null);
 
@@ -30,6 +31,7 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(userData);
   // 儲存使用者追蹤的 ID 名單
   const [userFollowings, setUserFollowings] = useState([]);
+  // 儲存使用者的 Like 名單
   const [userLikes, setUserLikes] = useState([]);
   // 儲存 特定使用者正在追蹤的用戶及資料
   const [userFollowInfo, setUserFollowInfo] = useState([]);
@@ -41,14 +43,33 @@ export const UserProvider = ({ children }) => {
   // 每次 handleLike 完都要拿到最新的 userLikeID List
   const handleLike = async (id) => {
     try {
-      if (userLikes.includes(id)) {
-        await unlikeTweet(id);
-        const newLikes = userLikes.filter((TweetId) => TweetId !== id);
-        setUserLikes(newLikes);
-        console.log('unLike-new', newLikes);
+      // 要得到此單則推文的ID 填入newLikes 的資料
+      const singleTweet = await getSingleTweet(id);
+      // 拿取現在使用者的 userLikes 名單去比對TweetId
+      const userLikes = await getUserLikes(currentMember().id);
+      // 這個singleTweet的 id 有沒有在 userLikes 裡, 如果有則使用 unLike post至 unLike, 並且將newLikesList名單將此unlike.id 用 filter去除
+      if (userLikes.some((tweet) => tweet.TweetId === id)) {
+        const unlike = await unlikeTweet(id);
+        // console.log('unlike', unlike);
+        const newLikesList = userLikes.filter(
+          (tweet) => tweet.TweetId !== unlike.TweetId
+        );
+        // setUserLiked 將最新的名單更新進去
+        setUserLikes(newLikesList);
+        // console.log('unLike-new', newLikesList);
       } else {
-        await likeTweet(id);
-        const newLikes = [...userLikes, id];
+        //eslint-disable-next-line
+        const likeNewTweet = await likeTweet(id);
+        const newLikes = [
+          ...userLikes,
+          {
+            TweetId: singleTweet.id,
+            isLiked: 1,
+            description: singleTweet.description,
+            likesNum: singleTweet.likesNum,
+            repliesNum: singleTweet.repliesNum,
+          },
+        ];
         setUserLikes(newLikes);
         console.log('like-new', newLikes);
       }
@@ -73,8 +94,6 @@ export const UserProvider = ({ children }) => {
       } else {
         //eslint-disable-next-line
         const newFollower = await following(id);
-        // if (newFollower.followingId !== userFollowProfile.id) return;
-        // console.log('new', newFollower);
         const newFollowList = [
           ...userFollowings,
           {

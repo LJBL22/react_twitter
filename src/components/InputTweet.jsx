@@ -4,21 +4,28 @@ import {
   StyledImgDiv,
 } from './styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
-import { useAuth } from 'contexts/AuthContext';
 import { ThemeButton } from 'components/common/common.styled';
+import { useUser } from 'contexts/UserContext';
 
 function InputTweet({
   width,
   height,
   divWidth,
   divHeight,
-  tweetInput,
+  tweetValue,
   onChange,
   onClick,
   isInputValid,
   borderBottom,
+  placeholder,
 }) {
-  const { currentMember } = useAuth();
+  const { currentUser } = useUser();
+
+  // console.log('twee', tweetValue);
+  // console.log('onChange', onChange);
+  // console.log('onClick', onClick);
+  // console.log('isInputValid', isInputValid);
+  // console.log('placeholder', placeholder);
 
   return (
     <StyledCardDiv
@@ -27,7 +34,7 @@ function InputTweet({
       borderBottom={borderBottom}
     >
       <StyledImgDiv>
-        <img src={currentMember().avatar} alt='avatar' />
+        <img src={currentUser.avatar} alt='avatar' />
       </StyledImgDiv>
       <StyledForm
         onSubmit={(e) => {
@@ -37,8 +44,9 @@ function InputTweet({
         <StyledTextarea
           width={width}
           height={height}
+          placeholder={placeholder}
           onChange={(e) => onChange?.(e.target.value)}
-          value={tweetInput}
+          value={tweetValue}
         />
         {/* submit 以後，text 設定為空值 */}
         <ThemeButton
