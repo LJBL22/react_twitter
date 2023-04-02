@@ -5,6 +5,7 @@ import {
 } from './styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
 import { useAuth } from 'contexts/AuthContext';
+import { ThemeButton } from 'components/common/common.styled';
 
 function InputTweet({
   width,
@@ -40,9 +41,13 @@ function InputTweet({
           value={tweetInput}
         />
         {/* submit 以後，text 設定為空值 */}
-        <button onClick={() => onClick?.()} disabled={!isInputValid}>
+        <ThemeButton
+          width='64px'
+          onClick={() => onClick?.()}
+          disabled={!isInputValid}
+        >
           推文
-        </button>
+        </ThemeButton>
       </StyledForm>
     </StyledCardDiv>
   );

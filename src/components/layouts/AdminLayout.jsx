@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 const AdminContainer = styled(GridContainer)`
+  height: 100vh;
+  overflow: hidden;
   @media screen and (${device.md}) {
     grid-template-columns: 1fr 7fr;
   }

@@ -25,16 +25,6 @@ export const Container = styled.div`
 `;
 
 export const GridContainer = styled(Container)`
-  .fr1 {
-    background-color: khaki;
-  }
-  .fr2 {
-    background-color: lavenderblush;
-  }
-  .fr3 {
-    background-color: beige;
-  }
-
   @media screen and (${device.md}) {
     display: grid;
     grid-template-columns: 1fr 4fr 3fr;

@@ -85,27 +85,7 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  // 在 flex 內 控制裡面的button flex-basis 和寬高 &>button
-  // 思考CSS變數化 以及把button 的style 拉出來共用
-  & > button {
-    flex-basis: 4rem;
-    width: 4rem;
-    height: 2.5rem;
-    line-height: 4rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 3.125rem;
-    background-color: var(--color-theme);
-    color: var(--color-white);
-    margin-bottom: 1rem;
-    &:hover {
-      cursor: pointer;
-      background-color: var(--color-primary);
-    }
-  }
+  padding: 0 0 1rem 0;
 `;
 
 export const StyledTextarea = styled.textarea.attrs({

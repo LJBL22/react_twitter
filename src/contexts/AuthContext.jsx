@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
           return success;
         },
         login: async (data) => {
-          const { token } = await login({
+          const { token, success } = await login({
             account: data.account,
             password: data.password,
           });
@@ -100,10 +100,10 @@ export const AuthProvider = ({ children }) => {
             setPayload(null);
             setIsAuthenticated(false);
           }
-          return;
+          return success;
         },
         adminLogin: async (data) => {
-          const { token } = await adminLogin({
+          const { token, success } = await adminLogin({
             account: data.account,
             password: data.password,
           });
@@ -116,7 +116,7 @@ export const AuthProvider = ({ children }) => {
             setPayload(null);
             setIsAuthenticated(false);
           }
-          return;
+          return success;
         },
       }}
     >
