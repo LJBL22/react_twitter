@@ -28,14 +28,18 @@ const LoginPage = () => {
 
     // 只能單純 success
     //現在這個寫法會 undefined
-    const { success, status, statusText } = await login({
+    // const { success, status, statusText } = await login({
+    //   account,
+    //   password,
+    // });
+    const success = await login({
       account,
       password,
     });
     console.log('success', success);
     console.log('account', account);
     console.log('password', password);
-    if (!success) {
+    if (success) {
       Swal.fire({
         title: '登入成功',
         icon: 'success',
@@ -46,15 +50,14 @@ const LoginPage = () => {
       navigate('/tweets');
       return;
     }
-    if (status === 'error')
-      Swal.fire({
-        title: '登入失敗',
-        icon: 'error',
-        text: `${statusText}`,
-        showConfirmButton: false,
-        timer: 1000,
-        position: 'top',
-      });
+
+    Swal.fire({
+      title: '登入失敗',
+      icon: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      position: 'top',
+    });
   };
   useEffect(() => {
     if (isAuthenticated) {
