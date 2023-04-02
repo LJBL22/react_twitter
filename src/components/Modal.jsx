@@ -270,6 +270,7 @@ export const ProfileModal = ({ onClose, onProfileChange }) => {
   return (
     <StyledDiv>
       <StyledModal>
+        <div className='modal-background show'></div>
         <form onSubmit={handleSubmit} encType='multipart/form-data'>
           <StyledCloseDiv>
             <button className='close-btn' type='button' onClick={onClose}>
@@ -383,11 +384,24 @@ const StyledDiv = styled.div`
 `;
 
 const StyledModal = styled.div`
+  z-index: 1
   display: flex;
   flex-direction: column;
   height: 100%;
   background-color: white;
-
+  .modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    opacity: 1;
+    /* 邊緣做效果 */
+    /* filter: blur(0px); */
+    transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+  }
   .content {
     position: relative;
     display: flex;
