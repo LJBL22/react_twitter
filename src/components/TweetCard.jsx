@@ -21,7 +21,7 @@ const StyledReplyActions = styled.div`
   }
 `;
 
-const formatDate = (dateString) => {
+export const formatDate = (dateString) => {
   const date = new Date(dateString);
   // 去抓使用者的時區
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -60,8 +60,7 @@ function TweetCard({ card, userInfo, id }) {
   const [disabled, setDisabled] = useState(false);
   const [currentLikeCounts, setCurrentLikeCounts] = useState(card.likesNum);
   const isLiked = userLikes.some((tweet) => tweet.TweetId === id);
-  // console.log('TWuserLikes', userLikes);
-
+  // console.log('card', card);
   const handleLikeTweet = async () => {
     setDisabled(true);
     await handleLike(card.id);
@@ -74,6 +73,7 @@ function TweetCard({ card, userInfo, id }) {
     setDisabled(false);
   };
 
+  //  等候端增加 getLikes 的createdAt, User.avatar, User.name, User.account, 資料後 更新判別式為如果 TweetId 存在?
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv>

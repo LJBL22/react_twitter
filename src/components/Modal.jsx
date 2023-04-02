@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, ThemeButton } from './common/common.styled';
+import { Modal, StyledCardDiv, ThemeButton } from './common/common.styled';
 import InputTweet from 'components/InputTweet';
 import {
   IconClose,
@@ -18,8 +18,12 @@ import {
   StyledContentDiv,
   StyledItemDiv,
   StyledImgDiv,
+  StyledTextarea,
+  StyledForm,
 } from 'components/styles/InputTweet.styled';
 import { StyledMainCard } from './TweetReply';
+import { useAuth } from 'contexts/AuthContext';
+import { formatDate } from './TweetCard';
 
 export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -117,25 +121,28 @@ export const TweetModal = () => {
   );
 };
 
-export const ReplyModal = (
-  tweet,
+export const ReplyModal = ({
+  onChange,
+  singleTweet,
   currentUser,
   replyInput,
-  onChange,
-  onAddReply
+  onAddReply,
   // onClose
-) => {
+}) => {
   const [showModal, setShowModal] = useState(false);
+  const { currentMember } = useAuth();
   // const handleShowModal = () => {
   //   const nextShowModal = !showModal;
   //   setShowModal(nextShowModal);
   // };
+
+  console.log('singleTweet2', singleTweet);
+
   return (
     <>
       <IconReply
         width='1.9rem'
         className='iconAction'
-        onChange={onChange}
         onClick={() => setShowModal(true)}
       />
       {showModal && (
@@ -161,25 +168,55 @@ export const ReplyModal = (
                   <IconDanger onClick={() => setShowModal(false)} />
                 </div>
                 <StyledMainCard borderBottom='none'>
-                  <div>
+                  <StyledImgDiv>
+                    <img src={singleTweet.User.avatar} alt='avatar' />
+                  </StyledImgDiv>
+                  <StyledContentDiv>
                     <StyledItemDiv>
-                      <StyledImgDiv>
-                        {/* <img src={singleTweet.User.avatar} alt='avatar' /> */}
-                      </StyledImgDiv>
-                      <div className='paddingL'>
-                        {/* <p>{singleTweet.User.name}</p>
-                    <p>{singleTweet.User.account}</p> */}
-                      </div>
+                      {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+                      <p className='cardName'>{singleTweet.User.name}</p>
+                      &ensp;
+                      <p className='cardAccount'>
+                        @{singleTweet.User.account}・
+                        {formatDate(singleTweet.createdAt)}
+                      </p>
                     </StyledItemDiv>
-                    <StyledContentDiv>
-                      {/* <div className='styledContent'>{singleTweet.description}</div> */}
-                      <div className='styledTime'>
-                        上午 10:05・2021年11月10日
-                      </div>
-                    </StyledContentDiv>
-                  </div>
+                    <div className='styledContent'>
+                      {singleTweet.description}
+                    </div>
+                    <div>
+                      回覆給<span>@{singleTweet.User.account}</span>
+                    </div>
+                  </StyledContentDiv>
                 </StyledMainCard>
-                {/* inpuTweet */}
+                <StyledCardDiv
+                // divWidth={divWidth}
+                // divHeight={divHeight}
+                // borderBottom={borderBottom}
+                >
+                  <StyledImgDiv>
+                    <img src={currentMember().avatar} alt='avatar' />
+                  </StyledImgDiv>
+                  <StyledForm
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <StyledTextarea
+                    // width={width}
+                    // height={height}
+                    // onChange={(e) => onChange?.(e.target.value)}
+                    // value={tweetInput}
+                    />
+                    {/* submit 以後，text 設定為空值 */}
+                    <button
+                    // onClick={() => onClick?.()}
+                    // disabled={!isInputValid}
+                    >
+                      推文
+                    </button>
+                  </StyledForm>
+                </StyledCardDiv>
               </div>
             </div>
           </Modal>

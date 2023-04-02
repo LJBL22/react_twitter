@@ -51,7 +51,7 @@ const ReplyActions = styled.div`
     border: none;
     outline: none;
     cursor: pointer;
-    margin-right: 8rem;
+    margin-left: 8rem;
   }
 `;
 
@@ -101,7 +101,7 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           </StyledItemDiv>
           <StyledContentDiv>
             <div className='styledContent'>{singleTweet.description}</div>
-            <div className='styledTime'>上午 10:05・2021年11月10日</div>
+            <div className='styledTime'>{singleTweet.createdAt}</div>
           </StyledContentDiv>
           <BorderDivider />
           <ReplyActions>
@@ -116,9 +116,8 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           </ReplyActions>
           <BorderDivider />
           <ReplyActions>
-            <button className='icon'>
-              <ReplyModal />
-            </button>
+            {console.log('singleTweet', singleTweet)}
+            <ReplyModal singleTweet={singleTweet} />
             <button className={disabled ? 'disabled' : ''}>
               {isLiked ? (
                 <IconLikeFi className='icon' onClick={handleLikeTweet} />
