@@ -4,7 +4,7 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
 
 > **Noted: This is a Scrum project scheduled from Mar. 20 to Apr. 3, 2023.**
 
-![Design](/public/designScreenshot.png)
+![Design](/public/UserInfo.png)
 
 ## 🎮 [DEMO](https://ljbl22.github.io/react_twitter/) page
 
@@ -13,6 +13,13 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
   |--------|---------|--------------|
   | Sign In | user1 | 12345678 |
   | Admin Panel | root | 12345678 |
+
+## Contributors
+
+| Type     | Account      | Password    | Link                                                    |
+| -------- | ------------ | ----------- | ------------------------------------------------------- |
+| Frontend | @LJBL22      | @cherylruei |
+| Backend  | @freeway26tw | @Ian920511  | [REPO](https://github.com/freeway26tw/twitter-api-2020) |
 
 ## 👀 Add Feature:
 
@@ -36,10 +43,11 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
   - The tweet content is limited to 140 characters.
   - The tweet content cannot be blank.
     ![.](/public/HomePage.png)
+    ![.](/public/ReplyModal.png)
 
 - User Interactions
 
-  - Users can follow/unfollow other users
+  - Users can follow/un-follow other users
   - Users can like/unlike other users' tweets
 
 - Data Summary
@@ -51,7 +59,7 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
     - Followers: the list of users who are following the user, sorted by the time of the follow record, with the newest at the front.
     - Likes: the list of tweets that the user has liked, sorted by the time of the like record, with the newest at the front.
   - Users can see a recommended top 10 list of followers, sorted by the number of followers, on the sidebar of the homepage.
-    ![.](/public/UserInfo.png)
+    ![.](/public/FollowList.png)
 
 - Admin Panel
   - Administrators can access the website backend through a dedicated login page.
