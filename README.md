@@ -14,7 +14,7 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
   | Sign In | user1 | 12345678 |
   | Admin Panel | root | 12345678 |
 
-## Contributors
+## 🧑🏻‍💻 Contributors
 
 | Type     | Account      | Password    | Link                                                    |
 | -------- | ------------ | ----------- | ------------------------------------------------------- |
