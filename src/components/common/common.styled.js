@@ -104,7 +104,7 @@ const StyledAvatar = styled.div`
     object-fit: cover;
     height: ${({ height }) => height || '3.125rem'};
     width: ${({ width }) => width || '3.125rem'};
-    border-radius: 100%;
+    border-radius: 50%;
   }
 `;
 

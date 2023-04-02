@@ -24,7 +24,9 @@ export const adminGetTweets = async () => {
     const res = await axiosInstance.get(`${baseUrl}/admin/tweets/`);
     // console.log('res', res);
     // 拿到資料庫裡存的所有的推文
-    return res.data;
+    const tweets = res.data
+    console.log(res.data)
+    return tweets;
   } catch (error) {
     console.error('[adminGetTweets failed]', error);
   }
@@ -45,10 +47,9 @@ export async function deleteTweet
 // 後台查看使用者
 export async function adminGetAllUsers() {
   try {
-    console.log('test api');
     const res = await axiosInstance.get(`${baseUrl}/admin/users`);
     // 回傳一個陣列
-    console.log(res.data)
+    // console.log(res.data)
     const user = res.data
     return user;
   } catch (error) {
