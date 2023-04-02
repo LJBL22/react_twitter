@@ -57,13 +57,21 @@ const formatDate = (dateString) => {
 
 function TweetCard({ card, userInfo, id }) {
   const { handleLike, userLikes } = useUser();
-  // const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [currentLikeCounts, setCurrentLikeCounts] = useState(card.likesNum);
   const isLiked = userLikes.some((tweet) => tweet.TweetId === id);
-  // console.log('TCisLiked', isLiked);
-  console.log('TWuserLikes', userLikes);
+  // console.log('TWuserLikes', userLikes);
 
   const handleLikeTweet = async () => {
-    await handleLike(id);
+    setDisabled(true);
+    await handleLike(card.id);
+    if (isLiked) {
+      setCurrentLikeCounts((prev) => prev - 1);
+    } else {
+      setCurrentLikeCounts((prev) => prev + 1);
+    }
+    // setDisable 去讓前面的setState可以更新畫面
+    setDisabled(false);
   };
 
   return (
@@ -99,7 +107,7 @@ function TweetCard({ card, userInfo, id }) {
             <IconReply width='0.825rem' className='iconAction' />
             {card.repliesNum}
           </div>
-          <div>
+          <div className={disabled ? 'disabled' : ''}>
             {isLiked ? (
               <IconLikeFi
                 width='0.825rem'
@@ -113,7 +121,7 @@ function TweetCard({ card, userInfo, id }) {
                 onClick={handleLikeTweet}
               />
             )}
-            {card.likesNum}
+            {currentLikeCounts}
           </div>
         </StyledActions>
       </StyledContentDiv>

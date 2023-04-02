@@ -102,9 +102,9 @@ export const StyledForm = styled.form`
     color: var(--color-white);
     margin-bottom: 1rem;
     &:hover {
-    cursor: pointer;
-    background-color: var(--color-primary);
-  }
+      cursor: pointer;
+      background-color: var(--color-primary);
+    }
   }
 `;
 
