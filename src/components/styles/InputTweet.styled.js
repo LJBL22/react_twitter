@@ -71,11 +71,12 @@ export const StyledItemDiv = styled.div`
 
 export const StyledActions = styled(StyledItemDiv)`
   margin-top: 8px;
-  > div {
+  .iconDiv {
     display: flex;
     align-items: center;
     margin-right: 41.3px;
     & .iconAction {
+      cursor: pointer;
       margin-right: 9.3px;
     }
     .NavLink {

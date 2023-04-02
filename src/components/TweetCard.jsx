@@ -10,7 +10,6 @@ import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useUser } from 'contexts/UserContext';
-import { ReplyModal } from './Modal';
 
 const StyledReplyActions = styled.div`
   & .replyAccount {
@@ -19,6 +18,16 @@ const StyledReplyActions = styled.div`
 
   & .replyComment {
     margin-bottom: 0.7rem;
+  }
+`;
+const StyledImgReply = styled.div`
+  padding-top: 1rem;
+  & > img {
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    max-width: none;
   }
 `;
 
@@ -99,13 +108,13 @@ function TweetCard({ card, id, tweet }) {
           </div>
         </NavLink>
         <StyledActions>
-          {/* <NavLink to={`/tweets/${id}`}> */}
-          <div>
-            <IconReply width='0.825rem' className='iconAction' />
-            {tweet ? tweet.repliesNum : card.repliesNum}
-          </div>
-          {/* </NavLink> */}
-          <div className={disabled ? 'disabled' : ''}>
+          <NavLink to={`/tweets/${id}`}>
+            <div className='iconDiv'>
+              <IconReply width='0.825rem' className='iconAction' />
+              {tweet ? tweet.repliesNum : card.repliesNum}
+            </div>
+          </NavLink>
+          <div className={`iconDiv ${disabled ? 'disabled' : ''}`}>
             {isLiked ? (
               <IconLikeFi
                 width='0.825rem'
@@ -130,12 +139,12 @@ function TweetCard({ card, id, tweet }) {
 function ReplyCard({ reply, replyTo, userInfo }) {
   return (
     <StyledCardDiv>
-      <StyledImgDiv>
+      <StyledImgReply>
         <img
           src={userInfo ? userInfo.avatar : reply.User.avatar}
           alt='avatar'
         />
-      </StyledImgDiv>
+      </StyledImgReply>
       <StyledContentDiv>
         <StyledItemDiv>
           <p className='cardName'>

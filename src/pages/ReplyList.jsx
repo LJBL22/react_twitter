@@ -89,7 +89,7 @@ const ReplyList = () => {
       // setTweets
       const newTweetReplies = [
         {
-          id: singleTweet.id,
+          id: data.id,
           comment: replyInput,
           UserId: data.UserId,
           TweetId: data.TweetId,

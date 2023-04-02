@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal, StyledCardDiv, ThemeButton } from './common/common.styled';
+import { Modal, ThemeButton } from './common/common.styled';
 import InputTweet from 'components/InputTweet';
 import {
   IconClose,
@@ -18,10 +18,8 @@ import {
   StyledContentDiv,
   StyledItemDiv,
   StyledImgDiv,
-  StyledForm,
 } from 'components/styles/InputTweet.styled';
 import { StyledMainCard } from './TweetReply';
-import { useAuth } from 'contexts/AuthContext';
 
 export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
