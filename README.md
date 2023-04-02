@@ -18,8 +18,8 @@ DEMO info:
 
 | Type     | Account      | Password    | Link                                                    |
 | -------- | ------------ | ----------- | ------------------------------------------------------- |
-| Frontend | @LJBL22      | @cherylruei |
-| Backend  | @freeway26tw | @Ian920511  | [REPO](https://github.com/freeway26tw/twitter-api-2020) |
+| Frontend | [@LJBL22](https://github.com/LJBL22)      | [@cherylruei](https://github.com/cherylruei)    | [REPO](https://github.com/LJBL22/react_twitter)
+| Backend  | [@freeway26tw](https://github.com/freeway26tw) | [@Ian920511](https://github.com/Ian920511)  | [REPO](https://github.com/freeway26tw/twitter-api-2020) |
 
 ![Pic](/public/twitter.png)
 ## 👀 Add Feature:
