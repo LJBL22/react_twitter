@@ -8,8 +8,6 @@ import {
 import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut } from 'assets/icons';
 // import { useState } from 'react';
-import { IconLikeOut } from 'assets/icons';
-// import { useState } from 'react';
 import { ReplyModal } from './Modal';
 import { NavLink } from 'react-router-dom';
 
