@@ -9,6 +9,7 @@ import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { useUser } from 'contexts/UserContext';
 
 const StyledReplyActions = styled.div`
   & .replyAccount {
@@ -55,18 +56,16 @@ const formatDate = (dateString) => {
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
 function TweetCard({ card, userInfo, id }) {
-  const isLiked = card.isLiked;
-  // console.log('isLiked', isLiked);
-  const [isCurrentLiked, setIsCurrentLiked] = useState(isLiked);
+  const { handleLike, userLikes } = useUser();
+  // const [disabled, setDisabled] = useState(false);
+  const isLiked = userLikes.some((tweet) => tweet.TweetId === id);
+  // console.log('TCisLiked', isLiked);
+  console.log('TWuserLikes', userLikes);
 
-  const handleLike = () => {
-    if (!isCurrentLiked) {
-      card.likesNum += 1;
-    } else {
-      card.likesNum -= 1;
-    }
-    setIsCurrentLiked(!isCurrentLiked);
+  const handleLikeTweet = async () => {
+    await handleLike(id);
   };
+
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv>
@@ -100,11 +99,19 @@ function TweetCard({ card, userInfo, id }) {
             <IconReply width='0.825rem' className='iconAction' />
             {card.repliesNum}
           </div>
-          <div onClick={handleLike}>
-            {isCurrentLiked ? (
-              <IconLikeFi width='0.825rem' className='iconAction' />
+          <div>
+            {isLiked ? (
+              <IconLikeFi
+                width='0.825rem'
+                className='iconAction'
+                onClick={handleLikeTweet}
+              />
             ) : (
-              <IconLikeOut width='0.825rem' className='iconAction' />
+              <IconLikeOut
+                width='0.825rem'
+                className='iconAction'
+                onClick={handleLikeTweet}
+              />
             )}
             {card.likesNum}
           </div>

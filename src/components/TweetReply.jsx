@@ -6,9 +6,10 @@ import {
   StyledImgDiv,
 } from 'components/styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
-import { IconLikeOut } from 'assets/icons';
+import { IconLikeOut, IconLikeFi } from 'assets/icons';
 import { ReplyModal } from './Modal';
 import { NavLink } from 'react-router-dom';
+import { useUser } from 'contexts/UserContext';
 
 export const StyledMainCard = styled(StyledCardDiv)`
   width: 40.0625rem;
@@ -24,6 +25,9 @@ const BorderDivider = styled.div`
 `;
 
 const ReplyActions = styled(StyledActions)`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   margin-top: 0px;
   height: 4.61rem;
   & .number {
@@ -36,11 +40,29 @@ const ReplyActions = styled(StyledActions)`
     font-size: 1.46rem;
     color: var(--color-secondary);
   }
+  button {
+    display: flex;
+    align-items: center;
+    margin-right: 41.3px;
+    & .icon {
+      width: 1.9rem;
+      margin-right: 9.3px;
+    }
+  }
 `;
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
 //eslint-disable-next-line
 const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
+  const { handleLike, userLikes } = useUser();
+
+  const isLiked = userLikes.some((tweet) => tweet.TweetId === singleTweet.id);
+
+  const handleLikeTweet = async () => {
+    await handleLike(singleTweet.id);
+  };
+  console.log('userLikes', userLikes);
+  console.log('isLiked', isLiked);
   // console.log('ere', singleTweet);
   // const [showModal, setShowModal] = useState(false);
 
@@ -81,12 +103,16 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           </ReplyActions>
           <BorderDivider />
           <ReplyActions>
-            <div style={{ cursor: 'pointer' }}>
+            <button>
               <ReplyModal />
-            </div>
-            <div style={{ cursor: 'pointer' }}>
-              <IconLikeOut width='1.9rem' className='iconAction' />
-            </div>
+            </button>
+            <button>
+              {isLiked ? (
+                <IconLikeFi className='icon' onClick={handleLikeTweet} />
+              ) : (
+                <IconLikeOut className='icon' onClick={handleLikeTweet} />
+              )}
+            </button>
           </ReplyActions>
         </div>
       </StyledMainCard>

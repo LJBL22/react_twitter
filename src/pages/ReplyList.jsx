@@ -32,9 +32,8 @@ export const BackHeader = styled(StyledHeader)`
 const ReplyList = () => {
   const navigate = useNavigate();
   const { tweetId } = useParams();
-  // console.log('tweetId', tweetId);
   const { currentUser } = useUser();
-  // console.log('currentUserReply', currentUser);
+  console.log('currentUserReply', currentUser);
   // 瀏覽單則推文
   const [singleTweet, setSingleTweet] = useState({});
   // 留言回覆
@@ -44,6 +43,7 @@ const ReplyList = () => {
   const [isLoading, setIsLoading] = useState(true);
   // console.log('singleTweet', singleTweet);
   // console.log('replies', replies);
+
   // 使用 handleClick 點擊其中一推文後，可瀏覽該則推文，及其相關回覆
   useEffect(() => {
     const token = localStorage.getItem('token');

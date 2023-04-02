@@ -45,17 +45,21 @@ export const UserProvider = ({ children }) => {
     try {
       // 要得到此單則推文的ID 填入newLikes 的資料
       const singleTweet = await getSingleTweet(id);
+      // 拿取現在使用者的 userLikes 名單去比對TweetId
       const userLikes = await getUserLikes(currentMember().id);
-      console.log('singleTweet', singleTweet);
-      if (userLikes.some((post) => post.TweetId === id)) {
+      // 這個singleTweet的 id 有沒有在 userLikes 裡, 如果有則使用 unLike post至 unLike, 並且將newLikesList名單將此unlike.id 用 filter去除
+      if (userLikes.some((tweet) => tweet.TweetId === id)) {
         const unlike = await unlikeTweet(id);
+        console.log('unlike', unlike);
         const newLikesList = userLikes.filter(
-          (TweetId) => TweetId !== unlike.id
+          (tweet) => tweet.TweetId !== unlike.TweetId
         );
+        // setUserLiked 將最新的名單更新進去
         setUserLikes(newLikesList);
         console.log('unLike-new', newLikesList);
       } else {
-        const likeTweet = await likeTweet(id);
+        console.log('id', id);
+        const likeNewTweet = await likeTweet(id);
         const newLikes = [
           ...userLikes,
           {
