@@ -6,9 +6,9 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
 
 ![Design](/public/UserInfo.png)
 
-## 🎮 [DEMO](https://ljbl22.github.io/react_twitter/) page
+## 🎮 DEMO page [LINK](https://ljbl22.github.io/react_twitter/)
 
-- DEMO info:
+DEMO info:
   | Type | Account | Password |
   |--------|---------|--------------|
   | Sign In | user1 | 12345678 |
