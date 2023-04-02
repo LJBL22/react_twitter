@@ -21,6 +21,7 @@ DEMO info:
 | Frontend | @LJBL22      | @cherylruei |
 | Backend  | @freeway26tw | @Ian920511  | [REPO](https://github.com/freeway26tw/twitter-api-2020) |
 
+![Pic](/public/twitter.png)
 ## 👀 Add Feature:
 
 - Registration/Login/Logout
@@ -84,29 +85,34 @@ DEMO info:
 Check Node.js installation and version by running the command in the terminal
 
 ```
-$ node -v
+node -v
 ```
 
 Clone the project to local
 
 ```
-$ git clone https://github.com/LJBL22/react_twitter.git
+git clone https://github.com/LJBL22/react_twitter.git
 ```
 
 Go to the directory
 
 ```
-$ cd react_twitter
+cd react_twitter
 ```
 
 Install npm
 
 ```
-$ npm install
+npm install
 ```
 
 Start the project
 
 ```
-$ npm start
+npm start
 ```
+
+## Bonus
+![.](/public/bonus.png)
+
+# 💬 THANK YOU 👥
