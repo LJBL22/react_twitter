@@ -31,7 +31,7 @@ DEMO info:
   - Users can edit their account, name, email, and password.
   - Users can edit their name, self-introduction, profile picture, and cover photo.
 
-![.](/public/SignIn.png)
+![.](/public/Login.png)
 
 - Post and Comments
 
