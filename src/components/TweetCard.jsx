@@ -9,6 +9,7 @@ import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { useUser } from 'contexts/UserContext';
 
 const StyledReplyActions = styled.div`
   & .replyAccount {
@@ -19,8 +20,18 @@ const StyledReplyActions = styled.div`
     margin-bottom: 0.7rem;
   }
 `;
+const StyledImgReply = styled.div`
+  padding-top: 1rem;
+  & > img {
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    max-width: none;
+  }
+`;
 
-const formatDate = (dateString) => {
+export const formatDate = (dateString) => {
   const date = new Date(dateString);
   // 去抓使用者的時區
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -54,59 +65,70 @@ const formatDate = (dateString) => {
 // console.log('1', formatDate('2023-03-22T11:39:01.000Z'));
 // console.log('2', formatDate('2023-03-24T03:26:01.000Z'));
 
-function TweetCard({ card, userInfo, id }) {
-  const isLiked = card.isLiked;
-  // console.log('isLiked', isLiked);
-  const [isCurrentLiked, setIsCurrentLiked] = useState(isLiked);
-
-  const handleLike = () => {
-    if (!isCurrentLiked) {
-      card.likesNum += 1;
+function TweetCard({ card, id, tweet }) {
+  const { handleLike, userLikes } = useUser();
+  const [disabled, setDisabled] = useState(false);
+  const likesNum = tweet ? tweet.likesNum : card.likesNum;
+  const [currentLikeCounts, setCurrentLikeCounts] = useState(likesNum);
+  const isLiked = userLikes.some((tweet) => tweet.TweetId === id);
+  const handleLikeTweet = async () => {
+    setDisabled(true);
+    await handleLike(id);
+    if (isLiked) {
+      setCurrentLikeCounts((prev) => prev - 1);
     } else {
-      card.likesNum -= 1;
+      setCurrentLikeCounts((prev) => prev + 1);
     }
-    setIsCurrentLiked(!isCurrentLiked);
+    // setDisable 去讓前面的setState可以更新畫面
+    setDisabled(false);
   };
+
+  //  等候端增加 getLikes 的createdAt, User.avatar, User.name, User.account,
   return (
     //  想要重新命名InputTweet.styled.js 檔名 初步嘗試 git mv 路徑有問題，待之後確認
     <StyledCardDiv>
-      <NavLink to={`/users/${userInfo ? userInfo.id : card.UserId}/tweets`}>
+      <NavLink to={`/users/${tweet ? tweet.UserId : card.UserId}/tweets`}>
         <StyledImgDiv>
-          <img
-            src={userInfo ? userInfo.avatar : card.User.avatar}
-            alt='avatar'
-          />
+          <img src={tweet ? tweet.avatar : card.User.avatar} alt='avatar' />
         </StyledImgDiv>
       </NavLink>
       <StyledContentDiv>
         <StyledItemDiv>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-          <p className='cardName'>
-            {userInfo ? userInfo.name : card.User.name}
-          </p>
+          <p className='cardName'>{tweet ? tweet.name : card.User.name}</p>
           &ensp;
           <p className='cardAccount'>
-            @{userInfo ? userInfo.account : card.User.account}・
-            {userInfo
-              ? formatDate(userInfo.createdAt)
-              : formatDate(card.createdAt)}
+            @{tweet ? tweet.account : card.User.account}・
+            {tweet ? formatDate(tweet.createdAt) : formatDate(card.createdAt)}
           </p>
         </StyledItemDiv>
         <NavLink to={`/tweets/${id}`}>
-          <div className='styledContent'>{card.description}</div>
+          <div className='styledContent'>
+            {tweet ? tweet.description : card.description}
+          </div>
         </NavLink>
         <StyledActions>
-          <div>
-            <IconReply width='0.825rem' className='iconAction' />
-            {card.repliesNum}
-          </div>
-          <div onClick={handleLike}>
-            {isCurrentLiked ? (
-              <IconLikeFi width='0.825rem' className='iconAction' />
+          <NavLink to={`/tweets/${id}`}>
+            <div className='iconDiv'>
+              <IconReply width='0.825rem' className='iconAction' />
+              {tweet ? tweet.repliesNum : card.repliesNum}
+            </div>
+          </NavLink>
+          <div className={`iconDiv ${disabled ? 'disabled' : ''}`}>
+            {isLiked ? (
+              <IconLikeFi
+                width='0.825rem'
+                className='iconAction'
+                onClick={handleLikeTweet}
+              />
             ) : (
-              <IconLikeOut width='0.825rem' className='iconAction' />
+              <IconLikeOut
+                width='0.825rem'
+                className='iconAction'
+                onClick={handleLikeTweet}
+              />
             )}
-            {card.likesNum}
+            {currentLikeCounts}
           </div>
         </StyledActions>
       </StyledContentDiv>
@@ -117,12 +139,12 @@ function TweetCard({ card, userInfo, id }) {
 function ReplyCard({ reply, replyTo, userInfo }) {
   return (
     <StyledCardDiv>
-      <StyledImgDiv>
+      <StyledImgReply>
         <img
           src={userInfo ? userInfo.avatar : reply.User.avatar}
           alt='avatar'
         />
-      </StyledImgDiv>
+      </StyledImgReply>
       <StyledContentDiv>
         <StyledItemDiv>
           <p className='cardName'>

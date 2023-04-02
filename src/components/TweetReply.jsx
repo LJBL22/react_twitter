@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import {
   StyledContentDiv,
   StyledItemDiv,
-  StyledActions,
   StyledImgDiv,
 } from 'components/styles/InputTweet.styled';
 import { StyledCardDiv } from 'components/common/common.styled';
-import { IconLikeOut } from 'assets/icons';
-// import { useState } from 'react';
+import { IconLikeOut, IconLikeFi } from 'assets/icons';
 import { ReplyModal } from './Modal';
 import { NavLink } from 'react-router-dom';
+import { useUser } from 'contexts/UserContext';
+import { useState } from 'react';
 
 export const StyledMainCard = styled(StyledCardDiv)`
   width: 40.0625rem;
@@ -24,31 +24,68 @@ const BorderDivider = styled.div`
   align-items: center;
 `;
 
-const ReplyActions = styled(StyledActions)`
+const ReplyActions = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   margin-top: 0px;
   height: 4.61rem;
-  & .number {
+  > div {
+    display: flex;
+    align-items: center;
+    margin-right: 4.5rem;
+  }
+  .number {
     font-weight: 700;
     font-size: 1.46rem;
     color: #000000;
   }
-  & .text {
+  .text {
     font-weight: 500;
     font-size: 1.46rem;
     color: var(--color-secondary);
+  }
+
+  .likeBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 8rem;
   }
 `;
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
 //eslint-disable-next-line
-const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
-  // console.log('ere', singleTweet);
-  // const [showModal, setShowModal] = useState(false);
+const TweetReply = ({
+  singleTweet,
+  replyInput,
+  onChange,
+  onAddReply,
+  isInputValueValid,
+  showModal,
+  setShowModal,
+}) => {
+  const { handleLike, userLikes } = useUser();
+  const [currentLikeCounts, setCurrentLikeCounts] = useState(
+    singleTweet.likesNum
+  );
+  const [disabled, setDisabled] = useState(false);
+  const isLiked = userLikes.some((tweet) => tweet.TweetId === singleTweet.id);
 
-  // const handleShowModal = () => {
-  //   const nextShowModal = !showModal;
-  //   setShowModal(nextShowModal);
-  // };
+  const handleLikeTweet = async () => {
+    setDisabled(true);
+    await handleLike(singleTweet.id);
+    if (isLiked) {
+      setCurrentLikeCounts((prev) => prev - 1);
+    } else {
+      setCurrentLikeCounts((prev) => prev + 1);
+    }
+    // setDisable 去讓前面的setState可以更新畫面
+    setDisabled(false);
+  };
+
+  // console.log('isinputttt', isInputValueValid);
 
   return (
     <>
@@ -61,13 +98,13 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
               </StyledImgDiv>
             </NavLink>
             <div className='paddingL'>
-              <p>{singleTweet.User.name}</p>
-              <p>{singleTweet.User.account}</p>
+              <p className='cardName'>{singleTweet.User.name}</p>
+              <p className='cardAccount'>@{singleTweet.User.account}</p>
             </div>
           </StyledItemDiv>
           <StyledContentDiv>
             <div className='styledContent'>{singleTweet.description}</div>
-            <div className='styledTime'>上午 10:05・2021年11月10日</div>
+            <div className='styledTime'>{singleTweet.createdAt}</div>
           </StyledContentDiv>
           <BorderDivider />
           <ReplyActions>
@@ -76,18 +113,28 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
               <p className='text'>回覆</p>
             </div>
             <div>
-              <p className='number'>{singleTweet.likesNum}</p>
+              <p className='number'>{currentLikeCounts}</p>
               <p className='text'>喜歡次數</p>
             </div>
           </ReplyActions>
           <BorderDivider />
           <ReplyActions>
-            <div style={{ cursor: 'pointer' }}>
-              <ReplyModal />
-            </div>
-            <div style={{ cursor: 'pointer' }}>
-              <IconLikeOut width='1.9rem' className='iconAction' />
-            </div>
+            <ReplyModal
+              singleTweet={singleTweet}
+              replyInput={replyInput}
+              onChange={onChange}
+              onAddReply={onAddReply}
+              isInputValueValid={isInputValueValid}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+            <button className={`likeBtn ${disabled ? 'disabled' : ''}`}>
+              {isLiked ? (
+                <IconLikeFi className='icon' onClick={handleLikeTweet} />
+              ) : (
+                <IconLikeOut className='icon' onClick={handleLikeTweet} />
+              )}
+            </button>
           </ReplyActions>
         </div>
       </StyledMainCard>

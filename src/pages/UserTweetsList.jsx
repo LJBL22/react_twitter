@@ -4,9 +4,10 @@ import { useOutletContext } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 const UserTweets = () => {
-  const { userInfo, userTweets } = useOutletContext();
-  const userTweetsCollection = userTweets.map((card) => {
-    return <TweetCard key={card.TweetId} card={card} userInfo={userInfo} />;
+  // 等資料用好 把map的 card 改成 tweet, 傳tweet跟 homePage的 card 做區分，刪除 userInfo
+  const { userTweets } = useOutletContext();
+  const userTweetsCollection = userTweets.map((tweet) => {
+    return <TweetCard key={tweet.TweetId} tweet={tweet} id={tweet.TweetId} />;
   });
   return <div>{userTweetsCollection}</div>;
 };
@@ -27,16 +28,10 @@ const UserReplied = () => {
 };
 
 const UserLikes = () => {
-  const { userInfo, userLikes } = useOutletContext();
-  const userLikesCollection = userLikes.map((card) => {
-    return (
-      <TweetCard
-        key={card.TweetId}
-        card={card}
-        userInfo={userInfo}
-        id={card.TweetId}
-      />
-    );
+  // 等資料用好 把map的 card 改成 tweet, 傳tweet跟 homePage的 card 做區分，刪除 userInfo
+  const { userLikes } = useOutletContext();
+  const userLikesCollection = userLikes.map((tweet) => {
+    return <TweetCard key={tweet.TweetId} tweet={tweet} id={tweet.TweetId} />;
   });
   return <div>{userLikesCollection}</div>;
 };

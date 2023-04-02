@@ -17,31 +17,31 @@ export const StyledHeader = styled.div`
 export const StyledContentDiv = styled.div`
   flex-direction: column;
   padding: 1rem 1.8125rem 1.0625rem 0.5rem;
-  width: 528px;
+  width: ${({ width }) => width || '528px'}
   & .cardName {
-    font-style: normal;
-    font-weight: 700;
-    font-size: var(--fs-basic);
-    line-height: 1.625rem;
-    color: var(--color-gray-900);
-  }
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--fs-basic);
+  line-height: 1.625rem;
+  color: var(--color-gray-900);
+}
   &.cardAccount {
-    font-style: normal;
-    font-weight: 400;
-    font-size: var(--fs-secondary);
-    line-height: 1.375rem;
-    color: var(--color-secondary);
-  }
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--fs-secondary);
+  line-height: 1.375rem;
+  color: var(--color-secondary);
+}
   & .styledContent {
-    width: 33rem;
-    height: auto;
-    min-height: 4.875rem;
-    font-style: normal;
-    font-weight: 400;
-    font-size: var(--fs-basic);
-    line-height: 1.625rem;
-    color: var(--color-gray-900);
-  }
+  width: ${({ width }) => width || '33rem'}
+  height: auto;
+  min-height: 4.875rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--fs-basic);
+  line-height: 1.625rem;
+  color: var(--color-gray-900);
+}
 `;
 export const StyledImgDiv = styled(StyledAvatar)`
   padding-top: 1rem;
@@ -71,12 +71,19 @@ export const StyledItemDiv = styled.div`
 
 export const StyledActions = styled(StyledItemDiv)`
   margin-top: 8px;
-  > div {
+  .iconDiv {
     display: flex;
     align-items: center;
     margin-right: 41.3px;
     & .iconAction {
+      cursor: pointer;
       margin-right: 9.3px;
+    }
+    .NavLink {
+      color: inherit;
+      text-decoration: none;
+      margin: 0;
+      padding: 0;
     }
   }
 `;
@@ -89,8 +96,6 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledTextarea = styled.textarea.attrs({
-  placeholder: '有什麼新鮮事?',
-  maxLength: '140',
   // 日後挑戰，使用者可繼續打(textarea框會長高)，但超過140個字就會跳錯誤提示
 })`
   width: ${({ width }) => width};

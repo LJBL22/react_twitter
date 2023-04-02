@@ -9,12 +9,7 @@ import {
   getUserRelies,
   getUserLikes,
 } from 'api/user';
-import styled from 'styled-components';
-
-const StyledDiv = styled.div`
-  height: calc(100vh-73px);
-  overflow-y: scroll;
-`;
+import { ScrollBar } from 'pages/HomePage';
 
 const UsersPage = () => {
   // 拿到特定 id 的使用者資料
@@ -72,28 +67,30 @@ const UsersPage = () => {
             goBackLink
             userTweets={userTweets}
           />
-          <StyledDiv>
-            {/* 如果pathname沒有follow，則不含此頁面 */}
-            {!pathname.includes('follow') && (
-              <UserProfile
-                // UserPage 點選的任何 id 使用
-                user={userInfo}
-                key={userInfo.id}
-                // currentUser 是從useUser引入的初始值，部會受UsersPage點選切換=> 當作使用者
-                currentUser={currentUser}
-                onProfileChange={getUserPageData}
+          <ScrollBar>
+            <div>
+              {/* 如果pathname沒有follow，則不含此頁面 */}
+              {!pathname.includes('follow') && (
+                <UserProfile
+                  // UserPage 點選的任何 id 使用
+                  user={userInfo}
+                  key={userInfo.id}
+                  // currentUser 是從useUser引入的初始值，部會受UsersPage點選切換=> 當作使用者
+                  currentUser={currentUser}
+                  onProfileChange={getUserPageData}
+                />
+              )}
+              <Outlet
+                context={{
+                  currentUser,
+                  userInfo,
+                  userTweets,
+                  userReplies,
+                  userLikes,
+                }}
               />
-            )}
-            <Outlet
-              context={{
-                currentUser,
-                userInfo,
-                userTweets,
-                userReplies,
-                userLikes,
-              }}
-            />
-          </StyledDiv>
+            </div>
+          </ScrollBar>
         </div>
       )}
     </>
