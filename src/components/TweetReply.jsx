@@ -63,6 +63,8 @@ const TweetReply = ({
   onChange,
   onAddReply,
   isInputValueValid,
+  showModal,
+  setShowModal,
 }) => {
   const { handleLike, userLikes } = useUser();
   const [currentLikeCounts, setCurrentLikeCounts] = useState(
@@ -123,6 +125,8 @@ const TweetReply = ({
               onChange={onChange}
               onAddReply={onAddReply}
               isInputValueValid={isInputValueValid}
+              showModal={showModal}
+              setShowModal={setShowModal}
             />
             <button className={`likeBtn ${disabled ? 'disabled' : ''}`}>
               {isLiked ? (

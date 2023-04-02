@@ -126,14 +126,9 @@ export const ReplyModal = ({
   onChange,
   onAddReply,
   isInputValueValid,
+  showModal,
+  setShowModal,
 }) => {
-  const { currentMember } = useAuth();
-  const [showModal, setShowModal] = useState(false);
-  // console.log('singleTweet', singleTweet);
-  // const handleShowModal = () => {
-  //   const nextShowModal = !showModal;
-  //   setShowModal(nextShowModal);
-  // };
   return (
     <>
       <IconReply

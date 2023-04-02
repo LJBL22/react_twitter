@@ -10,6 +10,7 @@ import { IconLikeOut, IconReply, IconLikeFi } from 'assets/icons';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { useUser } from 'contexts/UserContext';
+import { ReplyModal } from './Modal';
 
 const StyledReplyActions = styled.div`
   & .replyAccount {
@@ -98,10 +99,12 @@ function TweetCard({ card, id, tweet }) {
           </div>
         </NavLink>
         <StyledActions>
+          {/* <NavLink to={`/tweets/${id}`}> */}
           <div>
             <IconReply width='0.825rem' className='iconAction' />
             {tweet ? tweet.repliesNum : card.repliesNum}
           </div>
+          {/* </NavLink> */}
           <div className={disabled ? 'disabled' : ''}>
             {isLiked ? (
               <IconLikeFi
