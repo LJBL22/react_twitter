@@ -49,11 +49,20 @@ const AdminTweetCard = ({ tweet }) => {
   const { description, createdAt, User } = tweet;
   const { account, name, avatar } = User;
   return (
-    <StyledCardDiv divWidth='100%'>
+    <StyledCardDiv divWidth='937px' style={{ overflow: 'hidden' }}>
       <StyledImgDiv>
         <img src={avatar} alt='avatar' />
       </StyledImgDiv>
-      <StyledContentDiv width='100%'>
+      <StyledContentDiv
+        style={{
+          width: '90%',
+          position: 'relative',
+          padding: '1rem',
+          // 'white-space': 'nowrap',
+          // overflow: 'hidden',
+          // 'text-overflow': 'ellipsis',
+        }}
+      >
         <StyledItemDiv>
           <p className='cardName'>{name}</p>
           &ensp;
@@ -61,8 +70,16 @@ const AdminTweetCard = ({ tweet }) => {
             @{account}・{formatDate(createdAt)}
           </p>
         </StyledItemDiv>
-        <div className='styledContent' style={{ position: 'relative' }}>
-          {description}
+        <div className='styledContent'>
+          <span
+            style={{
+              display: 'inline-block',
+              maxWidth: '100%',
+              verticalAlign: 'bottom',
+            }}
+          >
+            {description}
+          </span>
           <StyleDelete>
             <IconClose
               width='2rem'
@@ -108,8 +125,9 @@ const formatDate = (dateString) => {
 
 const StyleDelete = styled.div`
   position: absolute;
-  right: 5px;
+  right: -1rem;
   top: 50%;
+  transform: translateY(-50%);
   .iconAction {
     color: var(--color-theme);
   }
