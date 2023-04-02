@@ -124,7 +124,7 @@ export const ReplyModal = ({
   singleTweet,
   replyInput,
   onChange,
-  onClick,
+  onAddReply,
   isReplyValueValid,
 }) => {
   const { currentMember } = useAuth();
@@ -192,7 +192,7 @@ export const ReplyModal = ({
                     borderBottom='none'
                     tweetValue={replyInput}
                     onChange={onChange}
-                    onClick={onClick}
+                    onClick={onAddReply}
                     isInputValid={isReplyValueValid}
                     placeholder={'推你的回覆'}
                   />

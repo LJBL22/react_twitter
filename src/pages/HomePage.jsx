@@ -81,7 +81,7 @@ const HomePage = () => {
             height='auto'
             divWidth='40.0625rem'
             divHeight='8.625rem'
-            tweetValue={tweetInput}
+            tweetInput={tweetInput}
             onChange={handleChange}
             onClick={handleAddTweet}
             isInputValid={isInputValueValid}

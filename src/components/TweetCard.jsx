@@ -61,7 +61,7 @@ function TweetCard({ card, userInfo, id }) {
   const likesNum = userInfo ? userInfo.likesNum : card.likesNum;
   const [currentLikeCounts, setCurrentLikeCounts] = useState(likesNum);
   const isLiked = userLikes.some((tweet) => tweet.TweetId === id);
-  // console.log('card', card);
+  console.log('card', card);
   const handleLikeTweet = async () => {
     setDisabled(true);
     await handleLike(card.id);
