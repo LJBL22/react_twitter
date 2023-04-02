@@ -6,9 +6,60 @@ A Twitter-like project which bootstrapped with [Create React App](https://github
 
 ![Design](/public/designScreenshot.png)
 
+## 🎮 [DEMO](https://ljbl22.github.io/react_twitter/) page
+
+- DEMO info:
+  | Type | Account | Password |
+  |--------|---------|--------------|
+  | Sign In | user1 | 12345678 |
+  | Admin Panel | root | 12345678 |
+
 ## 👀 Add Feature:
 
-Phase 1: _feature goes here._
+- Registration/Login/Logout
+
+  - users must log in to use the website.
+  - During registration, users can set their account, name, email, and password.
+  - Users can edit their account, name, email, and password.
+  - Users can edit their name, self-introduction, profile picture, and cover photo.
+
+![.](/public/SignIn.png)
+
+- Post and Comments
+
+  - Users can browse all the tweets on the home page.
+  - All tweets are sorted by create date, with the newest at the top.
+  - When clicking on a tweet, users can view the tweet and its comment thread.
+  - Users can reply to other users' tweets.
+  - When clicking on a user's avatar in a tweet, users can browse that user's profile and tweets.
+  - Users can create a new tweet.
+  - The tweet content is limited to 140 characters.
+  - The tweet content cannot be blank.
+    ![.](/public/HomePage.png)
+
+- User Interactions
+
+  - Users can follow/unfollow other users
+  - Users can like/unlike other users' tweets
+
+- Data Summary
+
+  - Any logged-in user can browse the following information of a specific user:
+    - Tweets: sorted by date, newest first.
+    - Tweets and replies: content that the user has replied to, sorted by date, newest first.
+    - Following: the list of users that the user is following, sorted by the time of the follow record, with the newest at the front.
+    - Followers: the list of users who are following the user, sorted by the time of the follow record, with the newest at the front.
+    - Likes: the list of tweets that the user has liked, sorted by the time of the like record, with the newest at the front.
+  - Users can see a recommended top 10 list of followers, sorted by the number of followers, on the sidebar of the homepage.
+    ![.](/public/UserInfo.png)
+
+- Admin Panel
+  - Administrators can access the website backend through a dedicated login page.
+  - Administrator accounts cannot access the frontend.
+  - Administrators can view the entire list of Tweets on the website.
+  - Administrators can delete any user's Tweet directly from the list.
+  - Administrators can view the list of all users on the website, including: - User social activity data, including - Number of Tweets (the total number of Tweets accumulated by the user) - Number of following - Number of followers - Number of Tweets liked (the total number of Tweets liked by the user) - The user list is sorted by the number of Tweets by default, from most to least.
+    ![.](/public/AdminPanel.png)
 
 ## 🛠️ Develop Tools and Packages Used
 
