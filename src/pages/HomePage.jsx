@@ -85,6 +85,7 @@ const HomePage = () => {
             onChange={handleChange}
             onClick={handleAddTweet}
             isInputValid={isInputValueValid}
+            placeholder={'有什麼新鮮事?'}
           />
           <StyledDivider />
           <TweetCollection tweets={tweets} />

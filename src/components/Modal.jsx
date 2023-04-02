@@ -18,12 +18,10 @@ import {
   StyledContentDiv,
   StyledItemDiv,
   StyledImgDiv,
-  StyledTextarea,
   StyledForm,
 } from 'components/styles/InputTweet.styled';
 import { StyledMainCard } from './TweetReply';
 import { useAuth } from 'contexts/AuthContext';
-import { formatDate } from 'components/TweetCard';
 
 export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -111,6 +109,7 @@ export const TweetModal = () => {
                   onChange={handleChange}
                   onClick={handleAddTweet}
                   isInputValid={isInputValueValid}
+                  placeholder={'有什麼新鮮事?'}
                 />
               </div>
             </div>
@@ -122,22 +121,19 @@ export const TweetModal = () => {
 };
 
 export const ReplyModal = ({
-  onChange,
   singleTweet,
-  currentUser,
   replyInput,
-  onAddReply,
-  // onClose
+  onChange,
+  onClick,
+  isReplyValueValid,
 }) => {
-  const [showModal, setShowModal] = useState(false);
   const { currentMember } = useAuth();
+  const [showModal, setShowModal] = useState(false);
+  // console.log('singleTweet', singleTweet);
   // const handleShowModal = () => {
   //   const nextShowModal = !showModal;
   //   setShowModal(nextShowModal);
   // };
-
-  console.log('singleTweet2', singleTweet);
-
   return (
     <>
       <IconReply
@@ -146,76 +142,61 @@ export const ReplyModal = ({
         onClick={() => setShowModal(true)}
       />
       {showModal && (
-        // <ReplyModal
-        //   // tweet={tweet}
-        //   // currentUser={currentUser}
-        //   // replyInput={replyInput}
-        //   // onChange={onChange}
-        //   // onAddReply={onAddReply}
-        //   onClose={handleShowModal}
-        // />
         <>
           <Modal>
-            <div className='modal-background show'></div>
-            <div className='modal'>
-              <div className='modal-content'>
-                <div
-                  style={{
-                    padding: '1rem',
-                    borderBottom: '1px solid var(--color-gray-border)',
-                  }}
-                >
-                  <IconDanger onClick={() => setShowModal(false)} />
-                </div>
-                <StyledMainCard borderBottom='none'>
-                  <StyledImgDiv>
-                    <img src={singleTweet.User.avatar} alt='avatar' />
-                  </StyledImgDiv>
-                  <StyledContentDiv>
-                    <StyledItemDiv>
-                      {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
-                      <p className='cardName'>{singleTweet.User.name}</p>
-                      &ensp;
-                      <p className='cardAccount'>
-                        @{singleTweet.User.account}・{singleTweet.diffTime}
-                      </p>
-                    </StyledItemDiv>
-                    <div className='styledContent'>
-                      {singleTweet.description}
-                    </div>
-                    <div>
-                      回覆給<span>@{singleTweet.User.account}</span>
-                    </div>
-                  </StyledContentDiv>
-                </StyledMainCard>
-                <StyledCardDiv
-                // divWidth={divWidth}
-                // divHeight={divHeight}
-                // borderBottom={borderBottom}
-                >
-                  <StyledImgDiv>
-                    <img src={currentMember().avatar} alt='avatar' />
-                  </StyledImgDiv>
-                  <StyledForm
-                    onSubmit={(e) => {
-                      e.preventDefault();
+            <div
+              className='modal-background show'
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <div className='modal'>
+                <div className='modal-content'>
+                  <div
+                    style={{
+                      padding: '1rem',
+                      borderBottom: '1px solid var(--color-gray-border)',
                     }}
                   >
-                    <StyledTextarea
-                    // width={width}
-                    // height={height}
-                    // onChange={(e) => onChange?.(e.target.value)}
-                    // value={tweetInput}
-                    />
-                    {/* submit 以後，text 設定為空值 */}
-                    <button
-                    // onClick={() => onClick?.()}
-                    // disabled={!isInputValid}
-                    >
-                      推文
-                    </button>
-                  </StyledForm>
-                </StyledCardDiv>
+                    <IconDanger onClick={() => setShowModal(false)} />
+                  </div>
+                  <StyledMainCard
+                    borderBottom='none'
+                    style={{ minHeight: '10.18rem' }}
+                  >
+                    <StyledImgDiv>
+                      <img src={singleTweet.User.avatar} alt='avatar' />
+                    </StyledImgDiv>
+                    <StyledContentDiv>
+                      <StyledItemDiv>
+                        {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
+                        <p className='cardName'>{singleTweet.User.name}</p>
+                        &ensp;
+                        <p className='cardAccount'>
+                          @{singleTweet.User.account}・{singleTweet.diffTime}
+                        </p>
+                      </StyledItemDiv>
+                      <div className='styledContent'>
+                        {singleTweet.description}
+                      </div>
+                      <div>
+                        回覆給<span>@{singleTweet.User.account}</span>
+                      </div>
+                    </StyledContentDiv>
+                  </StyledMainCard>
+                  <InputTweet
+                    width='32.875rem'
+                    height='auto'
+                    divWidth='40.0625rem'
+                    divHeight='10rem'
+                    borderBottom='none'
+                    tweetValue={replyInput}
+                    onChange={onChange}
+                    onClick={onClick}
+                    isInputValid={isReplyValueValid}
+                    placeholder={'推你的回覆'}
+                  />
+                </div>
               </div>
             </div>
           </Modal>

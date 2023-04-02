@@ -46,7 +46,7 @@ const ReplyActions = styled.div`
     color: var(--color-secondary);
   }
 
-  button {
+  .likeBtn {
     background-color: transparent;
     border: none;
     outline: none;
@@ -57,7 +57,7 @@ const ReplyActions = styled.div`
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
 //eslint-disable-next-line
-const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
+const TweetReply = ({ singleTweet, replyInput, onChange, onClick }) => {
   const { handleLike, userLikes } = useUser();
   const [currentLikeCounts, setCurrentLikeCounts] = useState(
     singleTweet.likesNum
@@ -76,13 +76,6 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
     // setDisable 去讓前面的setState可以更新畫面
     setDisabled(false);
   };
-
-  // const [showModal, setShowModal] = useState(false);
-
-  // const handleShowModal = () => {
-  //   const nextShowModal = !showModal;
-  //   setShowModal(nextShowModal);
-  // };
 
   return (
     <>
@@ -116,9 +109,13 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
           </ReplyActions>
           <BorderDivider />
           <ReplyActions>
-            {console.log('singleTweet', singleTweet)}
-            <ReplyModal singleTweet={singleTweet} />
-            <button className={disabled ? 'disabled' : ''}>
+            <ReplyModal
+              singleTweet={singleTweet}
+              replyInput={replyInput}
+              onChange={onChange}
+              onClick={onClick}
+            />
+            <button className={`likeBtn ${disabled ? 'disabled' : ''}`}>
               {isLiked ? (
                 <IconLikeFi className='icon' onClick={handleLikeTweet} />
               ) : (

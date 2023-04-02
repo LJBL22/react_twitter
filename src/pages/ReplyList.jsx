@@ -5,7 +5,7 @@ import TweetReply from 'components/TweetReply';
 import { ReplyCollection } from 'components/TweetCollection';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
-import { getSingleTweet, getReplies } from 'api/tweet';
+import { getSingleTweet, getReplies, replyTweet } from 'api/tweet';
 import { useUser } from 'contexts/UserContext';
 
 export const BackHeader = styled(StyledHeader)`
@@ -33,7 +33,7 @@ const ReplyList = () => {
   const navigate = useNavigate();
   const { tweetId } = useParams();
   const { currentUser } = useUser();
-  console.log('currentUserReply', currentUser);
+  // console.log('currentUserReply', currentUser);
   // 瀏覽單則推文
   const [singleTweet, setSingleTweet] = useState({});
   // 留言回覆
@@ -41,8 +41,6 @@ const ReplyList = () => {
   // 回覆 input 狀態
   const [replyInput, setReplyInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  // console.log('singleTweet', singleTweet);
-  // console.log('replies', replies);
 
   // 使用 handleClick 點擊其中一推文後，可瀏覽該則推文，及其相關回覆
   useEffect(() => {
@@ -75,21 +73,51 @@ const ReplyList = () => {
     setReplyInput(value);
   };
 
-  // const handleAddReply = async () => {
-  //   try {
-  //     const data = await replyTweet({
-  //       id: singleTweet.id,
-  //       comment: replyInput,
-  //     });
-  //     if (data === 'error') return;
-  //     // 思考加這行的好處?
+  const handleAddReply = async () => {
+    if (replyInput.length === 0) {
+      return;
+    }
+    try {
+      const data = await replyTweet({
+        id: singleTweet.id,
+        comment: replyInput,
+      });
+      if (data === 'error') return;
+      // 思考加這行的好處?
+      // setTweets
+      const newTweetReplies = [
+        {
+          id: singleTweet.id,
+          comment: replyInput,
+          UserId: data.UserId,
+          TweetId: data.TweetId,
+          createdAt: data.createdAt,
+          updatedAt: data.updatedAt,
+          User: {
+            account: currentUser.account,
+            avatar: currentUser.avatar,
+            name: currentUser.name,
+          },
+        },
+        ...tweetReplies,
+      ];
 
-  //     // setTweets
-  //     // const nextTweetReplies = [{}];
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      const nextSingleTweet = {
+        ...singleTweet,
+        User: { ...singleTweet.User },
+        repliesNum: singleTweet.repliesNum + 1,
+      };
+
+      setTimeout(() => {
+        setTweetReplies(newTweetReplies);
+        setSingleTweet(nextSingleTweet);
+        setReplyInput('');
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     singleTweet.id && (
       <div>
@@ -108,6 +136,7 @@ const ReplyList = () => {
           currentUser={currentUser}
           replyInput={replyInput}
           onChange={handleInputChange}
+          onAddReply={handleAddReply}
         />
         {!isLoading && tweetReplies !== null && (
           <ReplyCollection replies={tweetReplies} replyTo={singleTweet} />
