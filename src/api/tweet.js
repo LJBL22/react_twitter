@@ -46,7 +46,7 @@ export const createTweet = async ({ description }) => {
 export const getSingleTweet = async (tweetId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${tweetId}`);
-    console.log('res_getATweet', res.data);
+    // console.log('res_getATweet', res.data);
     return res.data;
   } catch (error) {
     console.error(`[Get a tweet failed]`, error);
@@ -57,7 +57,7 @@ export const getSingleTweet = async (tweetId) => {
 export const getReplies = async (tweetId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${tweetId}/replies`);
-    console.log('res_getReplies', res.data);
+    // console.log('res_getReplies', res.data);
     return res.data;
   } catch (error) {
     console.error(`[Get all tweet replies failed]`, error);

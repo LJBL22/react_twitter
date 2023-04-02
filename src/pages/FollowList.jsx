@@ -45,28 +45,24 @@ const StyledContent = styled(StyledContentDiv)`
 
 const FollowList = () => {
   const { pathname } = useLocation();
-  // 使用者追蹤清單
+  // 從UserPage 拿到正在瀏覽的用戶追蹤清單
   const { userInfo } = useOutletContext();
-  const { currentUser, userFollowings } = useUser();
-  console.log('currentUserFo', currentUser);
+  // userFollowings 存取 追蹤id
+  const { userFollowings, setUserFollowings } = useUser();
+  // console.log('userFollowings', userFollowings);
   // 更新使用者的追蹤 與被追蹤狀態
-  const [userFollowingList, setUserFollowingList] = useState([]);
   const [userFollower, setUserFollower] = useState([]);
   // 用這行在非同步拿到資料前，可以不會噴錯
   const [isLoading, setIsLoading] = useState(true);
-
   let renderedFollowList;
-
   if (pathname.includes('following')) {
-    renderedFollowList = userFollowingList.map((user) => {
-      // console.log('following', user);
+    renderedFollowList = userFollowings.map((user) => {
       return (
         <FollowItem key={user.followingId} user={user} id={user.followingId} />
       );
     });
   } else {
     renderedFollowList = userFollower.map((user) => {
-      // console.log('follower', user);
       return (
         <FollowItem key={user.followerId} user={user} id={user.followerId} />
       );
@@ -76,12 +72,12 @@ const FollowList = () => {
   useEffect(() => {
     const getUserFollowStatus = async () => {
       try {
+        // 處理 localStorage 裡面沒有 token 的情境
+        if (!userInfo.id) return;
         const followers = await getFollowers(userInfo.id);
         const following = await getFollowings(userInfo.id);
-        console.log('er', followers);
-        console.log('ing', following);
         setUserFollower(followers);
-        setUserFollowingList(following);
+        setUserFollowings(following);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -89,8 +85,8 @@ const FollowList = () => {
     };
     setIsLoading(true);
     getUserFollowStatus();
-    // need to add a dependency userInfo.id or remove dependency
-  }, [userFollowings, userInfo.id]);
+    //eslint-disable-next-line
+  }, [userInfo.id]);
   return (
     <div>
       <FollowTab id={userInfo.id} />
@@ -99,12 +95,10 @@ const FollowList = () => {
   );
 };
 
-// 目前帶出來的 userInfo 是使用者的資料，需替換成追蹤人的
-
 const FollowItem = ({ user, id }) => {
-  const { handleFollow } = useUser();
+  const { userFollowings, handleFollow } = useUser();
   const [disabled, setDisabled] = useState(false);
-
+  const isFollowed = userFollowings.some((user) => user.followingId === id);
   const handleFollowClick = async () => {
     setDisabled(true);
     await handleFollow(id);
@@ -122,15 +116,14 @@ const FollowItem = ({ user, id }) => {
         <div className='follower'>
           {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
           <p className='cardName'>{user.name}</p>
-
           <button
-            className={`${user.isFollowed ? 'active' : ''} ${
+            className={`${isFollowed ? 'active' : ''} ${
               disabled ? 'disabled' : ''
             }`}
             type='button'
             onClick={handleFollowClick}
           >
-            {user.isFollowed ? '正在跟隨' : '跟隨'}
+            {isFollowed ? '正在跟隨' : '跟隨'}
           </button>
         </div>
         <NavLink to={`/users/${user.id}/tweets`}>

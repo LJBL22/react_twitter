@@ -40,7 +40,7 @@ export const FollowshipProvider = ({ children }) => {
       const data = await createTweet({
         description: inputValue,
       });
-      console.log('data', data);
+      // console.log('data', data);
       const newTweet = {
         id: data.data.id,
         description: data.data.description,
