@@ -18,10 +18,10 @@ export const login = async ({ account, password }) => {
     return data;
   } catch (error) {
     const { data, status } = error.response;
-    if (status === 400) {
+    if (status === 401) {
       return { status: 'error', statusText: data.statusText };
     }
-    if (status === 404) {
+    if (status === 403) {
       return { status: 'error', statusText: data.statusText };
     }
     console.log('[Login Failed]:', error);

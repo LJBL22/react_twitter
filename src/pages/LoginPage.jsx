@@ -35,7 +35,7 @@ const LoginPage = () => {
     console.log('success', success);
     console.log('account', account);
     console.log('password', password);
-    if (success) {
+    if (!success) {
       Swal.fire({
         title: '登入成功',
         icon: 'success',
@@ -46,7 +46,7 @@ const LoginPage = () => {
       navigate('/tweets');
       return;
     }
-    if (status === 'error' && statusText)
+    if (status === 'error')
       Swal.fire({
         title: '登入失敗',
         icon: 'error',
