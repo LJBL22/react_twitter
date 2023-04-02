@@ -117,6 +117,9 @@ const ReplyList = () => {
       console.log(error);
     }
   };
+  const words = replyInput.trim().split(/\s+/);
+  const isInputValueValid = replyInput.length > 0 && words.length < 140;
+  // console.log('isinputttt', isInputValueValid);
 
   return (
     singleTweet.id && (
@@ -133,10 +136,10 @@ const ReplyList = () => {
         </BackHeader>
         <TweetReply
           singleTweet={singleTweet}
-          currentUser={currentUser}
           replyInput={replyInput}
           onChange={handleInputChange}
           onAddReply={handleAddReply}
+          isInputValueValid={isInputValueValid}
         />
         {!isLoading && tweetReplies !== null && (
           <ReplyCollection replies={tweetReplies} replyTo={singleTweet} />

@@ -21,6 +21,12 @@ function InputTweet({
 }) {
   const { currentUser } = useUser();
 
+  console.log('twee', tweetValue);
+  console.log('onChange', onChange);
+  console.log('onClick', onClick);
+  console.log('isInputValid', isInputValid);
+  console.log('placeholder', placeholder);
+
   return (
     <StyledCardDiv
       divWidth={divWidth}

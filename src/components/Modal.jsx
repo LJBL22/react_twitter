@@ -125,7 +125,7 @@ export const ReplyModal = ({
   replyInput,
   onChange,
   onAddReply,
-  isReplyValueValid,
+  isInputValueValid,
 }) => {
   const { currentMember } = useAuth();
   const [showModal, setShowModal] = useState(false);
@@ -190,11 +190,11 @@ export const ReplyModal = ({
                     divWidth='40.0625rem'
                     divHeight='10rem'
                     borderBottom='none'
+                    placeholder={'推你的回覆'}
                     tweetValue={replyInput}
                     onChange={onChange}
                     onClick={onAddReply}
-                    isInputValid={isReplyValueValid}
-                    placeholder={'推你的回覆'}
+                    isInputValid={isInputValueValid}
                   />
                 </div>
               </div>

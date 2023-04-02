@@ -57,7 +57,13 @@ const ReplyActions = styled.div`
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
 //eslint-disable-next-line
-const TweetReply = ({ singleTweet, replyInput, onChange, onAddReply }) => {
+const TweetReply = ({
+  singleTweet,
+  replyInput,
+  onChange,
+  onAddReply,
+  isInputValueValid,
+}) => {
   const { handleLike, userLikes } = useUser();
   const [currentLikeCounts, setCurrentLikeCounts] = useState(
     singleTweet.likesNum
@@ -76,6 +82,8 @@ const TweetReply = ({ singleTweet, replyInput, onChange, onAddReply }) => {
     // setDisable 去讓前面的setState可以更新畫面
     setDisabled(false);
   };
+
+  // console.log('isinputttt', isInputValueValid);
 
   return (
     <>
@@ -114,6 +122,7 @@ const TweetReply = ({ singleTweet, replyInput, onChange, onAddReply }) => {
               replyInput={replyInput}
               onChange={onChange}
               onAddReply={onAddReply}
+              isInputValueValid={isInputValueValid}
             />
             <button className={`likeBtn ${disabled ? 'disabled' : ''}`}>
               {isLiked ? (
