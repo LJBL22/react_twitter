@@ -177,8 +177,7 @@ export const ReplyModal = ({
                       <p className='cardName'>{singleTweet.User.name}</p>
                       &ensp;
                       <p className='cardAccount'>
-                        @{singleTweet.User.account}・
-                        {formatDate(singleTweet.createdAt)}
+                        @{singleTweet.User.account}・{singleTweet.diffTime}
                       </p>
                     </StyledItemDiv>
                     <div className='styledContent'>
