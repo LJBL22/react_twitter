@@ -3,6 +3,7 @@ import { adminGetAllUsers } from 'api/admin';
 import { IconLikeOut, IconPost } from 'assets/icons';
 // import { IconLikeOut, IconPost } from 'assets/icons';
 import { Header } from 'components/common/common.styled';
+import { ScrollBar } from 'pages/HomePage';
 // import { ScrollBar } from 'pages/HomePage';
 import React from 'react';
 import { useEffect, useState } from 'react';
@@ -34,19 +35,20 @@ const AdminUsersPage = () => {
   const StyledContainer = styled.div`
     padding: 1rem;
     display: grid;
-    grid-template: 1rem / repeat(4, 1fr);
+    grid-template: auto / repeat(4, 1fr);
     gap: 1rem;
   `;
-  // users.map((user) => {
-  //     return <UserCard key={user.id} user={user} />
-  // });
 
   return (
     <>
-      <StyledContainer>
-        <Header>使用者列表</Header>
-        <UserCard />
-      </StyledContainer>
+      <Header>使用者列表</Header>
+      <ScrollBar>
+        <StyledContainer>
+          {users.map((user) => {
+            return <UserCard key={user.id} user={user} />;
+          })}
+        </StyledContainer>
+      </ScrollBar>
     </>
   );
 };
@@ -64,13 +66,9 @@ const UserCard = ({ user }) => {
   } = user;
   return (
     <>
-      <StyledCard>
-        <div className='cover'>
-          <img src={coverUrl} alt='cover' />
-          <div className='avatar'>
-            <img scr={avatar} alt='avatar' />
-          </div>
-        </div>
+      <StyledCard backgroundImage={coverUrl}>
+        <div className='cover'></div>
+        <img src={avatar} alt='avatar' className='avatar' />
         <StyledTitle>
           <h2>{name}</h2>
           <p>@{account}</p>
@@ -97,6 +95,7 @@ const UserCard = ({ user }) => {
     </>
   );
 };
+
 const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -105,16 +104,17 @@ const StyledCard = styled.div`
   height: 314px;
   background-color: var(--color-gray-200);
   border-radius: 10px;
-  .cover {
+  position: relative;
+  > .cover {
     border-radius: 10px 10px 0 0;
+    width: 100%;
     height: 140px;
-    position: relative;
     background-image: url(${(props) => props.backgroundImage});
   }
-  .avatar {
+  > .avatar {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 20%;
     transform: translateX(-50%);
     width: 100px;
     height: 100px;
@@ -124,6 +124,7 @@ const StyledCard = styled.div`
 `;
 
 const StyledTitle = styled.div`
+  text-align: center;
   padding: 2rem 0 1rem 0;
   h2 {
     font-size: 1rem;
