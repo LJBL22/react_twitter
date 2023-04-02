@@ -60,17 +60,31 @@ export const UserProvider = ({ children }) => {
   // 每次 handleFollow 完都要拿到最新的 userFollowingID List
   const handleFollow = async (id) => {
     try {
-      //userFollowings = [1,2,3] 只能用來儲存followingId
-      if (userFollowings.includes(id)) {
-        await unfollow(id);
+      const userFollowProfile = await getUserData(id);
+      const userFollowings = await getFollowings(currentMember().id);
+      if (userFollowings.some((user) => user.followingId === id)) {
+        const unFollower = await unfollow(id);
+        // console.log('un', unFollower);
         const newFollowList = userFollowings.filter(
-          (followingId) => followingId !== id
+          (user) => user.followingId !== unFollower.followingId
         );
         setUserFollowings(newFollowList);
-        console.log('-following', newFollowList);
+        // console.log('-following', newFollowList);
       } else {
-        await following(id);
-        const newFollowList = [...userFollowings, id];
+        //eslint-disable-next-line
+        const newFollower = await following(id);
+        // if (newFollower.followingId !== userFollowProfile.id) return;
+        // console.log('new', newFollower);
+        const newFollowList = [
+          ...userFollowings,
+          {
+            avatar: userFollowProfile.avatar,
+            name: userFollowProfile.name,
+            introduction: userFollowProfile.introduction,
+            followingId: userFollowProfile.id,
+            isFollowed: 0,
+          },
+        ];
         setUserFollowings(newFollowList);
         console.log('+following', newFollowList);
       }
@@ -99,7 +113,6 @@ export const UserProvider = ({ children }) => {
       }
     };
     getUserAsync();
-    // 這邊是否要把'setUserFollowings' and 'setUserLikes 寫進去才合理呢?
   }, [id, setCurrentUser]);
 
   // 這裡的 currentUser 是拿到login的 ID ，所以是使用者

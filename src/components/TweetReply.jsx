@@ -8,7 +8,10 @@ import {
 import { StyledCardDiv } from 'components/common/common.styled';
 import { IconLikeOut } from 'assets/icons';
 // import { useState } from 'react';
+import { IconLikeOut } from 'assets/icons';
+// import { useState } from 'react';
 import { ReplyModal } from './Modal';
+import { NavLink } from 'react-router-dom';
 
 export const StyledMainCard = styled(StyledCardDiv)`
   width: 40.0625rem;
@@ -39,8 +42,9 @@ const ReplyActions = styled(StyledActions)`
 `;
 
 // 要先掛上 getReply 的API 去拿到裡面的id 來使用
+//eslint-disable-next-line
 const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
-  console.log('ere', singleTweet);
+  // console.log('ere', singleTweet);
   // const [showModal, setShowModal] = useState(false);
 
   // const handleShowModal = () => {
@@ -53,9 +57,11 @@ const TweetReply = ({ singleTweet, currentUser, replyInput, onChange }) => {
       <StyledMainCard>
         <div>
           <StyledItemDiv>
-            <StyledImgDiv>
-              <img src={singleTweet.User.avatar} alt='avatar' />
-            </StyledImgDiv>
+            <NavLink to={`/users/${singleTweet.UserId}/tweets`}>
+              <StyledImgDiv>
+                <img src={singleTweet.User.avatar} alt='avatar' />
+              </StyledImgDiv>
+            </NavLink>
             <div className='paddingL'>
               <p>{singleTweet.User.name}</p>
               <p>{singleTweet.User.account}</p>
