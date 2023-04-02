@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 const UserTweets = () => {
+  // 等資料用好 把map的 card 改成 tweet, 傳tweet跟 homePage的 card 做區分，刪除 userInfo
   const { userInfo, userTweets } = useOutletContext();
   const userTweetsCollection = userTweets.map((card) => {
     return <TweetCard key={card.TweetId} card={card} userInfo={userInfo} />;
@@ -27,6 +28,7 @@ const UserReplied = () => {
 };
 
 const UserLikes = () => {
+  // 等資料用好 把map的 card 改成 tweet, 傳tweet跟 homePage的 card 做區分，刪除 userInfo
   const { userInfo, userLikes } = useOutletContext();
   const userLikesCollection = userLikes.map((card) => {
     return (

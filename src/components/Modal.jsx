@@ -23,7 +23,7 @@ import {
 } from 'components/styles/InputTweet.styled';
 import { StyledMainCard } from './TweetReply';
 import { useAuth } from 'contexts/AuthContext';
-import { formatDate } from './TweetCard';
+import { formatDate } from 'components/TweetCard';
 
 export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
