@@ -49,7 +49,8 @@ export async function adminGetAllUsers() {
     const res = await axiosInstance.get(`${baseUrl}/admin/users`);
     // 回傳一個陣列
     console.log(res.data)
-    return res.data;
+    const user = res.data
+    return user;
   } catch (error) {
     console.error('[Admin get users failed]: ', error);
   }
