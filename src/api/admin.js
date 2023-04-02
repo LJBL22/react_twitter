@@ -37,8 +37,9 @@ export async function deleteTweet
   (id) {
   try {
     const res = await axiosInstance.delete(`${baseUrl}/admin/tweets/${id}`);
-    const { data, status } = res;
-    return { data, status };
+    const tweet = res.data;
+    console.log(tweet)
+    return tweet;
   } catch (error) {
     console.error('[Admin Delete Tweet failed]:', error);
   }

@@ -1,6 +1,6 @@
 import { Header } from 'components/common/common.styled';
 import { ScrollBar } from 'pages/HomePage';
-import { adminGetTweets } from 'api/admin';
+import { adminGetTweets, deleteTweet } from 'api/admin';
 import React, { useEffect, useState } from 'react';
 import { IconClose } from 'assets/icons';
 import { StyledCardDiv } from 'components/common/common.styled';
@@ -15,7 +15,21 @@ import styled from 'styled-components';
 export default function AdminTweetsPage() {
   const [tweets, setTweets] = useState([]);
   const navigate = useNavigate();
-
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm('確定要刪除？');
+    if (confirmed) {
+      try {
+        await deleteTweet(id);
+        setTweets((prevAllTweets) =>
+          prevAllTweets.filter((tweet) => {
+            return tweet.id !== id;
+          })
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   useEffect(() => {
     const adminToken = localStorage.getItem('token');
     if (!adminToken) {
@@ -38,16 +52,23 @@ export default function AdminTweetsPage() {
       <Header>推文清單</Header>
       <ScrollBar>
         {tweets.map((tweet) => {
-          return <AdminTweetCard key={tweet.id} tweet={tweet} />;
+          return (
+            <AdminTweetCard
+              key={tweet.id}
+              tweet={tweet}
+              onDelete={handleDelete}
+            />
+          );
         })}
       </ScrollBar>
     </>
   );
 }
 
-const AdminTweetCard = ({ tweet }) => {
-  const { description, createdAt, User } = tweet;
+const AdminTweetCard = ({ tweet, onDelete }) => {
+  const { id, description, createdAt, User } = tweet;
   const { account, name, avatar } = User;
+
   return (
     <StyledCardDiv divWidth='937px' style={{ overflow: 'hidden' }}>
       <StyledImgDiv>
@@ -58,9 +79,6 @@ const AdminTweetCard = ({ tweet }) => {
           width: '90%',
           position: 'relative',
           padding: '1rem',
-          // 'white-space': 'nowrap',
-          // overflow: 'hidden',
-          // 'text-overflow': 'ellipsis',
         }}
       >
         <StyledItemDiv>
@@ -80,12 +98,8 @@ const AdminTweetCard = ({ tweet }) => {
           >
             {description}
           </span>
-          <StyleDelete>
-            <IconClose
-              width='2rem'
-              className='iconAction'
-              // onClick={handleClick}
-            />
+          <StyleDelete onClick={() => onDelete(id)}>
+            <IconClose width='2rem' className='iconAction' />
           </StyleDelete>
         </div>
       </StyledContentDiv>
