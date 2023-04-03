@@ -160,7 +160,12 @@ export const ReplyModal = ({
                     <StyledImgDiv>
                       <img src={singleTweet.User.avatar} alt='avatar' />
                     </StyledImgDiv>
-                    <StyledContentDiv>
+                    <StyledContentDiv
+                      style={{
+                        width: '90%',
+                        padding: '1rem',
+                      }}
+                    >
                       <StyledItemDiv>
                         {/* en space，en是字體排印的一個計量單位，寬度是字體寬度的一半 */}
                         <p className='cardName'>{singleTweet.User.name}</p>

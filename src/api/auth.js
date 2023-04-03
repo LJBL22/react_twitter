@@ -17,13 +17,13 @@ export const login = async ({ account, password }) => {
     }
     return data;
   } catch (error) {
-    const { data, status } = error.response;
-    if (status === 400) {
-      return { status: 'error', statusText: data.statusText };
-    }
-    if (status === 404) {
-      return { status: 'error', statusText: data.statusText };
-    }
+    // const { data, status } = error.response;
+    // if (status === 401) {
+    //   return { status: 'error', statusText: data.statusText };
+    // }
+    // if (status === 403) {
+    //   return { status: 'error', statusText: data.statusText };
+    // }
     console.log('[Login Failed]:', error);
   }
 };
@@ -33,7 +33,6 @@ export const register = async ({
   password,
   checkPassword,
   email,
-  errorMsg,
 }) => {
   try {
     await axios.post(`${authURL}/users`, {
@@ -48,14 +47,6 @@ export const register = async ({
     console.error('[Register failed]:', error);
   }
 };
-
-// export const setup = async ({
-//   account,
-//   name,
-//   password,
-//   checkPassword,
-//   email,
-// })
 
 // admin
 export const adminLogin = async ({ account, password }) => {
