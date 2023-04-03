@@ -93,6 +93,15 @@ export const StyledForm = styled.form`
   flex-direction: column;
   align-items: flex-end;
   padding: 0 0 1rem 0;
+  .submitHint {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    .errorHint {
+      color: red;
+      margin: auto 0px;
+    }
+  }
 `;
 
 export const StyledTextarea = styled.textarea.attrs({

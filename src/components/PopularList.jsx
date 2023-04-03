@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { Header, ThemeButton } from './common/common.styled';
 import { getFollow } from 'api/followship';
 import { useEffect, useState } from 'react';
+import { useUser } from 'contexts/UserContext';
+import { useOutletContext } from 'react-router-dom';
+import { useAuth } from 'contexts/AuthContext';
 
 const PopContainer = styled.div`
   min-width: 273px;
@@ -49,17 +52,49 @@ const StyledUserCard = styled.div`
     }
   }
 `;
+
+const FollowBtn = styled(ThemeButton)`
+  background-color: var(--color-white);
+  color: var(--color-theme);
+  border: 1px solid var(--color-theme);
+  transition: background-color 0.1s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-gray-100);
+  }
+  &.active {
+    border: none;
+    background-color: var(--color-theme);
+    color: var(--color-white);
+  }
+`;
+
 const PopularUserCollection = ({ followship }) => {
+  // 從UserPage 拿到正在瀏覽的用戶追蹤清單
+
   return (
     <>
       {followship.map((user) => {
-        return <PopularUserCard key={user.id} user={user} />;
+        return <PopularUserCard key={user.id} user={user} id={user.id} />;
       })}
     </>
   );
 };
-function PopularUserCard({ user }) {
+function PopularUserCard({ user, id }) {
   const { name, account, avatar } = user;
+  const { handleFollow } = useUser();
+  // 用這行在非同步拿到資料前，可以不會噴錯
+  const [disabled, setDisabled] = useState(false);
+  // userFollowings 存取 追蹤id
+  const { userFollowings } = useUser();
+  const isFollowed = userFollowings.some((user) => user.followingId === id);
+
+  const handleFollowClick = async () => {
+    setDisabled(true);
+    await handleFollow(id);
+    setDisabled(false);
+  };
+
   return (
     <StyledUserCard>
       <div className='avatar'>
@@ -72,12 +107,18 @@ function PopularUserCard({ user }) {
       </div>
       <div>
         {/* 之後要寫邏輯切換 Button 樣式 */}
-        <ThemeButton width={'6rem'}>正在跟隨</ThemeButton>
+        <FollowBtn
+          className={isFollowed ? 'active' : ''}
+          type='button'
+          onClick={handleFollowClick}
+          width={'6rem'}
+        >
+          {isFollowed ? '正在跟隨' : '跟隨'}
+        </FollowBtn>
       </div>
     </StyledUserCard>
   );
 }
-
 export default function PopularList() {
   const [followship, setFollowship] = useState([]);
   useEffect(() => {

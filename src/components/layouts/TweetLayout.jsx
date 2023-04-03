@@ -26,9 +26,12 @@ const TweetLayout = () => {
   const { currentUser, userLikes } = useUser();
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
-
+  const [error, setError] = useState(false);
   // Input Tweet 撰寫推文
   const handleChange = (value) => {
+    if (tweetInput.length > 0) {
+      setError(false);
+    }
     setTweetInput(value);
   };
 
@@ -68,27 +71,6 @@ const TweetLayout = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const getUserAsync = async () => {
-  //     try {
-  //       // 將現有使用者拿到的id 去抓 currentUser
-  //       const currentUser = await getUserData(id);
-  //       // console.log('currentUser', currentUser);
-  //       // 拿到使用者追蹤清單
-  //       const userFollowings = await getFollowings(id);
-  //       // 拿到使用者喜歡貼文清單
-  //       const userLikes = await getUserLikes(id);
-  //       setCurrentUser(currentUser);
-  //       setUserFollowings(userFollowings);
-  //       setUserLikes(userLikes);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   getUserAsync();
-  //   // 這邊是否要把'setUserFollowings' and 'setUserLikes 寫進去才合理呢?
-  // }, [id, setCurrentUser]);
-
   return (
     <>
       <TweetContainer>
@@ -105,6 +87,8 @@ const TweetLayout = () => {
               handleChange,
               handleAddTweet,
               userLikes,
+              error,
+              setError,
             }}
           />
         </div>
