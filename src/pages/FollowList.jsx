@@ -38,8 +38,6 @@ const StyledContent = styled(StyledContentDiv)`
       background-color: var(--color-theme);
       color: var(--color-white);
     }
-    &.disabled {
-    }
   }
 `;
 
