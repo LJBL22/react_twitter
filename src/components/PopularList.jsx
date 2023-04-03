@@ -3,8 +3,6 @@ import { Header, ThemeButton } from './common/common.styled';
 import { getFollow } from 'api/followship';
 import { useEffect, useState } from 'react';
 import { useUser } from 'contexts/UserContext';
-import { useOutletContext } from 'react-router-dom';
-import { useAuth } from 'contexts/AuthContext';
 
 const PopContainer = styled.div`
   min-width: 273px;
@@ -84,6 +82,7 @@ function PopularUserCard({ user, id }) {
   const { name, account, avatar } = user;
   const { handleFollow } = useUser();
   // 用這行在非同步拿到資料前，可以不會噴錯
+  //eslint-disable-next-line
   const [disabled, setDisabled] = useState(false);
   // userFollowings 存取 追蹤id
   const { userFollowings } = useUser();
