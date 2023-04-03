@@ -42,6 +42,7 @@ const ReplyList = () => {
   const [replyInput, setReplyInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState(false);
 
   // 使用 handleClick 點擊其中一推文後，可瀏覽該則推文，及其相關回覆
   useEffect(() => {
@@ -71,6 +72,10 @@ const ReplyList = () => {
   }, [tweetId]);
 
   const handleInputChange = (value) => {
+    if (replyInput.length > 0) {
+      // console.log('replyinput', replyInput);
+      setError(false);
+    }
     setReplyInput(value);
   };
 
@@ -78,7 +83,6 @@ const ReplyList = () => {
     if (replyInput.length === 0) {
       return;
     }
-    console.log('singleTweet', singleTweet);
     try {
       const data = await replyTweet({
         id: singleTweet.id,
@@ -120,8 +124,6 @@ const ReplyList = () => {
       console.log(error);
     }
   };
-  const words = replyInput.trim().split(/\s+/);
-  const isInputValueValid = replyInput.length > 0 && words.length < 140;
 
   return (
     singleTweet.id && (
@@ -141,9 +143,10 @@ const ReplyList = () => {
           replyInput={replyInput}
           onChange={handleInputChange}
           onAddReply={handleAddReply}
-          isInputValueValid={isInputValueValid}
           showModal={showModal}
           setShowModal={setShowModal}
+          error={error}
+          setError={setError}
         />
         {!isLoading && tweetReplies !== null && (
           <ReplyCollection replies={tweetReplies} replyTo={singleTweet} />

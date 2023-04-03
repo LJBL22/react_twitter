@@ -35,8 +35,15 @@ export const ScrollBar = styled.div`
   }
 `;
 const HomePage = () => {
-  const { tweets, tweetInput, handleChange, handleAddTweet, setTweets } =
-    useOutletContext();
+  const {
+    tweets,
+    tweetInput,
+    handleChange,
+    handleAddTweet,
+    setTweets,
+    error,
+    setError,
+  } = useOutletContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,11 +88,13 @@ const HomePage = () => {
             height='auto'
             divWidth='40.0625rem'
             divHeight='8.625rem'
-            tweetInput={tweetInput}
+            tweetValue={tweetInput}
             onChange={handleChange}
             onClick={handleAddTweet}
             isInputValid={isInputValueValid}
             placeholder={'有什麼新鮮事?'}
+            error={error}
+            setError={setError}
           />
           <StyledDivider />
           <TweetCollection tweets={tweets} />

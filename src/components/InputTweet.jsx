@@ -15,18 +15,20 @@ function InputTweet({
   tweetValue,
   onChange,
   onClick,
-  isInputValid,
   borderBottom,
   placeholder,
+  error,
+  setError,
 }) {
   const { currentUser } = useUser();
-
-  // console.log('twee', tweetValue);
-  // console.log('onChange', onChange);
-  // console.log('onClick', onClick);
-  // console.log('isInputValid', isInputValid);
-  // console.log('placeholder', placeholder);
-
+  const words = tweetValue.trim().split(/\s+/);
+  const invalidLength = words.length > 140;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (tweetValue.length === 0) {
+      setError(true);
+    }
+  };
   return (
     <StyledCardDiv
       divWidth={divWidth}
@@ -36,11 +38,7 @@ function InputTweet({
       <StyledImgDiv>
         <img src={currentUser.avatar} alt='avatar' />
       </StyledImgDiv>
-      <StyledForm
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      <StyledForm onSubmit={handleSubmit}>
         <StyledTextarea
           width={width}
           height={height}
@@ -48,14 +46,20 @@ function InputTweet({
           onChange={(e) => onChange?.(e.target.value)}
           value={tweetValue}
         />
-        {/* submit 以後，text 設定為空值 */}
-        <ThemeButton
-          width='64px'
-          onClick={() => onClick?.()}
-          disabled={!isInputValid}
-        >
-          推文
-        </ThemeButton>
+        <div className='submitHint'>
+          {/* submit 以後，text 設定為空值 */}
+          {error && <div className='errorHint'>字數不可為空</div>}
+          {invalidLength && (
+            <div className='errorHint'>字數不可超過140個字</div>
+          )}
+          <ThemeButton
+            width='64px'
+            onClick={() => onClick?.()}
+            className={invalidLength ? 'disabled' : ''}
+          >
+            推文
+          </ThemeButton>
+        </div>
       </StyledForm>
     </StyledCardDiv>
   );

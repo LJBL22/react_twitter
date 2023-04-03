@@ -25,7 +25,11 @@ export const TweetModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [tweetInput, setTweetInput] = useState('');
   const [tweets, setTweets] = useState([]);
+  const [error, setError] = useState(false);
   const handleChange = (value) => {
+    if (tweetInput.length > 0) {
+      setError(false);
+    }
     setTweetInput(value);
   };
   const handleAddTweet = async () => {
@@ -64,8 +68,6 @@ export const TweetModal = () => {
       console.error(error);
     }
   };
-  const words = tweetInput.trim().split(/\s+/);
-  const isInputValueValid = tweetInput.length > 0 && words.length < 140;
   return (
     <>
       <ThemeButton onClick={() => setShowModal(true)} width='100%'>
@@ -106,8 +108,9 @@ export const TweetModal = () => {
                   tweetValue={tweetInput}
                   onChange={handleChange}
                   onClick={handleAddTweet}
-                  isInputValid={isInputValueValid}
                   placeholder={'有什麼新鮮事?'}
+                  error={error}
+                  setError={setError}
                 />
               </div>
             </div>
@@ -126,6 +129,8 @@ export const ReplyModal = ({
   isInputValueValid,
   showModal,
   setShowModal,
+  error,
+  setError,
 }) => {
   return (
     <>
@@ -188,6 +193,8 @@ export const ReplyModal = ({
                     onChange={onChange}
                     onClick={onAddReply}
                     isInputValid={isInputValueValid}
+                    error={error}
+                    setError={setError}
                   />
                 </div>
               </div>

@@ -62,9 +62,10 @@ const TweetReply = ({
   replyInput,
   onChange,
   onAddReply,
-  isInputValueValid,
   showModal,
   setShowModal,
+  error,
+  setError,
 }) => {
   const { handleLike, userLikes } = useUser();
   const [currentLikeCounts, setCurrentLikeCounts] = useState(
@@ -84,8 +85,6 @@ const TweetReply = ({
     // setDisable 去讓前面的setState可以更新畫面
     setDisabled(false);
   };
-
-  // console.log('isinputttt', isInputValueValid);
 
   return (
     <>
@@ -124,9 +123,10 @@ const TweetReply = ({
               replyInput={replyInput}
               onChange={onChange}
               onAddReply={onAddReply}
-              isInputValueValid={isInputValueValid}
               showModal={showModal}
               setShowModal={setShowModal}
+              error={error}
+              setError={setError}
             />
             <button className={`likeBtn ${disabled ? 'disabled' : ''}`}>
               {isLiked ? (
