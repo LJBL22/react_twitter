@@ -3,6 +3,8 @@ import { Header, ThemeButton } from './common/common.styled';
 import { getFollow } from 'api/followship';
 import { useEffect, useState } from 'react';
 import { useUser } from 'contexts/UserContext';
+import { getFollowings } from 'api/user';
+import { useAuth } from 'contexts/AuthContext';
 
 const PopContainer = styled.div`
   min-width: 273px;
@@ -68,24 +70,47 @@ const FollowBtn = styled(ThemeButton)`
 `;
 
 const PopularUserCollection = ({ followship }) => {
-  // 從UserPage 拿到正在瀏覽的用戶追蹤清單
-
+  const { currentMember } = useAuth();
+  const { userFollowings, setUserFollowings } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
+  const getFollowingsData = async () => {
+    try {
+      const userFollowings = await getFollowings(currentMember().id);
+      setUserFollowings(userFollowings);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    setIsLoading(true);
+    getFollowingsData();
+    //eslint-disable-next-line
+  }, []);
   return (
     <>
       {followship.map((user) => {
-        return <PopularUserCard key={user.id} user={user} id={user.id} />;
+        return (
+          <PopularUserCard
+            key={user.id}
+            user={user}
+            id={user.id}
+            userFollowings={userFollowings}
+            isLoading={isLoading}
+          />
+        );
       })}
     </>
   );
 };
-function PopularUserCard({ user, id }) {
+function PopularUserCard({ user, id, isLoading, userFollowings }) {
   const { name, account, avatar } = user;
   const { handleFollow } = useUser();
   // 用這行在非同步拿到資料前，可以不會噴錯
   //eslint-disable-next-line
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   // userFollowings 存取 追蹤id
-  const { userFollowings } = useUser();
+
   const isFollowed = userFollowings.some((user) => user.followingId === id);
 
   const handleFollowClick = async () => {
@@ -95,27 +120,32 @@ function PopularUserCard({ user, id }) {
   };
 
   return (
-    <StyledUserCard>
-      <div className='avatar'>
-        <img src={avatar} alt='avatar' />
-      </div>
-      <div className='info'>
-        {/* 之後要處理一下 ... 寫法 */}
-        <p>{name}</p>
-        <p>@{account}</p>
-      </div>
-      <div>
-        {/* 之後要寫邏輯切換 Button 樣式 */}
-        <FollowBtn
-          className={isFollowed ? 'active' : ''}
-          type='button'
-          onClick={handleFollowClick}
-          width={'6rem'}
-        >
-          {isFollowed ? '正在跟隨' : '跟隨'}
-        </FollowBtn>
-      </div>
-    </StyledUserCard>
+    <>
+      {isLoading && <div> 資料加載中 </div>}
+      {!isLoading && (
+        <StyledUserCard>
+          <div className='avatar'>
+            <img src={avatar} alt='avatar' />
+          </div>
+          <div className='info'>
+            {/* 之後要處理一下 ... 寫法 */}
+            <p>{name}</p>
+            <p>@{account}</p>
+          </div>
+          <div>
+            {/* 之後要寫邏輯切換 Button 樣式 */}
+            <FollowBtn
+              className={isFollowed ? 'active' : ''}
+              type='button'
+              onClick={handleFollowClick}
+              width={'6rem'}
+            >
+              {isFollowed ? '正在跟隨' : '跟隨'}
+            </FollowBtn>
+          </div>
+        </StyledUserCard>
+      )}
+    </>
   );
 }
 export default function PopularList() {

@@ -36,6 +36,9 @@ const LoginPage = () => {
       account,
       password,
     });
+
+    console.log('success', success);
+
     console.log('success', success);
     console.log('account', account);
     console.log('password', password);
