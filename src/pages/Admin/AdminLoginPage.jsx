@@ -16,7 +16,7 @@ const AdminLoginPage = () => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { adminLogin, isAuthenticated, currentUser } = useAuth();
+  const { adminLogin, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
     if (account.length === 0) {
