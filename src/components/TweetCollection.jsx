@@ -4,7 +4,6 @@ function TweetCollection({ tweets }) {
   return (
     <div>
       {tweets.map((card) => {
-        // console.log('card', card); 3/31 目前放置的頭像照片一樣
         return (
           <TweetCard
             divWidth='40.0625rem'

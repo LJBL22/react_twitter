@@ -50,13 +50,11 @@ export const UserProvider = ({ children }) => {
       // 這個singleTweet的 id 有沒有在 userLikes 裡, 如果有則使用 unLike post至 unLike, 並且將newLikesList名單將此unlike.id 用 filter去除
       if (userLikes.some((tweet) => tweet.TweetId === id)) {
         const unlike = await unlikeTweet(id);
-        // console.log('unlike', unlike);
         const newLikesList = userLikes.filter(
           (tweet) => tweet.TweetId !== unlike.TweetId
         );
         // setUserLiked 將最新的名單更新進去
         setUserLikes(newLikesList);
-        // console.log('unLike-new', newLikesList);
       } else {
         //eslint-disable-next-line
         const likeNewTweet = await likeTweet(id);
@@ -105,7 +103,6 @@ export const UserProvider = ({ children }) => {
           },
         ];
         setUserFollowings(newFollowList);
-        console.log('+following', newFollowList);
       }
     } catch (error) {
       console.log(error);

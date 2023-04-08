@@ -155,6 +155,7 @@ export default function PopularList() {
       try {
         const token = localStorage.getItem('token');
         const followship = await getFollow(token);
+        // console.log('followship', followship);
         setFollowship(
           followship.map((popUserCard) => {
             return {

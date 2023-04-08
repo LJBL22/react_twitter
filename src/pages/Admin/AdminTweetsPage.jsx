@@ -39,7 +39,7 @@ export default function AdminTweetsPage() {
       try {
         const tweets = await adminGetTweets();
         setTweets(tweets);
-        console.log(tweets);
+        // console.log(tweets);
       } catch (error) {
         console.error(error);
       }

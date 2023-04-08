@@ -22,10 +22,8 @@ axiosInstance.interceptors.request.use(
 export const adminGetTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/admin/tweets/`);
-    // console.log('res', res);
     // 拿到資料庫裡存的所有的推文
-    const tweets = res.data
-    console.log(res.data)
+    const tweets = res.data;
     return tweets;
   } catch (error) {
     console.error('[adminGetTweets failed]', error);
@@ -33,12 +31,11 @@ export const adminGetTweets = async () => {
 };
 
 // 刪除一篇推文
-export async function deleteTweet
-  (id) {
+export async function deleteTweet(id) {
   try {
     const res = await axiosInstance.delete(`${baseUrl}/admin/tweets/${id}`);
     const tweet = res.data;
-    console.log(tweet)
+    // console.log(tweet)
     return tweet;
   } catch (error) {
     console.error('[Admin Delete Tweet failed]:', error);
@@ -51,7 +48,7 @@ export async function adminGetAllUsers() {
     const res = await axiosInstance.get(`${baseUrl}/admin/users`);
     // 回傳一個陣列
     // console.log(res.data)
-    const user = res.data
+    const user = res.data;
     return user;
   } catch (error) {
     console.error('[Admin get users failed]: ', error);

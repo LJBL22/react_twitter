@@ -24,7 +24,6 @@ export async function getUserData(userId) {
   try {
     // 這裡要取得 currentMember的 userId
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}`);
-    // console.log('getUser', res);
     return res.data;
   } catch (error) {
     console.error('[Get User Data failed]:', error);
@@ -34,7 +33,6 @@ export async function getUserData(userId) {
 export async function getUserTweets(userId) {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/tweets`);
-    // console.log('getUserTweets', res);
     return res.data;
   } catch (error) {
     console.error('[Get user tweets failed]:', error);
@@ -47,7 +45,6 @@ export async function getUserRelies(userId) {
     const res = await axiosInstance.get(
       `${baseUrl}/users/${userId}/replied_tweets`
     );
-    // console.log('getUserReplies', res);
     return res.data;
   } catch (error) {
     console.error('[Get user replies failed]:', error);
@@ -58,7 +55,6 @@ export async function getUserRelies(userId) {
 export async function getUserLikes(userId) {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/likes`);
-    // console.log('getUserLikes', res);
     return res.data;
   } catch (error) {
     console.error('[Get user likes failed]:', error);
@@ -69,7 +65,6 @@ export async function getUserLikes(userId) {
 export const getFollowers = async (userId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/users/${userId}/followers`);
-
     return res.data;
   } catch (error) {
     console.log(`[getFollowers failed]`, error);
@@ -81,7 +76,6 @@ export const getFollowings = async (userId) => {
     const res = await axiosInstance.get(
       `${baseUrl}/users/${userId}/followings`
     );
-
     return res.data;
   } catch (error) {
     console.log(`[getFollowings failed]`, error);
@@ -89,14 +83,7 @@ export const getFollowings = async (userId) => {
 };
 // 使用者編輯自己的資料
 export async function changeUserInformation(payload) {
-  const {
-    userId,
-    account,
-    name,
-    email,
-    password,
-    checkPassword,
-  } = payload;
+  const { userId, account, name, email, password, checkPassword } = payload;
   try {
     const res = await axiosInstance.patch(`${baseUrl}/users/${userId}`, {
       account,
@@ -106,7 +93,6 @@ export async function changeUserInformation(payload) {
       checkPassword,
     });
     const { data, status } = res;
-    // console.log('updateUser', res);
     return { data, status };
   } catch (error) {
     console.error('[Patch User failed]: ', error);

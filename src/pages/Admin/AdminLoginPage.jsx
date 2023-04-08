@@ -30,7 +30,7 @@ const AdminLoginPage = () => {
       password,
     });
     if (success) {
-      console.log(currentUser);
+      // console.log(currentUser);
       Swal.fire({
         title: '登入成功',
         icon: 'success',
