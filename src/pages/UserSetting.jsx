@@ -65,7 +65,6 @@ const UserSetting = () => {
       password,
       checkPassword,
     });
-    console.log(currentUser.id);
     if (data && status === 200) {
       setShowSuccessMsg(true);
       setTimeout(() => {

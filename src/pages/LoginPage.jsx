@@ -36,9 +36,12 @@ const LoginPage = () => {
       account,
       password,
     });
-    console.log('success', success);
-    console.log('account', account);
-    console.log('password', password);
+
+    // console.log('success', success);
+
+    // console.log('success', success);
+    // console.log('account', account);
+    // console.log('password', password);
     if (success) {
       Swal.fire({
         title: '登入成功',

@@ -22,7 +22,6 @@ axiosInstance.interceptors.request.use(
 export const getTweets = async () => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets`);
-    // console.log('res', res);
     // 拿到資料庫裡存的所有的推文
     return res.data;
   } catch (error) {
@@ -34,7 +33,6 @@ export const getTweets = async () => {
 export const createTweet = async ({ description }) => {
   try {
     const res = await axiosInstance.post(`${baseUrl}/tweets`, { description });
-    // console.log('res-create', res);
     // 在這裡要抓到目前存的全部的 tweets，後面新增才可以把新的推文推到舊的tweets陣列裡
     return res.data;
   } catch (error) {
@@ -46,7 +44,6 @@ export const createTweet = async ({ description }) => {
 export const getSingleTweet = async (tweetId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${tweetId}`);
-    // console.log('res_getATweet', res.data);
     return res.data;
   } catch (error) {
     console.error(`[Get a tweet failed]`, error);
@@ -57,7 +54,6 @@ export const getSingleTweet = async (tweetId) => {
 export const getReplies = async (tweetId) => {
   try {
     const res = await axiosInstance.get(`${baseUrl}/tweets/${tweetId}/replies`);
-    // console.log('res_getReplies', res.data);
     return res.data;
   } catch (error) {
     console.error(`[Get all tweet replies failed]`, error);
@@ -71,7 +67,6 @@ export const replyTweet = async (payload) => {
     const res = await axiosInstance.post(`${baseUrl}/tweets/${id}/replies`, {
       comment,
     });
-    // console.log('res_tweetReply', res.data);
     return res.data;
   } catch (error) {
     console.error('[Reply tweet failed]', error);
