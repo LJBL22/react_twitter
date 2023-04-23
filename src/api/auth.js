@@ -1,10 +1,10 @@
 import axios from 'axios';
-const authURL = 'https://dry-lowlands-42863.herokuapp.com/api';
+export const baseUrl = 'https://twitter-api-2020-production.up.railway.app/api';
 
 // User
 export const login = async ({ account, password }) => {
   try {
-    const { data } = await axios.post(`${authURL}/users/signIn`, {
+    const { data } = await axios.post(`${baseUrl}/users/signIn`, {
       account,
       password,
     });
@@ -35,7 +35,7 @@ export const register = async ({
   email,
 }) => {
   try {
-    await axios.post(`${authURL}/users`, {
+    await axios.post(`${baseUrl}/users`, {
       account,
       name,
       password,
@@ -51,7 +51,7 @@ export const register = async ({
 // admin
 export const adminLogin = async ({ account, password }) => {
   try {
-    const { data } = await axios.post(`${authURL}/admin/signIn`, {
+    const { data } = await axios.post(`${baseUrl}/admin/signIn`, {
       account,
       password,
     });

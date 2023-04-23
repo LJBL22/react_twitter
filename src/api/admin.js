@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'https://dry-lowlands-42863.herokuapp.com/api';
+import { baseUrl } from './auth';
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
