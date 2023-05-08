@@ -21,11 +21,12 @@ import AdminLayout from 'components/layouts/AdminLayout';
 import TweetLayout from 'components/layouts/TweetLayout';
 import { AuthProvider } from 'contexts/AuthContext';
 import { UserProvider } from 'contexts/UserContext';
+const basename = process.env.PUBLIC_URL;
 
 function App() {
   return (
     <div className='App'>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <AuthProvider>
           <UserProvider>
             <GlobalStyle />
