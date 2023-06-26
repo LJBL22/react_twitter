@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const baseUrl = 'https://twitter-api-2020-production.up.railway.app/api';
+export const baseUrl = 'https://twitter-api-k3x9.onrender.com/api';
 
 // User
 export const login = async ({ account, password }) => {
