@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useUser } from 'contexts/UserContext';
 import { getFollowings } from 'api/user';
 import { useAuth } from 'contexts/AuthContext';
+import { useCallback } from 'react';
 
 const PopContainer = styled.div`
   min-width: 273px;
@@ -73,7 +74,7 @@ const PopularUserCollection = ({ followship }) => {
   const { currentMember } = useAuth();
   const { userFollowings, setUserFollowings } = useUser();
   const [isLoading, setIsLoading] = useState(false);
-  const getFollowingsData = async () => {
+  const getFollowingsData = useCallback(async () => {
     try {
       const userFollowings = await getFollowings(currentMember().id);
       setUserFollowings(userFollowings);
@@ -81,12 +82,11 @@ const PopularUserCollection = ({ followship }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [currentMember, setUserFollowings]);
   useEffect(() => {
     setIsLoading(true);
     getFollowingsData();
-    //eslint-disable-next-line
-  }, []);
+  }, [getFollowingsData]);
   return (
     <>
       {followship.map((user) => {
